@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout_main_activity"
+    tools:context="com.expandenegocio.veonegocio.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/su_nombre_de_usuario" />
+
+    <EditText
+        android:id="@+id/edit_nombre_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nombre_usuario"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/su_contrase_a" />
+
+    <EditText
+        android:id="@+id/edit_contraseña"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/contrase_a"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/boton_aceptar_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="comprobar"
+        android:text="@string/aceptar" />
+    <Button
+        android:id="@+id/boton_lanzar_presentacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="lanzarPresentacion"
+        android:text="@string/lanzar_presentacion" />
+    <Button
+        android:id="@+id/boton_lanzar_sin_conexion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="lanzarSinConexion"
+        android:text="@string/lanzar_sin_conexion" />
+
+    <Button
+        android:id="@+id/boton_lanzar_registro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="lanzarRegistro"
+        android:text="@string/lanzar_registro" />
+
+    <TextView
+        android:id="@+id/respuesta1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+         />
+
+    <TextView
+        android:id="@+id/respuesta2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>

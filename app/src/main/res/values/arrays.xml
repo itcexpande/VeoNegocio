@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="fotos">
+        <item>@drawable/fra1</item>
+        <item>@drawable/fra2</item>
+        <item>@drawable/fra3</item>
+        <item>@drawable/fra4</item>
+        <item>@drawable/fra5</item>
+        <item>@drawable/fra6</item>
+        <item>@drawable/fra7</item>
+        <item>@drawable/fra8</item>
+        <item>@drawable/fra9</item>
+    </array>
+
+
+</resources>
