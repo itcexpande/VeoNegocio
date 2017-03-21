@@ -28,13 +28,22 @@ public class ActivityRegistro extends AppCompatActivity {
         EditText otros = (EditText) this.findViewById(R.id.edit_otros_registro);
 
         TextView recoger1 = (TextView) this.findViewById(R.id.respuesta1);
-        recoger1.setText( nombre.getText());
+        recoger1.setText(nombre.getText());
 
         TextView recoger2 = (TextView) this.findViewById(R.id.respuesta2);
-        //recoger1.setText( co.getText());
+        recoger2.setText(apellidos.getText());
 
-        Toast.makeText(this, nombre.getText(), Toast.LENGTH_LONG).show();
-        Toast.makeText(this, apellidos.getText(), Toast.LENGTH_LONG).show();
+        TextView recoger3 = (TextView) this.findViewById(R.id.respuesta3);
+        recoger3.setText(telefono.getText());
+
+        TextView recoger4 = (TextView) this.findViewById(R.id.respuesta4);
+        recoger4.setText(mail.getText());
+
+        TextView recoger5 = (TextView) this.findViewById(R.id.respuesta5);
+        recoger5.setText(otros.getText());
+
+        //    Toast.makeText(this, nombre.getText(), Toast.LENGTH_LONG).show();
+     //   Toast.makeText(this, apellidos.getText(), Toast.LENGTH_LONG).show();
 
 
     }
