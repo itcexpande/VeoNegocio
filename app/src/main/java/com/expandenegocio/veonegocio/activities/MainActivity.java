@@ -102,9 +102,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
 
-
-
-
         for (String name : url_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
