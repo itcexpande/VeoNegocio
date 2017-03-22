@@ -26,7 +26,6 @@ public class GestoraImagenes extends ArrayList<Imagen> {
 
     private void DefinirFotos() {
         resources = activity.getResources();
-        //TypedArray valores= resources.obtainTypedArray(Imagen.v)
 
         for (Imagenes uno : Imagenes.values()) {
             TypedArray imagenes = resources.obtainTypedArray(uno.getImagenes());

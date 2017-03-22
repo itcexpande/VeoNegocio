@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/layout_main_activity"
-    tools:context="com.expandenegocio.veonegocio.activities.MainActivity">
+    tools:context="com.expandenegocio.ejemplosliderimages.MainActivity">
 
     <TextView
+        android:id="@+id/texto1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        />
+
+    <TextView
+        android:id="@+id/texto2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BBBBBBBBBBBBBBBBBBBBBBBB"
+        android:layout_below="@+id/texto1"/>
+
+    <TextView
+        android:id="@+id/texto3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CCCCCCCCCCCCCCCCCCCCCCCCCCC"
+        android:layout_below="@+id/texto2"/>
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:pager_animation_span="1100"
+        custom:auto_cycle="true"
+        custom:indicator_visibility="visible"
+        custom:pager_animation="Accordion"
+        android:layout_below="@+id/texto3"/>
+
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/su_nombre_de_usuario" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        app:selected_color="#0095BF"
+        app:selected_height="6dp"
+        app:selected_padding_left="5dp"
+        app:selected_padding_right="5dp"
+        app:selected_width="6dp"
+        app:shape="oval"
+        app:unselected_color="#55333333"
+        app:unselected_height="6dp"
+        app:unselected_padding_left="5dp"
+        app:unselected_padding_right="5dp"
+        app:unselected_width="6dp"
 
-    <EditText
-        android:id="@+id/edit_nombre_usuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/nombre_usuario"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/su_contrase_a" />
-
-    <EditText
-        android:id="@+id/edit_contraseña"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/contrase_a"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/boton_aceptar_usuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="comprobar"
-        android:text="@string/aceptar" />
-    <Button
-        android:id="@+id/boton_lanzar_presentacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="lanzarPresentacion"
-        android:text="@string/lanzar_presentacion" />
-    <Button
-        android:id="@+id/boton_lanzar_sin_conexion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="lanzarSinConexion"
-        android:text="@string/lanzar_sin_conexion" />
-
-    <Button
-        android:id="@+id/boton_lanzar_registro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="lanzarRegistro"
-        android:text="@string/lanzar_registro" />
-
-    <TextView
-        android:id="@+id/respuesta1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-         />
-
-    <TextView
-        android:id="@+id/respuesta2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         />
 
 
-</LinearLayout>
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator2"
+        style="@style/AndroidImageSlider_Corner_Oval_Orange"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+    <ListView
+        android:id="@+id/transformes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/custom_indicator2">
+
+
+
+
+
+    </ListView>
+
+</RelativeLayout>

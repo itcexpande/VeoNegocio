@@ -37,6 +37,7 @@ public class ActivityPresentacion extends AppCompatActivity {
 public class ActivityPresentacion extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     private SliderLayout mDemoSlider;
     private GestoraImagenes gestora;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,8 @@ public class ActivityPresentacion extends ActionBarActivity implements BaseSlide
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
-        mDemoSlider.addOnPageChangeListener(MainActivity.this);
+        mDemoSlider.addOnPageChangeListener(this);
+
         ListView l = (ListView) findViewById(R.id.transformes);
         l.setAdapter(new TransformerAdapter(this));
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,4 +112,6 @@ public class ActivityPresentacion extends ActionBarActivity implements BaseSlide
     public void onPageScrollStateChanged(int state) {
     }
 
+    public void resolverBotonPresentacion(View view) {
+    }
 }
