@@ -114,4 +114,7 @@ public class ActivityPresentacion extends ActionBarActivity implements BaseSlide
 
     public void resolverBotonPresentacion(View view) {
     }
+
+    public void irAEnlace(View view) {
+    }
 }
