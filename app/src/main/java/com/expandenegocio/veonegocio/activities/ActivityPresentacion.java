@@ -1,5 +1,6 @@
 package com.expandenegocio.veonegocio.activities;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class ActivityPresentacion extends ActionBarActivity implements BaseSlide
                     .description(name)
                     .image(url_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(MainActivity.this);
+                    .setOnSliderClickListener(ActivityPresentacion.this);
 
             //add your extra information
             textSliderView.bundle(new Bundle());

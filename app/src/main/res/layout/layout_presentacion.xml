@@ -20,13 +20,12 @@
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:src="@drawable/fra9" />
-    <ListView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </ListView>
-    <TextView
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="BOTON"
+        android:onClick=""/>
+        <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.51"
