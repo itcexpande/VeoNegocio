@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="fotos">
+
+
+    <string-array name="nombres_fotos">
+        <item>@string/f1_name</item>
+        <item>@string/f2_name</item>
+        <item>@string/f3_name</item>
+        <item>@string/f4_name</item>
+        <item>@string/f5_name</item>
+        <item>@string/f6_name</item>
+        <item>@string/f7_name</item>
+        <item>@string/f8_name</item>
+        <item>@string/f9_name</item>
+
+    </string-array>
+
+    <array name="foto1">
         <item>@drawable/fra1</item>
-        <item>@drawable/fra2</item>
-        <item>@drawable/fra3</item>
-        <item>@drawable/fra4</item>
-        <item>@drawable/fra5</item>
-        <item>@drawable/fra6</item>
-        <item>@drawable/fra7</item>
-        <item>@drawable/fra8</item>
-        <item>@drawable/fra9</item>
     </array>
 
+    <array name="foto2">
+        <item>@drawable/fra2</item>
+    </array>
+    <array name="foto3">
+        <item>@drawable/fra3</item>
+    </array>
+    <array name="foto4">
+        <item>@drawable/fra4</item>
+    </array>
+    <array name="foto5">
+        <item>@drawable/fra5</item>
+    </array>
+    <array name="foto6">
+        <item>@drawable/fra6</item>
+    </array>
+    <array name="foto7">
+        <item>@drawable/fra7</item>
+    </array>
+    <array name="foto8">
+        <item>@drawable/fra8</item>
+    </array>
+    <array name="foto9">
+        <item>@drawable/fra9</item>
+    </array>
 
 </resources>

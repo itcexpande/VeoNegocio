@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/layout_main_activity"
-    tools:context="com.expandenegocio.veonegocio.MainActivity">
+    tools:context="com.expandenegocio.veonegocio.activities.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"

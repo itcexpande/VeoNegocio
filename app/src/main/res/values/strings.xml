@@ -11,4 +11,16 @@
     <string name="title_activity_sin_conexion">Sin Conexión</string>
     <string name="title_activity_registro">Registro</string>
     <string name="lanzar_registro">REGISTRAR</string>
+
+    <string name="f1_name">NOMBRE01</string>
+    <string name="f2_name">NOMBRE02</string>
+    <string name="f3_name">NOMBRE03</string>
+    <string name="f4_name">NOMBRE04</string>
+    <string name="f5_name">NOMBRE05</string>
+    <string name="f6_name">NOMBRE06</string>
+    <string name="f7_name">NOMBRE07</string>
+    <string name="f8_name">NOMBRE08</string>
+    <string name="f9_name">NOMBRE09</string>
+
+
 </resources>

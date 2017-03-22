@@ -1,4 +1,4 @@
-package com.expandenegocio.veonegocio;
+package com.expandenegocio.veonegocio.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.expandenegocio.veonegocio.R;
 
 /**
  * Created by jesus on 20/03/2017.
