@@ -44,6 +44,7 @@ public class ActivityPresentacion extends ActionBarActivity implements BaseSlide
         gestora = new GestoraImagenes(this);
         String from[] = Imagen.getClaves();
 
+
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         HashMap<String, String> url_maps = new HashMap();
         url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
