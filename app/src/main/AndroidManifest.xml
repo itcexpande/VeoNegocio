@@ -17,15 +17,6 @@
 
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.ActivityPresentacion"
-            android:label="@string/title_activity_presentacion" >
-            <intent-filter>
-                <action android:name="AcivityPresentacion" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activities.ActivitySinConexion"

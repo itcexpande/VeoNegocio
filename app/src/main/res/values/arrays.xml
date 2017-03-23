@@ -2,27 +2,4 @@
 <resources>
 
 
-    <string-array name="nombres_fotos">
-        <item>@string/f1_name</item>
-        <item>@string/f2_name</item>
-        <item>@string/f3_name</item>
-        <item>@string/f4_name</item>
-
-
-    </string-array>
-
-    <array name="foto1">
-        <item>@drawable/presentacion1</item>
-    </array>
-
-    <array name="foto2">
-        <item>@drawable/presentacion2</item>
-    </array>
-    <array name="foto3">
-        <item>@drawable/presentacion3</item>
-    </array>
-    <array name="foto4">
-        <item>@drawable/presentacion4</item>
-    </array>
-
 </resources>
