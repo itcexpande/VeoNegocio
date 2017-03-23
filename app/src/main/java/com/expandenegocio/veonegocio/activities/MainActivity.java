@@ -1,14 +1,21 @@
 package com.expandenegocio.veonegocio.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.expandenegocio.veonegocio.R;
+
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -16,10 +23,14 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 //public class MainActivity extends AppCompatActivity {
 public class MainActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     private SliderLayout mDemoSlider;
+    private TextView textoEnlace1;
+    private TextView textoEnlace2;
+
 
 
     @Override
@@ -27,8 +38,11 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-        HashMap<String, Integer> fotos_presentacion = new HashMap();
+        TreeMap<String, Integer> fotos_presentacion = new TreeMap<>();
         fotos_presentacion.put("Presentacion1", R.drawable.presentacion1);
         fotos_presentacion.put("Presentacion2", R.drawable.presentacion2);
         fotos_presentacion.put("Presentacion3", R.drawable.presentacion3);
@@ -38,8 +52,15 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         for (String name : fotos_presentacion.keySet()) {
             TextSliderView textSliderView = new TextSliderView(MainActivity.this);
             // initialize a SliderLayout
+/*
             textSliderView
                     .description(name)
+                    .image(fotos_presentacion.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(MainActivity.this);
+*/
+            textSliderView
+
                     .image(fotos_presentacion.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(MainActivity.this);
@@ -56,6 +77,8 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(MainActivity.this);
+
+        /*
         ListView l = (ListView) findViewById(R.id.transformes);
         l.setAdapter(new TransformerAdapter(this));
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,6 +87,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 mDemoSlider.setPresetTransformer(((TextView) view).getText().toString());
             }
         });
+        */
     }
 
 
@@ -76,7 +100,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -90,6 +114,25 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+
+
+    public void irAEnlaceTerminosDeServicio(View view) {
+
+     //   textoEnlace1= (TextView) findViewById(R.id.texto_pie1);
+
+       // textoEnlace1.setText(Html.fromHtml("Este texto lleva un " + "Enlace terminos de servicio"));
+        Intent intent=new Intent("AcivityServicio");
+        startActivity(intent);
+    }
+
+    public void irAEnlacePoliticaDePrivacidad(View view) {
+       // textoEnlace2= (TextView) findViewById(R.id.texto_pie2);
+
+       // textoEnlace2.setText(Html.fromHtml("Este texto lleva un " + "Enlace politica de privacidad"));
+        //Intent intent=new Intent("AcivityPrivacidad");
+        //startActivity(intent);
     }
 
 /*
