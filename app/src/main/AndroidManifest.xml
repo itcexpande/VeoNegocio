@@ -40,19 +40,19 @@
 
         <activity
             android:name=".activities.ActivityServicio"
-            android:label="@string/title_activity_registro"
-            android:theme="@style/AppTheme">
+            android:label="Servicio">
             <intent-filter>
-                <action android:name="AcivityRegistro" />
+                <action android:name="AcivityServicio" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.ActivityPrivacidad"
-            android:label="@string/title_activity_registro" >
+            android:label="Privacidad" >
             <intent-filter>
-                <action android:name="AcivityRegistro" />
+                <action android:name="AcivityPrivacidad" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

@@ -7,25 +7,24 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.expandenegocio.veonegocio.R;
+
+//import com.expandenegocio.veonegocio.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.expandenegocio.veonegocio.R;
 
-import java.util.HashMap;
+
 import java.util.TreeMap;
 
-//public class MainActivity extends AppCompatActivity {
+
 public class MainActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     private SliderLayout mDemoSlider;
     private TextView textoEnlace1;
@@ -119,20 +118,13 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
     public void irAEnlaceTerminosDeServicio(View view) {
-
-     //   textoEnlace1= (TextView) findViewById(R.id.texto_pie1);
-
-       // textoEnlace1.setText(Html.fromHtml("Este texto lleva un " + "Enlace terminos de servicio"));
         Intent intent=new Intent("AcivityServicio");
         startActivity(intent);
     }
 
     public void irAEnlacePoliticaDePrivacidad(View view) {
-       // textoEnlace2= (TextView) findViewById(R.id.texto_pie2);
-
-       // textoEnlace2.setText(Html.fromHtml("Este texto lleva un " + "Enlace politica de privacidad"));
-        //Intent intent=new Intent("AcivityPrivacidad");
-        //startActivity(intent);
+        Intent intent=new Intent("AcivityPrivacidad");
+        startActivity(intent);
     }
 
 /*

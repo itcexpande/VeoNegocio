@@ -15,30 +15,62 @@ import com.expandenegocio.veonegocio.R;
  */
 
 public class ActivityServicio extends AppCompatActivity {
-    private TextView textView;
-    private CharSequence[] datos;
-    private Resources res;
+    private ListView mLeadsList;
+    private ArrayAdapter<String> mLeadsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_terminos_de_servicio);
-        ListView lista = (ListView) this.findViewById(R.id.list_view_terminos_de_servicio);
+        mLeadsList = (ListView) this.findViewById(R.id.list_view_terminos_de_servicio);
 
-    //    String[] from={"",""};
+        String[] leadsNames = {
+                "Con cien cañones por banda," +
+                        "\nviento en popa a toda vela," +
+                        "\nno corta el mar, sino vuela," +
+                        "\nun velero bergantín:" +
+                        "\n\nbajel pirata que llaman" +
+                        "\npor su bravura el Temido," +
+                        "\nen todo mar conocido" +
+                        "\ndel uno al otro confín." +
+                        "\n\nLa luna en el mar riela," +
+                        "\nen la lona gime el viento," +
+                        "\ny alza en blando movimiento" +
+                        "\nolas de plata y azul;" +
+                        "\n\ny ve el capitán pirata," +
+                        "\ncantando alegre en la popa," +
+                        "\nAsia a un lado, al otro Europa" +
+                        "\ny allá a su frente Stambul. " +
 
-      // int[] to = {R.id.texto_servicio_1};
+                        "\n\nNavega, velero mío," +
+                        "sin temor," +
+                        "\nque ni enemigo navío," +
+                        "\nni tormenta, ni bonanza," +
+                        "\ntu rumbo a torcer alcanza," +
+                        "\nni a sujetar tu valor. " +
 
-       // SimpleAdapter elAdaptador = new SimpleAdapter(this, gestora, R.layout.layout_items_terminos_de_servicio, from, to);
-      // lista.setAdapter(elAdaptador);
-       // ListView lista;
-        ArrayAdapter<String> adaptador;
+                        "\n\nVeinte presas" +
+                        "hemos hecho" +
+                        "\na despecho" +
+                        "del inglés," +
+                        "\ny han rendido" +
+                        "sus pendones" +
+                        "\ncien naciones" +
+                        "a mis pies. " +
 
-       // lista = (ListView)findViewById(R.id.listView);
+                        "\n\n¿Qué es mi barco?Mi tesoro." +
+                        "\n¿Qué es mi Dios?La libertad. " +
+                        "\n¿Mi ley? ¡La fuerza y el viento !" +
+                        "\n¿Mi única patria ? ¡La mar ! "
 
-        adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
 
-        lista.setAdapter(adaptador);
+        };
+
+        mLeadsAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                leadsNames);
+        mLeadsList.setAdapter(mLeadsAdapter);
 
     }
 }
