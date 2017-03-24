@@ -3,6 +3,7 @@ package com.expandenegocio.veonegocio.activities;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -22,8 +23,12 @@ public class ActivityServicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_terminos_de_servicio);
-        mLeadsList = (ListView) this.findViewById(R.id.list_view_terminos_de_servicio);
-
+      //  mLeadsList = (ListView) this.findViewById(R.id.list_view_terminos_de_servicio);
+        WebView webView = new WebView(this);
+        //WebView webView= new WebView();
+        webView.loadUrl("file: ///android_assets/servicios.html");
+        webView=(WebView)findViewById(R.id.web_servicios);
+/*
         String[] leadsNames = {
                 "Con cien cañones por banda," +
                         "\nviento en popa a toda vela," +
@@ -71,6 +76,13 @@ public class ActivityServicio extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 leadsNames);
         mLeadsList.setAdapter(mLeadsAdapter);
+        */
+        /*
+        WebView web = new WebView ();
+web.loadUrl ( "file: ///android_asset/sample.html");
+asegurarse de que lances la vista web antes de utilizar la función LoadURL ():
+web = (WebView) findViewById (R.id.webview);
+         */
 
     }
 }
