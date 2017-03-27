@@ -55,15 +55,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="1dp" />
 
-        <!--  <ListView
-              android:id="@+id/transformes"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@+id/custom_indicator2">
-
-
-          </ListView>-->
-
 
     </LinearLayout>
 
@@ -110,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/texto_pie1"
             android:layout_centerHorizontal="true"
-            android:onClick="irAEnlacePoliticaDePrivacidad"
+            android:onClick="irAEnlaceTerminosDeServicio"
             android:text="@string/po_tica_de_privacidad"
             android:textAlignment="center"
             android:textSize="15dp" />

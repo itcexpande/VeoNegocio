@@ -49,16 +49,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.ActivityPrivacidad"
-            android:label="Privacidad" >
-            <intent-filter>
-                <action android:name="AcivityPrivacidad" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
     </application>
 
 </manifest>
