@@ -11,8 +11,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created by jesus on 23/03/2017.
@@ -41,25 +48,15 @@ public class ActivityServicio extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.servicios:
 
-                customHtml = "<html><body><h1>SERVICIOS</h1>" +
-                        "<h1>Titulo  1</h1><h2>Titulo 2</h2><h3>JESUS</h3>" +
-                        "<h3>  HTML En Web view</h3>" +
-                        "<p>Esto solo es una prueba linea 01</p>" +
-                        "<p>Esto solo es una prueba linea 02</p>" +
-                        "<p>Esto solo es una prueba linea 03</p>" +
-                        "<p>Esto solo es una prueba linea 04</p>" +
-                        "<p>Esto solo es una prueba linea 05</p>" +
-                        "<p>Esto solo es una prueba linea 06</p>" +
-                        "<p>Esto solo es una prueba linea 07</p>" +
-                        "<p>Esto solo es una prueba linea 08</p>" +
-                        "<p>Esto solo es una prueba linea 09</p>" +
-                        "<p>Esto solo es una prueba linea 10</p>" +
-
-                        "</body></html>";
+                customHtml= leerArchivo(R.raw.servicios);
 
                 simpleWebView.loadData(customHtml, "text/html", "UTF-8");
+
+
                 break;
             case R.id.privacidad:
+                customHtml= leerArchivo(R.raw.privacidad);
+                /*
                 customHtml = "<html><body><h1>POLITICA PRIVACIDAD</h1>" +
                         "<h1>Titulo 1</h1><h2>Titulo 2</h2><h3>JESUS</h3>" +
 
@@ -87,18 +84,35 @@ public class ActivityServicio extends AppCompatActivity implements View.OnClickL
 
 
                         "</body></html>";
+                        */
                 simpleWebView.loadData(customHtml, "text/html", "UTF-8");
                 break;
         }
     }
 
-   /* private class MyWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
+    private String leerArchivo(int queArchivo) {
+        try {
+            InputStreamReader isr = new InputStreamReader(this.getResources().openRawResource(queArchivo));
+            BufferedReader br = new BufferedReader(isr);
+
+            String linea;
+
+            StringBuilder texto = new StringBuilder();
+
+            while ((linea = br.readLine()) != null) {
+                texto.append(linea);
+                texto.append("\n");
+            }
+            br.close();
+            isr.close();
+
+            return texto.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }*/
+        return "";
+    }
 
 
 }
