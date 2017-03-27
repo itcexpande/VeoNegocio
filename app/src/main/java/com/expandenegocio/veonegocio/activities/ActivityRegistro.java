@@ -9,19 +9,49 @@ import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by jesus on 20/03/2017.
  */
 
 public class ActivityRegistro extends AppCompatActivity {
+    private EditText nombre;
+    private EditText apellidos;
+    private EditText telefono;
+    private EditText mail;
+    private EditText otros;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_registro);
+        nombre = (EditText) this.findViewById(R.id.edit_nombre_registro);
+        apellidos = (EditText) this.findViewById(R.id.edit_apellidos_registro);
+
+        telefono = (EditText) this.findViewById(R.id.edit_tfno_registro);
+        mail = (EditText) this.findViewById(R.id.edit_mail_registro);
+        otros = (EditText) this.findViewById(R.id.edit_otros_registro);
+
 
     }
 
     public void aceptarRegistro(View view) {
+        try {
+            comprobarEntrada();
+            procesarInformacion();
+        } catch (MiExcepcion e) {
+            Toast.makeText(getApplicationContext(),
+                    e.getMessage(),
+                    Toast.LENGTH_SHORT).show();
+            e.getVista().selectAll();
+            e.getVista().requestFocus();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(),
+                    e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+
         EditText nombre = (EditText) this.findViewById(R.id.edit_nombre_registro);
         EditText apellidos = (EditText) this.findViewById(R.id.edit_apellidos_registro);
 
@@ -44,9 +74,44 @@ public class ActivityRegistro extends AppCompatActivity {
         TextView recoger5 = (TextView) this.findViewById(R.id.respuesta5);
         recoger5.setText(otros.getText());
 
-        //    Toast.makeText(this, nombre.getText(), Toast.LENGTH_LONG).show();
-     //   Toast.makeText(this, apellidos.getText(), Toast.LENGTH_LONG).show();
 
+    }
 
+    private void comprobarEntrada() throws MiExcepcion {
+
+        String mensajeErrorSinDato=this.getString(R.string.mensajeToastFaltaDato);
+        if (nombre.getText().toString().equals("")) {
+            throw new MiExcepcion(nombre, mensajeErrorSinDato);
+        }
+        if (apellidos.getText().toString().equals("")) {
+            throw new MiExcepcion(apellidos, mensajeErrorSinDato);
+        }
+        /*
+
+        if (!Pattern.matches("([0-9]+)(||\\.||(\\.[0-9]{1,2}))", pvp.getText())){
+            throw new MiExcepcion(pvp, mensajeErrorDecimales);
+        }
+        if (dto.getText().toString().equals("")) {
+            throw new MiExcepcion(dto, mensajeErrorSinDato);
+        }
+        if (!Pattern.matches("[0-9]{1,2}", dto.getText())) {
+            throw new MiExcepcion(dto, mensajeErrorPorcentaje);
+        }
+        if (iva.getText().toString().equals("")) {
+            throw new MiExcepcion(iva, mensajeErrorSinDato);
+        }
+        if (!Pattern.matches("[0-9]{1,2}", iva.getText())) {
+            throw new MiExcepcion(iva, mensajeErrorPorcentaje);
+        }
+        */
+    }
+
+    private void procesarInformacion() {
+        /*
+        Articulo elArticulo=new Articulo(Float.parseFloat(pvp.getText().toString()), Integer.parseInt(iva.getText().toString()), Integer.parseInt(dto.getText().toString()));
+ total.setText(String.format("%.2f", elArticulo.calculaAPagar()));
+ //total.setText(new BigDecimal(elArticulo.calculaAPagar().toString()).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+
+         */
     }
 }

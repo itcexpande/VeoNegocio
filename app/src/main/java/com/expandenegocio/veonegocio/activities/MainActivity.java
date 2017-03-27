@@ -101,7 +101,8 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void haceralgo(View view) {
-        //
+        Intent intent = new Intent("AcivityRegistro");
+        startActivity(intent);
     }
 
 

@@ -75,7 +75,7 @@
             android:gravity="center"
             android:onClick="haceralgo"
             android:padding="5dp"
-            android:text="BOTON REDONDEADO"
+            android:text="REGISTRO"
             android:textColor="#000000"
             android:textSize="30dp"
             android:layout_marginLeft="10dp"
@@ -93,7 +93,7 @@
             android:textAlignment="center"
             android:onClick="irAEnlaceTerminosDeServicio"
             android:text="@string/al_continuar_aceptas_nuestros_t_rminos_de_servicio_y"
-            android:textSize="13dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/texto_pie2"
