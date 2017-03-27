@@ -48,51 +48,23 @@ public class ActivityServicio extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.servicios:
 
-                customHtml= leerArchivo(R.raw.servicios);
+                customHtml = leerArchivo(R.raw.servicios);
 
                 simpleWebView.loadData(customHtml, "text/html", "UTF-8");
 
 
                 break;
             case R.id.privacidad:
-                customHtml= leerArchivo(R.raw.privacidad);
-                /*
-                customHtml = "<html><body><h1>POLITICA PRIVACIDAD</h1>" +
-                        "<h1>Titulo 1</h1><h2>Titulo 2</h2><h3>JESUS</h3>" +
+                customHtml = leerArchivo(R.raw.privacidad);
 
-                        "<p>Política de Privacidad Última modificación: 1 de marzo de"
-                        + "2017 (ver versiones archivadas) (Los ejemplos con hiperenlaces están"
-                        + "disponibles al final de este documento). Existen muchas formas diferentes de"
-                        + "utilizar nuestros servicios para buscar y compartir información, ponerte en"
-                        + "contacto con otros usuarios o crear contenido nuevo. Cuando compartes"
-                        + "información con nosotros, por ejemplo, al crear una cuenta de Google, podemos"
-                        + "mejorar esos servicios para mostrarte anuncios y resultados de búsqueda más"
-                        + "relevantes, ayudarte a conectar con personas o compartir contenido con otros"
-                        + "usuarios de forma más fácil y rápida. Ya que eres usuario de nuestros"
-                        + "servicios, queremos que entiendas cómo usamos la información y lo que puedes"
-                        + "hacer para proteger tu privacidad. La presente Política de privacidad describe:"
-                        + "Qué datos recogemos y los fines para los que llevamos a cabo su recogida Cómo"
-                        + "utilizamos esos datos Las opciones que ofrecemos, incluyendo cómo acceder a los"
-                        + "datos y actualizarlos. Aunque hemos intentado proporcionar una descripción lo"
-                        + "más sencilla posible, si no estás familiarizado con términos clave tales como"
-                        + "«cookies», «dirección IP», «contadores de visitas» y «navegador», consulta esta"
-                        + "página para informarte de su significado antes de continuar. Tu privacidad es"
-                        + "importante para Google, por lo que con independencia de que seas un usuario"
-                        + "nuevo o un usuario avanzado, te recomendamos que leas nuestra política y te"
-                        + "pongas en contacto con nosotros si tienes cualquier duda. Datos recogidos por"
-                        + "Google Recopilamos información para ofrecer mejores servicios a todos nuestros</p>" +
-
-
-                        "</body></html>";
-                        */
                 simpleWebView.loadData(customHtml, "text/html", "UTF-8");
                 break;
         }
     }
 
-    private String leerArchivo(int queArchivo) {
+    private String leerArchivo(int queArchivoLeemos) {
         try {
-            InputStreamReader isr = new InputStreamReader(this.getResources().openRawResource(queArchivo));
+            InputStreamReader isr = new InputStreamReader(this.getResources().openRawResource(queArchivoLeemos));
             BufferedReader br = new BufferedReader(isr);
 
             String linea;

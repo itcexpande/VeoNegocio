@@ -20,11 +20,13 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="#444"
+
             android:text="PRIVACIDAD"
-            android:textColor="#fff"
+            android:textColor="#0B22F0"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:background="@drawable/boton_2"/>
 
         <Button
             android:id="@+id/servicios"
@@ -32,11 +34,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:background="#444"
+            android:background="@drawable/boton_3"
             android:text="SERVICIOS"
-            android:textColor="#fff"
+            android:textColor="#F0290B"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:typeface="monospace"/>
     </LinearLayout>
 
     <WebView
