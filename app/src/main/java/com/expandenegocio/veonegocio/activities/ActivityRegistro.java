@@ -33,13 +33,14 @@ public class ActivityRegistro extends AppCompatActivity {
         mail = (EditText) this.findViewById(R.id.edit_mail_registro);
         otros = (EditText) this.findViewById(R.id.edit_otros_registro);
 
-
+        limpiar();
     }
 
     public void aceptarRegistro(View view) {
         try {
             comprobarEntrada();
             procesarInformacion();
+            limpiar();
         } catch (MiExcepcion e) {
             Toast.makeText(getApplicationContext(),
                     e.getMessage(),
@@ -77,41 +78,46 @@ public class ActivityRegistro extends AppCompatActivity {
 
     }
 
+    private void limpiar() {
+        nombre.setText("");
+        apellidos.setText("");
+        telefono.setText("");
+        mail.setText("");
+        otros.setText("");
+        nombre.requestFocus();
+    }
+
     private void comprobarEntrada() throws MiExcepcion {
 
-        String mensajeErrorSinDato=this.getString(R.string.mensajeToastFaltaDato);
+        String mensajeErrorSinDato = this.getString(R.string.mensajeToastFaltaDato);
+        String mensajeErrorTelefono = this.getString(R.string.mensajeToastTelefono);
+        String mensajeErrorMail = this.getString(R.string.mensajeToastMail);
+
+
         if (nombre.getText().toString().equals("")) {
             throw new MiExcepcion(nombre, mensajeErrorSinDato);
         }
         if (apellidos.getText().toString().equals("")) {
             throw new MiExcepcion(apellidos, mensajeErrorSinDato);
         }
-        /*
 
-        if (!Pattern.matches("([0-9]+)(||\\.||(\\.[0-9]{1,2}))", pvp.getText())){
-            throw new MiExcepcion(pvp, mensajeErrorDecimales);
+
+        if (!Pattern.matches("^(0034|\\+34)?(\\d\\d\\d)-? ?(\\d\\d)-? ?(\\d)-? ?(\\d)-? ?(\\d\\d)$", telefono.getText())) {
+            throw new MiExcepcion(telefono, mensajeErrorTelefono);
         }
-        if (dto.getText().toString().equals("")) {
-            throw new MiExcepcion(dto, mensajeErrorSinDato);
+
+        if (!Pattern.matches("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$", mail.getText())) {
+            throw new MiExcepcion(telefono, mensajeErrorMail);
         }
-        if (!Pattern.matches("[0-9]{1,2}", dto.getText())) {
-            throw new MiExcepcion(dto, mensajeErrorPorcentaje);
-        }
-        if (iva.getText().toString().equals("")) {
-            throw new MiExcepcion(iva, mensajeErrorSinDato);
-        }
-        if (!Pattern.matches("[0-9]{1,2}", iva.getText())) {
-            throw new MiExcepcion(iva, mensajeErrorPorcentaje);
-        }
-        */
+
     }
 
     private void procesarInformacion() {
-        /*
-        Articulo elArticulo=new Articulo(Float.parseFloat(pvp.getText().toString()), Integer.parseInt(iva.getText().toString()), Integer.parseInt(dto.getText().toString()));
- total.setText(String.format("%.2f", elArticulo.calculaAPagar()));
- //total.setText(new BigDecimal(elArticulo.calculaAPagar().toString()).setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        Cliente elCliente = new Cliente(nombre.getText().toString(),
+                apellidos.getText().toString(),
+                telefono.getText().toString(),
+                mail.getText().toString(),
+                otros.getText().toString());
 
-         */
     }
 }
