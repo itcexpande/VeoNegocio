@@ -14,9 +14,21 @@
     <string name="al_continuar_aceptas_nuestros_t_rminos_de_servicio_y">Al continuar, <u>aceptas nuestros Términos de servicio y</u></string>
     <string name="po_tica_de_privacidad"><u>Poítica de privacidad</u></string>
     <string name="cancelar">CANCELAR</string>
-    <string name="mensajeToastFaltaDato">Falta dato</string>
-    <string name="mensajeToastTelefono">Telefono Erroneo - formato +034 999 999 999</string>
+    <string name="mensajeToastFaltaDato">Falta dato nombre</string>
+
     <string name="mensajeToastMail">Direccion mail erronea</string>
     <string name="listado_de_clientes">LISTADO DE CLIENTES</string>
+    <string name="nombre_registro">Nombre:</string>
+    <string name="hint_su_nombre_registro">su nombre</string>
+    <string name="apellidos_registro">Apellidos:</string>
+    <string name="hint_sus_apellidos_registro">sus apellidos</string>
+    <string name="direcci_n_correo_electr_nico_registro">Dirección Correo Electrónico:</string>
+    <string name="hint_su_direcci_n_de_correo_electr_nico_registro">su dirección de correo electrónico</string>
+    <string name="password_registro">Contraseña:</string>
+    <string name="hint_contrase_a_registro">contraseña</string>
+    <string name="faltaDatoApellidos">Falta dato apellidos</string>
+    <string name="faltaDatoPassword">Falta dato contraseña</string>
+    <string name="patronPassword">^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$</string>
+    <string name="action_settings">settings</string>
 
 </resources>

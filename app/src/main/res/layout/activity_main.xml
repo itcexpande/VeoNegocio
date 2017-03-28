@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.70"
+        android:layout_weight="0.60"
         android:orientation="vertical">
 
         <com.daimajia.slider.library.SliderLayout
@@ -61,46 +61,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight=".30"
+        android:layout_weight=".40"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+
+        <Button
+            android:id="@+id/boton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/boton"
-                android:layout_width="170dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/slider"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/boton_redondeado"
-                android:gravity="center"
-                android:onClick="registro"
-                android:text="REGISTRO"
-                android:textSize="30dp"
-
-                />
-
-            <Button
-                android:id="@+id/boton2"
-                android:layout_width="170dp"
-                android:layout_height="35dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/slider"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/boton_redondeado"
-                android:gravity="center"
-                android:onClick="listado"
-                android:text="LISTADO"
-                android:textSize="30dp"
-
-                />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/slider"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/boton_redondeado"
+            android:gravity="center"
+            android:onClick="registro"
+            android:text="REGISTRO"
+            android:textSize="30dp" />
 
 
-        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
 
         <TextView
             android:id="@+id/texto_pie1"
@@ -113,6 +94,9 @@
             android:textAlignment="center"
             android:textSize="15dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
         <TextView
             android:id="@+id/texto_pie2"
             android:layout_width="match_parent"

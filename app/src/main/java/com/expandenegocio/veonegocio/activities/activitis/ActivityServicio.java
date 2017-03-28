@@ -1,4 +1,4 @@
-package com.expandenegocio.veonegocio.activities;
+package com.expandenegocio.veonegocio.activities.activitis;
 
 import android.content.res.Resources;
 import android.os.Bundle;

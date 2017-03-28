@@ -1,12 +1,8 @@
-package com.expandenegocio.veonegocio.activities;
+package com.expandenegocio.veonegocio.activities.activitis;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.view.Window;
-import android.widget.TextView;
 
 
 //import com.expandenegocio.veonegocio.R;
@@ -106,9 +102,5 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
 
-    public void listado(View view) {
-        Intent intent = new Intent("AcivityListadoClientes");
-        startActivity(intent);
 
-    }
 }

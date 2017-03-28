@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.activitis.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".activities.ActivitySinConexion"
+            android:name=".activities.activitis.ActivitySinConexion"
             android:label="@string/title_activity_sin_conexion" >
             <intent-filter>
                 <action android:name="AcivitySinConexion" />
@@ -30,8 +30,9 @@
         </activity>
 
         <activity
-            android:name=".activities.ActivityRegistro"
-            android:label="@string/title_activity_registro" >
+            android:name=".activities.activitis.ActivityRegistro"
+            android:label="@string/title_activity_registro"
+            >
             <intent-filter>
                 <action android:name="AcivityRegistro" />
 
@@ -40,20 +41,10 @@
         </activity>
 
         <activity
-            android:name=".activities.ActivityServicio"
+            android:name=".activities.activitis.ActivityServicio"
             android:label="Servicio">
             <intent-filter>
                 <action android:name="AcivityServicio" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".activities.ActivityListadoClientes"
-            android:label="Listado de Clientes">
-            <intent-filter>
-                <action android:name="AcivityListadoClientes" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
