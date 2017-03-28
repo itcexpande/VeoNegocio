@@ -100,10 +100,15 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         startActivity(intent);
     }
 
-    public void haceralgo(View view) {
+    public void registro(View view) {
         Intent intent = new Intent("AcivityRegistro");
         startActivity(intent);
     }
 
 
+    public void listado(View view) {
+        Intent intent = new Intent("AcivityListadoClientes");
+        startActivity(intent);
+
+    }
 }

@@ -49,6 +49,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.ActivityListadoClientes"
+            android:label="Listado de Clientes">
+            <intent-filter>
+                <action android:name="AcivityListadoClientes" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

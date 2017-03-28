@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout.activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/layout.activity_main"
     tools:context="com.expandenegocio.ejemplosliderimages.MainActivity">
 
 
@@ -64,25 +64,43 @@
         android:layout_weight=".30"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/boton"
-            android:layout_width="350dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/slider"
-            android:layout_margin="20dp"
-            android:background="@drawable/boton_redondeado"
-            android:gravity="center"
-            android:onClick="haceralgo"
-            android:padding="5dp"
-            android:text="REGISTRO"
-            android:textColor="#000000"
-            android:textSize="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
 
-            />
+            <Button
+                android:id="@+id/boton"
+                android:layout_width="170dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/slider"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/boton_redondeado"
+                android:gravity="center"
+                android:onClick="registro"
+                android:text="REGISTRO"
+                android:textSize="30dp"
 
+                />
+
+            <Button
+                android:id="@+id/boton2"
+                android:layout_width="170dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/slider"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/boton_redondeado"
+                android:gravity="center"
+                android:onClick="listado"
+                android:text="LISTADO"
+                android:textSize="30dp"
+
+                />
+
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/texto_pie1"
@@ -90,9 +108,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/boton"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
             android:onClick="irAEnlaceTerminosDeServicio"
             android:text="@string/al_continuar_aceptas_nuestros_t_rminos_de_servicio_y"
+            android:textAlignment="center"
             android:textSize="15dp" />
 
         <TextView

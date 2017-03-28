@@ -120,4 +120,9 @@ public class ActivityRegistro extends AppCompatActivity {
                 otros.getText().toString());
 
     }
+
+
+    public void cancelarRegistro(View view) {
+        limpiar();
+    }
 }

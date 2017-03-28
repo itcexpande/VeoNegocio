@@ -17,5 +17,6 @@
     <string name="mensajeToastFaltaDato">Falta dato</string>
     <string name="mensajeToastTelefono">Telefono Erroneo - formato +034 999 999 999</string>
     <string name="mensajeToastMail">Direccion mail erronea</string>
+    <string name="listado_de_clientes">LISTADO DE CLIENTES</string>
 
 </resources>
