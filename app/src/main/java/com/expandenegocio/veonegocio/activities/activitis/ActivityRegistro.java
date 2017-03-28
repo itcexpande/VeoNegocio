@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 import cz.msebera.android.httpclient.Header;
 
 
-
 /**
  * Created by jesus on 20/03/2017.
  */
@@ -53,9 +52,7 @@ public class ActivityRegistro extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //recogemos los valores de los
-
-
+                //recogemos los valores de los
 
 
             }
