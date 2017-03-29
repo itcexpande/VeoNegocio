@@ -9,8 +9,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
+
+import cz.msebera.android.httpclient.Header;
 
 
 /**
@@ -74,10 +81,17 @@ public class ActivityInicioSesion extends AppCompatActivity {
     }
 
     private void procesarInformacion() {
-      /*  User elUsuario = new User(nombre.getText().toString(),
-                apellidos.getText().toString(),
-                email.getText().toString(),
-                password.getText().toString());*/
+        RequestParams params = new RequestParams();
+//        params.put("name", emailUsuario.getText().toString());
+        // Put Http parameter username with value of Email Edit View control
+        params.put("email", emailUsuario.getText().toString());
+        // Put Http parameter password with value of Password Edit View control
+        params.put("pwd", password.getText().toString());
+
+
+        // Invoke RESTful Web Service with Http parameters
+        invokeWS(params);
+
     }
 
 
@@ -87,5 +101,67 @@ public class ActivityInicioSesion extends AppCompatActivity {
     public void registro(View view) {
         Intent intent = new Intent("AcivityRegistro");
         startActivity(intent);
+    }
+
+    public void invokeWS(RequestParams params) {
+        // Show Progress Dialog
+        //prgDialog.show();
+        // Make RESTful webservice call using AsyncHttpClient object
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://www.expandenegocio.com/app/signup.php", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+
+                //prgDialog.hide();
+                try {
+                    // JSON Object
+
+                    JSONObject obj = new JSONObject(response);
+
+                    switch (obj.getInt("status")) {
+
+                        case 0:
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            break;
+                        case 1:
+                            Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "ir a activity de la aplicacion", Toast.LENGTH_LONG).show();
+
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                    error) {
+
+                //prgDialog.hide();
+
+                try {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 }

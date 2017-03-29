@@ -89,15 +89,7 @@ public class ActivityRegistro extends AppCompatActivity {
                     e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
-        /*
 
-        nombre = (EditText) this.findViewById(R.id.edit_nombre_registro);
-        apellidos = (EditText) this.findViewById(R.id.edit_apellidos_registro);
-
-
-        email = (EditText) this.findViewById(R.id.edit_email_registro);
-        password = (EditText) this.findViewById(R.id.edit_password_registro);
-        */
     }
 
 
@@ -115,11 +107,7 @@ public class ActivityRegistro extends AppCompatActivity {
         String mensajeErrorSinApellidos = getString(R.string.faltaDatoApellidos);
         String mensajeErrorMail = this.getString(R.string.mensajeToastMail);
         String mensajeErrorSinPassword = getString(R.string.faltaDatoPassword);
-/*
-        if (email.getText().toString().equals("") || !Pattern.matches(getString(R.string.patronPassword),email.getText())) {
-            throw new MiExcepcion(email, mensajeErrorMail);
-        }
-*/
+
         if (email.getText().toString().equals("")) {
             throw new MiExcepcion(email, mensajeErrorMail);
         }
