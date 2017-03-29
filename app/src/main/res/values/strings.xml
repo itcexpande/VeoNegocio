@@ -17,18 +17,18 @@
     <string name="mensajeToastFaltaDato">Falta dato nombre</string>
 
     <string name="mensajeToastMail">Direccion mail erronea</string>
-    <string name="listado_de_clientes">LISTADO DE CLIENTES</string>
+
     <string name="nombre_registro">Nombre:</string>
-    <string name="hint_su_nombre_registro">su nombre</string>
+    <string name="hint_su_nombre_registro">nombre</string>
     <string name="apellidos_registro">Apellidos:</string>
-    <string name="hint_sus_apellidos_registro">sus apellidos</string>
+    <string name="hint_sus_apellidos_registro">apellidos</string>
     <string name="direcci_n_correo_electr_nico_registro">Dirección Correo Electrónico:</string>
-    <string name="hint_su_direcci_n_de_correo_electr_nico_registro">su dirección de correo electrónico</string>
+    <string name="hint_su_direcci_n_de_correo_electr_nico_registro">dirección de correo electrónico</string>
     <string name="password_registro">Contraseña:</string>
     <string name="hint_contrase_a_registro">contraseña</string>
     <string name="faltaDatoApellidos">Falta dato apellidos</string>
     <string name="faltaDatoPassword">Falta dato contraseña</string>
-    <string name="patronPassword">^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$</string>
+    <string name="patronPassword">^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$</string>
     <string name="action_settings">settings</string>
     <string name="has_olvidado_los_datos_de_tu_cuenta"><u>¿Has olvidado los datos de tu cuenta?</u></string>
     <string name="registrarse_es_gratis">REGISTRARSE, es gratis</string>

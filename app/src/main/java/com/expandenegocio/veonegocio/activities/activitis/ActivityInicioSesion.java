@@ -1,6 +1,7 @@
 package com.expandenegocio.veonegocio.activities.activitis;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,7 +33,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
     }
 
-    public void aceptarRegistro(View view) {
+    public void inicioSesion(View view) {
         try {
             comprobarEntrada();
             procesarInformacion();
@@ -66,10 +67,6 @@ public class ActivityInicioSesion extends AppCompatActivity {
             throw new MiExcepcion(emailUsuario, mensajeErrorMail);
         }
 
-        if (!Pattern.matches(getString(R.string.patronPassword), emailUsuario.getText())) {
-            throw new MiExcepcion(emailUsuario, mensajeErrorMail);
-        }
-
         if (password.getText().toString().equals("")) {
             throw new MiExcepcion(password, mensajeErrorSinPassword);
         }
@@ -83,9 +80,12 @@ public class ActivityInicioSesion extends AppCompatActivity {
                 password.getText().toString());*/
     }
 
-    public void inicioSesion(View view) {
-    }
 
     public void recordarDatos(View view) {
+    }
+
+    public void registro(View view) {
+        Intent intent = new Intent("AcivityRegistro");
+        startActivity(intent);
     }
 }
