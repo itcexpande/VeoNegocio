@@ -67,15 +67,15 @@
 
         <Button
             android:id="@+id/boton"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/slider"
-            android:layout_marginLeft="2dp"
+            android:layout_marginLeft="15dp"
             android:background="@drawable/boton_redondeado"
             android:gravity="center"
             android:onClick="registro"
-            android:text="REGISTRO"
+            android:text="INICIAR SESION"
             android:textSize="30dp" />
 
 
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/texto_pie1"
             android:layout_centerHorizontal="true"
-            android:onClick="irAEnlaceTerminosDeServicio"
+            android:onClick="irAEnlaceTerminosDePrivacidad"
             android:text="@string/po_tica_de_privacidad"
             android:textAlignment="center"
             android:textSize="15dp" />

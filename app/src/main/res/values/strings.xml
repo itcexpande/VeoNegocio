@@ -30,5 +30,7 @@
     <string name="faltaDatoPassword">Falta dato contraseña</string>
     <string name="patronPassword">^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$</string>
     <string name="action_settings">settings</string>
+    <string name="has_olvidado_los_datos_de_tu_cuenta"><u>¿Has olvidado los datos de tu cuenta?</u></string>
+    <string name="registrarse_es_gratis">REGISTRARSE, es gratis</string>
 
 </resources>

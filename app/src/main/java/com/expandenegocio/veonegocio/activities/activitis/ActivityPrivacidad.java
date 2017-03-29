@@ -16,19 +16,20 @@ import java.io.InputStreamReader;
  * Created by jesus on 23/03/2017.
  */
 
-public class ActivityServicio extends AppCompatActivity  {
+public class ActivityPrivacidad extends AppCompatActivity {
 
-    WebView simpleWebViewServicio;
+    WebView simpleWebViewPrivacidad;
     String customHtml;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_servicio);
-        simpleWebViewServicio = (WebView) findViewById(R.id.simpleWebView_servicio);
-        customHtml = leerArchivo(R.raw.servicios);
+        setContentView(R.layout.layout_privacidad);
+        simpleWebViewPrivacidad = (WebView) findViewById(R.id.simpleWebView_privacidad);
 
-        simpleWebViewServicio.loadData(customHtml, "text/html", "UTF-8");
+        customHtml = leerArchivo(R.raw.privacidad);
+
+        simpleWebViewPrivacidad.loadData(customHtml, "text/html", "UTF-8");
 
     }
 

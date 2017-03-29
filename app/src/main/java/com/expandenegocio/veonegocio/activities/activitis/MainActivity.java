@@ -97,10 +97,18 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void registro(View view) {
+       /*
         Intent intent = new Intent("AcivityRegistro");
         startActivity(intent);
+*/
+        Intent intent = new Intent("AcivityInicioSesion");
+        startActivity(intent);
+
     }
 
 
-
+    public void irAEnlaceTerminosDePrivacidad(View view) {
+        Intent intent = new Intent("AcivityPrivacidad");
+        startActivity(intent);
+    }
 }

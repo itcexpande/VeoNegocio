@@ -1,28 +1,19 @@
 package com.expandenegocio.veonegocio.activities.activitis;
 
-import android.app.ProgressDialog;
+
+
+
 import android.os.Bundle;
-//import android.support.design.widget.FloatingActionButton;
-//import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
-import cz.msebera.android.httpclient.Header;
+
 
 
 /**
@@ -30,11 +21,13 @@ import cz.msebera.android.httpclient.Header;
  */
 
 public class ActivityRegistro extends AppCompatActivity {
+
     private EditText nombre;
     private EditText apellidos;
     private EditText email;
     private EditText password;
-    ProgressDialog prgDialog;
+
+  //  ProgressDialog prgDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +38,6 @@ public class ActivityRegistro extends AppCompatActivity {
         email = (EditText) this.findViewById(R.id.edit_email_registro);
         password = (EditText) this.findViewById(R.id.edit_password_registro);
         limpiar();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        Button fab = (Button) findViewById(R.id.boton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //recogemos los valores de los
-
-
-            }
-        });
-
-        prgDialog = new ProgressDialog(this);
-        prgDialog.setMessage("Please wait...");
-        prgDialog.setCancelable(false);
-
 
     }
 
@@ -89,6 +65,7 @@ public class ActivityRegistro extends AppCompatActivity {
         email = (EditText) this.findViewById(R.id.edit_email_registro);
         password = (EditText) this.findViewById(R.id.edit_password_registro);
     }
+
 
     private void limpiar() {
         nombre.setText("");
@@ -122,14 +99,15 @@ public class ActivityRegistro extends AppCompatActivity {
     }
 
     private void procesarInformacion() {
-        User elUsuario = new User(nombre.getText().toString(),
+      /*  User elUsuario = new User(nombre.getText().toString(),
                 apellidos.getText().toString(),
                 email.getText().toString(),
-                password.getText().toString());
+                password.getText().toString());*/
 
 
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -221,4 +199,5 @@ public class ActivityRegistro extends AppCompatActivity {
         });
 
     }
+    */
 }
