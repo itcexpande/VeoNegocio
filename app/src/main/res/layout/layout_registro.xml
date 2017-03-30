@@ -10,7 +10,7 @@
         android:id="@+id/edit_correo_registro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_su_direcci_n_de_correo_electr_nico_registro"
+        android:hint="@string/direcci_n_correo_electr_nico_registro"
         android:inputType="textEmailAddress" />
 
     <EditText

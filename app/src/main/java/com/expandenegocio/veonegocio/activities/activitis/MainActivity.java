@@ -12,6 +12,7 @@ import android.view.View;
 
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -128,7 +129,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void registro(View view) {
-        /*
+   /*
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent("AcivitySinConexion");
@@ -139,6 +140,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             startActivity(intent);
 
         }
+
         */
 
 

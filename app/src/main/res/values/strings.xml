@@ -23,7 +23,6 @@
     <string name="apellidos_registro">Apellidos:</string>
     <string name="hint_sus_apellidos_registro">apellidos</string>
     <string name="direcci_n_correo_electr_nico_registro">Dirección Correo Electrónico:</string>
-    <string name="hint_su_direcci_n_de_correo_electr_nico_registro">dirección de correo electrónico</string>
     <string name="password_registro">Contraseña:</string>
     <string name="hint_contrase_a_registro">contraseña</string>
     <string name="faltaDatoApellidos">Falta dato apellidos</string>
