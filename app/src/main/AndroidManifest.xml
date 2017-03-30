@@ -75,7 +75,8 @@
 
         <activity
             android:name=".activities.activitis.ActivityConsultas"
-            android:label="Consultas"   >
+            android:label="Consultas"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="ActivityConsultas" />
 

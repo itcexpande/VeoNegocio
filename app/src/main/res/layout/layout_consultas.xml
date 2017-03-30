@@ -4,13 +4,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RadioGroup
+        android:id="@+id/radioGroup_consultas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <RadioButton
+            android:id="@+id/radio_button_todas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Todas" />
+
+        <RadioButton
+            android:id="@+id/radio_button_ConFiltros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:text="Con Filtros" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/listView_listadoTodas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+
+    </ListView>
+
     <Spinner
         android:id="@+id/spinner_consultas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/nombresCiudades">
+        android:entries="@array/nombresCiudades"
+        android:visibility="invisible">
 
     </Spinner>
+<!--
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -26,5 +58,5 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 </LinearLayout>
