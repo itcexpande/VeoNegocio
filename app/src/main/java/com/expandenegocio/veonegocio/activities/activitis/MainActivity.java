@@ -33,12 +33,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (!compruebaConexion(this)) {
-            Toast.makeText(getBaseContext(),"Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(getBaseContext(),"Conectado a internet ", Toast.LENGTH_SHORT).show();
-
-        }
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -102,10 +96,10 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     /**
      * Función para comprobar si hay conexión a Internet
+     *
      * @param context
      * @return boolean
      */
-
     public static boolean compruebaConexion(Context context) {
 
         boolean connected = false;
@@ -121,6 +115,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 connected = true;
             }
         }
+
         return connected;
     }
 
@@ -131,9 +126,22 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void registro(View view) {
+        if (!compruebaConexion(this)) {
+            Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent("AcivitySinConexion");
+            startActivity(intent);
+        } else {
+            Toast.makeText(getBaseContext(), "Conectado a internet ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent("AcivityInicioSesion");
+            startActivity(intent);
 
+        }
+
+/*
         Intent intent = new Intent("AcivityInicioSesion");
+
         startActivity(intent);
+        */
 
     }
 
