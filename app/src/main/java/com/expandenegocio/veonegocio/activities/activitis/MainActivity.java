@@ -1,6 +1,9 @@
 package com.expandenegocio.veonegocio.activities.activitis;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,6 +12,7 @@ import android.view.View;
 
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -29,6 +33,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!compruebaConexion(this)) {
+            Toast.makeText(getBaseContext(),"Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getBaseContext(),"Conectado a internet ", Toast.LENGTH_SHORT).show();
+
+        }
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -88,6 +98,30 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+    /**
+     * Función para comprobar si hay conexión a Internet
+     * @param context
+     * @return boolean
+     */
+
+    public static boolean compruebaConexion(Context context) {
+
+        boolean connected = false;
+
+        ConnectivityManager connec = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // Recupera todas las redes (tanto móviles como wifi)
+        NetworkInfo[] redes = connec.getAllNetworkInfo();
+
+        for (int i = 0; i < redes.length; i++) {
+            // Si alguna red tiene conexión, se devuelve true
+            if (redes[i].getState() == NetworkInfo.State.CONNECTED) {
+                connected = true;
+            }
+        }
+        return connected;
     }
 
 
