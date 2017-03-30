@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="comentariosCiudad">
 
+        <item >Madrid es la capital de España y de la Comunidad de Madrid, comunidad autónoma uniprovincial. ...</item>
+        <item >París (en francés Paris, pronunciado [paʁi] (?·i)) es la capital de Francia y de la región de Isla de Francia. ..</item>
+        <item >Roma (IPA: [roːma]) es una ciudad italiana de 2.783.300 habitantes, capital de la provincia de Roma, de la región del Lacio y de Italia...</item>
+        <item >Londres (London en inglés) es la capital de Inglaterra y del Reino Unido. Situada a orillas del río Támesis en el sureste de la isla de Gran Bretaña, su establecimiento se data más de dos milenios atrás,..</item>
+
+
+    </string-array>
+    <string-array name="nombresCiudades">
+
+
+        <item >Madrid</item>
+        <item >París</item>
+        <item >Roma</item>
+        <item >Londres</item>
+
+
+    </string-array>
+
+
+    <string-array name="paises">
+        <item>España</item>
+        <item>Francia</item>
+        <item>Italia</item>
+        <item>Inglaterra</item>
+    </string-array>
 
 </resources>

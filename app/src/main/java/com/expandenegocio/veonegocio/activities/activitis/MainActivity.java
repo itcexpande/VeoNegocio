@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 
 
-//import com.expandenegocio.veonegocio.R;
+
 
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.widget.Toast;
+
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -123,9 +123,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     public void irAEnlaceTerminosDeServicio(View view) {
         Intent intent = new Intent("AcivityServicio");
         startActivity(intent);
+
+
     }
 
     public void registro(View view) {
+        /*
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent("AcivitySinConexion");
@@ -136,12 +139,13 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             startActivity(intent);
 
         }
+        */
 
-/*
-        Intent intent = new Intent("AcivityInicioSesion");
+
+        Intent intent = new Intent("ActivityConsultas");
 
         startActivity(intent);
-        */
+
 
     }
 

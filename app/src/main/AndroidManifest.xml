@@ -72,6 +72,18 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".activities.activitis.ActivityConsultas"
+            android:label="Consultas"   >
+            <intent-filter>
+                <action android:name="ActivityConsultas" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>
