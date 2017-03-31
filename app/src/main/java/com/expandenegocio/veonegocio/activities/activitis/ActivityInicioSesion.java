@@ -132,6 +132,12 @@ public class ActivityInicioSesion extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
                             Toast.makeText(getApplicationContext(), "ir a activity de la aplicacion", Toast.LENGTH_LONG).show();
 
+
+                            Intent intent = new Intent("ActivityConsultas");
+
+                            startActivity(intent);
+
+
                             break;
                     }
 

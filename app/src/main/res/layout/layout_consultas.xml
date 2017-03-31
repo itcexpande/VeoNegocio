@@ -16,14 +16,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Todas" />
+            android:text="Todas"
+            android:onClick="todas"/>
 
         <RadioButton
             android:id="@+id/radio_button_ConFiltros"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
-            android:text="Con Filtros" />
+            android:text="Con Filtros"
+            android:onClick="filtrar"/>
     </RadioGroup>
 
     <ListView

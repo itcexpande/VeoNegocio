@@ -129,7 +129,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void registro(View view) {
-   /*
+
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent("AcivitySinConexion");
@@ -141,12 +141,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
         }
 
-        */
-
-
-        Intent intent = new Intent("ActivityConsultas");
-
-        startActivity(intent);
 
 
     }
@@ -154,6 +148,11 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     public void irAEnlaceTerminosDePrivacidad(View view) {
         Intent intent = new Intent("AcivityPrivacidad");
+        startActivity(intent);
+    }
+
+    public void consultaro(View view) {
+        Intent intent = new Intent("AcivityConsultas");
         startActivity(intent);
     }
 }

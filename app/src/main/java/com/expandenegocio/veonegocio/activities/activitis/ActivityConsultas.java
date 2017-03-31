@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
 
@@ -24,6 +25,8 @@ public class ActivityConsultas extends AppCompatActivity {
     private GestoraCiudades gestora;
     private CharSequence[] datos;
     private Resources res;
+    private ListView lista;
+    private  Spinner selectorCiudad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class ActivityConsultas extends AppCompatActivity {
         final ListView lista = (ListView) this.findViewById(R.id.listView_listadoTodas);
         final RadioButton radioButtonTodos = (RadioButton) this.findViewById(R.id.radio_button_todas);
         final RadioButton radioButtonFiltros = (RadioButton) this.findViewById(R.id.radio_button_ConFiltros);
+        /*
         if (radioButtonTodos.isChecked()==true) {
 
 
@@ -58,7 +62,7 @@ public class ActivityConsultas extends AppCompatActivity {
             SimpleAdapter adaptador = new SimpleAdapter(this, gestora, R.layout.layout_consultas_spinner, from, to);
             selectorCiudad.setAdapter(adaptador);
         }
-
+*/
     }
 
     @Override
@@ -68,4 +72,25 @@ public class ActivityConsultas extends AppCompatActivity {
         return true;
     }
 
+    public void todas(View view) {
+        Toast.makeText(this,"listview",Toast.LENGTH_LONG).show();
+        final GestoraPais gestora = new GestoraPais(this);
+        String[] from = Pais.getClaves();
+        int[] to = {R.id.text_mapa};
+        SimpleAdapter elAdaptador = new SimpleAdapter(this, gestora, R.layout.item_listview, from, to);
+        lista.setAdapter(elAdaptador);
+
+    }
+
+    public void filtrar(View view) {
+
+        Toast.makeText(this,"spinner",Toast.LENGTH_LONG).show();
+
+        final GestoraCiudades gestora = new GestoraCiudades(this);
+        String[] from = gestora.clavesParaSpinner();
+        int[] to = {R.id.textview_nombre_ciudad, R.id.textview_pais_ciudad};
+        SimpleAdapter adaptador = new SimpleAdapter(this, gestora, R.layout.layout_consultas_spinner, from, to);
+        selectorCiudad.setAdapter(adaptador);
+
+    }
 }
