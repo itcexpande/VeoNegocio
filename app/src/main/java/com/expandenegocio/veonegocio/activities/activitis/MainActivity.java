@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
     public void irAEnlaceTerminosDeServicio(View view) {
-        Intent intent = new Intent("AcivityServicio");
+        Intent intent = new Intent("ActivityServicio");
         startActivity(intent);
 
 
@@ -132,11 +132,11 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent("AcivitySinConexion");
+            Intent intent = new Intent("ActivitySinConexion");
             startActivity(intent);
         } else {
             Toast.makeText(getBaseContext(), "Conectado a internet ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent("AcivityInicioSesion");
+            Intent intent = new Intent("ActivityInicioSesion");
             startActivity(intent);
 
         }
@@ -147,7 +147,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
     public void irAEnlaceTerminosDePrivacidad(View view) {
-        Intent intent = new Intent("AcivityPrivacidad");
+        Intent intent = new Intent("ActivityPrivacidad");
         startActivity(intent);
     }
 

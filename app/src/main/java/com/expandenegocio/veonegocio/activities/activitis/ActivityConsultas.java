@@ -23,10 +23,10 @@ import com.expandenegocio.veonegocio.R;
 
 public class ActivityConsultas extends AppCompatActivity {
     private GestoraCiudades gestora;
-    private CharSequence[] datos;
+    //    private CharSequence[] datos;
     private Resources res;
     private ListView lista;
-    private  Spinner selectorCiudad;
+    private Spinner selectorCiudad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class ActivityConsultas extends AppCompatActivity {
     }
 
     public void todas(View view) {
-        Toast.makeText(this,"listview",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "listview", Toast.LENGTH_LONG).show();
         final GestoraPais gestora = new GestoraPais(this);
         String[] from = Pais.getClaves();
         int[] to = {R.id.text_mapa};
@@ -84,7 +84,7 @@ public class ActivityConsultas extends AppCompatActivity {
 
     public void filtrar(View view) {
 
-        Toast.makeText(this,"spinner",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "spinner", Toast.LENGTH_LONG).show();
 
         final GestoraCiudades gestora = new GestoraCiudades(this);
         String[] from = gestora.clavesParaSpinner();

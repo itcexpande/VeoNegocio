@@ -75,7 +75,7 @@ public class ActivityRegistro extends AppCompatActivity {
         try {
             comprobarEntrada();
             procesarInformacion();
-            Intent intent = new Intent("AcivityInicioSesion");
+            Intent intent = new Intent("ActivityInicioSesion");
             startActivity(intent);
 
         } catch (MiExcepcion e) {

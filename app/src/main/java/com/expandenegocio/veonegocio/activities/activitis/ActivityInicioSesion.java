@@ -99,7 +99,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
     }
 
     public void registro(View view) {
-        Intent intent = new Intent("AcivityRegistro");
+        Intent intent = new Intent("ActivityRegistro");
         startActivity(intent);
     }
 
