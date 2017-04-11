@@ -1,4 +1,4 @@
-package com.expandenegocio.veonegocio.activities.activitis;
+package com.expandenegocio.veonegocio.utilities;
 
 import android.widget.EditText;
 

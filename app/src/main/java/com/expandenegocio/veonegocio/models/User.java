@@ -1,4 +1,4 @@
-package com.expandenegocio.veonegocio.activities.activitis;
+package com.expandenegocio.veonegocio.models;
 
 
 /**
@@ -9,13 +9,7 @@ public class User {
     private String Nombre;
     private String Apellidos;
     private String email;
-
-    public User(String id, String nombre, String apellidos, String email) {
-        Id = id;
-        Nombre = nombre;
-        Apellidos = apellidos;
-        this.email = email;
-    }
+    private Provincia provincia;
 
     public String getId() {
         return Id;
@@ -47,5 +41,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 }

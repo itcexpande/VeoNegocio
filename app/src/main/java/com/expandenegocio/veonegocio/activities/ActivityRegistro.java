@@ -1,27 +1,21 @@
-package com.expandenegocio.veonegocio.activities.activitis;
+package com.expandenegocio.veonegocio.activities;
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
+import com.expandenegocio.veonegocio.utilities.MiExcepcion;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
-
-import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
 

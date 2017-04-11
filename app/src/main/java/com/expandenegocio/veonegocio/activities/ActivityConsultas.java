@@ -1,19 +1,14 @@
-package com.expandenegocio.veonegocio.activities.activitis;
+package com.expandenegocio.veonegocio.activities;
 
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
 
@@ -73,7 +68,7 @@ public class ActivityConsultas extends AppCompatActivity {
     }
 
     public void todas(View view) {
-        Toast.makeText(this, "listview", Toast.LENGTH_LONG).show();
+
         final GestoraPais gestora = new GestoraPais(this);
         String[] from = Pais.getClaves();
         int[] to = {R.id.text_mapa};
@@ -84,7 +79,6 @@ public class ActivityConsultas extends AppCompatActivity {
 
     public void filtrar(View view) {
 
-        Toast.makeText(this, "spinner", Toast.LENGTH_LONG).show();
 
         final GestoraCiudades gestora = new GestoraCiudades(this);
         String[] from = gestora.clavesParaSpinner();

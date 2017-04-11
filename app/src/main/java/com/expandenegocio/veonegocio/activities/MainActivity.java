@@ -1,4 +1,4 @@
-package com.expandenegocio.veonegocio.activities.activitis;
+package com.expandenegocio.veonegocio.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -152,7 +152,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void consultaro(View view) {
-        Intent intent = new Intent("AcivityConsultas");
+        Intent intent = new Intent("ActivityConsultas");
         startActivity(intent);
     }
 }

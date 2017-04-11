@@ -1,4 +1,4 @@
-package com.expandenegocio.veonegocio.activities.clases;
+package com.expandenegocio.veonegocio.utilities;
 
 import android.content.Context;
 import android.view.LayoutInflater;

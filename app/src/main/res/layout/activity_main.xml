@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.expandenegocio.veonegocio.activities.activitis.MainActivity">
+    tools:context="com.expandenegocio.veonegocio.activities.MainActivity">
 
 
     <LinearLayout
@@ -64,31 +64,36 @@
         android:layout_weight=".40"
         android:orientation="vertical">
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/boton"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/slider"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/boton_redondeado"
+        android:gravity="center"
+        android:onClick="registro"
+        android:text="INICIAR SESION"
+        android:textSize="30dp" />
+    <Button
+        android:id="@+id/boton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/slider"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/boton_2"
+        android:gravity="center"
+        android:onClick="consultaro"
+        android:text="Consultas"
+        android:textSize="15dp" />
 
-        <Button
-            android:id="@+id/boton"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/slider"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/boton_redondeado"
-            android:gravity="center"
-            android:onClick="registro"
-            android:text="INICIAR SESION"
-            android:textSize="30dp" />
-        <Button
-            android:id="@+id/boton"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/slider"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/boton_2"
-            android:gravity="center"
-            android:onClick="consultaro"
-            android:text="Consultas"
-            android:textSize="15dp" />
+</LinearLayout>
 
 
         <TextView
