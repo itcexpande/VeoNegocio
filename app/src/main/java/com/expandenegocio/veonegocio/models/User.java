@@ -9,7 +9,6 @@ public class User {
     private String email;
     private String password;
     private String status;
-    private String surname;
     private String nombre;
     private String apellidos;
     private Municipio municipio;
@@ -47,14 +46,6 @@ public class User {
         this.status = status;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -86,4 +77,5 @@ public class User {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
 }
