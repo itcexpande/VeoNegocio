@@ -7,7 +7,7 @@ package com.expandenegocio.veonegocio.models;
 public class Provincia {
 
     private int id;
-    private String name;
+    private String nombreProvincia;
 
     public int getId() {
         return id;
@@ -17,17 +17,16 @@ public class Provincia {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombreProvincia() {
+        return nombreProvincia;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombreProvincia(String nombreProvincia) {
+        this.nombreProvincia = nombreProvincia;
     }
 
     @Override
-    public String toString(){
-        return name;
+    public String toString() {
+        return nombreProvincia;
     }
-
 }

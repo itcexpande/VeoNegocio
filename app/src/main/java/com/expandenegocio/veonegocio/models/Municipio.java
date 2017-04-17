@@ -6,47 +6,38 @@ package com.expandenegocio.veonegocio.models;
 
 public class Municipio {
 
-    private int provincia;
-    private int municipio;
-    private String nombre;
-    private int poblacion;
+    //   private int c_provincia;
+    private int c_municipio;
+    // private String nombre_provincia;
+    private String nombre_municipio;
+    private Provincia provincia;
 
-    public int getProvincia() {
+    public int getC_municipio() {
+        return c_municipio;
+    }
+
+    public void setC_municipio(int c_municipio) {
+        this.c_municipio = c_municipio;
+    }
+
+    public String getNombre_municipio() {
+        return nombre_municipio;
+    }
+
+    public void setNombre_municipio(String nombre_municipio) {
+        this.nombre_municipio = nombre_municipio;
+    }
+
+    public Provincia getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(int provincia) {
+    public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
-    }
-
-    public int getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(int municipio) {
-        this.municipio = municipio;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getPoblacion() {
-        return poblacion;
-    }
-
-    public void setPoblacion(int poblacion) {
-        this.poblacion = poblacion;
     }
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre_municipio;
     }
-
-
 }

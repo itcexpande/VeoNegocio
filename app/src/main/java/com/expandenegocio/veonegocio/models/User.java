@@ -5,34 +5,22 @@ package com.expandenegocio.veonegocio.models;
  * Created by Jesus on 27/03/2017.
  */
 public class User {
-    private String Id;
-    private String Nombre;
-    private String Apellidos;
+    private String id;
     private String email;
-    private Provincia provincia;
+    private String password;
+    private String status;
+    private String surname;
+    private String nombre;
+    private String apellidos;
+    private Municipio municipio;
+    private String telefono;
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
-    }
-
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public void setNombre(String nombre) {
-        Nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return Apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
+        this.id = id;
     }
 
     public String getEmail() {
@@ -43,11 +31,59 @@ public class User {
         this.email = email;
     }
 
-    public Provincia getProvincia() {
-        return provincia;
+    public String getPassword() {
+        return password;
     }
 
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }
