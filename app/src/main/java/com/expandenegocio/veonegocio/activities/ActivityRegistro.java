@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Municipio;
@@ -48,45 +50,79 @@ public class ActivityRegistro extends AppCompatActivity {
     private EditText txtCorreo;
     private EditText txtPassword;
     private EditText txtTelefono;
+    private Provincia provinciaSeleccionada;
+    private Municipio municipioSeleccionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_registro);
 
-        loadSpinner();
+        provincia = loadSpinnerProvincias();
+        loadSpinnerMunicipios(provincia.getNombreProvincia());
 
         limpiar();
 
     }
 
-    private void loadSpinner() {
+    private Municipio loadSpinnerMunicipios(String nombreProvincia) {
+        MunicipioDataSource dataSource = new MunicipioDataSource(this);
+        final ArrayList<Municipio> listaMunicipios = dataSource.getMunicipios(nombreProvincia);
+
+        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaMunicipios);
+
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio);
+
+        spnMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                                   @Override
+                                                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                       Municipio municipoSeleccionado = listaMunicipios.get(position);
+                                                   }
+
+                                                   @Override
+                                                   public void onNothingSelected(AdapterView<?> parent) {
+                                                       Municipio municipioSeleccionado = null;
+                                                   }
+                                               }
+        );
+
+        spnMunicipio.setAdapter(spinner_adapter);
+
+
+        return municipioSeleccionado;
+    }
+
+    private Provincia loadSpinnerProvincias() {
 
         ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
-        ArrayList<Provincia> listaProv = dataSource.getProvincias();
+        final ArrayList<Provincia> listaProv = dataSource.getProvincias();
 
         ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaProv);
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spnProvincia = (Spinner) findViewById(R.id.spinner_provincia);
-/*
+
         spnProvincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                                                    @Override
                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                       setupMainWindowDisplayMode();
-
+                                                       Provincia provinciaSeleccionada = listaProv.get(position);
                                                    }
 
                                                    @Override
                                                    public void onNothingSelected(AdapterView<?> parent) {
-                                                       setupMainWindowDisplayMode();
+                                                       Provincia provinciaSeleccionada = null;
                                                    }
                                                }
         );
-*/
+
         spnProvincia.setAdapter(spinner_adapter);
+
+        return provinciaSeleccionada;
 
     }
 
@@ -118,7 +154,7 @@ public class ActivityRegistro extends AppCompatActivity {
         txtNombre.setText("");
         txtApellidos.setText("");
         txtTelefono.setText("");*/
-     //   txtCorreo.requestFocus();
+        //   txtCorreo.requestFocus();
     }
 
     private void comprobarEntrada() throws MiExcepcion {
