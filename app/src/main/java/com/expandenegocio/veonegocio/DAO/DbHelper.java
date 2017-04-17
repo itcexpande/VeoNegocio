@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
+import java.io.File;
+
 /**
  * Created by Penlopjo on 31/03/2016.
  */
@@ -15,8 +17,12 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
            .getAbsolutePath() + "/Pictures/Solicitudes.db";
 */
+    /*
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
-            .getAbsolutePath() + "/Users/jesus/AndroidStudioProjects/VeoNegocioData/VeoNegocio.DB";
+            .getAbsolutePath() + "c:/Users/jesus/AndroidStudioProjects/VeoNegocioData/VeoNegocio.db";
+*/
+   public static final String NOMBREBD = Environment.getExternalStorageDirectory()
+           .getAbsolutePath() + "/Pictures/VeoNegocio.db";
 
     public DbHelper(Context context){
         super(context,NOMBREBD,null,3);

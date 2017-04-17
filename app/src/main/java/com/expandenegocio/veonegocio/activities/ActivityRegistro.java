@@ -5,10 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.R;
+import com.expandenegocio.veonegocio.models.Municipio;
+import com.expandenegocio.veonegocio.models.Provincia;
 import com.expandenegocio.veonegocio.utilities.MiExcepcion;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -16,6 +21,8 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -26,43 +33,61 @@ import cz.msebera.android.httpclient.Header;
 
 public class ActivityRegistro extends AppCompatActivity {
 
-    private EditText nombre;
-    private EditText apellidos;
-    private EditText email;
-    private EditText password;
+    private String correo;
+    private String password;
+    private String nombre;
+    private String apellidos;
+    private String telefono;
+    private Spinner spnProvincia;
+    private Spinner spnMunicipio;
+    private Provincia provincia;
+    private Municipio municipio;
 
-    // ProgressDialog prgDialog;
+    private EditText txtNombre;
+    private EditText txtApellidos;
+    private EditText txtCorreo;
+    private EditText txtPassword;
+    private EditText txtTelefono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_registro);
-        nombre = (EditText) this.findViewById(R.id.edit_nombre_registro);
-        apellidos = (EditText) this.findViewById(R.id.edit_apellidos_registro);
-        email = (EditText) this.findViewById(R.id.edit_correo_registro);
-        password = (EditText) this.findViewById(R.id.edit_password_registro);
+
+        loadSpinner();
+
         limpiar();
-      /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        Button fab = (Button) findViewById(R.id.boton);
+    }
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //recogemos los valores para registro
+    private void loadSpinner() {
 
+        ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+        ArrayList<Provincia> listaProv = dataSource.getProvincias();
 
-            }
-        });
+        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaProv);
 
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        prgDialog = new ProgressDialog(this);
-        prgDialog.setMessage("Please wait...");
-        prgDialog.setCancelable(false);
+        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia);
+/*
+        spnProvincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+                                                   @Override
+                                                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                       setupMainWindowDisplayMode();
+
+                                                   }
+
+                                                   @Override
+                                                   public void onNothingSelected(AdapterView<?> parent) {
+                                                       setupMainWindowDisplayMode();
+                                                   }
+                                               }
+        );
 */
+        spnProvincia.setAdapter(spinner_adapter);
+
     }
 
     public void aceptarRegistro(View view) {
@@ -88,11 +113,12 @@ public class ActivityRegistro extends AppCompatActivity {
 
 
     private void limpiar() {
-        nombre.setText("");
-        apellidos.setText("");
-        email.setText("");
-        password.setText("");
-        email.requestFocus();
+        txtCorreo.setText("");
+        txtPassword.setText("");
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtTelefono.setText("");
+        txtCorreo.requestFocus();
     }
 
     private void comprobarEntrada() throws MiExcepcion {
@@ -101,20 +127,24 @@ public class ActivityRegistro extends AppCompatActivity {
         String mensajeErrorSinApellidos = getString(R.string.faltaDatoApellidos);
         String mensajeErrorMail = this.getString(R.string.mensajeToastMail);
         String mensajeErrorSinPassword = getString(R.string.faltaDatoPassword);
+        String mensajeErrorSinTelefono = "Falta dato teléfono";
 
-        if (email.getText().toString().equals("")) {
-            throw new MiExcepcion(email, mensajeErrorMail);
+        if (txtCorreo.getText().toString().equals("")) {
+            throw new MiExcepcion(txtCorreo, mensajeErrorMail);
         }
 
-        if (password.getText().toString().equals("")) {
-            throw new MiExcepcion(password, mensajeErrorSinPassword);
+        if (txtPassword.getText().toString().equals("")) {
+            throw new MiExcepcion(txtPassword, mensajeErrorSinPassword);
         }
 
-        if (nombre.getText().toString().equals("")) {
-            throw new MiExcepcion(nombre, mensajeErrorSinNombre);
+        if (txtNombre.getText().toString().equals("")) {
+            throw new MiExcepcion(txtNombre, mensajeErrorSinNombre);
         }
-        if (apellidos.getText().toString().equals("")) {
-            throw new MiExcepcion(apellidos, mensajeErrorSinApellidos);
+        if (txtApellidos.getText().toString().equals("")) {
+            throw new MiExcepcion(txtApellidos, mensajeErrorSinApellidos);
+        }
+        if (txtTelefono.getText().toString().equals("")) {
+            throw new MiExcepcion(txtTelefono, mensajeErrorSinTelefono);
         }
 
 
@@ -132,6 +162,7 @@ public class ActivityRegistro extends AppCompatActivity {
         params.put("pwd", "aauaytuasa");
 
 */
+/*
         params.put("name", nombre.getText().toString());
         // Put Http parameter username with value of Email Edit View control
         params.put("email", email.getText().toString());
@@ -141,7 +172,7 @@ public class ActivityRegistro extends AppCompatActivity {
 
         // Invoke RESTful Web Service with Http parameters
         invokeWS(params);
-
+*/
     }
 
 
