@@ -6,7 +6,7 @@ import android.widget.EditText;
  * Created by jesus on 27/03/2017.
  */
 
-class MiExcepcion extends Exception {
+public class MiExcepcion extends Exception {
 
 
     private EditText vista;
