@@ -113,12 +113,12 @@ public class ActivityRegistro extends AppCompatActivity {
 
 
     private void limpiar() {
-        txtCorreo.setText("");
+       /* txtCorreo.setText("");
         txtPassword.setText("");
         txtNombre.setText("");
         txtApellidos.setText("");
-        txtTelefono.setText("");
-        txtCorreo.requestFocus();
+        txtTelefono.setText("");*/
+     //   txtCorreo.requestFocus();
     }
 
     private void comprobarEntrada() throws MiExcepcion {
