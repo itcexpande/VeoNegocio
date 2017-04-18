@@ -6,26 +6,24 @@ package com.expandenegocio.veonegocio.models;
 
 public class Municipio {
 
-    //   private int c_provincia;
-    private int c_municipio;
-    // private String nombre_provincia;
-    private String nombre_municipio;
+    private int codigoMunicipio;
+    private String nombreMunicipio;
     private Provincia provincia;
 
-    public int getC_municipio() {
-        return c_municipio;
+    public int getCodigoMunicipio() {
+        return codigoMunicipio;
     }
 
-    public void setC_municipio(int c_municipio) {
-        this.c_municipio = c_municipio;
+    public void setCodigoMunicipio(int codigoMunicipio) {
+        this.codigoMunicipio = codigoMunicipio;
     }
 
-    public String getNombre_municipio() {
-        return nombre_municipio;
+    public String getNombreMunicipio() {
+        return nombreMunicipio;
     }
 
-    public void setNombre_municipio(String nombre_municipio) {
-        this.nombre_municipio = nombre_municipio;
+    public void setNombreMunicipio(String nombreMunicipio) {
+        this.nombreMunicipio = nombreMunicipio;
     }
 
     public Provincia getProvincia() {
@@ -38,6 +36,6 @@ public class Municipio {
 
     @Override
     public String toString() {
-        return nombre_municipio;
+        return nombreMunicipio;
     }
 }

@@ -16,11 +16,9 @@ import java.util.ArrayList;
 
 public class MunicipioDataSource {
     public static final String MUNICIPIO_TABLE_NAME = "municipios";
-    public static final String PROVINCIA_TABLE_NAME = "provincias";
 
     //Campos de la tabla municipios
     public static class ColumnMunicipio {
-        public static final String CODIGO_PROVINCIA = "c_prov";
         public static final String CODIGO_MUNICIPIO = "c_mun";
         public static final String NOMBRE_PROVINCIA = "d_prov";
         public static final String NOMBRE_MUNICIPIO = "d_mun";
@@ -48,9 +46,12 @@ public class MunicipioDataSource {
 
         try {
 
-            String query = "SELECT " + ColumnMunicipio.NOMBRE_MUNICIPIO +
+            String query = "SELECT " +
+                    ColumnMunicipio.CODIGO_MUNICIPIO + "," +
+                    ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
+                    ColumnMunicipio.NOMBRE_PROVINCIA +
                     " FROM " + MUNICIPIO_TABLE_NAME +
-                    " WHERE "+ColumnMunicipio.NOMBRE_PROVINCIA+"="+provincia+
+                    " WHERE " + ColumnMunicipio.NOMBRE_PROVINCIA + "=" + provincia +
                     " ORDER BY " + ColumnMunicipio.NOMBRE_MUNICIPIO;
 
             Cursor cursor = database.rawQuery(query, null);
@@ -58,9 +59,12 @@ public class MunicipioDataSource {
             if (cursor.moveToFirst()) {
                 do {
                     Municipio municipio = new Municipio();
-                    municipio.setNombre_municipio(cursor.getString(0));
-
-                    // Add book to books
+                    municipio.setCodigoMunicipio(cursor.getInt(0));
+                    municipio.setNombreMunicipio(cursor.getString(1));
+                    Provincia provincia1= new Provincia();
+                    provincia1.setId(0);
+                    provincia1.setNombreProvincia(cursor.getString(2));
+                    municipio.setProvincia(provincia1);
                     output.add(municipio);
                 } while (cursor.moveToNext());
             }

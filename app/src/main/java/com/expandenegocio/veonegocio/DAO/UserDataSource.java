@@ -1,11 +1,229 @@
 package com.expandenegocio.veonegocio.DAO;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.expandenegocio.veonegocio.models.Municipio;
+import com.expandenegocio.veonegocio.models.Provincia;
+import com.expandenegocio.veonegocio.models.User;
+
 /**
  * Created by jesus on 05/04/2017.
  */
 
 public class UserDataSource {
+    public static final String USUARIO_TABLE_NAME = "usuarios";
+    public static final String MUNICIPIO_TABLE_NAME = "municipios";
+    public static final String PROVINCIA_TABLE_NAME = "provincias";
 
+    //Campos de la tabla provincias
+    public static class ColumnProvincia {
+        public static final String ID = "c_prov";
+        public static final String NOMBRE = "d_prov";
+    }
+
+    //Campos de la tabla usuarios
+    public static class ColumnUsuarios {
+        public static final String ID = "id";
+        public static final String EMAIL = "email";
+        public static final String PASSWORD = "password";
+        public static final String STATUS = "status";
+        public static final String NOMBRE = "nombre";
+        public static final String APELLIDOS = "apellidos";
+        public static final String TELEFONO = "telefono";
+        public static final String MUNICIPIO = "municipio";
+        public static final String PROVINCIA = "provincia";
+    }
+
+    //Campos de la tabla municipios
+    public static class ColumnMunicipio {
+        public static final String CODIGO_MUNICIPIO = "c_mun";
+        public static final String NOMBRE_PROVINCIA = "d_prov";
+        public static final String NOMBRE_MUNICIPIO = "d_mun";
+    }
+
+
+    private DbHelper openHelper;
+    private SQLiteDatabase database;
+
+    public UserDataSource(Context context) {
+        //Creando una instancia hacia la base de datos
+        openHelper = new DbHelper(context);
+        database = openHelper.getWritableDatabase();
+    }
+
+    public void insertUsuario(User user) {
+
+        String insertSQL = "Insert into " + USUARIO_TABLE_NAME +
+                "(" +
+                ColumnUsuarios.ID + "," +
+                ColumnUsuarios.EMAIL + "," +
+                ColumnUsuarios.PASSWORD + ", " +
+                ColumnUsuarios.STATUS + ", " +
+                ColumnUsuarios.NOMBRE + ", " +
+                ColumnUsuarios.APELLIDOS + ", " +
+                ColumnUsuarios.TELEFONO + ", " +
+                ColumnUsuarios.MUNICIPIO + ", " +
+                ColumnUsuarios.PROVINCIA +
+                ") VALUES" + "(" +
+                "'" + user.getId() + "'," +
+                "'" + user.getEmail() + "'," +
+                "'" + user.getPassword() + "'," +
+                "'" + user.getStatus() + "'," +
+                "'" + user.getNombre() + "'," +
+                "'" + user.getApellidos() + "," +
+                "'" + user.getTelefono() + "'," +
+                "'" + user.getMunicipio() + "'," +
+                "'" + user.getMunicipio().getProvincia() + "')";
+        try {
+            database.execSQL(insertSQL);
+        } catch (Exception ex) {
+            Log.d("Error insertar Usuario", ex.toString());
+        }
+    }
+
+    public String buscarUsuarioPorId(String id) {
+
+        String output = "";
+        try {
+
+            String query = "SELECT " + ColumnUsuarios.ID +
+                    " FROM " + USUARIO_TABLE_NAME +
+                    " WHERE " + ColumnUsuarios.ID + " = " + id;
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = cursor.getString(0);
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error recoge Usuario", ex.toString());
+        }
+        return output;
+    }
+
+
+    public User buscaUsuarioPorEmail(String correo) {
+
+        User output = null;
+
+        try {
+
+            String query = "SELECT  " +
+                    ColumnUsuarios.ID + "," +
+                    ColumnUsuarios.EMAIL + "," +
+                    ColumnUsuarios.PASSWORD + "," +
+                    ColumnUsuarios.STATUS + ", " +
+                    ColumnUsuarios.NOMBRE + "," +
+                    ColumnUsuarios.APELLIDOS + "," +
+                    ColumnUsuarios.TELEFONO + "," +
+                    ColumnUsuarios.MUNICIPIO + "," +
+                    ColumnUsuarios.PROVINCIA +
+                    " FROM " + USUARIO_TABLE_NAME +
+                    " WHERE " + ColumnUsuarios.EMAIL + " = " + correo;
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = new User();
+                    Municipio municipio = new Municipio();
+                    output.setId(cursor.getString(0));
+                    output.setEmail(cursor.getString(1));
+                    output.setPassword(cursor.getString(2));
+                    output.setStatus(cursor.getString(3));
+                    output.setNombre(cursor.getString(4));
+                    output.setApellidos(cursor.getString(5));
+                    output.setTelefono(cursor.getString(6));
+                    String nombreMunicipio = cursor.getString(7);
+                    String nombreProvincia = cursor.getString(8);
+                    municipio = buscaMunipio(nombreMunicipio, nombreProvincia);
+                    output.setMunicipio(municipio);
+
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error recoge Usuario", ex.toString());
+        }
+
+        return output;
+
+    }
+
+    private Municipio buscaMunipio(String nombreMunicipio, String nombreProvincia) {
+        Municipio output = null;
+
+        try {
+
+            String query = "SELECT " +
+                    MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "," +
+                    MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
+                    MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA +
+                    " FROM " + MUNICIPIO_TABLE_NAME +
+                    " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA + "=" + nombreProvincia +
+                    " AND " + MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "=" + nombreMunicipio;
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = new Municipio();
+                    Provincia provincia = new Provincia();
+                    output.setCodigoMunicipio(cursor.getInt(0));
+                    output.setNombreMunicipio(cursor.getString(1));
+                    nombreMunicipio = cursor.getString(1);
+                    provincia = buscaProvincia(nombreMunicipio);
+                    output.setProvincia(provincia);
+
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error busca Municipio", ex.toString());
+        }
+
+        return output;
+    }
+
+    private Provincia buscaProvincia(String nombreProv) {
+        Provincia output = null;
+/*
+        try {
+
+            String query = "SELECT " +
+                    ProvinciaDataSource.ColumnProvincia.ID + "," +
+                    ProvinciaDataSource.ColumnProvincia.NOMBRE +
+                    " FROM " + PROVINCIA_TABLE_NAME +
+                    " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA + "=" + nombreProvincia +
+                    " AND " + MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "=" + nombreMunicipio;
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = new Municipio();
+                    Provincia provincia = new Provincia();
+                    output.setCodigoMunicipio(cursor.getInt(0));
+                    output.setNombreMunicipio(cursor.getString(1));
+                    nombreMunicipio = cursor.getString(1);
+                    provincia = buscaProvincia(nombreMunicipio);
+                    output.setProvincia(provincia);
+
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error busca Municipio", ex.toString());
+        }*/
+
+        return output;
+    }
 
 }
 
