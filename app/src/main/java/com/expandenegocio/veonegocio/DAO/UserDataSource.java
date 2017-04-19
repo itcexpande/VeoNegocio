@@ -14,6 +14,7 @@ import com.expandenegocio.veonegocio.models.User;
  */
 
 public class UserDataSource {
+
     public static final String USUARIO_TABLE_NAME = "usuarios";
     public static final String MUNICIPIO_TABLE_NAME = "municipios";
     public static final String PROVINCIA_TABLE_NAME = "provincias";
@@ -34,7 +35,7 @@ public class UserDataSource {
         public static final String APELLIDOS = "apellidos";
         public static final String TELEFONO = "telefono";
         public static final String MUNICIPIO = "municipio";
-        public static final String PROVINCIA = "provincia";
+        //  public static final String PROVINCIA = "provincia";
     }
 
     //Campos de la tabla municipios
@@ -65,8 +66,7 @@ public class UserDataSource {
                 ColumnUsuarios.NOMBRE + ", " +
                 ColumnUsuarios.APELLIDOS + ", " +
                 ColumnUsuarios.TELEFONO + ", " +
-                ColumnUsuarios.MUNICIPIO + ", " +
-                ColumnUsuarios.PROVINCIA +
+                ColumnUsuarios.MUNICIPIO +
                 ") VALUES" + "(" +
                 "'" + user.getId() + "'," +
                 "'" + user.getEmail() + "'," +
@@ -75,8 +75,8 @@ public class UserDataSource {
                 "'" + user.getNombre() + "'," +
                 "'" + user.getApellidos() + "," +
                 "'" + user.getTelefono() + "'," +
-                "'" + user.getMunicipio() + "'," +
-                "'" + user.getMunicipio().getProvincia() + "')";
+                "'" + user.getMunicipio() + "'" +
+                ")";
         try {
             database.execSQL(insertSQL);
         } catch (Exception ex) {
@@ -122,11 +122,9 @@ public class UserDataSource {
                     ColumnUsuarios.NOMBRE + "," +
                     ColumnUsuarios.APELLIDOS + "," +
                     ColumnUsuarios.TELEFONO + "," +
-                    ColumnUsuarios.MUNICIPIO + "," +
-                    ColumnUsuarios.PROVINCIA +
+                    ColumnUsuarios.MUNICIPIO +
                     " FROM " + USUARIO_TABLE_NAME +
                     " WHERE " + ColumnUsuarios.EMAIL + " = " + correo;
-
             Cursor cursor = database.rawQuery(query, null);
 
             if (cursor.moveToFirst()) {
@@ -141,8 +139,7 @@ public class UserDataSource {
                     output.setApellidos(cursor.getString(5));
                     output.setTelefono(cursor.getString(6));
                     String nombreMunicipio = cursor.getString(7);
-                    String nombreProvincia = cursor.getString(8);
-                    municipio = buscaMunipio(nombreMunicipio, nombreProvincia);
+                    municipio = buscaMunipio(nombreMunicipio);
                     output.setMunicipio(municipio);
 
                 } while (cursor.moveToNext());
@@ -156,7 +153,7 @@ public class UserDataSource {
 
     }
 
-    private Municipio buscaMunipio(String nombreMunicipio, String nombreProvincia) {
+    private Municipio buscaMunipio(String nombreMunicipio) {
         Municipio output = null;
 
         try {
@@ -166,8 +163,7 @@ public class UserDataSource {
                     MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
                     MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA +
                     " FROM " + MUNICIPIO_TABLE_NAME +
-                    " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA + "=" + nombreProvincia +
-                    " AND " + MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "=" + nombreMunicipio;
+                    " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "=" + nombreMunicipio;
 
             Cursor cursor = database.rawQuery(query, null);
 
@@ -178,7 +174,8 @@ public class UserDataSource {
                     output.setCodigoMunicipio(cursor.getInt(0));
                     output.setNombreMunicipio(cursor.getString(1));
                     nombreMunicipio = cursor.getString(1);
-                    provincia = buscaProvincia(nombreMunicipio);
+                    String nombreProvincia = cursor.getString(2);
+                    provincia = buscaProvincia(nombreProvincia);
                     output.setProvincia(provincia);
 
                 } while (cursor.moveToNext());
@@ -193,34 +190,29 @@ public class UserDataSource {
 
     private Provincia buscaProvincia(String nombreProv) {
         Provincia output = null;
-/*
-        try {
 
+        try {
             String query = "SELECT " +
                     ProvinciaDataSource.ColumnProvincia.ID + "," +
                     ProvinciaDataSource.ColumnProvincia.NOMBRE +
                     " FROM " + PROVINCIA_TABLE_NAME +
-                    " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA + "=" + nombreProvincia +
-                    " AND " + MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "=" + nombreMunicipio;
+                    " WHERE " + ProvinciaDataSource.ColumnProvincia.NOMBRE + "=" + nombreProv;
 
             Cursor cursor = database.rawQuery(query, null);
 
             if (cursor.moveToFirst()) {
                 do {
-                    output = new Municipio();
+                    output = new Provincia();
                     Provincia provincia = new Provincia();
-                    output.setCodigoMunicipio(cursor.getInt(0));
-                    output.setNombreMunicipio(cursor.getString(1));
-                    nombreMunicipio = cursor.getString(1);
-                    provincia = buscaProvincia(nombreMunicipio);
-                    output.setProvincia(provincia);
+                    output.setId(cursor.getInt(0));
+                    output.setNombreProvincia(cursor.getString(1));
 
                 } while (cursor.moveToNext());
             }
 
         } catch (Exception ex) {
-            Log.d("Error busca Municipio", ex.toString());
-        }*/
+            Log.d("Error busca Provincia", ex.toString());
+        }
 
         return output;
     }

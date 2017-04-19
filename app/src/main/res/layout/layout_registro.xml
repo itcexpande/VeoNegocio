@@ -55,15 +55,16 @@
         android:hint="teléfono"
         android:inputType="phone"
         android:textSize="15dp" />
+
     <Spinner
         android:id="@+id/spinner_provincia"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="20dp"></Spinner>
 
     <Spinner
         android:id="@+id/spinner_municipio"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="20dp"></Spinner>
 
     <Button
         android:id="@+id/boton_aceptar_registro"
