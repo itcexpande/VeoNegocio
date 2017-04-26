@@ -19,9 +19,12 @@ public class MunicipioDataSource {
 
     //Campos de la tabla municipios
     public static class ColumnMunicipio {
+        public static final String CODIGO_PROVINCIA = "c_prov";
         public static final String CODIGO_MUNICIPIO = "c_mun";
-        public static final String NOMBRE_PROVINCIA = "d_prov";
         public static final String NOMBRE_MUNICIPIO = "d_mun";
+        public static final String TOTAL_HABITANTES = "total_habitantes";
+        public static final String TOTAL_HOMBRES = "total_hombres";
+        public static final String TOTAL_MUJERES = "total_mujeres";
     }
 
     //Campos de la tabla provincias
@@ -40,18 +43,22 @@ public class MunicipioDataSource {
         database = dbHelper.getWritableDatabase();
     }
 
-    public ArrayList<Municipio> getMunicipios(String provincia) {
+    public ArrayList<Municipio> getMunicipios(String nombre) {
 
         ArrayList<Municipio> output = new ArrayList<Municipio>();
 
         try {
 
             String query = "SELECT " +
+
+                    ColumnMunicipio.CODIGO_PROVINCIA + "," +
                     ColumnMunicipio.CODIGO_MUNICIPIO + "," +
                     ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
-                    ColumnMunicipio.NOMBRE_PROVINCIA +
+                    ColumnMunicipio.TOTAL_HABITANTES + "," +
+                    ColumnMunicipio.TOTAL_HOMBRES + "," +
+                    ColumnMunicipio.TOTAL_MUJERES +
                     " FROM " + MUNICIPIO_TABLE_NAME +
-                    " WHERE " + ColumnMunicipio.NOMBRE_PROVINCIA + "=" + provincia +
+                    " WHERE " + ColumnMunicipio.NOMBRE_MUNICIPIO + "=" + nombre +
                     " ORDER BY " + ColumnMunicipio.NOMBRE_MUNICIPIO;
 
             Cursor cursor = database.rawQuery(query, null);
@@ -59,12 +66,12 @@ public class MunicipioDataSource {
             if (cursor.moveToFirst()) {
                 do {
                     Municipio municipio = new Municipio();
-                    municipio.setCodigoMunicipio(cursor.getInt(0));
-                    municipio.setNombreMunicipio(cursor.getString(1));
-                    Provincia provincia1= new Provincia();
-                    provincia1.setId(0);
-                    provincia1.setNombreProvincia(cursor.getString(2));
-                    municipio.setProvincia(provincia1);
+                    municipio.setCodigoProvincia(cursor.getInt(0));
+                    municipio.setCodigoMunicipio(cursor.getInt(1));
+                    municipio.setNombreMunicipio(cursor.getString(2));
+                    municipio.setTotalHabitantes(cursor.getInt(3));
+                    municipio.setHombres(cursor.getInt(4));
+                    municipio.setMujeres(cursor.getInt(5));
                     output.add(municipio);
                 } while (cursor.moveToNext());
             }

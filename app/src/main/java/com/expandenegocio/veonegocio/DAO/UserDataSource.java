@@ -35,7 +35,7 @@ public class UserDataSource {
         public static final String APELLIDOS = "apellidos";
         public static final String TELEFONO = "telefono";
         public static final String MUNICIPIO = "municipio";
-        //  public static final String PROVINCIA = "provincia";
+
     }
 
     //Campos de la tabla municipios
@@ -155,13 +155,14 @@ public class UserDataSource {
 
     private Municipio buscaMunipio(String nombreMunicipio) {
         Municipio output = null;
+/*
 
         try {
 
             String query = "SELECT " +
                     MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "," +
                     MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
-                    MunicipioDataSource.ColumnMunicipio.NOMBRE_PROVINCIA +
+                    MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO +
                     " FROM " + MUNICIPIO_TABLE_NAME +
                     " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "=" + nombreMunicipio;
 
@@ -176,7 +177,7 @@ public class UserDataSource {
                     nombreMunicipio = cursor.getString(1);
                     String nombreProvincia = cursor.getString(2);
                     provincia = buscaProvincia(nombreProvincia);
-                    output.setProvincia(provincia);
+                    output.setsetProvincia(provincia);
 
                 } while (cursor.moveToNext());
             }
@@ -185,13 +186,14 @@ public class UserDataSource {
             Log.d("Error busca Municipio", ex.toString());
         }
 
+*/
         return output;
     }
 
     private Provincia buscaProvincia(String nombreProv) {
         Provincia output = null;
 
-        try {
+     /*   try {
             String query = "SELECT " +
                     ProvinciaDataSource.ColumnProvincia.ID + "," +
                     ProvinciaDataSource.ColumnProvincia.NOMBRE +
@@ -213,7 +215,7 @@ public class UserDataSource {
         } catch (Exception ex) {
             Log.d("Error busca Provincia", ex.toString());
         }
-
+*/
         return output;
     }
 

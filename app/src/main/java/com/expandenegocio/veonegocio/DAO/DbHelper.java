@@ -21,8 +21,12 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
             .getAbsolutePath() + "c:/Users/jesus/AndroidStudioProjects/VeoNegocioData/VeoNegocio.db";
 */
+/*
    public static final String NOMBREBD = Environment.getExternalStorageDirectory()
-           .getAbsolutePath() + "/Pictures/VeoNegocio.db";
+           .getAbsolutePath() + "C:\\Users\\jesus\\AndroidStudioProjects\\VeoNegocioData/VeoNegocio.db";//"/Pictures/VeoNegocio.db";
+*/
+    public static final String NOMBREBD = "C:/Users/jesus/AndroidStudioProjects/VeoNegocioData/VeoNegocio.db";//"/Pictures/VeoNegocio.db";
+
 
     public DbHelper(Context context){
         super(context,NOMBREBD,null,3);

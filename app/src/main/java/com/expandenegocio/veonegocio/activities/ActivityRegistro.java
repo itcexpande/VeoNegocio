@@ -61,7 +61,6 @@ public class ActivityRegistro extends AppCompatActivity {
         provincia = loadSpinnerProvincias();
         loadSpinnerMunicipios(provincia.getNombreProvincia());
 
-        limpiar();
 
     }
 
@@ -147,15 +146,6 @@ public class ActivityRegistro extends AppCompatActivity {
 
     }
 
-
-    private void limpiar() {
-       /* txtCorreo.setText("");
-        txtPassword.setText("");
-        txtNombre.setText("");
-        txtApellidos.setText("");
-        txtTelefono.setText("");*/
-        //   txtCorreo.requestFocus();
-    }
 
     private void comprobarEntrada() throws MiExcepcion {
 
