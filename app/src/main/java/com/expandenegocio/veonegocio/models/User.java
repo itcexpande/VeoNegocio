@@ -11,8 +11,9 @@ public class User {
     private String status;
     private String nombre;
     private String apellidos;
-    private Municipio municipio;
     private String telefono;
+    private Integer codigoProv;
+    private Integer codigoMun;
 
     public String getId() {
         return id;
@@ -62,14 +63,6 @@ public class User {
         this.apellidos = apellidos;
     }
 
-    public Municipio getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -78,4 +71,19 @@ public class User {
         this.telefono = telefono;
     }
 
+    public Integer getCodigoProv() {
+        return codigoProv;
+    }
+
+    public void setCodigoProv(Integer codigoProv) {
+        this.codigoProv = codigoProv;
+    }
+
+    public Integer getCodigoMun() {
+        return codigoMun;
+    }
+
+    public void setCodigoMun(Integer codigoMun) {
+        this.codigoMun = codigoMun;
+    }
 }

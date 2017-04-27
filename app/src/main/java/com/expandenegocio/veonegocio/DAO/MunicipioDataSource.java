@@ -27,11 +27,11 @@ public class MunicipioDataSource {
         public static final String TOTAL_MUJERES = "total_mujeres";
     }
 
-    //Campos de la tabla provincias
+ /*   //Campos de la tabla provincias
     public static class ColumnProvincia {
         public static final String ID = "c_prov";
         public static final String NOMBRE = "d_prov";
-    }
+    }*/
 
     private DbHelper dbHelper;
     private SQLiteDatabase database;
@@ -43,7 +43,7 @@ public class MunicipioDataSource {
         database = dbHelper.getWritableDatabase();
     }
 
-    public ArrayList<Municipio> getMunicipios(String nombre) {
+    public ArrayList<Municipio> getMunicipios(int numero) {
 
         ArrayList<Municipio> output = new ArrayList<Municipio>();
 
@@ -58,7 +58,7 @@ public class MunicipioDataSource {
                     ColumnMunicipio.TOTAL_HOMBRES + "," +
                     ColumnMunicipio.TOTAL_MUJERES +
                     " FROM " + MUNICIPIO_TABLE_NAME +
-                    " WHERE " + ColumnMunicipio.NOMBRE_MUNICIPIO + "=" + nombre +
+                    " WHERE " + ColumnMunicipio.CODIGO_PROVINCIA + "=" + numero +
                     " ORDER BY " + ColumnMunicipio.NOMBRE_MUNICIPIO;
 
             Cursor cursor = database.rawQuery(query, null);

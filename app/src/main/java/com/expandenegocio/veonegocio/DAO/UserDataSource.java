@@ -15,15 +15,8 @@ import com.expandenegocio.veonegocio.models.User;
 
 public class UserDataSource {
 
-    public static final String USUARIO_TABLE_NAME = "usuarios";
-    public static final String MUNICIPIO_TABLE_NAME = "municipios";
-    public static final String PROVINCIA_TABLE_NAME = "provincias";
+    public static final String USUARIO_TABLE_NAME = "users";
 
-    //Campos de la tabla provincias
-    public static class ColumnProvincia {
-        public static final String ID = "c_prov";
-        public static final String NOMBRE = "d_prov";
-    }
 
     //Campos de la tabla usuarios
     public static class ColumnUsuarios {
@@ -34,16 +27,13 @@ public class UserDataSource {
         public static final String NOMBRE = "nombre";
         public static final String APELLIDOS = "apellidos";
         public static final String TELEFONO = "telefono";
-        public static final String MUNICIPIO = "municipio";
-
-    }
-
-    //Campos de la tabla municipios
-    public static class ColumnMunicipio {
+        public static final String CODIGO_PROVINCIA = "c_prov";
         public static final String CODIGO_MUNICIPIO = "c_mun";
-        public static final String NOMBRE_PROVINCIA = "d_prov";
-        public static final String NOMBRE_MUNICIPIO = "d_mun";
+
+
     }
+
+
 
 
     private DbHelper openHelper;
@@ -66,16 +56,18 @@ public class UserDataSource {
                 ColumnUsuarios.NOMBRE + ", " +
                 ColumnUsuarios.APELLIDOS + ", " +
                 ColumnUsuarios.TELEFONO + ", " +
-                ColumnUsuarios.MUNICIPIO +
-                ") VALUES" + "(" +
+                ColumnUsuarios.CODIGO_PROVINCIA + ", " +
+                ColumnUsuarios.CODIGO_MUNICIPIO +
+                ") VALUES" + " ( " +
                 "'" + user.getId() + "'," +
                 "'" + user.getEmail() + "'," +
                 "'" + user.getPassword() + "'," +
                 "'" + user.getStatus() + "'," +
                 "'" + user.getNombre() + "'," +
-                "'" + user.getApellidos() + "," +
+                "'" + user.getApellidos() + "'," +
                 "'" + user.getTelefono() + "'," +
-                "'" + user.getMunicipio() + "'" +
+                "" + user.getCodigoProv() + "," +
+                user.getCodigoMun() + " " +
                 ")";
         try {
             database.execSQL(insertSQL);
@@ -122,7 +114,7 @@ public class UserDataSource {
                     ColumnUsuarios.NOMBRE + "," +
                     ColumnUsuarios.APELLIDOS + "," +
                     ColumnUsuarios.TELEFONO + "," +
-                    ColumnUsuarios.MUNICIPIO +
+                    ColumnUsuarios.CODIGO_PROVINCIA +
                     " FROM " + USUARIO_TABLE_NAME +
                     " WHERE " + ColumnUsuarios.EMAIL + " = " + correo;
             Cursor cursor = database.rawQuery(query, null);
@@ -130,7 +122,6 @@ public class UserDataSource {
             if (cursor.moveToFirst()) {
                 do {
                     output = new User();
-                    Municipio municipio = new Municipio();
                     output.setId(cursor.getString(0));
                     output.setEmail(cursor.getString(1));
                     output.setPassword(cursor.getString(2));
@@ -138,9 +129,6 @@ public class UserDataSource {
                     output.setNombre(cursor.getString(4));
                     output.setApellidos(cursor.getString(5));
                     output.setTelefono(cursor.getString(6));
-                    String nombreMunicipio = cursor.getString(7);
-                    municipio = buscaMunipio(nombreMunicipio);
-                    output.setMunicipio(municipio);
 
                 } while (cursor.moveToNext());
             }
@@ -153,71 +141,6 @@ public class UserDataSource {
 
     }
 
-    private Municipio buscaMunipio(String nombreMunicipio) {
-        Municipio output = null;
-/*
-
-        try {
-
-            String query = "SELECT " +
-                    MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "," +
-                    MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
-                    MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO +
-                    " FROM " + MUNICIPIO_TABLE_NAME +
-                    " WHERE " + MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "=" + nombreMunicipio;
-
-            Cursor cursor = database.rawQuery(query, null);
-
-            if (cursor.moveToFirst()) {
-                do {
-                    output = new Municipio();
-                    Provincia provincia = new Provincia();
-                    output.setCodigoMunicipio(cursor.getInt(0));
-                    output.setNombreMunicipio(cursor.getString(1));
-                    nombreMunicipio = cursor.getString(1);
-                    String nombreProvincia = cursor.getString(2);
-                    provincia = buscaProvincia(nombreProvincia);
-                    output.setsetProvincia(provincia);
-
-                } while (cursor.moveToNext());
-            }
-
-        } catch (Exception ex) {
-            Log.d("Error busca Municipio", ex.toString());
-        }
-
-*/
-        return output;
-    }
-
-    private Provincia buscaProvincia(String nombreProv) {
-        Provincia output = null;
-
-     /*   try {
-            String query = "SELECT " +
-                    ProvinciaDataSource.ColumnProvincia.ID + "," +
-                    ProvinciaDataSource.ColumnProvincia.NOMBRE +
-                    " FROM " + PROVINCIA_TABLE_NAME +
-                    " WHERE " + ProvinciaDataSource.ColumnProvincia.NOMBRE + "=" + nombreProv;
-
-            Cursor cursor = database.rawQuery(query, null);
-
-            if (cursor.moveToFirst()) {
-                do {
-                    output = new Provincia();
-                    Provincia provincia = new Provincia();
-                    output.setId(cursor.getInt(0));
-                    output.setNombreProvincia(cursor.getString(1));
-
-                } while (cursor.moveToNext());
-            }
-
-        } catch (Exception ex) {
-            Log.d("Error busca Provincia", ex.toString());
-        }
-*/
-        return output;
-    }
 
 }
 
