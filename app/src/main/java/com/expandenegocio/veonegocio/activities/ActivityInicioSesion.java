@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
@@ -31,9 +32,11 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
     private EditText emailUsuario;
     private EditText password;
+    private TextView recuerdaContraseña;
     private String correo;
     private String pass;
     private User usuario;
+    private TextView nuevoPassword;
 
 
     @Override
@@ -42,7 +45,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
         setContentView(R.layout.layout_inicio_sesion);
         emailUsuario = (EditText) this.findViewById(R.id.campo_correo);
         password = (EditText) this.findViewById(R.id.campo_contrasena);
-
+        recuerdaContraseña = (TextView) this.findViewById(R.id.recuerdoContraseña);
     }
 
     public void inicioSesion(View view) {
@@ -172,6 +175,122 @@ public class ActivityInicioSesion extends AppCompatActivity {
     }
 
     public void recordarDatos(View view) {
+        String val = validate2();
+
+        if (val == null) {
+
+            usuario = createUsuario2();
+
+            UserDataSource dataSource = new UserDataSource(this);
+            String nuevaContra = dataSource.buscaUsuarioPorEmail(usuario.getEmail().toString());
+            if (nuevaContra != null) {
+                // recuerdaContraseña.setText("SU CONTRASEÑA ES:===> "+nuevaContra.toString());
+                procesarInformacion2();
+
+            } else {
+                Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private String validate2() {
+
+        String output = null;
+
+        correo = emailUsuario.getText().toString();
+
+        if (correo.trim().equals("")) {
+            output = "El campo correo no puede estar vacío";
+        }
+        if (!ValidatorUtil.validateEmail(correo)) {
+            output = "El correo no es válido";
+        }
+
+        return output;
+    }
+
+    private User createUsuario2() {
+
+        User usuario = new User();
+
+        usuario.setId(UUID.randomUUID().toString());
+        usuario.setEmail(correo);
+
+        return usuario;
+    }
+
+    private void procesarInformacion2() {
+        RequestParams params = new RequestParams();
+        params.put("email", emailUsuario.getText().toString());
+
+
+        invokeWS2(params);
+    }
+
+    public void invokeWS2(RequestParams params) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://www.expandenegocio.com/app/restaura_password.php", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+
+                try {
+                    // JSON Object
+
+                    JSONObject obj = new JSONObject(response);
+
+                    switch (obj.getInt("status")) {
+
+                        case 0:
+                     //      Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+
+                            String nuevaContra = obj.getString("info");
+                            int longitud= nuevaContra.length();
+                            String nueva= nuevaContra.substring(14,longitud-3);
+                            recuerdaContraseña.setText("SU CONTRASEÑA ES:===> " + nueva.toString());
+
+
+                            break;
+                        case 1:
+                            Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Peticion no aceptada", Toast.LENGTH_LONG).show();
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                    error) {
+
+
+                try {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
     }
 

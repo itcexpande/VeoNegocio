@@ -95,6 +95,32 @@ public class UserDataSource {
         return output;
     }
 
+    public String buscaUsuarioPorEmail(String correo) {
+
+        String output = null;
+
+        try {
+
+            String query = "SELECT  " +
+                    ColumnUsuarios.PASSWORD +
+                    " FROM " + USUARIO_TABLE_NAME +
+                    " WHERE " + ColumnUsuarios.EMAIL + " = '" + correo + "'";
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = cursor.getString(0);
+
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error recoge Usuario", ex.toString());
+        }
+        return output;
+
+    }
+
 
     public User buscaUsuarioPorEmailYPassword(String correo, String p) {
 
