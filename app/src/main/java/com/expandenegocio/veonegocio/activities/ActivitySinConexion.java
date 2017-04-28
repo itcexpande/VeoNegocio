@@ -1,7 +1,6 @@
 package com.expandenegocio.veonegocio.activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.expandenegocio.veonegocio.R;

@@ -18,7 +18,6 @@ import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.Provincia;
 import com.expandenegocio.veonegocio.models.User;
-import com.expandenegocio.veonegocio.utilities.MiExcepcion;
 import com.expandenegocio.veonegocio.utilities.ValidatorUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -26,10 +25,7 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
@@ -141,37 +137,25 @@ public class ActivityRegistro extends AppCompatActivity {
     }
 
     public void aceptarRegistro(View view) {
-        try {
-            String val = validate();
 
-            if (val == null) {
+        String val = validate();
 
-                usuario = createUsuario();
+        if (val == null) {
+
+            usuario = createUsuario();
 
 
-                UserDataSource dataSource = new UserDataSource(this);
-                dataSource.insertUsuario(usuario);
+            UserDataSource dataSource = new UserDataSource(this);
+            dataSource.insertUsuario(usuario);
 
-     /*
-                Intent intent = new Intent(this, FranquicisasActivity.class);
+            procesarInformacion();
 
-                intent.putExtra("Solicitud", solicitud);
-                startActivity(intent);
-*/
-            } else {
-                Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
-            }
-
-            // comprobarEntrada();
-            // procesarInformacion();
-            Intent intent = new Intent("ActivityInicioSesion");
-            startActivity(intent);
-
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),
-                    e.getMessage(),
-                    Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
         }
+
+        Intent intent = new Intent("ActivityInicioSesion");
+        startActivity(intent);
 
     }
 
@@ -187,7 +171,7 @@ public class ActivityRegistro extends AppCompatActivity {
         telefono = txtTelefono.getText().toString();
         provincia = (Provincia) spnProvincia.getSelectedItem();
         municipio = (Municipio) spnMunicipio.getSelectedItem();
-/*
+
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
         }
@@ -214,7 +198,7 @@ public class ActivityRegistro extends AppCompatActivity {
         }
         if (municipio == null || municipio.getNombreMunicipio() == null) {
             output = "El campo municipio no puede estar vacío";
-        }*/
+        }
 
         return output;
     }
@@ -234,71 +218,31 @@ public class ActivityRegistro extends AppCompatActivity {
         usuario.setCodigoMun(municipio.getCodigoMunicipio());
 
 
-/*
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String currentDateandTime = sdf.format(new Date());
-        solicitud.setFecha(currentDateandTime);
-*/
-
-
         return usuario;
 
     }
 
-    /* private void comprobarEntrada() throws MiExcepcion {
 
-         String mensajeErrorSinNombre = this.getString(R.string.mensajeToastFaltaDato);
-         String mensajeErrorSinApellidos = getString(R.string.faltaDatoApellidos);
-         String mensajeErrorMail = this.getString(R.string.mensajeToastMail);
-         String mensajeErrorSinPassword = getString(R.string.faltaDatoPassword);
-         String mensajeErrorSinTelefono = "Falta dato teléfono";
-         String mensajeErrorSinProvincia = "Falta dato Provincia";
-         String mensajeErrorSinMunicipio = "Falta dato Municipio";
-
-
-         if (txtCorreo.getText().toString().equals("")) {
-             throw new MiExcepcion(txtCorreo, null, mensajeErrorMail);
-         }
-
-         if (txtPassword.getText().toString().equals("")) {
-             throw new MiExcepcion(txtPassword, null, mensajeErrorSinPassword);
-         }
-
-         if (txtNombre.getText().toString().equals("")) {
-             throw new MiExcepcion(txtNombre, null, mensajeErrorSinNombre);
-         }
-         if (txtApellidos.getText().toString().equals("")) {
-             throw new MiExcepcion(txtApellidos, null, mensajeErrorSinApellidos);
-         }
-         if (txtTelefono.getText().toString().equals("")) {
-             throw new MiExcepcion(txtTelefono, null, mensajeErrorSinTelefono);
-         }
-         if (provincia == null) {
-             throw new MiExcepcion(null, spnProvincia, mensajeErrorSinProvincia);
-         }
-         if (municipio == null) {
-             throw new MiExcepcion(null, spnMunicipio, mensajeErrorSinMunicipio);
-         }
-
-     }
- */
     private void procesarInformacion() {
-/*
-        provincia = (Provincia) spnProvincia.getSelectedItem();
-        municipio = (Municipio) spnMunicipio.getSelectedItem();
-        String hh = "";
-        User nuavoUsuario = new User();
-*/
 
-        //  RequestParams params = new RequestParams();
-/*
-        params.put("name", "Hola");
-        // Put Http parameter username with value of Email Edit View control
-        params.put("email", "jgasj@gmail.com");
-        // Put Http parameter password with value of Password Edit View control
-        params.put("pwd", "aauaytuasa");
+        RequestParams params = new RequestParams();
+        params.put("ID", usuario.getId().toString());
+        params.put("email", correo);
+        params.put("password", password);
+        params.put("status", "null");
+        params.put("nombre", nombre);
+        params.put("apellidos", apellidos);
+        params.put("telefono", telefono);
+        params.put("c_prov", usuario.getCodigoProv());
+        params.put("c_mun", usuario.getCodigoMun());
 
-*/
+
+
+        invokeWS(params);
+
+
+
+
 /*
         params.put("name", nombre.getText().toString());
         // Put Http parameter username with value of Email Edit View control
@@ -314,9 +258,7 @@ public class ActivityRegistro extends AppCompatActivity {
 
 
     public void invokeWS(RequestParams params) {
-        // Show Progress Dialog
-        //prgDialog.show();
-        // Make RESTful webservice call using AsyncHttpClient object
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.post("http://www.expandenegocio.com/app/signup.php", params, new AsyncHttpResponseHandler() {
             @Override
@@ -324,7 +266,7 @@ public class ActivityRegistro extends AppCompatActivity {
 
                 String response = new String(responseBody);
 
-                //prgDialog.hide();
+
                 try {
                     // JSON Object
 
@@ -356,7 +298,6 @@ public class ActivityRegistro extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                     error) {
 
-                //prgDialog.hide();
 
                 try {
                     if (responseBody != null) {

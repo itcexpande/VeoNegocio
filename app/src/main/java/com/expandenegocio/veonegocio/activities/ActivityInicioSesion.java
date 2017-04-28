@@ -8,13 +8,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
+import com.expandenegocio.veonegocio.models.User;
 import com.expandenegocio.veonegocio.utilities.MiExcepcion;
+import com.expandenegocio.veonegocio.utilities.ValidatorUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
+
+import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -27,6 +32,9 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
     private EditText emailUsuario;
     private EditText password;
+    private String correo;
+    private String pass;
+    private User usuario;
 
 
     @Override
@@ -35,85 +43,84 @@ public class ActivityInicioSesion extends AppCompatActivity {
         setContentView(R.layout.layout_inicio_sesion);
         emailUsuario = (EditText) this.findViewById(R.id.campo_correo);
         password = (EditText) this.findViewById(R.id.campo_contrasena);
-        limpiar();
 
     }
 
     public void inicioSesion(View view) {
-        try {
-            comprobarEntrada();
-            procesarInformacion();
-            limpiar();
-        } catch (MiExcepcion e) {
-            Toast.makeText(getApplicationContext(),
-                    e.getMessage(),
-                    Toast.LENGTH_SHORT).show();
-            e.getVista().selectAll();
-            e.getVista().requestFocus();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),
-                    e.getMessage(),
-                    Toast.LENGTH_LONG).show();
-        }
 
+        String val = validate();
+
+        if (val == null) {
+
+            usuario = createUsuario();
+
+            UserDataSource dataSource = new UserDataSource(this);
+            if (dataSource.buscaUsuarioPorEmailYPassword(usuario.getEmail().toString(), usuario.getPassword()) != null) {
+                procesarInformacion();
+                //         Intent intent = new Intent("ActivityConsultas");
+                //       startActivity(intent);
+
+            } else {
+                Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
+            }
+
+        } else {
+            Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
+        }
     }
 
+    private String validate() {
 
-    private void limpiar() {
-        emailUsuario.setText("");
-        password.setText("");
-        emailUsuario.requestFocus();
-    }
+        String output = null;
 
-    private void comprobarEntrada() throws MiExcepcion {
-        String mensajeErrorMail = this.getString(R.string.mensajeToastMail);
-        String mensajeErrorSinPassword = getString(R.string.faltaDatoPassword);
+        correo = emailUsuario.getText().toString();
+        pass = password.getText().toString();
 
-        if (emailUsuario.getText().toString().equals("")) {
-            throw new MiExcepcion(emailUsuario, mensajeErrorMail);
+        if (correo.trim().equals("")) {
+            output = "El campo correo no puede estar vacío";
+        }
+        if (!ValidatorUtil.validateEmail(correo)) {
+            output = "El correo no es válido";
+        }
+        if (pass.trim().equals("")) {
+            output = "El campo contraseña no puede estar vacío";
         }
 
-        if (password.getText().toString().equals("")) {
-            throw new MiExcepcion(password, mensajeErrorSinPassword);
-        }
-
+        return output;
     }
+
+    private User createUsuario() {
+
+        User usuario = new User();
+
+        usuario.setId(UUID.randomUUID().toString());
+        usuario.setEmail(correo);
+        usuario.setPassword(pass);
+
+        return usuario;
+    }
+
 
     private void procesarInformacion() {
         RequestParams params = new RequestParams();
-//        params.put("name", emailUsuario.getText().toString());
-        // Put Http parameter username with value of Email Edit View control
         params.put("email", emailUsuario.getText().toString());
-        // Put Http parameter password with value of Password Edit View control
-        params.put("pwd", password.getText().toString());
+        params.put("password", password.getText().toString());
 
 
-        // Invoke RESTful Web Service with Http parameters
         invokeWS(params);
-
     }
 
-
-    public void recordarDatos(View view) {
-    }
-
-    public void registro(View view) {
-        Intent intent = new Intent("ActivityRegistro");
-        startActivity(intent);
-    }
 
     public void invokeWS(RequestParams params) {
-        // Show Progress Dialog
-        //prgDialog.show();
-        // Make RESTful webservice call using AsyncHttpClient object
+
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post("http://www.expandenegocio.com/app/signup.php", params, new AsyncHttpResponseHandler() {
+        //  client.post("http://www.expandenegocio.com/app/info.php", params, new AsyncHttpResponseHandler() {
+        client.post("http://www.expandenegocio.com/app/info_jesus.php", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 String response = new String(responseBody);
 
-                //prgDialog.hide();
                 try {
                     // JSON Object
 
@@ -123,20 +130,16 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
                         case 0:
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-                            break;
-                        case 1:
-                            Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
-                            break;
-                        case 2:
-                            Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
-                            //Toast.makeText(getApplicationContext(), "ir a activity de la aplicacion", Toast.LENGTH_LONG).show();
-
 
                             Intent intent = new Intent("ActivityConsultas");
-
                             startActivity(intent);
 
-
+                            break;
+                        case 1:
+                            Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Peticion no aceptada", Toast.LENGTH_LONG).show();
                             break;
                     }
 
@@ -153,7 +156,6 @@ public class ActivityInicioSesion extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
                     error) {
 
-                //prgDialog.hide();
 
                 try {
                     if (responseBody != null) {
@@ -168,5 +170,13 @@ public class ActivityInicioSesion extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void recordarDatos(View view) {
+    }
+
+    public void registro(View view) {
+        Intent intent = new Intent("ActivityRegistro");
+        startActivity(intent);
     }
 }

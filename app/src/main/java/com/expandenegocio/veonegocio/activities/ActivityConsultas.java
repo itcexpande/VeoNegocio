@@ -1,25 +1,11 @@
 package com.expandenegocio.veonegocio.activities;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 
-import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.R;
-import com.expandenegocio.veonegocio.models.Municipio;
-import com.expandenegocio.veonegocio.models.Provincia;
-
-import java.util.ArrayList;
-import java.util.Timer;
 
 /**
  * Created by jesus on 30/03/2017.
