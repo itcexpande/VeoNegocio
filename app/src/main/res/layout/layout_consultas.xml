@@ -4,43 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/radioGroup_consultas"
+    <Spinner
+        android:id="@+id/spinner_consultas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:entries="@array/nombresFranquicias">
 
-        <RadioButton
-            android:id="@+id/radio_button_todas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Todas"
-            android:onClick="todas"/>
-
-        <RadioButton
-            android:id="@+id/radio_button_ConFiltros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:text="Con Filtros"
-            android:onClick="filtrar"/>
-    </RadioGroup>
+    </Spinner>
 
     <ListView
-        android:id="@+id/listView_listadoTodas"
+        android:id="@+id/listView_franquicias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </ListView>
 
-    <Spinner
-        android:id="@+id/spinner_consultas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/nombresCiudades">
-
-    </Spinner>
 
 </LinearLayout>

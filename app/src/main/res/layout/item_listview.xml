@@ -5,7 +5,7 @@
     >
 
     <TextView
-        android:id="@+id/text_mapa"
+        android:id="@+id/text_nombre_franquicia"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

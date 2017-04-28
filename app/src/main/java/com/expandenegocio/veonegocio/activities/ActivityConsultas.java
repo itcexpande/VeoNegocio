@@ -4,8 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.expandenegocio.veonegocio.R;
+import com.expandenegocio.veonegocio.models.ClavesFranquicia;
+import com.expandenegocio.veonegocio.models.Franquicia;
+import com.expandenegocio.veonegocio.models.GestoraFranquicia;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jesus on 30/03/2017.
@@ -13,21 +22,43 @@ import com.expandenegocio.veonegocio.R;
 
 public class ActivityConsultas extends AppCompatActivity {
 
+    private ListView lista;
+    public static SimpleAdapter adaptador;
+    private GestoraFranquicia gestora;
+
+    public GestoraFranquicia getGestora() {
+        return gestora;
+    }
+
+    public static SimpleAdapter getAdaptador() {
+        return adaptador;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_consultas);
+        if (gestora == null) {
+            gestora = new GestoraFranquicia();
+        }
 
+        lista = (ListView) findViewById(R.id.listView_franquicias);
+        this.registerForContextMenu(lista);
+
+        String[] from = ClavesFranquicia.claves();
+        int[] to = {R.id.text_nombre_franquicia};
+
+        adaptador = new SimpleAdapter(this, gestora, R.layout.item_listview, from, to);
+        lista.setAdapter(adaptador);
+
+     //   lista = (ListView) findViewById(R.id.listView_franquicias);
+      //  this.registerForContextMenu(lista);
 
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

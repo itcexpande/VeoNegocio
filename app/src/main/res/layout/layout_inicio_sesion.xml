@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="esta es tu contraeña"
+        android:text="esta es tu contraseña"
         android:textColor="@android:color/holo_green_dark" />
 
     <TextView
