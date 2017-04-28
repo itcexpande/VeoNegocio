@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.User;
-import com.expandenegocio.veonegocio.utilities.MiExcepcion;
 import com.expandenegocio.veonegocio.utilities.ValidatorUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -173,6 +172,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
     }
 
     public void recordarDatos(View view) {
+
     }
 
     public void registro(View view) {
