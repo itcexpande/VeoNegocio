@@ -152,7 +152,11 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void consultaro(View view) {
-        Intent intent = new Intent("ActivityConsultas");
+    //    Intent intent = new Intent("ActivityConsultas");
+    //    startActivity(intent);
+
+        Intent intent = new Intent("ActivityAltaUsuario");
         startActivity(intent);
+
     }
 }

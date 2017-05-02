@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView_altas_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_alta_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="correo"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/et_alta_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="contraseña"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_alta_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="nombre"
+                android:inputType="textCapWords" />
+
+            <EditText
+                android:id="@+id/et_alta_apellidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="apellidos"
+                android:inputType="textCapWords" />
+
+            <EditText
+                android:id="@+id/et_alta_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="teléfono"
+                android:inputType="phone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_provincia_alta_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></Spinner>
+
+                <Spinner
+                    android:id="@+id/spinner_municipio_alta_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"></Spinner>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_alta_capital"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="capital"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_capital_observaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="observaciones"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_cerrada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="cerrada"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/et_alta_cuando_empezar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="cuando empezar"
+                android:inputType="text" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <DatePicker
+                    android:id="@+id/dt_alta1"
+                    style="@android:style/Widget.DatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    tools:style="@android:style/Widget.Holo.DatePicker"></DatePicker>
+
+                <DatePicker
+                    android:id="@+id/dt_alta2"
+                    style="@android:style/Widget.DatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_orange_light"></DatePicker>
+
+            </LinearLayout>
+
+
+            <EditText
+                android:id="@+id/et_alta_dispone_contacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="dispone contacto"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_dispone_local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="dispone local"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_empresa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="empresa"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_negocio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="negocio"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_negocio_anterior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="negocio aanterior"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_perfil_franquicia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="perfil franquicia"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_perfil_profesional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="perfil profesional"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_recursos_propios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="recursos propios"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_situacion_profesional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="situacion profesional"
+                android:inputType="text" />
+
+
+            <Button
+                android:id="@+id/boton_aceptar_alta_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="altaUsuario"
+                android:text="ACEPTAR" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

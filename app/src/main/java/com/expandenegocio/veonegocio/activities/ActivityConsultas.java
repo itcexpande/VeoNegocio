@@ -51,9 +51,6 @@ public class ActivityConsultas extends AppCompatActivity {
         adaptador = new SimpleAdapter(this, gestora, R.layout.item_listview, from, to);
         lista.setAdapter(adaptador);
 
-     //   lista = (ListView) findViewById(R.id.listView_franquicias);
-      //  this.registerForContextMenu(lista);
-
     }
 
 
