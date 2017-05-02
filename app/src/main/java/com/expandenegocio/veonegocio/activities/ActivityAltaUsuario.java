@@ -50,14 +50,14 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private Municipio municipio;
     private User usuario;
 
-    private String DisponeContacto;
-    private String DisponeLocal;
-    private String Empresa;
-    private String Negocio;
-    private String NegocioAnterior;
-    private String PerfilFranquicia;
-    private String Profesional;
-    private String RecursosPropios;
+    private String disponeContacto;
+    private String disponeLocal;
+    private String empresa;
+    private String negocio;
+    private String negocioAnterior;
+    private String perfilFranquicia;
+    private String profesional;
+    private String recursosPropios;
     private String situacionProfesional;
 
 
@@ -218,6 +218,17 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         provincia = (Provincia) spnProvincia.getSelectedItem();
         municipio = (Municipio) spnMunicipio.getSelectedItem();
 
+        disponeContacto = txtDisponeContacto.getText().toString();
+        disponeLocal = txtDisponeLocal.getText().toString();
+        empresa = txtEmpresa.getText().toString();
+        negocio = txtNegocio.getText().toString();
+        negocioAnterior = txtNegocioAnterior.getText().toString();
+        perfilFranquicia = txtPerfilFranquicia.getText().toString();
+        profesional = txtProfesional.getText().toString();
+        recursosPropios = txtRecursosPropios.getText().toString();
+        situacionProfesional = txtsituacionProfesional.getText().toString();
+
+
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
         }
@@ -245,6 +256,29 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         if (municipio == null || municipio.getNombreMunicipio() == null) {
             output = "El campo municipio no puede estar vacío";
         }
+
+        if (disponeContacto.trim().equals("")) {
+            output = "El campo dispone contacto no puede estar vacío";
+        }
+        if (disponeLocal.trim().equals("")) {
+            output = "El campo dispone localno puede estar vacío";
+        }
+        if (empresa.trim().equals("")) {
+            output = "El campo empresa no puede estar vacío";
+        }
+        if (negocio.trim().equals("")) {
+            output = "El campo negocio no puede estar vacío";
+        }
+        if (negocioAnterior.trim().equals("")) {
+            output = "El campo negocio anterior no puede estar vacío";
+        }
+        if (perfilFranquicia.trim().equals("")) {
+            output = "El campo perfil franquicia no puede estar vacío";
+        }
+        if (profesional.trim().equals("")) {
+            output = "El campo perfil profesional no puede estar vacío";
+        }
+
 
         return output;
     }
