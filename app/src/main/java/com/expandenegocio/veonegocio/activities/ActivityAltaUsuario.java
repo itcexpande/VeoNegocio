@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
@@ -233,11 +234,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         municipio = (Municipio) spnMunicipio.getSelectedItem();
         capital = txtCapital.getText().toString();
         capitalObservaciones = txtCapitalObservaciones.getText().toString();
-        if (txtCerrada == null) {
-            cerrada = 0;
-        } else {
-            cerrada = Integer.parseInt(txtCerrada.getText().toString());
-        }
+        //    cerrada = Integer.parseInt(txtCerrada.getText().toString());
         cuandoEmpezar = txtCuandoEmpezar.getText().toString();
         deleted = 0;
         disponeContacto = txtDisponeContacto.getText().toString();
@@ -254,6 +251,31 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         phoneMobile = txtPhoneMobile.getText().toString();
         recursosPropios = txtRecursosPropios.getText().toString();
         situacionProfesional = txtSituacionProfesional.getText().toString();
+
+        correo = "correo@gmail.com";
+        password = "1234";
+        nombre = "jesus";
+        apellidos = "Villa Alonso";
+        telefono = "983359746";
+        capital = "capital";
+        capitalObservaciones = "capital observaciones";
+        cerrada = 7;
+        cuandoEmpezar = "cuando empezar";
+        disponeContacto = "dispone contacto";
+        disponeLocal = "dispone local";
+        empresa = "empresa";
+        firstName = "first name";
+        lastName = "last name";
+        negocio = "negocio";
+        negocioAnterior = "negocio anterior";
+        perfilFranquicia = "perfil franquicia";
+        perfilProfesional = "perfil profesional";
+        phoneHome = "9833597461";
+        phoneMobile = "617759716";
+        recursosPropios = "recursos propios";
+        situacionProfesional = "situacion profesional";
+
+
 
 /*
 
@@ -350,15 +372,21 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setCapitalObservaciones(capitalObservaciones);
         usuario.setCerrada(cerrada);
         usuario.setCuandoEmpezar(cuandoEmpezar);
-        dateEntered = (fechaDateEntered.getYear() + "-" + fechaDateEntered.getMonth() + "-" + fechaDateEntered.getDayOfMonth()).toString();
-        dateModified = (fechaDateModified.getYear() + "-" + fechaDateModified.getMonth() + "-" + fechaDateModified.getDayOfMonth()).toString();
+        //  dateEntered = (fechaDateEntered.getYear() + "-" + fechaDateEntered.getMonth() + "-" + fechaDateEntered.getDayOfMonth()).toString();
+        //  dateModified = (fechaDateModified.getYear() + "-" + fechaDateModified.getMonth() + "-" + fechaDateModified.getDayOfMonth()).toString();
 
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        String currentDateandTime = sdf.format(dateEntered);
+        dateEntered = (fechaDateEntered.getDayOfMonth() + "-" + fechaDateEntered.getMonth() + "-" + fechaDateEntered.getYear()).toString();
+        dateModified = (fechaDateModified.getDayOfMonth() + "-" + fechaDateModified.getMonth() + "-" + fechaDateModified.getYear()).toString();
+        dateEntered = new Date().toString();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        String currentDateandTime = sdf.format(new Date());
         usuario.setDateEntered(currentDateandTime);
-        currentDateandTime = sdf.format(dateModified);
+//        currentDateandTime = sdf.format(dateModified);
+        currentDateandTime = sdf.format(new Date());
         usuario.setDateModified(currentDateandTime);
         usuario.setDeleted(deleted);
         usuario.setDisponeContacto(disponeContacto);
@@ -392,56 +420,39 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.TELEFONO, telefono);
         params.put(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA, usuario.getCodigoProv());
         params.put(UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO, usuario.getCodigoMun());
-
         params.put(UserDataSource.ColumnUsuarios.CAPITAL, usuario.getCapital());
         params.put(UserDataSource.ColumnUsuarios.CAPITAL_OBSERVACIONES, usuario.getCapitalObservaciones());
-
         params.put(UserDataSource.ColumnUsuarios.CERRADA, usuario.getCerrada());
         params.put(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR, usuario.getCuandoEmpezar());
         params.put(UserDataSource.ColumnUsuarios.DATE_ENTERED, usuario.getDateEntered());
-
         params.put(UserDataSource.ColumnUsuarios.DATE_MODIFIED, usuario.getDateModified());
         params.put(UserDataSource.ColumnUsuarios.DELETED, usuario.getDateEntered());
-
-
         params.put(UserDataSource.ColumnUsuarios.DISP_CONTACTO, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.FIRTS_NAME, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.LAST_NAME, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.PHONE_HOME, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.PHONE_MOBILE, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL, usuario.getDisponeContacto());
+        params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeLocal());
+        params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getEmpresa());
+        params.put(UserDataSource.ColumnUsuarios.FIRTS_NAME, usuario.getFirstName());
+        params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getId2());
+        params.put(UserDataSource.ColumnUsuarios.LAST_NAME, usuario.getLastName());
+        params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getNegocio());
+        params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getNegocioAnterior());
+        params.put(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA, usuario.getPerfilFranquicia());
+        params.put(UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL, usuario.getPerfilProfesional());
+        params.put(UserDataSource.ColumnUsuarios.PHONE_HOME, usuario.getPhoneHome());
+        params.put(UserDataSource.ColumnUsuarios.PHONE_MOBILE, usuario.getPhoneMobile());
+        params.put(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS, usuario.getRecursosPropios());
+        params.put(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL, usuario.getSituacionProfesional());
+
 
         invokeWS(params);
 
 
-,usuario.getDisponeContacto());
-
-/*
-        params.put("name", nombre.getText().toString());
-        // Put Http parameter username with value of Email Edit View control
-        params.put("email", email.getText().toString());
-        // Put Http parameter password with value of Password Edit View control
-        params.put("pwd", password.getText().toString());
-
-
-        // Invoke RESTful Web Service with Http parameters
-        invokeWS(params);
-*/
     }
 
 
     public void invokeWS(RequestParams params) {
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post("http://www.expandenegocio.com/app/signup.php", params, new AsyncHttpResponseHandler() {
+        client.post("http://www.expandenegocio.com/app/signup_jesus.php", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -496,4 +507,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     }
 
 
+    public void fecha1(View view) {
+
+    }
 }

@@ -226,6 +226,7 @@ public class ActivityRegistro extends AppCompatActivity {
     private void procesarInformacion() {
 
         RequestParams params = new RequestParams();
+
         params.put("ID", usuario.getId().toString());
         params.put("email", correo);
         params.put("password", password);
@@ -235,7 +236,6 @@ public class ActivityRegistro extends AppCompatActivity {
         params.put("telefono", telefono);
         params.put("c_prov", usuario.getCodigoProv());
         params.put("c_mun", usuario.getCodigoMun());
-
 
 
         invokeWS(params);

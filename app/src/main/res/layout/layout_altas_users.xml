@@ -20,7 +20,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="correo"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress" >
+                <requestFocus></requestFocus>
+            </EditText>
 
             <EditText
                 android:id="@+id/et_alta_password"
@@ -109,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:onClick="fecha1"
                     tools:style="@android:style/Widget.Holo.DatePicker"></DatePicker>
 
                 <DatePicker
@@ -191,14 +194,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="phone home"
-                android:inputType="text" />
+                android:inputType="phone" />
 
             <EditText
                 android:id="@+id/et_alta_phone_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="phone mobile"
-                android:inputType="text" />
+                android:inputType="phone" />
 
             <EditText
                 android:id="@+id/et_alta_recursos_propios"

@@ -37,7 +37,7 @@ public class UserDataSource {
         public static final String DATE_MODIFIED = "date_modified";
         public static final String DELETED = "deleted";
         public static final String DISP_CONTACTO = "disp_contacto";
-        public static final String DISP_LOCAL = "disp_local";
+        public static final String DISP_LOCAL = "dispone_local";
         public static final String EMPRESA = "empresa";
         public static final String FIRTS_NAME = "first_name";
         public static final String ID2 = "id2";
