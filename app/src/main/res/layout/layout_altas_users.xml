@@ -107,6 +107,7 @@
                     style="@android:style/Widget.DatePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     tools:style="@android:style/Widget.Holo.DatePicker"></DatePicker>
 
@@ -115,7 +116,7 @@
                     style="@android:style/Widget.DatePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@android:color/holo_orange_light"></DatePicker>
 
@@ -144,6 +145,20 @@
                 android:inputType="text" />
 
             <EditText
+                android:id="@+id/et_alta_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="first name"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="last name"
+                android:inputType="text" />
+
+            <EditText
                 android:id="@+id/et_alta_negocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,6 +184,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="perfil profesional"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_phone_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="phone home"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/et_alta_phone_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="phone mobile"
                 android:inputType="text" />
 
             <EditText

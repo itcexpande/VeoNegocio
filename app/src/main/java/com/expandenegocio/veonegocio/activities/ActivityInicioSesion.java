@@ -57,14 +57,14 @@ public class ActivityInicioSesion extends AppCompatActivity {
             usuario = createUsuario();
 
             UserDataSource dataSource = new UserDataSource(this);
-            if (dataSource.buscaUsuarioPorEmailYPassword(usuario.getEmail().toString(), usuario.getPassword()) != null) {
+          //  if (dataSource.buscaUsuarioPorEmailYPassword(usuario.getEmail().toString(), usuario.getPassword()) != null) {
                 procesarInformacion();
                 //         Intent intent = new Intent("ActivityConsultas");
                 //       startActivity(intent);
 
-            } else {
-                Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
-            }
+            //} else {
+              //  Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
+           // }
 
         } else {
             Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();

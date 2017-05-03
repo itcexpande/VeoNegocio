@@ -146,7 +146,7 @@ public class ActivityRegistro extends AppCompatActivity {
 
 
             UserDataSource dataSource = new UserDataSource(this);
-            dataSource.insertUsuario(usuario);
+            //dataSource.insertUsuario(usuario);
 
             procesarInformacion();
 

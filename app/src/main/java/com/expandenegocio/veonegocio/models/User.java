@@ -1,6 +1,8 @@
 package com.expandenegocio.veonegocio.models;
 
 
+import java.util.Date;
+
 /**
  * Created by Jesus on 27/03/2017.
  */
@@ -14,6 +16,28 @@ public class User {
     private String telefono;
     private Integer codigoProv;
     private Integer codigoMun;
+    private String capital;
+    private String capitalObservaciones;
+    private Integer cerrada;
+    private String cuandoEmpezar;
+    private String dateEntered;
+    private String dateModified;
+    private Integer deleted;
+    private String disponeContacto;
+    private String disponeLocal;
+    private String empresa;
+    private String firstName;
+    private String id2;
+    private String lastName;
+    private String negocio;
+    private String negocioAnterior;
+    private String perfilFranquicia;
+    private String perfilProfesional;
+    private String phoneHome;
+    private String phoneMobile;
+    private String recursosPropios;
+    private String situacionProfesional;
+
 
     public String getId() {
         return id;
@@ -85,5 +109,173 @@ public class User {
 
     public void setCodigoMun(Integer codigoMun) {
         this.codigoMun = codigoMun;
+    }
+
+    public String getCapital() {
+        return capital;
+    }
+
+    public void setCapital(String capital) {
+        this.capital = capital;
+    }
+
+    public String getCapitalObservaciones() {
+        return capitalObservaciones;
+    }
+
+    public void setCapitalObservaciones(String capitalObservaciones) {
+        this.capitalObservaciones = capitalObservaciones;
+    }
+
+    public Integer getCerrada() {
+        return cerrada;
+    }
+
+    public void setCerrada(Integer cerrada) {
+        this.cerrada = cerrada;
+    }
+
+    public String getCuandoEmpezar() {
+        return cuandoEmpezar;
+    }
+
+    public void setCuandoEmpezar(String cuandoEmpezar) {
+        this.cuandoEmpezar = cuandoEmpezar;
+    }
+
+    public String getDateEntered() {
+        return dateEntered;
+    }
+
+    public void setDateEntered(String dateEntered) {
+        this.dateEntered = dateEntered;
+    }
+
+    public String getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(String dateModified) {
+        this.dateModified = dateModified;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getDisponeContacto() {
+        return disponeContacto;
+    }
+
+    public void setDisponeContacto(String disponeContacto) {
+        this.disponeContacto = disponeContacto;
+    }
+
+    public String getDisponeLocal() {
+        return disponeLocal;
+    }
+
+    public void setDisponeLocal(String disponeLocal) {
+        this.disponeLocal = disponeLocal;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getId2() {
+        return id2;
+    }
+
+    public void setId2(String id2) {
+        this.id2 = id2;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getNegocio() {
+        return negocio;
+    }
+
+    public void setNegocio(String negocio) {
+        this.negocio = negocio;
+    }
+
+    public String getNegocioAnterior() {
+        return negocioAnterior;
+    }
+
+    public void setNegocioAnterior(String negocioAnterior) {
+        this.negocioAnterior = negocioAnterior;
+    }
+
+    public String getPerfilFranquicia() {
+        return perfilFranquicia;
+    }
+
+    public void setPerfilFranquicia(String perfilFranquicia) {
+        this.perfilFranquicia = perfilFranquicia;
+    }
+
+    public String getPerfilProfesional() {
+        return perfilProfesional;
+    }
+
+    public void setPerfilProfesional(String perfilProfesional) {
+        this.perfilProfesional = perfilProfesional;
+    }
+
+    public String getPhoneHome() {
+        return phoneHome;
+    }
+
+    public void setPhoneHome(String phoneHome) {
+        this.phoneHome = phoneHome;
+    }
+
+    public String getPhoneMobile() {
+        return phoneMobile;
+    }
+
+    public void setPhoneMobile(String phoneMobile) {
+        this.phoneMobile = phoneMobile;
+    }
+
+    public String getRecursosPropios() {
+        return recursosPropios;
+    }
+
+    public void setRecursosPropios(String recursosPropios) {
+        this.recursosPropios = recursosPropios;
+    }
+
+    public String getSituacionProfesional() {
+        return situacionProfesional;
+    }
+
+    public void setSituacionProfesional(String situacionProfesional) {
+        this.situacionProfesional = situacionProfesional;
     }
 }

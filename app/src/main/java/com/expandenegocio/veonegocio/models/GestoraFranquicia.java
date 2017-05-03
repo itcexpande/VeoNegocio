@@ -1,6 +1,7 @@
 package com.expandenegocio.veonegocio.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by jesus on 28/04/2017.
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 public class GestoraFranquicia extends ArrayList<Franquicia> {
     public GestoraFranquicia() {
         super();
+/*
 
         this.add(new Franquicia("Adagio"));
         this.add(new Franquicia("Aramburu"));
@@ -23,7 +25,14 @@ public class GestoraFranquicia extends ArrayList<Franquicia> {
         this.add(new Franquicia("NyN"));
         this.add(new Franquicia("Realty Plus"));
         this.add(new Franquicia("Técico Salud"));
+*/
 
 
     }
+
+    public void ordenaPorNombre() {
+        Collections.sort(this);
+    }
+
+
 }

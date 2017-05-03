@@ -29,6 +29,29 @@ public class UserDataSource {
         public static final String TELEFONO = "telefono";
         public static final String CODIGO_PROVINCIA = "c_prov";
         public static final String CODIGO_MUNICIPIO = "c_mun";
+        public static final String CAPITAL = "capital";
+        public static final String CAPITAL_OBSERVACIONES = "capital_observaciones";
+        public static final String CERRADA = "cerrada";
+        public static final String CUANDO_EMPEZAR = "cuando_empezar";
+        public static final String DATE_ENTERED = "date_entered";
+        public static final String DATE_MODIFIED = "date_modified";
+        public static final String DELETED = "deleted";
+        public static final String DISP_CONTACTO = "disp_contacto";
+        public static final String DISP_LOCAL = "disp_local";
+        public static final String EMPRESA = "empresa";
+        public static final String FIRTS_NAME = "first_name";
+        public static final String ID2 = "id2";
+        public static final String LAST_NAME = "last_name";
+        public static final String NEGOCIO = "negocio";
+        public static final String NEGOCIO_ANTES = "negocio_antes";
+        public static final String PERFIL_FRANQUICIA = "perfil_franquicia";
+        public static final String PERFIL_PROFESIONAL = "perfil_profesional";
+        public static final String PHONE_HOME = "phone_home";
+        public static final String PHONE_MOBILE = "phone_mobile";
+        public static final String RECURSOS_PROPIOS = "recursos_propios";
+        public static final String SITUACION_PROFESIONAL = "situacion_profesional";
+
+
     }
 
 
@@ -53,7 +76,28 @@ public class UserDataSource {
                 ColumnUsuarios.APELLIDOS + ", " +
                 ColumnUsuarios.TELEFONO + ", " +
                 ColumnUsuarios.CODIGO_PROVINCIA + ", " +
-                ColumnUsuarios.CODIGO_MUNICIPIO +
+                ColumnUsuarios.CODIGO_MUNICIPIO + ", " +
+                ColumnUsuarios.CAPITAL + ", " +
+                ColumnUsuarios.CAPITAL_OBSERVACIONES + ", " +
+                ColumnUsuarios.CERRADA + ", " +
+                ColumnUsuarios.CUANDO_EMPEZAR + ", " +
+                ColumnUsuarios.DATE_ENTERED + ", " +
+                ColumnUsuarios.DATE_MODIFIED + ", " +
+                ColumnUsuarios.DELETED + ", " +
+                ColumnUsuarios.DISP_CONTACTO + ", " +
+                ColumnUsuarios.DISP_LOCAL + ", " +
+                ColumnUsuarios.EMPRESA + ", " +
+                ColumnUsuarios.FIRTS_NAME + ", " +
+                ColumnUsuarios.ID2 + ", " +
+                ColumnUsuarios.LAST_NAME + ", " +
+                ColumnUsuarios.NEGOCIO + ", " +
+                ColumnUsuarios.NEGOCIO_ANTES + ", " +
+                ColumnUsuarios.PERFIL_FRANQUICIA + ", " +
+                ColumnUsuarios.PERFIL_PROFESIONAL + ", " +
+                ColumnUsuarios.PHONE_HOME + ", " +
+                ColumnUsuarios.PHONE_MOBILE + ", " +
+                ColumnUsuarios.RECURSOS_PROPIOS + ", " +
+                ColumnUsuarios.SITUACION_PROFESIONAL +
                 ") VALUES" + " ( " +
                 "'" + user.getId() + "'," +
                 "'" + user.getEmail() + "'," +
@@ -63,7 +107,28 @@ public class UserDataSource {
                 "'" + user.getApellidos() + "'," +
                 "'" + user.getTelefono() + "'," +
                 "" + user.getCodigoProv() + "," +
-                user.getCodigoMun() + " " +
+                "" + user.getCodigoMun() + "," +
+                "'" + user.getCapital() + "'," +
+                "'" + user.getCapitalObservaciones() + "'," +
+                "" + user.getCerrada() + "," +
+                "'" + user.getCuandoEmpezar() + "'," +
+                "'" + user.getDateEntered() + "'," +
+                "'" + user.getDateModified() + "'," +
+                "" + user.getDeleted() + "," +
+                "'" + user.getDisponeContacto() + "'," +
+                "'" + user.getDisponeLocal() + "'," +
+                "'" + user.getEmpresa() + "'," +
+                "'" + user.getFirstName() + "'," +
+                "'" + user.getId2() + "'," +
+                "'" + user.getLastName() + "'," +
+                "'" + user.getNegocio() + "'," +
+                "'" + user.getNegocioAnterior() + "'," +
+                "'" + user.getPerfilFranquicia() + "'," +
+                "'" + user.getPerfilProfesional() + "'," +
+                "'" + user.getPhoneHome() + "'," +
+                "'" + user.getPhoneMobile() + "'," +
+                "'" + user.getRecursosPropios() + "'," +
+                "'" + user.getSituacionProfesional() +"'"+
                 ")";
         try {
             database.execSQL(insertSQL);
