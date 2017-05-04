@@ -64,4 +64,28 @@ public class ProvinciaDataSource {
 
         return output;
     }
+
+    public String buscarProvinciaPorId(String id) {
+
+        String output = "";
+        try {
+
+            String query = "SELECT " + ColumnProvincia.NOMBRE +
+                    " FROM " + PROVINCIA_TABLE_NAME +
+                    " WHERE " + ColumnProvincia.ID + " = '" + id + "'";
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = cursor.getString(0);
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error recoge Usuario", ex.toString());
+        }
+        return output;
+    }
+
 }

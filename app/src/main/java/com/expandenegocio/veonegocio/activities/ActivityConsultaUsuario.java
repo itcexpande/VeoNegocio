@@ -26,6 +26,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -108,40 +110,42 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_altas_users);
-        tvFecha1 = (TextView) findViewById(R.id.tv_alta_fecha1);
-        tvFecha2 = (TextView) findViewById(R.id.tv_alta_fecha2);
+        setContentView(R.layout.layout_consultas_users);
+        tvFecha1 = (TextView) findViewById(R.id.tv_consulta_fecha1);
+        tvFecha2 = (TextView) findViewById(R.id.tv_consulta_fecha2);
         ID_FECHA1 = tvFecha1.getId();
+
+/*
         Calendar ahora = Calendar.getInstance();
         actualizarLaFecha1EnTextView(ahora);
         ID_FECHA2 = tvFecha2.getId();
         ahora = Calendar.getInstance();
         actualizarLaFecha2EnTextView(ahora);
-
-        txtCorreo = (EditText) findViewById(R.id.et_alta_correo);
-        txtPassword = (EditText) findViewById(R.id.et_alta_password);
-        txtNombre = (EditText) findViewById(R.id.et_alta_nombre);
-        txtApellidos = (EditText) findViewById(R.id.et_alta_apellidos);
-        txtTelefono = (EditText) findViewById(R.id.et_alta_telefono);
-        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_alta_user);
-        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_alta_user);
-        txtCapital = (EditText) findViewById(R.id.et_alta_capital);
-        txtCapitalObservaciones = (EditText) findViewById(R.id.et_alta_capital_observaciones);
-        txtCerrada = (EditText) findViewById(R.id.et_alta_cerrada);
-        txtCuandoEmpezar = (EditText) findViewById(R.id.et_alta_cuando_empezar);
-        txtDisponeContacto = (EditText) findViewById(R.id.et_alta_dispone_contacto);
-        txtDisponeLocal = (EditText) findViewById(R.id.et_alta_dispone_local);
-        txtEmpresa = (EditText) findViewById(R.id.et_alta_empresa);
-        txtFirstName = (EditText) findViewById(R.id.et_alta_first_name);
-        txtLastName = (EditText) findViewById(R.id.et_alta_last_name);
-        txtNegocio = (EditText) findViewById(R.id.et_alta_negocio);
-        txtNegocioAnterior = (EditText) findViewById(R.id.et_alta_negocio_anterior);
-        txtPerfilFranquicia = (EditText) findViewById(R.id.et_alta_perfil_franquicia);
-        txtPerfilProfesional = (EditText) findViewById(R.id.et_alta_perfil_profesional);
-        txtRecursosPropios = (EditText) findViewById(R.id.et_alta_recursos_propios);
-        txtSituacionProfesional = (EditText) findViewById(R.id.et_alta_situacion_profesional);
-        txtPhoneHome = (EditText) findViewById(R.id.et_alta_phone_home);
-        txtPhoneMobile = (EditText) findViewById(R.id.et_alta_phone_mobile);
+*/
+        txtCorreo = (EditText) findViewById(R.id.et_consulta_correo);
+        txtPassword = (EditText) findViewById(R.id.et_consulta_password);
+        txtNombre = (EditText) findViewById(R.id.et_consulta_nombre);
+        txtApellidos = (EditText) findViewById(R.id.et_consulta_apellidos);
+        txtTelefono = (EditText) findViewById(R.id.et_consulta_telefono);
+        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_consulta_user);
+        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_consulta_user);
+        txtCapital = (EditText) findViewById(R.id.et_consulta_capital);
+        txtCapitalObservaciones = (EditText) findViewById(R.id.et_consulta_capital_observaciones);
+        txtCerrada = (EditText) findViewById(R.id.et_consulta_cerrada);
+        txtCuandoEmpezar = (EditText) findViewById(R.id.et_consulta_cuando_empezar);
+        txtDisponeContacto = (EditText) findViewById(R.id.et_consulta_dispone_contacto);
+        txtDisponeLocal = (EditText) findViewById(R.id.et_consulta_dispone_local);
+        txtEmpresa = (EditText) findViewById(R.id.et_consulta_empresa);
+        txtFirstName = (EditText) findViewById(R.id.et_consulta_first_name);
+        txtLastName = (EditText) findViewById(R.id.et_consulta_last_name);
+        txtNegocio = (EditText) findViewById(R.id.et_consulta_negocio);
+        txtNegocioAnterior = (EditText) findViewById(R.id.et_consulta_negocio_anterior);
+        txtPerfilFranquicia = (EditText) findViewById(R.id.et_consulta_perfil_franquicia);
+        txtPerfilProfesional = (EditText) findViewById(R.id.et_consulta_perfil_profesional);
+        txtRecursosPropios = (EditText) findViewById(R.id.et_consulta_recursos_propios);
+        txtSituacionProfesional = (EditText) findViewById(R.id.et_consulta_situacion_profesional);
+        txtPhoneHome = (EditText) findViewById(R.id.et_consulta_phone_home);
+        txtPhoneMobile = (EditText) findViewById(R.id.et_consulta_phone_mobile);
 
         provincia = loadSpinnerProvincias();
 
@@ -157,7 +161,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_alta_user);
+        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_consulta_user);
 
         spnProvincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -190,7 +194,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_alta_user);
+        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_consulta_user);
 
         spnMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -532,6 +536,197 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         }
         elDialogFragment.show(getSupportFragmentManager(), null);
+    }
+
+
+    public void consultaUsuario(View view) {
+
+        String val = validate2();
+
+        if (val == null) {
+
+            usuario = createUsuario2();
+
+
+            procesarInformacion2();
+
+        } else {
+            Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+    private String validate2() {
+
+        String output = null;
+
+        correo = txtCorreo.getText().toString();
+        password = txtPassword.getText().toString();
+
+        correo = "correo@gmail.com";
+        password = "12345";
+
+
+        if (correo.trim().equals("")) {
+            output = "El campo correo no puede estar vacío";
+        }
+        if (!ValidatorUtil.validateEmail(correo)) {
+            output = "El correo no es válido";
+        }
+        if (password.trim().equals("")) {
+            output = "el campo contraseña no puede estar vacío";
+        }
+
+
+        return output;
+    }
+
+    private User createUsuario2() {
+
+        User usuario = new User();
+
+        usuario.setId(UUID.randomUUID().toString());
+        usuario.setEmail(correo);
+        usuario.setPassword(password);
+
+        return usuario;
+
+    }
+
+    private void procesarInformacion2() {
+
+        RequestParams params = new RequestParams();
+
+        // params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
+        params.put(UserDataSource.ColumnUsuarios.EMAIL, correo);
+        params.put(UserDataSource.ColumnUsuarios.PASSWORD, password);
+
+
+        invokeWS2(params);
+
+
+    }
+
+
+    public void invokeWS2(RequestParams params) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://www.expandenegocio.com/app/retorna_usuario.php", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+
+
+                try {
+
+                    JSONObject obj = new JSONObject(response);
+
+                    switch (obj.getInt("status")) {
+
+                        case 0:
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            break;
+                        case 1:
+                            //         Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
+                            recogeDatos(obj.getString("info"));
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                    error) {
+
+
+                try {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    private void recogeDatos(String info) {
+        int longitud = info.length();
+        String nuevaInfo = info.substring(2, longitud - 2);
+        String[] campos = nuevaInfo.split(",");
+        for (int x = 0; x < campos.length; x++) {
+            String[] subcampos = campos[x].split(":");
+            String clave = subcampos[0].substring(1, subcampos[0].length() - 1);
+            if (clave.equals("nombre")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtNombre.setText(campo);
+            } else if (clave.equals("apellidos")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtApellidos.setText(campo);
+            } else if (clave.equals("telefono")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtTelefono.setText(campo);
+            } else if (clave.equals("c_prov")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                //  ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+                //   dataSource.buscarProvinciaPorId(campo);
+                spnProvincia.setSelection(Integer.parseInt(campo));
+
+            } else if (clave.equals("c_mun")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                //MunicipioDataSource dataSource = new MunicipioDataSource(this);
+                //dataSource.buscarMuicipioPorId(campo);
+                spnMunicipio.setSelection(Integer.parseInt(campo));
+            } else if (clave.equals("capital")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtCapital.setText(campo);
+            } else if (clave.equals("capital_observaciones")) {
+                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtCapitalObservaciones.setText(campo);
+            }
+            else if(clave.equals("cerrada")){
+                String campo= subcampos[1].substring(1,subcampos[1].length()-1);
+                txtCerrada.setText(campo);
+            }
+            else if(clave.equals("cuando_empezar")){
+                String campo= subcampos[1].substring(1,subcampos[1].length()-1);
+                txtCuandoEmpezar.setText(campo);
+            }
+            else if(clave.equals("date_entered")){
+                String campo= subcampos[1].substring(1,subcampos[1].length()-1);
+                String dia;
+                String mes;
+                String anno;
+                if(campo.length()==10){
+
+                }
+
+                tvFecha1.setText(campo);
+            }
+
+
+
+        }
+
+
+        String bb = "";
+
     }
 
 
