@@ -23,6 +23,7 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.expandenegocio.veonegocio.R;
 
 
+import java.util.Calendar;
 import java.util.TreeMap;
 
 
@@ -155,8 +156,16 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     //    Intent intent = new Intent("ActivityConsultas");
     //    startActivity(intent);
 
-        Intent intent = new Intent("ActivityAltaUsuario");
+//        Intent intent = new Intent("ActivityAltaUsuario");
+ //       startActivity(intent);
+
+
+
+        Intent intent = new Intent("ActivityConsultaUsuario");
         startActivity(intent);
 
+
     }
+
+
 }

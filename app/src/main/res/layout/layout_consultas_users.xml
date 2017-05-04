@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <ScrollView
-        android:id="@+id/scrollView_altas_user"
+        android:id="@+id/scrollView_consulta_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/et_alta_correo"
+                android:id="@+id/et_consulta_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="correo"
@@ -26,28 +26,35 @@
             </EditText>
 
             <EditText
-                android:id="@+id/et_alta_password"
+                android:id="@+id/et_consulta_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="contraseña"
                 android:inputType="textPassword" />
+            <Button
+                android:id="@+id/boton_aceptar_consulta_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="consultaUsuario"
+                android:text="CONSULTAR" />
+
 
             <EditText
-                android:id="@+id/et_alta_nombre"
+                android:id="@+id/et_consulta_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="nombre"
                 android:inputType="textCapWords" />
 
             <EditText
-                android:id="@+id/et_alta_apellidos"
+                android:id="@+id/et_consulta_apellidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="apellidos"
                 android:inputType="textCapWords" />
 
             <EditText
-                android:id="@+id/et_alta_telefono"
+                android:id="@+id/et_consulta_telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="teléfono"
@@ -59,41 +66,41 @@
                 android:orientation="horizontal">
 
                 <Spinner
-                    android:id="@+id/spinner_provincia_alta_user"
+                    android:id="@+id/spinner_provincia_consulta_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"></Spinner>
 
                 <Spinner
-                    android:id="@+id/spinner_municipio_alta_user"
+                    android:id="@+id/spinner_municipio_consulta_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"></Spinner>
             </LinearLayout>
 
             <EditText
-                android:id="@+id/et_alta_capital"
+                android:id="@+id/et_consulta_capital"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="capital"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_capital_observaciones"
+                android:id="@+id/et_consulta_capital_observaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="capital observaciones"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_cerrada"
+                android:id="@+id/et_consulta_cerrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="cerrada"
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/et_alta_cuando_empezar"
+                android:id="@+id/et_consulta_cuando_empezar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="cuando empezar"
@@ -105,7 +112,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_alta_fecha1"
+                    android:id="@+id/tv_consulta_fecha1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -113,7 +120,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/tv_alta_fecha2"
+                    android:id="@+id/tv_consulta_fecha2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,91 +132,91 @@
 
 
             <EditText
-                android:id="@+id/et_alta_dispone_contacto"
+                android:id="@+id/et_consulta_dispone_contacto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="dispone contacto"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_dispone_local"
+                android:id="@+id/et_consulta_dispone_local"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="dispone local"
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/et_alta_empresa"
+                android:id="@+id/et_consulta_empresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="empresa"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_first_name"
+                android:id="@+id/et_consulta_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="first name"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_last_name"
+                android:id="@+id/et_consulta_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="last name"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_negocio"
+                android:id="@+id/et_consulta_negocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="negocio"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_negocio_anterior"
+                android:id="@+id/et_consulta_negocio_anterior"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="negocio anterior"
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/et_alta_perfil_franquicia"
+                android:id="@+id/et_consulta_perfil_franquicia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="perfil franquicia"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_perfil_profesional"
+                android:id="@+id/et_consulta_perfil_profesional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="perfil profesional"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_phone_home"
+                android:id="@+id/et_consulta_phone_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="phone home"
                 android:inputType="phone" />
 
             <EditText
-                android:id="@+id/et_alta_phone_mobile"
+                android:id="@+id/et_consulta_phone_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="phone mobile"
                 android:inputType="phone" />
 
             <EditText
-                android:id="@+id/et_alta_recursos_propios"
+                android:id="@+id/et_consulta_recursos_propios"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="recursos propios"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/et_alta_situacion_profesional"
+                android:id="@+id/et_consulta_situacion_profesional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="situacion profesional"
@@ -217,10 +224,10 @@
 
 
             <Button
-                android:id="@+id/boton_aceptar_alta_user"
+                android:id="@+id/boton_aceptar_consulta_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="altaUsuario"
+                android:onClick="consultaUsuario"
                 android:text="ACEPTAR" />
 
 

@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,11 +28,8 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
@@ -42,7 +38,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by jesus on 20/03/2017.
  */
 
-public class ActivityAltaUsuario extends AppCompatActivity {
+public class ActivityConsultaUsuario extends AppCompatActivity {
     private Provincia provincia;
     private Municipio municipio;
     private User usuario;

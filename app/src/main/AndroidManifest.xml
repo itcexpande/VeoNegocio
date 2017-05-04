@@ -95,6 +95,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.ActivityConsultaUsuario"
+            android:label="Consulta Usuario"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="ActivityConsultaUsuario" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

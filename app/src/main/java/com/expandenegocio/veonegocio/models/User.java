@@ -24,13 +24,13 @@ public class User {
     private String dateModified;
     private Integer deleted;
     private String disponeContacto;
-    private String disponeLocal;
+    private Integer disponeLocal;
     private String empresa;
     private String firstName;
     private String id2;
     private String lastName;
     private String negocio;
-    private String negocioAnterior;
+    private Integer negocioAnterior;
     private String perfilFranquicia;
     private String perfilProfesional;
     private String phoneHome;
@@ -175,11 +175,11 @@ public class User {
         this.disponeContacto = disponeContacto;
     }
 
-    public String getDisponeLocal() {
+    public Integer getDisponeLocal() {
         return disponeLocal;
     }
 
-    public void setDisponeLocal(String disponeLocal) {
+    public void setDisponeLocal(Integer disponeLocal) {
         this.disponeLocal = disponeLocal;
     }
 
@@ -223,11 +223,11 @@ public class User {
         this.negocio = negocio;
     }
 
-    public String getNegocioAnterior() {
+    public Integer getNegocioAnterior() {
         return negocioAnterior;
     }
 
-    public void setNegocioAnterior(String negocioAnterior) {
+    public void setNegocioAnterior(Integer negocioAnterior) {
         this.negocioAnterior = negocioAnterior;
     }
 
