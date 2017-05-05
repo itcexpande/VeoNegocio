@@ -248,17 +248,17 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         municipio = (Municipio) spnMunicipio.getSelectedItem();
         capital = txtCapital.getText().toString();
         capitalObservaciones = txtCapitalObservaciones.getText().toString();
-        //cerrada = Integer.parseInt(txtCerrada.getText().toString());
+        cerrada = Integer.parseInt(txtCerrada.getText().toString());
         cuandoEmpezar = txtCuandoEmpezar.getText().toString();
         deleted = 0;
         disponeContacto = txtDisponeContacto.getText().toString();
-        //   disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
+           disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
         empresa = txtEmpresa.getText().toString();
         firstName = txtFirstName.getText().toString();
         lastName = txtLastName.getText().toString();
         id2 = "";
         negocio = txtNegocio.getText().toString();
-        //negocioAnterior = Integer.parseInt(txtNegocioAnterior.getText().toString());
+        negocioAnterior = Integer.parseInt(txtNegocioAnterior.getText().toString());
         perfilFranquicia = txtPerfilFranquicia.getText().toString();
         perfilProfesional = txtPerfilProfesional.getText().toString();
         phoneHome = txtPhoneHome.getText().toString();
@@ -266,7 +266,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         recursosPropios = txtRecursosPropios.getText().toString();
         situacionProfesional = txtSituacionProfesional.getText().toString();
 
-
+/*
         correo = "correo2@gmail.com";
         password = "12345";
         nombre = "jesus";
@@ -290,7 +290,8 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         recursosPropios = "recursos propios";
         situacionProfesional = "situacion profesional";
 
-/*
+*/
+
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
         }
@@ -356,7 +357,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
             output = "El campo perfil profesional no puede estar vacío";
         }
 
-*/
+
         return output;
     }
 
@@ -380,22 +381,12 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         dateEntered = tvFecha1.getText().toString();
         dateModified = tvFecha2.getText().toString();
 
-        /*
-        Date date = ParseFecha(tvFecha1.getText().toString());
-        usuario.setDateEntered(date);
-        date = ParseFecha(tvFecha2.getText().toString());
-        usuario.setDateModified(date);
-
-*/
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String currentDateandTime = sdf.format(new Date());
 
 
         usuario.setDateEntered(new Date());
         usuario.setDateModified(new Date());
 
-        //usuario.setDateEntered(dateEntered);
-        // usuario.setDateModified(dateModified);
+
         usuario.setDeleted(deleted);
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);

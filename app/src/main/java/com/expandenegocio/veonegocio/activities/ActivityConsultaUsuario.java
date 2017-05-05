@@ -115,13 +115,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         tvFecha2 = (TextView) findViewById(R.id.tv_consulta_fecha2);
         ID_FECHA1 = tvFecha1.getId();
 
-/*
-        Calendar ahora = Calendar.getInstance();
-        actualizarLaFecha1EnTextView(ahora);
-        ID_FECHA2 = tvFecha2.getId();
-        ahora = Calendar.getInstance();
-        actualizarLaFecha2EnTextView(ahora);
-*/
+
         txtCorreo = (EditText) findViewById(R.id.et_consulta_correo);
         txtPassword = (EditText) findViewById(R.id.et_consulta_password);
         txtNombre = (EditText) findViewById(R.id.et_consulta_nombre);
@@ -222,7 +216,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
             usuario = createUsuario();
 
-      //      UserDataSource dataSource = new UserDataSource(this);
+            //      UserDataSource dataSource = new UserDataSource(this);
             // dataSource.insertUsuario(usuario);
 
             procesarInformacion();
@@ -264,34 +258,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         phoneMobile = txtPhoneMobile.getText().toString();
         recursosPropios = txtRecursosPropios.getText().toString();
         situacionProfesional = txtSituacionProfesional.getText().toString();
-        correo = "correo2@gmail.com";
-        password = "12345";
-/*
-        correo = "correo2@gmail.com";
-        password = "12345";
-        nombre = "jesusito";
-        apellidos = "Villa Alonso";
-        telefono = "983359746";
-        capital = "capital";
-        capitalObservaciones = "capital observaciones";
-        cerrada = 7;
-        cuandoEmpezar = "cuando empezar";
-        disponeContacto = "dispone contacto";
-        disponeLocal = 1;
-        empresa = "empresa";
-        firstName = "first name";
-        lastName = "last name";
-        negocio = "negocio";
-        negocioAnterior = 66;
-        perfilFranquicia = "perfil franquicia";
-        perfilProfesional = "perfil profesional";
-        phoneHome = "9833597461";
-        phoneMobile = "617759716";
-        recursosPropios = "recursos propios";
-        situacionProfesional = "situacion profesional";
-*/
 
-/*
 
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
@@ -358,7 +325,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             output = "El campo perfil profesional no puede estar vacío";
         }
 
-*/
+
         return output;
     }
 
@@ -420,14 +387,14 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.CAPITAL_OBSERVACIONES, usuario.getCapitalObservaciones());
         params.put(UserDataSource.ColumnUsuarios.CERRADA, usuario.getCerrada());
         params.put(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR, usuario.getCuandoEmpezar());
-       // params.put(UserDataSource.ColumnUsuarios.DATE_ENTERED, usuario.getDateEntered());
-       // params.put(UserDataSource.ColumnUsuarios.DATE_MODIFIED, usuario.getDateModified());
-    //    params.put(UserDataSource.ColumnUsuarios.DELETED, usuario.getDeleted());
+        // params.put(UserDataSource.ColumnUsuarios.DATE_ENTERED, usuario.getDateEntered());
+        // params.put(UserDataSource.ColumnUsuarios.DATE_MODIFIED, usuario.getDateModified());
+        //    params.put(UserDataSource.ColumnUsuarios.DELETED, usuario.getDeleted());
         params.put(UserDataSource.ColumnUsuarios.DISP_CONTACTO, usuario.getDisponeContacto());
         params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeLocal());
         params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getEmpresa());
         params.put(UserDataSource.ColumnUsuarios.FIRTS_NAME, usuario.getFirstName());
-      //  params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getId2());
+        //  params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getId2());
         params.put(UserDataSource.ColumnUsuarios.LAST_NAME, usuario.getLastName());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getNegocio());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getNegocioAnterior());
@@ -564,9 +531,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         correo = txtCorreo.getText().toString();
         password = txtPassword.getText().toString();
-
-        correo = "correo2@gmail.com";
-        password = "12345";
 
 
         if (correo.trim().equals("")) {
