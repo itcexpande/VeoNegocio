@@ -22,7 +22,6 @@
                 android:hint="correo"
                 android:inputType="textEmailAddress">
 
-                <requestFocus></requestFocus>
             </EditText>
 
             <EditText
@@ -221,6 +220,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="altaUsuario"
+                android:background="@drawable/boton_aceptar_registro"
                 android:text="ACEPTAR" />
 
 

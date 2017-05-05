@@ -22,7 +22,7 @@
                 android:hint="correo"
                 android:inputType="textEmailAddress">
 
-                <requestFocus></requestFocus>
+
             </EditText>
 
             <EditText
@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="verUsuario"
+                android:background="@drawable/boton_2"
                 android:text="CONSULTAR" />
 
 
@@ -229,6 +230,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="consultaUsuario2"
+                android:background="@drawable/boton_redondeado"
                 android:text="ACEPTAR" />
 
 
