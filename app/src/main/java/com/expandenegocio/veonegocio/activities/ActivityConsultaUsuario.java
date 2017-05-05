@@ -26,8 +26,6 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -106,6 +104,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private static int ID_FECHA2;
     private DialogFragment elDialogFragment;
 
+    private String nCorreo;
+    private String nPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,9 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         setContentView(R.layout.layout_consultas_users);
         tvFecha1 = (TextView) findViewById(R.id.tv_consulta_fecha1);
         tvFecha2 = (TextView) findViewById(R.id.tv_consulta_fecha2);
-        ID_FECHA1 = tvFecha1.getId();
+
+        nCorreo = getIntent().getStringExtra("correo");
+        nPassword = getIntent().getStringExtra("password");
 
 
         txtCorreo = (EditText) findViewById(R.id.et_consulta_correo);
@@ -141,6 +143,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         txtPhoneHome = (EditText) findViewById(R.id.et_consulta_phone_home);
         txtPhoneMobile = (EditText) findViewById(R.id.et_consulta_phone_mobile);
 
+        txtCorreo.setText(nCorreo);
+        txtPassword.setText(nPassword);
         provincia = loadSpinnerProvincias();
 
     }
@@ -215,9 +219,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         if (val == null) {
 
             usuario = createUsuario();
-
-            //      UserDataSource dataSource = new UserDataSource(this);
-            // dataSource.insertUsuario(usuario);
 
             procesarInformacion();
 

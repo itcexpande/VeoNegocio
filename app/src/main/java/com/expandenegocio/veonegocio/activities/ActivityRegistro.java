@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
-import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.Provincia;
@@ -68,6 +67,11 @@ public class ActivityRegistro extends AppCompatActivity {
         txtTelefono = (EditText) findViewById(R.id.edit_telefono);
         spnProvincia = (Spinner) findViewById(R.id.spinner_provincia);
         spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio);
+
+        String nCorreo = getIntent().getStringExtra("correo");
+        String nPassword = getIntent().getStringExtra("password");
+        txtCorreo.setText(nCorreo);
+        txtPassword.setText(nPassword);
 
         provincia = loadSpinnerProvincias();
 
@@ -143,10 +147,6 @@ public class ActivityRegistro extends AppCompatActivity {
         if (val == null) {
 
             usuario = createUsuario();
-
-
-         //   UserDataSource dataSource = new UserDataSource(this);
-            //dataSource.insertUsuario(usuario);
 
             procesarInformacion();
 
@@ -241,19 +241,6 @@ public class ActivityRegistro extends AppCompatActivity {
         invokeWS(params);
 
 
-
-
-/*
-        params.put("name", nombre.getText().toString());
-        // Put Http parameter username with value of Email Edit View control
-        params.put("email", email.getText().toString());
-        // Put Http parameter password with value of Password Edit View control
-        params.put("pwd", password.getText().toString());
-
-
-        // Invoke RESTful Web Service with Http parameters
-        invokeWS(params);
-*/
     }
 
 

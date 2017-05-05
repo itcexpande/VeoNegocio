@@ -1,6 +1,7 @@
 package com.expandenegocio.veonegocio.activities;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,15 +57,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
             usuario = createUsuario();
 
-         //   UserDataSource dataSource = new UserDataSource(this);
-          //  if (dataSource.buscaUsuarioPorEmailYPassword(usuario.getEmail().toString(), usuario.getPassword()) != null) {
-                procesarInformacion();
-                //         Intent intent = new Intent("ActivityConsultas");
-                //       startActivity(intent);
-
-            //} else {
-              //  Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
-           // }
+            procesarInformacion();
 
         } else {
             Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
@@ -131,9 +124,11 @@ public class ActivityInicioSesion extends AppCompatActivity {
                     switch (obj.getInt("status")) {
 
                         case 0:
-                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
 
-                            Intent intent = new Intent("ActivityConsultas");
+                            Intent intent = new Intent("ActivityOpciones");
+                            intent.putExtra("correo",emailUsuario.getText().toString());
+                            intent.putExtra("password",password.getText().toString());
                             startActivity(intent);
 
                             break;
@@ -248,11 +243,11 @@ public class ActivityInicioSesion extends AppCompatActivity {
                     switch (obj.getInt("status")) {
 
                         case 0:
-                     //      Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            //      Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
 
                             String nuevaContra = obj.getString("info");
-                            int longitud= nuevaContra.length();
-                            String nueva= nuevaContra.substring(14,longitud-3);
+                            int longitud = nuevaContra.length();
+                            String nueva = nuevaContra.substring(14, longitud - 3);
                             recuerdaContraseña.setText("SU CONTRASEÑA ES:===> " + nueva.toString());
 
 
@@ -296,6 +291,8 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
     public void registro(View view) {
         Intent intent = new Intent("ActivityRegistro");
+        intent.putExtra("correo",emailUsuario.getText().toString());
+        intent.putExtra("password",password.getText().toString());
         startActivity(intent);
     }
 }

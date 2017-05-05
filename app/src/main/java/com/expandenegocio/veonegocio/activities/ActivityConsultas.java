@@ -6,15 +6,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.ClavesFranquicia;
-import com.expandenegocio.veonegocio.models.Franquicia;
 import com.expandenegocio.veonegocio.models.GestoraFranquicia;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by jesus on 30/03/2017.
@@ -50,6 +46,10 @@ public class ActivityConsultas extends AppCompatActivity {
 
         adaptador = new SimpleAdapter(this, gestora, R.layout.item_listview, from, to);
         lista.setAdapter(adaptador);
+        String nCorreo=getIntent().getStringExtra("correo");
+        String nPassword= getIntent().getStringExtra("password");
+
+        Toast.makeText(this,nCorreo+"   => "+nPassword,Toast.LENGTH_LONG).show();
 
     }
 

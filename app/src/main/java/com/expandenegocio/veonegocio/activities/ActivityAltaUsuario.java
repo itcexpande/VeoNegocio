@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
@@ -108,12 +106,16 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private static int ID_FECHA1;
     private static int ID_FECHA2;
     private DialogFragment elDialogFragment;
-
+    private String nCorreo;
+    private String nPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_altas_users);
+        nCorreo = getIntent().getStringExtra("correo");
+        nPassword = getIntent().getStringExtra("password");
+
         tvFecha1 = (TextView) findViewById(R.id.tv_alta_fecha1);
         tvFecha2 = (TextView) findViewById(R.id.tv_alta_fecha2);
         ID_FECHA1 = tvFecha1.getId();
@@ -147,7 +149,8 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         txtSituacionProfesional = (EditText) findViewById(R.id.et_alta_situacion_profesional);
         txtPhoneHome = (EditText) findViewById(R.id.et_alta_phone_home);
         txtPhoneMobile = (EditText) findViewById(R.id.et_alta_phone_mobile);
-
+        txtCorreo.setText(nCorreo);
+        txtPassword.setText(nPassword);
         provincia = loadSpinnerProvincias();
 
     }
@@ -223,8 +226,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
             usuario = createUsuario();
 
-            //UserDataSource dataSource = new UserDataSource(this);
-            // dataSource.insertUsuario(usuario);
 
             procesarInformacion();
 
@@ -252,7 +253,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         cuandoEmpezar = txtCuandoEmpezar.getText().toString();
         deleted = 0;
         disponeContacto = txtDisponeContacto.getText().toString();
-           disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
+        disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
         empresa = txtEmpresa.getText().toString();
         firstName = txtFirstName.getText().toString();
         lastName = txtLastName.getText().toString();
@@ -266,31 +267,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         recursosPropios = txtRecursosPropios.getText().toString();
         situacionProfesional = txtSituacionProfesional.getText().toString();
 
-/*
-        correo = "correo2@gmail.com";
-        password = "12345";
-        nombre = "jesus";
-        apellidos = "Villa Alonso";
-        telefono = "983359746";
-        capital = "capital";
-        capitalObservaciones = "capital observaciones";
-        cerrada = 7;
-        cuandoEmpezar = "cuando empezar";
-        disponeContacto = "dispone contacto";
-        disponeLocal = 1;
-        empresa = "empresa";
-        firstName = "first name";
-        lastName = "last name";
-        negocio = "negocio";
-        negocioAnterior = 66;
-        perfilFranquicia = "perfil franquicia";
-        perfilProfesional = "perfil profesional";
-        phoneHome = "9833597461";
-        phoneMobile = "617759716";
-        recursosPropios = "recursos propios";
-        situacionProfesional = "situacion profesional";
-
-*/
 
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
@@ -380,7 +356,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setCuandoEmpezar(cuandoEmpezar);
         dateEntered = tvFecha1.getText().toString();
         dateModified = tvFecha2.getText().toString();
-
 
 
         usuario.setDateEntered(new Date());

@@ -5,13 +5,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.View;
-
-
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
-
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -20,8 +17,6 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.expandenegocio.veonegocio.R;
 
-
-import java.util.Calendar;
 import java.util.TreeMap;
 
 
@@ -127,7 +122,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     }
 
-    public void registro(View view) {
+    public void InicioSesion(View view) {
 
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
@@ -149,19 +144,5 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         startActivity(intent);
     }
 
-    public void consultaro(View view) {
-        //    Intent intent = new Intent("ActivityConsultas");
-        //    startActivity(intent);
 
-        Intent intent = new Intent("ActivityAltaUsuario");
-        startActivity(intent);
-
-
-    }
-
-
-    public void consultaUsuario(View view) {
-        Intent intent = new Intent("ActivityConsultaUsuario");
-        startActivity(intent);
-    }
 }
