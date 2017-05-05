@@ -31,11 +31,12 @@
                 android:layout_height="wrap_content"
                 android:hint="contraseña"
                 android:inputType="textPassword" />
+
             <Button
                 android:id="@+id/boton_aceptar_consulta_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="consultaUsuario"
+                android:onClick="verUsuario"
                 android:text="CONSULTAR" />
 
 
@@ -227,7 +228,7 @@
                 android:id="@+id/boton_aceptar_consulta_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="consultaUsuario"
+                android:onClick="consultaUsuario2"
                 android:text="ACEPTAR" />
 
 

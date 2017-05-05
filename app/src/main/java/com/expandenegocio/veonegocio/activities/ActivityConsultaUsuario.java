@@ -214,7 +214,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         return municipioSeleccionado;
     }
 
-    public void altaUsuario(View view) {
+    public void consultaUsuario2(View view) {
 
         String val = validate();
 
@@ -222,7 +222,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
             usuario = createUsuario();
 
-            UserDataSource dataSource = new UserDataSource(this);
+      //      UserDataSource dataSource = new UserDataSource(this);
             // dataSource.insertUsuario(usuario);
 
             procesarInformacion();
@@ -264,11 +264,12 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         phoneMobile = txtPhoneMobile.getText().toString();
         recursosPropios = txtRecursosPropios.getText().toString();
         situacionProfesional = txtSituacionProfesional.getText().toString();
-
-/*
-        correo = "correo@gmail.com";
+        correo = "correo2@gmail.com";
         password = "12345";
-        nombre = "jesus";
+/*
+        correo = "correo2@gmail.com";
+        password = "12345";
+        nombre = "jesusito";
         apellidos = "Villa Alonso";
         telefono = "983359746";
         capital = "capital";
@@ -288,9 +289,9 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         phoneMobile = "617759716";
         recursosPropios = "recursos propios";
         situacionProfesional = "situacion profesional";
-
 */
 
+/*
 
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
@@ -357,7 +358,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             output = "El campo perfil profesional no puede estar vacío";
         }
 
-
+*/
         return output;
     }
 
@@ -380,8 +381,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         usuario.setCuandoEmpezar(cuandoEmpezar);
         dateEntered = tvFecha1.getText().toString();
         dateModified = tvFecha2.getText().toString();
-        usuario.setDateEntered(dateEntered);
-        usuario.setDateModified(dateModified);
+        //usuario.setDateEntered(dateEntered);
+        // usuario.setDateModified(dateModified);
         usuario.setDeleted(deleted);
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);
@@ -406,7 +407,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         RequestParams params = new RequestParams();
 
-        params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
+        //params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
         params.put(UserDataSource.ColumnUsuarios.EMAIL, correo);
         params.put(UserDataSource.ColumnUsuarios.PASSWORD, password);
         params.put(UserDataSource.ColumnUsuarios.STATUS, status);
@@ -419,14 +420,14 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.CAPITAL_OBSERVACIONES, usuario.getCapitalObservaciones());
         params.put(UserDataSource.ColumnUsuarios.CERRADA, usuario.getCerrada());
         params.put(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR, usuario.getCuandoEmpezar());
-        params.put(UserDataSource.ColumnUsuarios.DATE_ENTERED, usuario.getDateEntered());
-        params.put(UserDataSource.ColumnUsuarios.DATE_MODIFIED, usuario.getDateModified());
-        params.put(UserDataSource.ColumnUsuarios.DELETED, usuario.getDateEntered());
+       // params.put(UserDataSource.ColumnUsuarios.DATE_ENTERED, usuario.getDateEntered());
+       // params.put(UserDataSource.ColumnUsuarios.DATE_MODIFIED, usuario.getDateModified());
+    //    params.put(UserDataSource.ColumnUsuarios.DELETED, usuario.getDeleted());
         params.put(UserDataSource.ColumnUsuarios.DISP_CONTACTO, usuario.getDisponeContacto());
         params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeLocal());
         params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getEmpresa());
         params.put(UserDataSource.ColumnUsuarios.FIRTS_NAME, usuario.getFirstName());
-        params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getId2());
+      //  params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getId2());
         params.put(UserDataSource.ColumnUsuarios.LAST_NAME, usuario.getLastName());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getNegocio());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getNegocioAnterior());
@@ -447,7 +448,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     public void invokeWS(RequestParams params) {
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post("http://www.expandenegocio.com/app/signup_jesus.php", params, new AsyncHttpResponseHandler() {
+        client.post("http://www.expandenegocio.com/app/update_jesus.php", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -464,7 +465,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Modificado correctamente!", Toast.LENGTH_LONG).show();
                             break;
                         case 2:
                             Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
@@ -539,7 +540,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     }
 
 
-    public void consultaUsuario(View view) {
+    public void verUsuario(View view) {
 
         String val = validate2();
 
@@ -564,7 +565,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         correo = txtCorreo.getText().toString();
         password = txtPassword.getText().toString();
 
-        correo = "correo@gmail.com";
+        correo = "correo2@gmail.com";
         password = "12345";
 
 
@@ -629,7 +630,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             break;
                         case 1:
-                            //         Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
                             recogeDatos(obj.getString("info"));
                             break;
                         case 2:
@@ -667,66 +667,100 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     }
 
     private void recogeDatos(String info) {
+        String campo;
+        String dia;
+        String mes;
+        String anno;
+
         int longitud = info.length();
         String nuevaInfo = info.substring(2, longitud - 2);
         String[] campos = nuevaInfo.split(",");
         for (int x = 0; x < campos.length; x++) {
             String[] subcampos = campos[x].split(":");
             String clave = subcampos[0].substring(1, subcampos[0].length() - 1);
+            campo = subcampos[1].substring(1, subcampos[1].length() - 1);
             if (clave.equals("nombre")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+//                campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtNombre.setText(campo);
             } else if (clave.equals("apellidos")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                //              String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtApellidos.setText(campo);
             } else if (clave.equals("telefono")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                //            String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtTelefono.setText(campo);
             } else if (clave.equals("c_prov")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
-                //  ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
-                //   dataSource.buscarProvinciaPorId(campo);
+                //          String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 spnProvincia.setSelection(Integer.parseInt(campo));
-
             } else if (clave.equals("c_mun")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
-                //MunicipioDataSource dataSource = new MunicipioDataSource(this);
-                //dataSource.buscarMuicipioPorId(campo);
+                //        String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 spnMunicipio.setSelection(Integer.parseInt(campo));
             } else if (clave.equals("capital")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                //      String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtCapital.setText(campo);
             } else if (clave.equals("capital_observaciones")) {
-                String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                //    String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtCapitalObservaciones.setText(campo);
-            }
-            else if(clave.equals("cerrada")){
-                String campo= subcampos[1].substring(1,subcampos[1].length()-1);
+            } else if (clave.equals("cerrada")) {
+                //         String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtCerrada.setText(campo);
-            }
-            else if(clave.equals("cuando_empezar")){
-                String campo= subcampos[1].substring(1,subcampos[1].length()-1);
+            } else if (clave.equals("cuando_empezar")) {
+                //       String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
                 txtCuandoEmpezar.setText(campo);
-            }
-            else if(clave.equals("date_entered")){
-                String campo= subcampos[1].substring(1,subcampos[1].length()-1);
-                String dia;
-                String mes;
-                String anno;
-                if(campo.length()==10){
-
-                }
-
+            } else if (clave.equals("date_entered")) {
+                //     String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                anno = campo.substring(0, 4);
+                mes = campo.substring(5, 7);
+                dia = campo.substring(8, 10);
+                campo = dia + "/" + mes + "/" + anno;
                 tvFecha1.setText(campo);
+            } else if (clave.equals("date_modified")) {
+                //   String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                anno = campo.substring(0, 4);
+                mes = campo.substring(5, 7);
+                dia = campo.substring(8, 10);
+                campo = dia + "/" + mes + "/" + anno;
+                tvFecha2.setText(campo);
+            } else if (clave.equals("disp_contacto")) {
+                // String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtDisponeContacto.setText(campo);
+            } else if (clave.equals("dispone_local")) {
+                //            String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtDisponeLocal.setText(campo);
+            } else if (clave.equals("empresa")) {
+                //          String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtEmpresa.setText(campo);
+            } else if (clave.equals("first_name")) {
+                //        String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtFirstName.setText(campo);
+            } else if (clave.equals("last_name")) {
+                //           String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtLastName.setText(campo);
+            } else if (clave.equals("negocio")) {
+                //         String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtNegocio.setText(campo);
+            } else if (clave.equals("negocio_antes")) {
+                //          String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtNegocioAnterior.setText(campo);
+            } else if (clave.equals("perfil_franquicia")) {
+                //        String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtPerfilFranquicia.setText(campo);
+            } else if (clave.equals("perfil_profesional")) {
+                //      String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtPerfilProfesional.setText(campo);
+            } else if (clave.equals("phone_home")) {
+                //    String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtPhoneHome.setText(campo);
+            } else if (clave.equals("phone_mobile")) {
+                //      String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtPhoneMobile.setText(campo);
+            } else if (clave.equals("recursos_propios")) {
+                //       String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtRecursosPropios.setText(campo);
+            } else if (clave.equals("situacion_profesional")) {
+                //        String campo = subcampos[1].substring(1, subcampos[1].length() - 1);
+                txtSituacionProfesional.setText(campo);
             }
-
-
-
         }
-
-
-        String bb = "";
-
     }
 
 

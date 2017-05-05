@@ -56,7 +56,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
             usuario = createUsuario();
 
-            UserDataSource dataSource = new UserDataSource(this);
+         //   UserDataSource dataSource = new UserDataSource(this);
           //  if (dataSource.buscaUsuarioPorEmailYPassword(usuario.getEmail().toString(), usuario.getPassword()) != null) {
                 procesarInformacion();
                 //         Intent intent = new Intent("ActivityConsultas");

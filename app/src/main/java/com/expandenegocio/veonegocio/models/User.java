@@ -20,8 +20,8 @@ public class User {
     private String capitalObservaciones;
     private Integer cerrada;
     private String cuandoEmpezar;
-    private String dateEntered;
-    private String dateModified;
+    private Date dateEntered;
+    private Date dateModified;
     private Integer deleted;
     private String disponeContacto;
     private Integer disponeLocal;
@@ -143,19 +143,20 @@ public class User {
         this.cuandoEmpezar = cuandoEmpezar;
     }
 
-    public String getDateEntered() {
+
+    public Date getDateEntered() {
         return dateEntered;
     }
 
-    public void setDateEntered(String dateEntered) {
+    public void setDateEntered(Date dateEntered) {
         this.dateEntered = dateEntered;
     }
 
-    public String getDateModified() {
+    public Date getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(String dateModified) {
+    public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
     }
 

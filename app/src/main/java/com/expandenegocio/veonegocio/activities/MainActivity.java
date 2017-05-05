@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 
 
-
-
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -143,7 +141,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         }
 
 
-
     }
 
 
@@ -153,19 +150,18 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void consultaro(View view) {
-    //    Intent intent = new Intent("ActivityConsultas");
-    //    startActivity(intent);
+        //    Intent intent = new Intent("ActivityConsultas");
+        //    startActivity(intent);
 
-//        Intent intent = new Intent("ActivityAltaUsuario");
- //       startActivity(intent);
-
-
-
-        Intent intent = new Intent("ActivityConsultaUsuario");
+        Intent intent = new Intent("ActivityAltaUsuario");
         startActivity(intent);
 
 
     }
 
 
+    public void consultaUsuario(View view) {
+        Intent intent = new Intent("ActivityConsultaUsuario");
+        startActivity(intent);
+    }
 }
