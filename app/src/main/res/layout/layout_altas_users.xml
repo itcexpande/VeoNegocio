@@ -99,31 +99,6 @@
                 android:hint="cuando empezar"
                 android:inputType="text" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_alta_fecha1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="fecha1"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/tv_alta_fecha2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="fecha2"
-                    android:textColor="@android:color/holo_green_dark"
-                    android:textSize="20dp" />
-
-            </LinearLayout>
-
-
             <EditText
                 android:id="@+id/et_alta_dispone_contacto"
                 android:layout_width="match_parent"

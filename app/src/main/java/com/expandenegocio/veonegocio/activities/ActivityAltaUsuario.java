@@ -19,8 +19,6 @@ import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.Provincia;
 import com.expandenegocio.veonegocio.models.User;
-import com.expandenegocio.veonegocio.utilities.DialogoDate1;
-import com.expandenegocio.veonegocio.utilities.DialogoDate2;
 import com.expandenegocio.veonegocio.utilities.ValidatorUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -31,7 +29,6 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -101,11 +98,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private EditText txtPhoneMobile;
     private EditText txtRecursosPropios;
     private EditText txtSituacionProfesional;
-    private TextView tvFecha1;
-    private TextView tvFecha2;
-    private static int ID_FECHA1;
-    private static int ID_FECHA2;
-    private DialogFragment elDialogFragment;
     private String nCorreo;
     private String nPassword;
 
@@ -115,16 +107,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         setContentView(R.layout.layout_altas_users);
         nCorreo = getIntent().getStringExtra("correo");
         nPassword = getIntent().getStringExtra("password");
-
-        tvFecha1 = (TextView) findViewById(R.id.tv_alta_fecha1);
-        tvFecha2 = (TextView) findViewById(R.id.tv_alta_fecha2);
-        ID_FECHA1 = tvFecha1.getId();
-        Calendar ahora = Calendar.getInstance();
-        actualizarLaFecha1EnTextView(ahora);
-        ID_FECHA2 = tvFecha2.getId();
-        ahora = Calendar.getInstance();
-        actualizarLaFecha2EnTextView(ahora);
-
         txtCorreo = (EditText) findViewById(R.id.et_alta_correo);
         txtPassword = (EditText) findViewById(R.id.et_alta_password);
         txtNombre = (EditText) findViewById(R.id.et_alta_nombre);
@@ -354,14 +336,8 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setCapitalObservaciones(capitalObservaciones);
         usuario.setCerrada(cerrada);
         usuario.setCuandoEmpezar(cuandoEmpezar);
-        dateEntered = tvFecha1.getText().toString();
-        dateModified = tvFecha2.getText().toString();
-
-
         usuario.setDateEntered(new Date());
         usuario.setDateModified(new Date());
-
-
         usuario.setDeleted(deleted);
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);
@@ -382,22 +358,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
     }
 
-    /**
-     * Permite convertir un String en fecha (Date).
-     *
-     * @param fecha Cadena de fecha dd/MM/yyyy
-     * @return Objeto Date
-     */
-    public static Date ParseFecha(String fecha) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date fechaDate = null;
-        try {
-            fechaDate = formato.parse(fecha);
-        } catch (ParseException ex) {
-            System.out.println(ex);
-        }
-        return fechaDate;
-    }
 
     private void procesarInformacion() {
 
@@ -496,44 +456,5 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         });
 
     }
-
-
-    public void actualizarLaFecha2EnTextView(Calendar momento) {
-        tvFecha2.setText(new StringBuilder()
-                .append(momento.get(Calendar.DAY_OF_MONTH)).append("/")
-                .append(momento.get(Calendar.MONTH) + 1).append("/")
-                .append(momento.get(Calendar.YEAR)));
-    }
-
-    public void actualizarLaFecha1EnTextView(Calendar momento) {
-        tvFecha1.setText(new StringBuilder()
-                .append(momento.get(Calendar.DAY_OF_MONTH)).append("/")
-                .append(momento.get(Calendar.MONTH) + 1).append("/")
-                .append(momento.get(Calendar.YEAR)));
-    }
-
-    public void fecha1(View v) {
-
-        int etiquetaView = v.getId();
-        if (etiquetaView == ID_FECHA1) {
-
-            elDialogFragment = new DialogoDate1();
-            // Log.i("INFO", "se creo uno de fecha");
-
-        }
-        elDialogFragment.show(getSupportFragmentManager(), null);
-    }
-
-    public void fecha2(View v) {
-        int etiquetaView = v.getId();
-        if (etiquetaView == ID_FECHA2) {
-
-            elDialogFragment = new DialogoDate2();
-            // Log.i("INFO", "se creo uno de fecha");
-
-        }
-        elDialogFragment.show(getSupportFragmentManager(), null);
-    }
-
 
 }

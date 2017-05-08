@@ -1,6 +1,9 @@
 package com.expandenegocio.veonegocio.models;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
@@ -37,7 +40,48 @@ public class User {
     private String phoneMobile;
     private String recursosPropios;
     private String situacionProfesional;
+/*
+    public User(JSONObject objetoJSON) {
 
+        try {
+            id = objetoJSON.getString("id");
+            email = objetoJSON.getString("email");
+            password = objetoJSON.getString("password");
+            status = objetoJSON.getString("status");
+            nombre = objetoJSON.getString("nombre");
+            apellidos = objetoJSON.getString("apellidos");
+            telefono = objetoJSON.getString("telefono");
+            codigoProv = objetoJSON.getInt("codigoProv");
+            codigoMun = objetoJSON.getInt("codigoMun");
+            capital = objetoJSON.getString("capital");
+            capitalObservaciones = objetoJSON.getString("capitalObservaciones");
+            cerrada = objetoJSON.getInt("cerrada");
+            cuandoEmpezar = objetoJSON.getString("cuandoEmpezar");
+            //dateEntered = dateEntered.getDate();
+            //dateModified = objetoJSON.getString("dateModified");
+            deleted = objetoJSON.getInt("deleted");
+            disponeContacto = objetoJSON.getString("disponeContacto");
+            disponeLocal = objetoJSON.getInt("disponeLocal");
+            empresa = objetoJSON.getString("empresa");
+            firstName = objetoJSON.getString("firstName");
+            id2 = objetoJSON.getString("id2");
+            lastName = objetoJSON.getString("lastName");
+            negocio = objetoJSON.getString("negocio");
+            negocioAnterior = objetoJSON.getInt("negocioAnterior");
+            perfilFranquicia = objetoJSON.getString("perfilFranquicia");
+            perfilProfesional = objetoJSON.getString("perfilProfesional");
+            phoneHome = objetoJSON.getString("phoneHome");
+            phoneMobile = objetoJSON.getString("phoneMobile");
+            recursosPropios = objetoJSON.getString("recursosPropios");
+            situacionProfesional = objetoJSON.getString("situacionProfesional");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }*/
+
+    public User() {
+    }
 
     public String getId() {
         return id;
