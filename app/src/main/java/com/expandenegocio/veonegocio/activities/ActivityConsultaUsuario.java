@@ -578,16 +578,59 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     }
 
     private void recogeDatos2(JSONObject obj) throws JSONException {
-        // String aa = obj.get("nombre").toString();
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
         for (int x = 0; x < longitud; x++) {
-            JSONObject var= datos.getJSONObject(x);
+            JSONObject var = datos.getJSONObject(x);
+
+            txtNombre.setText(var.get(UserDataSource.ColumnUsuarios.NOMBRE).toString());
+            txtApellidos.setText(var.get(UserDataSource.ColumnUsuarios.APELLIDOS).toString());
+            txtTelefono.setText(var.get(UserDataSource.ColumnUsuarios.TELEFONO).toString());
+            spnProvincia.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA).toString()));
+            spnMunicipio.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO).toString()));
+            txtCapital.setText(var.get(UserDataSource.ColumnUsuarios.CAPITAL).toString());
+            txtCapitalObservaciones.setText(var.get(UserDataSource.ColumnUsuarios.CAPITAL_OBSERVACIONES).toString());
+            txtCerrada.setText(var.get(UserDataSource.ColumnUsuarios.CERRADA).toString());
+            txtCuandoEmpezar.setText(var.get(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR).toString());
+            txtDisponeContacto.setText(var.get(UserDataSource.ColumnUsuarios.DISP_CONTACTO).toString());
+            txtDisponeLocal.setText(var.get(UserDataSource.ColumnUsuarios.DISP_LOCAL).toString());
+            txtEmpresa.setText(var.get(UserDataSource.ColumnUsuarios.EMPRESA).toString());
+            txtFirstName.setText(var.get(UserDataSource.ColumnUsuarios.FIRTS_NAME).toString());
+            txtLastName.setText(var.get(UserDataSource.ColumnUsuarios.LAST_NAME).toString());
+            txtNegocio.setText(var.get(UserDataSource.ColumnUsuarios.NEGOCIO).toString());
+            txtNegocioAnterior.setText(var.get(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES).toString());
+            txtPerfilFranquicia.setText(var.get(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA).toString());
+            txtPerfilProfesional.setText(var.get(UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL).toString());
+            txtPhoneHome.setText(var.get(UserDataSource.ColumnUsuarios.PHONE_HOME).toString());
+            txtPhoneMobile.setText(var.get(UserDataSource.ColumnUsuarios.PHONE_MOBILE).toString());
+            txtRecursosPropios.setText(var.get(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS).toString());
+            txtSituacionProfesional.setText(var.get(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL).toString());
+/*
+
             txtNombre.setText(var.get("nombre").toString());
             txtApellidos.setText(var.get("apellidos").toString());
-
+            txtTelefono.setText(var.get("telefono").toString());
+            spnProvincia.setSelection(Integer.parseInt(var.get("c_prov").toString()));
+            spnMunicipio.setSelection(Integer.parseInt(var.get("c_mun").toString()));
+            txtCapital.setText(var.get("capital").toString());
+            txtCapitalObservaciones.setText(var.get("capital_observaciones").toString());
+            txtCerrada.setText(var.get("cerrada").toString());
+            txtCuandoEmpezar.setText(var.get("cuando_empezar").toString());
+            txtDisponeContacto.setText(var.get("disp_contacto").toString());
+            txtDisponeLocal.setText(var.get("dispone_local").toString());
+            txtEmpresa.setText(var.get("empresa").toString());
+            txtFirstName.setText(var.get("first_name").toString());
+            txtLastName.setText(var.get("last_name").toString());
+            txtNegocio.setText(var.get("negocio").toString());
+            txtNegocioAnterior.setText(var.get("negocio_antes").toString());
+            txtPerfilFranquicia.setText(var.get("perfil_franquicia").toString());
+            txtPerfilProfesional.setText(var.get("perfil_profesional").toString());
+            txtPhoneHome.setText(var.get("phone_home").toString());
+            txtPhoneMobile.setText(var.get("phone_mobile").toString());
+            txtRecursosPropios.setText(var.get("recursos_propios").toString());
+            txtSituacionProfesional.setText(var.get("situacion_profesional").toString());
+*/
         }
-        String nn = "";
     }
 
     private void recogeDatos(String info) {

@@ -37,7 +37,7 @@ public class ActivityConsultas extends AppCompatActivity {
         if (gestora == null) {
             gestora = new GestoraFranquicia();
         }
-
+/*
         lista = (ListView) findViewById(R.id.listView_franquicias);
         this.registerForContextMenu(lista);
 
@@ -50,7 +50,7 @@ public class ActivityConsultas extends AppCompatActivity {
         String nPassword= getIntent().getStringExtra("password");
 
         Toast.makeText(this,nCorreo+"   => "+nPassword,Toast.LENGTH_LONG).show();
-
+*/
     }
 
 

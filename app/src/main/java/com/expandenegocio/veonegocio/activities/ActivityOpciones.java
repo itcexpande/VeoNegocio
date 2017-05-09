@@ -45,4 +45,12 @@ public class ActivityOpciones extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void SeleccionarProvinciasPorFranquicias(View view) {
+
+        Intent intent = new Intent("ActivityFranquiciasProvincias");
+       // intent.putExtra("correo", nCorreo);
+       // intent.putExtra("password", nPassword);
+        startActivity(intent);
+    }
 }

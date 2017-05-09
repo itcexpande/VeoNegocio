@@ -31,7 +31,7 @@ public class GestoraFranquicia extends ArrayList<Franquicia> {
     }
 
     public void ordenaPorNombre() {
-        Collections.sort(this);
+       // Collections.sort(this);
     }
 
 

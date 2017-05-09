@@ -20,4 +20,12 @@
         android:text="CONSULTA Y MODIFICACION DE USUARIOS"
         android:onClick="ConsultaModificacionDeUsuarios"/>
 
+    <Button
+        android:id="@+id/botonSeleccionarProvinciasPorFranquicias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="SELECCIONAR PROVINCIAS POR FRANQUICIA"
+        android:onClick="SeleccionarProvinciasPorFranquicias"/>
+
 </LinearLayout>
