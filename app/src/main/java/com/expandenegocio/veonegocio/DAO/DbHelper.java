@@ -22,25 +22,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
             .getAbsolutePath() + "/Pictures/VeoNegocio.db";
 
-    public static final int DATABASE_VERSION = 3;
-
-    private static final String BD_CREAR_PROVINCIAS = "CREATE TABLE provincias " +
-            "(PK_UID INTEGER primary key AUTOINCREMENT , " +
-            "c_prov INTEGER ,d_prov text ";
-
-
-    private static final String BD_CREAR_MUNICIPIOS = "CREATE TABLE municipios " +
-            "(PK_UID INTEGER primary key AUTOINCREMENT , " +
-            "c_prov INTEGER ," +
-            "c_mun INTEGER, " +
-            "d_mun text, " +
-            "total_habitantes INTEGER, " +
-            "total_hombres INTEGER, " +
-            "total_mujeres INTEGER ";
-
 
     public DbHelper(Context context) {
-        super(context, NOMBREBD, null, DATABASE_VERSION);
+        super(context, NOMBREBD, null, 3);
         SQLiteDatabase.openOrCreateDatabase(NOMBREBD, null);
     }
 
@@ -49,11 +33,9 @@ public class DbHelper extends SQLiteOpenHelper {
         //Crear la base de datos
         try {
             //db.execSQL(DataSource.CREATE_SOLICITUDES_SCRIPT);
-            // db.execSQL(BD_CREAR_PROVINCIAS);
-            // db.execSQL(BD_CREAR_MUNICIPIOS);
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+
         }
     }
 
