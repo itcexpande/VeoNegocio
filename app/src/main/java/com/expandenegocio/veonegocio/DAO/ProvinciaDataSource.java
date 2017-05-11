@@ -65,6 +65,59 @@ public class ProvinciaDataSource {
         return output;
     }
 
+    public ArrayList<Provincia> getProvincias2() {
+
+        ArrayList<Provincia> output = new ArrayList<Provincia>();
+
+        try {
+
+            String query = "SELECT " + ColumnProvincia.ID + "," +
+                    ColumnProvincia.NOMBRE + " " +
+                    " FROM " + PROVINCIA_TABLE_NAME +
+                    " WHERE " + ColumnProvincia.ID + "> 0" +
+                    " ORDER BY " +  ColumnProvincia.NOMBRE;
+            //COLLATE latin1_spanish_ci
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Provincia provincia = new Provincia();
+                    provincia.setId(Integer.parseInt(cursor.getString(0)));
+                    provincia.setNombreProvincia(cursor.getString(1));
+
+                    // Add book to books
+                    output.add(provincia);
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error getProvincias", ex.toString());
+        }
+
+        return output;
+    }
+
+    /**
+     * Función que elimina acentos y caracteres especiales de
+     * una cadena de texto.
+     *
+     * @param input
+     * @return cadena de texto limpia de acentos y caracteres especiales.
+     */
+    public static String remove1(String input) {
+        // Cadena de caracteres original a sustituir.
+        String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+        // Cadena de caracteres ASCII que reemplazarán los originales.
+        String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+        String output = input;
+        for (int i = 0; i < original.length(); i++) {
+            // Reemplazamos los caracteres especiales.
+            output = output.replace(original.charAt(i), ascii.charAt(i));
+        }//for i
+        return output;
+    }//remove1
+
     public String buscarProvinciaPorId(String id) {
 
         String output = "";

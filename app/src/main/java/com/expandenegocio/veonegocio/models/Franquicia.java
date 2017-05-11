@@ -1565,4 +1565,9 @@ public class Franquicia {
     public void setMaster(Integer master) {
         this.master = master;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
