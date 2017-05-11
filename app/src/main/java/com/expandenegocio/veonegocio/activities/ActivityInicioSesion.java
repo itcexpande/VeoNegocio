@@ -47,6 +47,8 @@ public class ActivityInicioSesion extends AppCompatActivity {
         emailUsuario = (EditText) this.findViewById(R.id.campo_correo);
         password = (EditText) this.findViewById(R.id.campo_contrasena);
         recuerdaContraseña = (TextView) this.findViewById(R.id.recuerdoContraseña);
+        emailUsuario.setText("jesus@gmail.com");
+        password.setText("1234");
     }
 
     public void inicioSesion(View view) {
