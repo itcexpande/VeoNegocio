@@ -1,28 +1,20 @@
 package com.expandenegocio.veonegocio.activities;
 
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
-import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Franquicia;
 import com.expandenegocio.veonegocio.models.Provincia;
 import com.expandenegocio.veonegocio.models.Row;
-import com.expandenegocio.veonegocio.models.User;
-import com.expandenegocio.veonegocio.utilities.ValidatorUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -37,76 +29,86 @@ import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.expandenegocio.veonegocio.activities.DialogoAlertaListaSeleccionMultiple.*;
+
 /**
  * Created by jesus on 09/05/2017.
  */
 
 public class ActivityFranquiciasProvincias extends AppCompatActivity {
-    private String nCorreo;
-    private String nPassword;
     Franquicia franquicia;
     static ArrayList<Franquicia> listaFran = new ArrayList<>();
     private Spinner spnFranquicia;
     private Franquicia franquiciaSeleccionada;
-    private Provincia provincia;
-    private Provincia provinciaSeleccionada;
-    private ListView listProvincia;
-    private ArrayList<Provincia> listaProv = new ArrayList<Provincia>();
-    List<Row> rows;
-    static String identificadorFranquicia;
+    /*
+        private Provincia provincia;
+        private Provincia provinciaSeleccionada;
+        private ListView listProvincia;
+        private ArrayList<Provincia> listaProv = new ArrayList<Provincia>();
+        List<Row> rows;
+      */
+    private String identificadorFranquicia;
+    private String nombreFranquicia;
 
+   /* public String getDataFragment() {
+        return identificadorFranquicia;
+    }
+*/
+    String datoFragment = identificadorFranquicia+nombreFranquicia;
 
+    public String getDataFragment(){
+
+        return datoFragment;
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_franquicias_provincias);
-        //    nCorreo = getIntent().getStringExtra("correo");
-        //    nPassword = getIntent().getStringExtra("password");
         spnFranquicia = (Spinner) findViewById(R.id.spinner_franquicia_provincia);
-        listProvincia = (ListView) findViewById(R.id.listView_franquicias_provincias);
 
         franquicia = loadSpinnerFranquicias();
 
-        provincia = loadListViewProvincias();
-
     }
 
-    private Provincia loadListViewProvincias() {
-        ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
-        ArrayList<Provincia> listaProv = dataSource.getProvincias2();
+    /*
+        private Provincia loadListViewProvincias() {
+            ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+            ArrayList<Provincia> listaProv = dataSource.getProvincias2();
 
 
-        rows = new ArrayList<Row>(52);
-        Row row = null;
-        for (int i = 0; i < 52; i++) {
-            row = new Row();
-            row.setTitle(listaProv.get(i).getNombreProvincia());
-            row.setChecked(true);
-            rows.add(row);
-        }
-
-        listProvincia.setAdapter(new CustomArrayAdapter(this, rows));
-        listProvincia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(ActivityFranquiciasProvincias.this,
-                        rows.get(position).getTitle(), Toast.LENGTH_SHORT)
-                        .show();
-                if (rows.get(position).isChecked()) {
-                    rows.get(position).setChecked(false);
-                } else {
-                    rows.get(position).setChecked(true);
-                }
+            rows = new ArrayList<Row>(52);
+            Row row = null;
+            for (int i = 0; i < 52; i++) {
+                row = new Row();
+                row.setTitle(listaProv.get(i).getNombreProvincia());
+                row.setChecked(true);
+                rows.add(row);
             }
-        });
+
+            listProvincia.setAdapter(new CustomArrayAdapter(this, rows));
+            listProvincia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    Toast.makeText(ActivityFranquiciasProvincias.this,
+                            rows.get(position).getTitle() + "  " + position, Toast.LENGTH_SHORT)
+                            .show();
+                   if (rows.get(position).isChecked()) {
+                        rows.get(position).setChecked(false);
+                    } else {
+                        rows.get(position).setChecked(true);
+                    }
+                }
+            });
 
 
-        return provinciaSeleccionada;
+            return provinciaSeleccionada;
 
 
-    }
+        }
+    */
 
     private Franquicia loadSpinnerFranquicias() {
         crearFranquicia();
@@ -114,6 +116,7 @@ public class ActivityFranquiciasProvincias extends AppCompatActivity {
 
         Franquicia franquicia = new Franquicia();
         franquicia.setName("");
+        franquicia.setId("");
         listaFran.add(new Franquicia());
 
 
@@ -130,15 +133,16 @@ public class ActivityFranquiciasProvincias extends AppCompatActivity {
                                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                         Franquicia franquiciaSeleccionada = listaFran.get(position);
                                                         if (franquiciaSeleccionada != null) {
-                                                            // municipio = loadSpinnerMunicipios(provinciaSeleccionada.getId());
-                                                            // listProvincia.setVisibility(View.VISIBLE);
+                                                            identificadorFranquicia = franquiciaSeleccionada.getId();
+                                                            datoFragment= identificadorFranquicia+";"+franquiciaSeleccionada.getName();
                                                         }
                                                     }
 
                                                     @Override
                                                     public void onNothingSelected(AdapterView<?> parent) {
                                                         Franquicia franquiciaSeleccionada = null;
-                                                        // listProvincia.setVisibility(View.INVISIBLE);
+                                                        identificadorFranquicia = null;
+                                                        datoFragment= null;
 
                                                     }
                                                 }
@@ -194,7 +198,7 @@ public class ActivityFranquiciasProvincias extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             break;
                         case 1:
-                            recogeDatos2(obj);
+                            recogeDatos(obj);
                             break;
                         case 2:
                             Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
@@ -230,103 +234,181 @@ public class ActivityFranquiciasProvincias extends AppCompatActivity {
 
     }
 
-    private void recogeDatos2(JSONObject obj) throws JSONException {
+    private void recogeDatos(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
             franquicia = new Franquicia();
+            franquicia.setId(var.getString("id").toString());
             franquicia.setName(var.getString("name").toString());
             listaFran.add(franquicia);
         }
     }
 
+    /*
+        public void altaFranquiciasProvincias(View view) {
+            ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+            ArrayList<Provincia> listaProv = dataSource.getProvincias2();
 
-    public void altaFranquiciasProvincias(View view) {
-        Franquicia franquicia = (Franquicia) spnFranquicia.getSelectedItem();
-        if (franquicia != null) {
-            String ii = franquicia.getId();
-            int nn = 0;
-            for (int i = 0; i < 52; i++) {
-                if (rows.get(i).isChecked()) {
-                    nn++;
-                    String pr = rows.get(i).getTitle();
+            Franquicia franquicia = (Franquicia) spnFranquicia.getSelectedItem();
+            if (franquicia != null) {
+                idFranquiciaABorrarEnFranquiciasProvincias = franquicia.getId();
+                bajaRegistrosFranquiciasProvincias();
+
+                for (int i = 0; i < 52; i++) {
+                    if (rows.get(i).isChecked()) {
+                        Provincia provincia = listaProv.get(i);
+                        franquicia = (Franquicia) spnFranquicia.getSelectedItem();
+                        int codigoProvincia = provincia.getId();
+                        idFranquiciaABorrarEnFranquiciasProvincias = franquicia.getId();
+    //                    String nn= "";
+                        //      altaProvinciasFranquicia(codigoProvincia,franquicia.getId().toString());// idFranquiciaABorrarEnFranquiciasProvincias);
+                        altaProvinciasFranquicia(provincia, franquicia);// idFranquiciaABorrarEnFranquiciasProvincias);
+
+                    }
                 }
             }
-            String para = "para";
-            procesarInformacion2();
+            //franquicia = loadSpinnerFranquicias();
+            //provincia = loadListViewProvincias();
+
+        }
+
+        private void bajaRegistrosFranquiciasProvincias() {
+            RequestParams params = new RequestParams();
+            params.put("id", idFranquiciaABorrarEnFranquiciasProvincias);
+            invokeWS2(params);
         }
 
 
-    }
+        public void invokeWS2(RequestParams params) {
+
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post("http://www.expandenegocio.com/app/baja_franquicias_provincias.php", params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                    String response = new String(responseBody);
 
 
-    private void procesarInformacion2() {
+                    try {
 
-        RequestParams params = new RequestParams();
+                        JSONObject obj = new JSONObject(response);
 
-        params.put("name", franquicia.getName().toString());
+                        switch (obj.getInt("status")) {
 
-        invokeWS2(params);
+                            case 0:
+                                Toast.makeText(getApplicationContext(), "Borrados", Toast.LENGTH_LONG).show();
+                                break;
+                            default:
+                                Toast.makeText(getApplicationContext(), "Error en baja", Toast.LENGTH_LONG).show();
+                                break;
+                        }
 
-
-    }
-
-
-    public void invokeWS2(RequestParams params) {
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.post("http://www.expandenegocio.com/app/retorna_id_franquicia_por_name.php", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-                String response = new String(responseBody);
-
-
-                try {
-
-                    JSONObject obj = new JSONObject(response);
-
-                    switch (obj.getInt("status")) {
-
-                        case 0:
-                            identificadorFranquicia = obj.get("info").toString();
-                            // 65e73b4e-6932-c425-7ec2-5399ccfd4d18
-
-                            break;
-                        case 1:
-                            Toast.makeText(getApplicationContext(), "Nombre Franquicia no existe", Toast.LENGTH_LONG).show();
-                            break;
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
                     }
 
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
                 }
 
-            }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                        error) {
 
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
-                    error) {
+                    try {
+                        if (responseBody != null) {
+                            String response = new String(responseBody);
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                        }
 
-
-                try {
-                    if (responseBody != null) {
-                        String response = new String(responseBody);
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                }
+            });
+
+        }
+
+        private void altaProvinciasFranquicia(Provincia p, Franquicia f) {
+            RequestParams params = new RequestParams();
+
+            params.put("idProvincia", p.getId());
+            params.put("id", f.getId());
+            params.put("nombre", f.getName());
+
+            invokeWS3(params);
+
+        }
+
+
+        public void invokeWS3(RequestParams params) {
+
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post("http://www.expandenegocio.com/app/alta_franquicias_provincias.php", params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                    String response = new String(responseBody);
+
+
+                    try {
+
+                        JSONObject obj = new JSONObject(response);
+
+                        switch (obj.getInt("status")) {
+
+                            case 0:
+                                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                                break;
+                            case 1:
+                                Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
+                                break;
+                            case 2:
+                                Toast.makeText(getApplicationContext(), "Ya hay un registro igual", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+
                 }
 
-            }
-        });
 
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                        error) {
+
+
+                    try {
+                        if (responseBody != null) {
+                            String response = new String(responseBody);
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+        }
+
+    */
+    public void seleccionarProvincias(View view) {
+        if (identificadorFranquicia != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            DialogoAlertaListaSeleccionMultiple dialogo = new DialogoAlertaListaSeleccionMultiple();
+
+            dialogo.show(fragmentManager, "AlertSeleccionMultiple");
+        }
     }
-
-
 }

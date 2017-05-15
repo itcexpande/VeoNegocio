@@ -8,17 +8,16 @@
         android:id="@+id/botonAltasUsuarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:text="ALTAS DE USUARIOS"
         android:background="@drawable/boton_2"
-
         android:onClick="AltasUsuarios"/>
 
     <Button
         android:id="@+id/botonConsultasYModificacionDeUsuarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="CONSULTA Y MODIFICACION DE USUARIOS"
         android:background="@drawable/boton_2"
         android:onClick="ConsultaModificacionDeUsuarios"/>
@@ -27,8 +26,9 @@
         android:id="@+id/botonSeleccionarProvinciasPorFranquicias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="SELECCIONAR PROVINCIAS POR FRANQUICIA"
+        android:background="@drawable/boton_2"
         android:onClick="SeleccionarProvinciasPorFranquicias"/>
 
 </LinearLayout>
