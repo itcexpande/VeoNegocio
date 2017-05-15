@@ -121,8 +121,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         txtDisponeContacto = (EditText) findViewById(R.id.et_alta_dispone_contacto);
         txtDisponeLocal = (EditText) findViewById(R.id.et_alta_dispone_local);
         txtEmpresa = (EditText) findViewById(R.id.et_alta_empresa);
-        txtFirstName = (EditText) findViewById(R.id.et_alta_first_name);
-        txtLastName = (EditText) findViewById(R.id.et_alta_last_name);
         txtNegocio = (EditText) findViewById(R.id.et_alta_negocio);
         txtNegocioAnterior = (EditText) findViewById(R.id.et_alta_negocio_anterior);
         txtPerfilFranquicia = (EditText) findViewById(R.id.et_alta_perfil_franquicia);
@@ -342,9 +340,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);
         usuario.setEmpresa(empresa);
-        usuario.setFirstName(firstName);
-        usuario.setId2(UUID.randomUUID().toString());
-        usuario.setLastName(lastName);
         usuario.setNegocio(negocio);
         usuario.setNegocioAnterior(negocioAnterior);
         usuario.setPerfilFranquicia(perfilFranquicia);
@@ -382,9 +377,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.DISP_CONTACTO, usuario.getDisponeContacto());
         params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeLocal());
         params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getEmpresa());
-        params.put(UserDataSource.ColumnUsuarios.FIRTS_NAME, usuario.getFirstName());
-        params.put(UserDataSource.ColumnUsuarios.ID2, usuario.getId2());
-        params.put(UserDataSource.ColumnUsuarios.LAST_NAME, usuario.getLastName());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getNegocio());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getNegocioAnterior());
         params.put(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA, usuario.getPerfilFranquicia());

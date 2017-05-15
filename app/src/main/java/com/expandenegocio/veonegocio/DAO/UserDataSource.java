@@ -39,9 +39,6 @@ public class UserDataSource {
         public static final String DISP_CONTACTO = "disp_contacto";
         public static final String DISP_LOCAL = "dispone_local";
         public static final String EMPRESA = "empresa";
-        public static final String FIRTS_NAME = "first_name";
-        public static final String ID2 = "id2";
-        public static final String LAST_NAME = "last_name";
         public static final String NEGOCIO = "negocio";
         public static final String NEGOCIO_ANTES = "negocio_antes";
         public static final String PERFIL_FRANQUICIA = "perfil_franquicia";
@@ -87,9 +84,6 @@ public class UserDataSource {
                 ColumnUsuarios.DISP_CONTACTO + ", " +
                 ColumnUsuarios.DISP_LOCAL + ", " +
                 ColumnUsuarios.EMPRESA + ", " +
-                ColumnUsuarios.FIRTS_NAME + ", " +
-                ColumnUsuarios.ID2 + ", " +
-                ColumnUsuarios.LAST_NAME + ", " +
                 ColumnUsuarios.NEGOCIO + ", " +
                 ColumnUsuarios.NEGOCIO_ANTES + ", " +
                 ColumnUsuarios.PERFIL_FRANQUICIA + ", " +
@@ -118,9 +112,6 @@ public class UserDataSource {
                 "'" + user.getDisponeContacto() + "'," +
                 "'" + user.getDisponeLocal() + "'," +
                 "'" + user.getEmpresa() + "'," +
-                "'" + user.getFirstName() + "'," +
-                "'" + user.getId2() + "'," +
-                "'" + user.getLastName() + "'," +
                 "'" + user.getNegocio() + "'," +
                 "'" + user.getNegocioAnterior() + "'," +
                 "'" + user.getPerfilFranquicia() + "'," +

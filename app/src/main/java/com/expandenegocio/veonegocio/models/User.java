@@ -29,9 +29,6 @@ public class User {
     private String disponeContacto;
     private Integer disponeLocal;
     private String empresa;
-    private String firstName;
-    private String id2;
-    private String lastName;
     private String negocio;
     private Integer negocioAnterior;
     private String perfilFranquicia;
@@ -40,9 +37,6 @@ public class User {
     private String phoneMobile;
     private String recursosPropios;
     private String situacionProfesional;
-
-//    public User() {
-  //  }
 
     public String getId() {
         return id;
@@ -148,7 +142,6 @@ public class User {
         this.cuandoEmpezar = cuandoEmpezar;
     }
 
-
     public Date getDateEntered() {
         return dateEntered;
     }
@@ -195,30 +188,6 @@ public class User {
 
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getId2() {
-        return id2;
-    }
-
-    public void setId2(String id2) {
-        this.id2 = id2;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getNegocio() {
@@ -283,5 +252,10 @@ public class User {
 
     public void setSituacionProfesional(String situacionProfesional) {
         this.situacionProfesional = situacionProfesional;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

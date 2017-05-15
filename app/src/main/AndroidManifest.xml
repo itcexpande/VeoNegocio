@@ -32,15 +32,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.ActivityRegistro"
-            android:label="@string/title_activity_registro">
-            <intent-filter>
-                <action android:name="ActivityRegistro" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activities.ActivityServicio"
@@ -74,17 +66,6 @@
 
 
         <activity
-            android:name=".activities.ActivityConsultas"
-            android:label="Consultas"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="ActivityConsultas" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".activities.ActivityAltaUsuario"
             android:label="Alta Usuario"
             android:theme="@style/AppTheme">
@@ -112,17 +93,6 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="ActivityOpciones" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".activities.ActivityFranquiciasProvincias"
-            android:label="Franquicias Provincias"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="ActivityFranquiciasProvincias" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

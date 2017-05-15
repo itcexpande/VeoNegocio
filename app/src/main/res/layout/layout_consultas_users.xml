@@ -36,8 +36,8 @@
                 android:id="@+id/boton_aceptar_consulta_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="verUsuario"
                 android:background="@drawable/boton_2"
+                android:onClick="verUsuario"
                 android:text="CONSULTAR" />
 
 
@@ -109,8 +109,6 @@
                 android:inputType="text" />
 
 
-
-
             <EditText
                 android:id="@+id/et_consulta_dispone_contacto"
                 android:layout_width="match_parent"
@@ -130,20 +128,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="empresa"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/et_consulta_first_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="first name"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/et_consulta_last_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="last name"
                 android:inputType="text" />
 
             <EditText
@@ -207,8 +191,8 @@
                 android:id="@+id/boton_aceptar_consulta_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="consultaUsuario2"
                 android:background="@drawable/boton_redondeado"
+                android:onClick="consultaUsuario2"
                 android:text="ACEPTAR" />
 
 

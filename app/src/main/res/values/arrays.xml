@@ -2,46 +2,9 @@
 <resources>
     <string-array name="nombresFranquicias">
 
-        <item></item>
-        <item>ADAGIO</item>
-        <item>Aramburu</item>
-        <item>Bajo Cero</item>
-        <item>El Jamoncito</item>
-        <item>Espacio Lector Nobel</item>
-        <item>Helados El Arte</item>
-        <item>Ibero Trade Place</item>
-        <item>Krack</item>
-        <item>Mini Call</item>
-        <item>NyN</item>
-        <item>Realty Plus</item>
-        <item>Técnico Salud</item>
-
-    </string-array>
-    <string-array name="nombresCiudades">
-
-
-        <item>Madrid</item>
-        <item>París</item>
-        <item>Roma</item>
-        <item>Londres</item>
-
 
     </string-array>
 
-
-    <string-array name="paises">
-        <item>España</item>
-        <item>Francia</item>
-        <item>Italia</item>
-        <item>Inglaterra</item>
-    </string-array>
-
-
-    <string name="francia">FRANCIA</string>
-    <string name="italia">ITALIA</string>
-    <string name="portugal">PORTUGAL</string>
-    <string name="dinamarca">DINAMARCA</string>
-    <string name="argentina">ARGENTINA</string>
 
 
 

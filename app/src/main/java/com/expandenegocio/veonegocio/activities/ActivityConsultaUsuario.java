@@ -123,8 +123,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         txtDisponeContacto = (EditText) findViewById(R.id.et_consulta_dispone_contacto);
         txtDisponeLocal = (EditText) findViewById(R.id.et_consulta_dispone_local);
         txtEmpresa = (EditText) findViewById(R.id.et_consulta_empresa);
-        txtFirstName = (EditText) findViewById(R.id.et_consulta_first_name);
-        txtLastName = (EditText) findViewById(R.id.et_consulta_last_name);
         txtNegocio = (EditText) findViewById(R.id.et_consulta_negocio);
         txtNegocioAnterior = (EditText) findViewById(R.id.et_consulta_negocio_anterior);
         txtPerfilFranquicia = (EditText) findViewById(R.id.et_consulta_perfil_franquicia);
@@ -343,9 +341,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);
         usuario.setEmpresa(empresa);
-        usuario.setFirstName(firstName);
-        usuario.setId2(UUID.randomUUID().toString());
-        usuario.setLastName(lastName);
         usuario.setNegocio(negocio);
         usuario.setNegocioAnterior(negocioAnterior);
         usuario.setPerfilFranquicia(perfilFranquicia);
@@ -379,8 +374,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.DISP_CONTACTO, usuario.getDisponeContacto());
         params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeLocal());
         params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getEmpresa());
-        params.put(UserDataSource.ColumnUsuarios.FIRTS_NAME, usuario.getFirstName());
-        params.put(UserDataSource.ColumnUsuarios.LAST_NAME, usuario.getLastName());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getNegocio());
         params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getNegocioAnterior());
         params.put(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA, usuario.getPerfilFranquicia());
@@ -595,8 +588,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             txtDisponeContacto.setText(var.get(UserDataSource.ColumnUsuarios.DISP_CONTACTO).toString());
             txtDisponeLocal.setText(var.get(UserDataSource.ColumnUsuarios.DISP_LOCAL).toString());
             txtEmpresa.setText(var.get(UserDataSource.ColumnUsuarios.EMPRESA).toString());
-            txtFirstName.setText(var.get(UserDataSource.ColumnUsuarios.FIRTS_NAME).toString());
-            txtLastName.setText(var.get(UserDataSource.ColumnUsuarios.LAST_NAME).toString());
             txtNegocio.setText(var.get(UserDataSource.ColumnUsuarios.NEGOCIO).toString());
             txtNegocioAnterior.setText(var.get(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES).toString());
             txtPerfilFranquicia.setText(var.get(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA).toString());

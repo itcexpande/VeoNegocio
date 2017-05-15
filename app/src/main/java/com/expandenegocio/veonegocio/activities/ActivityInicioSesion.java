@@ -129,8 +129,8 @@ public class ActivityInicioSesion extends AppCompatActivity {
                             //Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
 
                             Intent intent = new Intent("ActivityOpciones");
-                            intent.putExtra("correo",emailUsuario.getText().toString());
-                            intent.putExtra("password",password.getText().toString());
+                            intent.putExtra("correo", emailUsuario.getText().toString());
+                            intent.putExtra("password", password.getText().toString());
                             startActivity(intent);
 
                             break;
@@ -292,9 +292,15 @@ public class ActivityInicioSesion extends AppCompatActivity {
     }
 
     public void registro(View view) {
+        Intent intent = new Intent("ActivityAltaUsuario");
+        intent.putExtra("correo", emailUsuario.getText().toString());
+        intent.putExtra("password", password.getText().toString());
+        startActivity(intent);
+    /*
         Intent intent = new Intent("ActivityRegistro");
         intent.putExtra("correo",emailUsuario.getText().toString());
         intent.putExtra("password",password.getText().toString());
         startActivity(intent);
+        */
     }
 }
