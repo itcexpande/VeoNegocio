@@ -2,14 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/listarTodas"
+        android:id="@+id/consultaModificcionUsuario"
         android:orderInCategory="100"
-        android:title="Listar Todas"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/listarPorcategorias"
-        android:orderInCategory="100"
-        android:title="Listar Por Categorias"
-        app:showAsAction="never"/>
+        android:title="Consulta y Modificacion Usuario"
+        app:showAsAction="never"
+        android:onClick="ConsultaModificacionDeUsuarios"/>
 
 </menu>

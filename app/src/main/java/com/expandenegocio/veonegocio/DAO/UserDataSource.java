@@ -71,7 +71,6 @@ public class UserDataSource {
                 ColumnUsuarios.STATUS + ", " +
                 ColumnUsuarios.NOMBRE + ", " +
                 ColumnUsuarios.APELLIDOS + ", " +
-                ColumnUsuarios.TELEFONO + ", " +
                 ColumnUsuarios.CODIGO_PROVINCIA + ", " +
                 ColumnUsuarios.CODIGO_MUNICIPIO + ", " +
                 ColumnUsuarios.CAPITAL + ", " +
@@ -99,7 +98,6 @@ public class UserDataSource {
                 "'" + user.getStatus() + "'," +
                 "'" + user.getNombre() + "'," +
                 "'" + user.getApellidos() + "'," +
-                "'" + user.getTelefono() + "'," +
                 "" + user.getCodigoProv() + "," +
                 "" + user.getCodigoMun() + "," +
                 "'" + user.getCapital() + "'," +
@@ -119,7 +117,7 @@ public class UserDataSource {
                 "'" + user.getPhoneHome() + "'," +
                 "'" + user.getPhoneMobile() + "'," +
                 "'" + user.getRecursosPropios() + "'," +
-                "'" + user.getSituacionProfesional() +"'"+
+                "'" + user.getSituacionProfesional() + "'" +
                 ")";
         try {
             database.execSQL(insertSQL);
@@ -128,6 +126,32 @@ public class UserDataSource {
         }
     }
 
+    public User devuelveUsuario() {
+
+        User output = null;
+        try {
+
+            String query = "SELECT " + ColumnUsuarios.EMAIL +
+                    "," + ColumnUsuarios.PASSWORD +
+                    " FROM " + USUARIO_TABLE_NAME;
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = new User();
+                    output.setEmail(cursor.getString(0));
+                    output.setPassword(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error recoge Usuario", ex.toString());
+        }
+        return output;
+    }
+
+    /*
     public String buscarUsuarioPorId(String id) {
 
         String output = "";
@@ -150,7 +174,7 @@ public class UserDataSource {
         }
         return output;
     }
-
+*/
     public String buscaUsuarioPorEmail(String correo) {
 
         String output = null;
@@ -186,7 +210,6 @@ public class UserDataSource {
 
             String query = "SELECT  " +
                     ColumnUsuarios.ID +
-
                     " FROM " + USUARIO_TABLE_NAME +
                     " WHERE " + ColumnUsuarios.EMAIL + " = '" + correo +
                     "' AND " + ColumnUsuarios.PASSWORD + " = '" + p + "'";

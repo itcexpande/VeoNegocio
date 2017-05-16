@@ -32,11 +32,12 @@
         android:onClick="inicioSesion"
         android:text="Iniciar sesión"
         android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,13 +56,9 @@
         android:textColor="@android:color/holo_green_dark" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:visibility="invisible"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="55dp"
         android:text="@string/registrarse_es_gratis"
         android:textColor="@android:color/darker_gray"
         android:textSize="30dp" />

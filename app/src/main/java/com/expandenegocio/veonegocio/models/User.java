@@ -16,15 +16,14 @@ public class User {
     private String status;
     private String nombre;
     private String apellidos;
-    private String telefono;
     private Integer codigoProv;
     private Integer codigoMun;
     private String capital;
     private String capitalObservaciones;
     private Integer cerrada;
     private String cuandoEmpezar;
-    private Date dateEntered;
-    private Date dateModified;
+    private String dateEntered;
+    private String dateModified;
     private Integer deleted;
     private String disponeContacto;
     private Integer disponeLocal;
@@ -86,13 +85,6 @@ public class User {
         this.apellidos = apellidos;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 
     public Integer getCodigoProv() {
         return codigoProv;
@@ -142,19 +134,19 @@ public class User {
         this.cuandoEmpezar = cuandoEmpezar;
     }
 
-    public Date getDateEntered() {
+    public String getDateEntered() {
         return dateEntered;
     }
 
-    public void setDateEntered(Date dateEntered) {
+    public void setDateEntered(String dateEntered) {
         this.dateEntered = dateEntered;
     }
 
-    public Date getDateModified() {
+    public String getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(Date dateModified) {
+    public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
 

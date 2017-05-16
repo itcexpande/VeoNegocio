@@ -18,6 +18,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.UUID;
@@ -37,7 +39,9 @@ public class ActivityInicioSesion extends AppCompatActivity {
     private String correo;
     private String pass;
     private User usuario;
-    private TextView nuevoPassword;
+    //private TextView nuevoPassword;
+    private String correoRemoto;
+    private String passRemoto;
 
 
     @Override
@@ -47,9 +51,33 @@ public class ActivityInicioSesion extends AppCompatActivity {
         emailUsuario = (EditText) this.findViewById(R.id.campo_correo);
         password = (EditText) this.findViewById(R.id.campo_contrasena);
         recuerdaContraseña = (TextView) this.findViewById(R.id.recuerdoContraseña);
-        emailUsuario.setText("jesus@gmail.com");
-        password.setText("1234");
+
+        usuario = new User();
+        UserDataSource dataSource = new UserDataSource(this);
+        usuario = dataSource.devuelveUsuario();
+        if (usuario != null) {
+            correo = usuario.getEmail().toString();
+            pass = usuario.getPassword().toString();
+
+            RequestParams params = new RequestParams();
+            params.put("email", correo);
+            params.put("password", pass);
+            correoRemoto = null;
+            passRemoto = null;
+            invokeWS3(params);
+            correoRemoto = emailUsuario.getText().toString();
+            passRemoto = password.getText().toString();
+            if (emailUsuario.getText().toString().equals(correoRemoto) && password.getText().toString().equals(passRemoto)) {
+
+                Intent intent = new Intent("ActivityOpciones");
+                intent.putExtra("correo", emailUsuario.getText().toString());
+                intent.putExtra("password", password.getText().toString());
+                startActivity(intent);
+            }
+
+        }
     }
+
 
     public void inicioSesion(View view) {
 
@@ -291,16 +319,84 @@ public class ActivityInicioSesion extends AppCompatActivity {
 
     }
 
+    public void invokeWS3(RequestParams params) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://www.expandenegocio.com/app/retorna_usuario.php", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+
+                try {
+                    // JSON Object
+
+                    JSONObject obj = new JSONObject(response);
+
+                    switch (obj.getInt("status")) {
+
+                        case 0:
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            break;
+                        case 1:
+                            //Toast.makeText(getApplicationContext(), "Usuario no existe", Toast.LENGTH_LONG).show();
+                            recogeDatos2(obj);
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Peticion no aceptada", Toast.LENGTH_LONG).show();
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                    error) {
+
+
+                try {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    private void recogeDatos2(JSONObject obj) throws JSONException {
+        JSONArray datos = obj.getJSONArray("info");
+        int longitud = datos.length();
+        for (int x = 0; x < longitud; x++) {
+            JSONObject var = datos.getJSONObject(x);
+            emailUsuario.setText(var.get(UserDataSource.ColumnUsuarios.EMAIL).toString());
+            password.setText(var.get(UserDataSource.ColumnUsuarios.PASSWORD).toString());
+
+
+        }
+    }
+
+
     public void registro(View view) {
         Intent intent = new Intent("ActivityAltaUsuario");
         intent.putExtra("correo", emailUsuario.getText().toString());
         intent.putExtra("password", password.getText().toString());
         startActivity(intent);
-    /*
-        Intent intent = new Intent("ActivityRegistro");
-        intent.putExtra("correo",emailUsuario.getText().toString());
-        intent.putExtra("password",password.getText().toString());
-        startActivity(intent);
-        */
+
+
     }
+
+
 }

@@ -45,8 +45,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "status  text NOT NULL," +
             "nombre varchar(100) NOT NULL," +
             "apellidos varchar(100) NOT NULL," +
-            "telefono varchar(20) NOT NULL," +
-            "c_prov  int(11) NOT NULL," +
+            "c_prov  int(11) DEFAULT NULL," +
             "c_mun  int(11) DEFAULT NULL," +
             "capital  varchar(100) DEFAULT NULL," +
             "capital_observaciones varchar(255) DEFAULT NULL," +
@@ -62,8 +61,8 @@ public class DbHelper extends SQLiteOpenHelper {
             "negocio_antes  tinyint(4) DEFAULT NULL," +
             "perfil_franquicia  varchar(100) DEFAULT NULL," +
             "perfil_profesional  text CHARACTER," +
-            "phone_home  varchar(100) DEFAULT NULL," +
-            "phone_mobile varchar(100) DEFAULT NULL," +
+            "phone_home  varchar(20) DEFAULT NULL," +
+            "phone_mobile varchar(20) DEFAULT NULL," +
             "recursos_propios  varchar(100) DEFAULT NULL," +
             "situacion_profesional  varchar(100) DEFAULT NULL)";
 

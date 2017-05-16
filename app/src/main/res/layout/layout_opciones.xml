@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/botonAltasUsuarios"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="ALTAS DE USUARIOS"
-        android:background="@drawable/boton_2"
-        android:onClick="AltasUsuarios"/>
 
     <Button
         android:id="@+id/botonConsultasYModificacionDeUsuarios"

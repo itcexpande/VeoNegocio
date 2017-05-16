@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -328,15 +329,16 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         usuario.setStatus("");
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
-        usuario.setTelefono(telefono);
         usuario.setCodigoProv(provincia.getId());
         usuario.setCodigoMun(municipio.getCodigoMunicipio());
         usuario.setCapital(capital);
         usuario.setCapitalObservaciones(capitalObservaciones);
         usuario.setCerrada(cerrada);
         usuario.setCuandoEmpezar(cuandoEmpezar);
-        usuario.setDateEntered(new Date());
-        usuario.setDateModified(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String currentDateandTime = sdf.format(new Date());
+        usuario.setDateEntered(currentDateandTime);
+        usuario.setDateModified(currentDateandTime);
         usuario.setDeleted(deleted);
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);
@@ -364,7 +366,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.STATUS, status);
         params.put(UserDataSource.ColumnUsuarios.NOMBRE, nombre);
         params.put(UserDataSource.ColumnUsuarios.APELLIDOS, apellidos);
-        params.put(UserDataSource.ColumnUsuarios.TELEFONO, telefono);
         params.put(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA, usuario.getCodigoProv());
         params.put(UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO, usuario.getCodigoMun());
         params.put(UserDataSource.ColumnUsuarios.CAPITAL, usuario.getCapital());

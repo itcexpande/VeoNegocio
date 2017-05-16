@@ -51,7 +51,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private String nombre;
     private String status;
     private String apellidos;
-    private String telefono;
     private Spinner spnProvincia;
     private Spinner spnMunicipio;
     private String capital;
@@ -64,9 +63,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private String disponeContacto;
     private Integer disponeLocal;
     private String empresa;
-    private String firstName;
-    private String id2;
-    private String lastName;
     private String negocio;
     private Integer negocioAnterior;
     private String perfilFranquicia;
@@ -80,7 +76,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private EditText txtPassword;
     private EditText txtNombre;
     private EditText txtApellidos;
-    private EditText txtTelefono;
     private EditText txtCapital;
     private EditText txtCapitalObservaciones;
     private EditText txtCerrada;
@@ -88,8 +83,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private EditText txtDisponeContacto;
     private EditText txtDisponeLocal;
     private EditText txtEmpresa;
-    private EditText txtFirstName;
-    private EditText txtLastName;
     private EditText txtNegocio;
     private EditText txtNegocioAnterior;
     private EditText txtPerfilFranquicia;
@@ -111,9 +104,8 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         txtPassword = (EditText) findViewById(R.id.et_alta_password);
         txtNombre = (EditText) findViewById(R.id.et_alta_nombre);
         txtApellidos = (EditText) findViewById(R.id.et_alta_apellidos);
-        txtTelefono = (EditText) findViewById(R.id.et_alta_telefono);
-        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_alta_user);
-        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_alta_user);
+        spnProvincia = (Spinner) findViewById(R.id.sp_alta_provincia);
+        spnMunicipio = (Spinner) findViewById(R.id.sp_alta_municipio);
         txtCapital = (EditText) findViewById(R.id.et_alta_capital);
         txtCapitalObservaciones = (EditText) findViewById(R.id.et_alta_capital_observaciones);
         txtCerrada = (EditText) findViewById(R.id.et_alta_cerrada);
@@ -127,8 +119,8 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         txtPerfilProfesional = (EditText) findViewById(R.id.et_alta_perfil_profesional);
         txtRecursosPropios = (EditText) findViewById(R.id.et_alta_recursos_propios);
         txtSituacionProfesional = (EditText) findViewById(R.id.et_alta_situacion_profesional);
-        txtPhoneHome = (EditText) findViewById(R.id.et_alta_phone_home);
-        txtPhoneMobile = (EditText) findViewById(R.id.et_alta_phone_mobile);
+        txtPhoneHome = (EditText) findViewById(R.id.et_alta_telefono_home);
+        txtPhoneMobile = (EditText) findViewById(R.id.et_alta_telefono_mobile);
         txtCorreo.setText(nCorreo);
         txtPassword.setText(nPassword);
         provincia = loadSpinnerProvincias();
@@ -145,7 +137,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_alta_user);
+        spnProvincia = (Spinner) findViewById(R.id.sp_alta_provincia);
 
         spnProvincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -178,7 +170,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_alta_user);
+        spnMunicipio = (Spinner) findViewById(R.id.sp_alta_municipio);
 
         spnMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -205,9 +197,12 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         if (val == null) {
 
             usuario = createUsuario();
-
-
+            UserDataSource dataSource = new UserDataSource(this);
+            if (dataSource.buscaUsuarioPorEmailYPassword(correo, password) == null) {
+                dataSource.insertUsuario(usuario);
+            }
             procesarInformacion();
+
 
         } else {
             Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
@@ -219,14 +214,37 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private String validate() {
 
         String output = null;
+/*
+        correo = "j@gmail.com";
+        password = "a";
+        nombre = "Jesus";
+        apellidos = "Villa Alonso";
+        capital = "CAPITAL";
+        capitalObservaciones = "capital observaaciones";
+        cerrada = 1;
+        cuandoEmpezar = "cuando empezar";
+        deleted = 3;
+        disponeContacto = "dispone de contacto";
+        disponeLocal = 6;
+        empresa = "empresa";
+        negocio = "negocio";
+        negocioAnterior = 7;
+        perfilFranquicia = "perfil franquicia";
+        perfilProfesional = "perfil profesional";
+        phoneHome = "983359746";
+        phoneMobile = "617759716";
+        recursosPropios = "recursos propios";
+        situacionProfesional = "situacion profesionaal";
+        */
 
         correo = txtCorreo.getText().toString();
         password = txtPassword.getText().toString();
         nombre = txtNombre.getText().toString();
         apellidos = txtApellidos.getText().toString();
-        telefono = txtTelefono.getText().toString();
+
         provincia = (Provincia) spnProvincia.getSelectedItem();
         municipio = (Municipio) spnMunicipio.getSelectedItem();
+
         capital = txtCapital.getText().toString();
         capitalObservaciones = txtCapitalObservaciones.getText().toString();
         cerrada = Integer.parseInt(txtCerrada.getText().toString());
@@ -235,9 +253,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         disponeContacto = txtDisponeContacto.getText().toString();
         disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
         empresa = txtEmpresa.getText().toString();
-        firstName = txtFirstName.getText().toString();
-        lastName = txtLastName.getText().toString();
-        id2 = "";
         negocio = txtNegocio.getText().toString();
         negocioAnterior = Integer.parseInt(txtNegocioAnterior.getText().toString());
         perfilFranquicia = txtPerfilFranquicia.getText().toString();
@@ -263,12 +278,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         if (apellidos.trim().equals("")) {
             output = "El campo Apellidos no puede estar vacío";
         }
-        if (telefono.trim().equals("")) {
-            output = "El campo telefono no puede estar vacío";
-        }
-        if (!ValidatorUtil.validateTel(telefono.trim(), "34")) {
-            output = "El formato de teléfono no es válido";
-        }
         if (provincia == null || provincia.getId() == -1) {
             output = "El campo provincia no puede estar vacío";
         }
@@ -293,18 +302,20 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         if (empresa.trim().equals("")) {
             output = "El campo empresa no puede estar vacío";
         }
-        if (firstName.trim().equals("")) {
-            output = "El campo first name no puede estar vacío";
-        }
-        if (lastName.trim().equals("")) {
-            output = "El campo last name no puede estar vacío";
-        }
-
         if (negocio.trim().equals("")) {
             output = "El campo negocio no puede estar vacío";
         }
         if (txtNegocioAnterior.getText().toString().trim().equals("")) {
             output = "El campo negocio anterior no puede estar vacío";
+        }
+        if (phoneHome.trim().equals("")) {
+            output = "El campo telefono fijo no puede estar vacío";
+        }
+        if (!ValidatorUtil.validateTel(phoneHome.trim(), "34")) {
+            output = "El formato de teléfono fijo no es válido";
+        }
+        if (phoneMobile.trim().equals("")) {
+            output = "El campo telefono movil no puede estar vacío";
         }
         if (perfilFranquicia.trim().equals("")) {
             output = "El campo perfil franquicia no puede estar vacío";
@@ -327,15 +338,16 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setStatus("");
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
-        usuario.setTelefono(telefono);
         usuario.setCodigoProv(provincia.getId());
         usuario.setCodigoMun(municipio.getCodigoMunicipio());
         usuario.setCapital(capital);
         usuario.setCapitalObservaciones(capitalObservaciones);
         usuario.setCerrada(cerrada);
         usuario.setCuandoEmpezar(cuandoEmpezar);
-        usuario.setDateEntered(new Date());
-        usuario.setDateModified(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String currentDateandTime = sdf.format(new Date());
+        usuario.setDateEntered(currentDateandTime);
+        usuario.setDateModified(currentDateandTime);
         usuario.setDeleted(deleted);
         usuario.setDisponeContacto(disponeContacto);
         usuario.setDisponeLocal(disponeLocal);
@@ -348,7 +360,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setPhoneMobile(phoneMobile);
         usuario.setRecursosPropios(recursosPropios);
         usuario.setSituacionProfesional(situacionProfesional);
-
         return usuario;
 
     }
@@ -364,7 +375,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.STATUS, status);
         params.put(UserDataSource.ColumnUsuarios.NOMBRE, nombre);
         params.put(UserDataSource.ColumnUsuarios.APELLIDOS, apellidos);
-        params.put(UserDataSource.ColumnUsuarios.TELEFONO, telefono);
         params.put(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA, usuario.getCodigoProv());
         params.put(UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO, usuario.getCodigoMun());
         params.put(UserDataSource.ColumnUsuarios.CAPITAL, usuario.getCapital());
