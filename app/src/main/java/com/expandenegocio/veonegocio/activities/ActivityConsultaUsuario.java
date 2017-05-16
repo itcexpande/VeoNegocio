@@ -50,22 +50,18 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private String nombre;
     private String status;
     private String apellidos;
-    private String telefono;
     private Spinner spnProvincia;
     private Spinner spnMunicipio;
     private String capital;
     private String capitalObservaciones;
     private Integer cerrada;
     private String cuandoEmpezar;
-    private String dateEntered;
-    private String dateModified;
+    //    private String dateEntered;
+//    private String dateModified;
     private Integer deleted;
     private String disponeContacto;
     private Integer disponeLocal;
     private String empresa;
-    private String firstName;
-    private String id2;
-    private String lastName;
     private String negocio;
     private Integer negocioAnterior;
     private String perfilFranquicia;
@@ -79,7 +75,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private EditText txtPassword;
     private EditText txtNombre;
     private EditText txtApellidos;
-    private EditText txtTelefono;
     private EditText txtCapital;
     private EditText txtCapitalObservaciones;
     private EditText txtCerrada;
@@ -87,8 +82,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private EditText txtDisponeContacto;
     private EditText txtDisponeLocal;
     private EditText txtEmpresa;
-    private EditText txtFirstName;
-    private EditText txtLastName;
     private EditText txtNegocio;
     private EditText txtNegocioAnterior;
     private EditText txtPerfilFranquicia;
@@ -114,9 +107,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         txtPassword = (EditText) findViewById(R.id.et_consulta_password);
         txtNombre = (EditText) findViewById(R.id.et_consulta_nombre);
         txtApellidos = (EditText) findViewById(R.id.et_consulta_apellidos);
-        txtTelefono = (EditText) findViewById(R.id.et_consulta_telefono);
-        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_consulta_user);
-        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_consulta_user);
+        spnProvincia = (Spinner) findViewById(R.id.sp_consulta_provincia);
+        spnMunicipio = (Spinner) findViewById(R.id.sp_consulta_municipio);
         txtCapital = (EditText) findViewById(R.id.et_consulta_capital);
         txtCapitalObservaciones = (EditText) findViewById(R.id.et_consulta_capital_observaciones);
         txtCerrada = (EditText) findViewById(R.id.et_consulta_cerrada);
@@ -130,8 +122,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         txtPerfilProfesional = (EditText) findViewById(R.id.et_consulta_perfil_profesional);
         txtRecursosPropios = (EditText) findViewById(R.id.et_consulta_recursos_propios);
         txtSituacionProfesional = (EditText) findViewById(R.id.et_consulta_situacion_profesional);
-        txtPhoneHome = (EditText) findViewById(R.id.et_consulta_phone_home);
-        txtPhoneMobile = (EditText) findViewById(R.id.et_consulta_phone_mobile);
+        txtPhoneHome = (EditText) findViewById(R.id.et_consulta_telefono_home);
+        txtPhoneMobile = (EditText) findViewById(R.id.et_consulta_telefono_mobile);
 
         txtCorreo.setText(nCorreo);
         txtPassword.setText(nPassword);
@@ -149,7 +141,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnProvincia = (Spinner) findViewById(R.id.spinner_provincia_consulta_user);
+        spnProvincia = (Spinner) findViewById(R.id.sp_consulta_provincia);
 
         spnProvincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -182,7 +174,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnMunicipio = (Spinner) findViewById(R.id.spinner_municipio_consulta_user);
+        spnMunicipio = (Spinner) findViewById(R.id.sp_consulta_municipio);
 
         spnMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -226,7 +218,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         password = txtPassword.getText().toString();
         nombre = txtNombre.getText().toString();
         apellidos = txtApellidos.getText().toString();
-        telefono = txtTelefono.getText().toString();
         provincia = (Provincia) spnProvincia.getSelectedItem();
         municipio = (Municipio) spnMunicipio.getSelectedItem();
         capital = txtCapital.getText().toString();
@@ -237,9 +228,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         disponeContacto = txtDisponeContacto.getText().toString();
         disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
         empresa = txtEmpresa.getText().toString();
-        firstName = txtFirstName.getText().toString();
-        lastName = txtLastName.getText().toString();
-        id2 = "";
         negocio = txtNegocio.getText().toString();
         negocioAnterior = Integer.parseInt(txtNegocioAnterior.getText().toString());
         perfilFranquicia = txtPerfilFranquicia.getText().toString();
@@ -265,12 +253,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         if (apellidos.trim().equals("")) {
             output = "El campo Apellidos no puede estar vacío";
         }
-        if (telefono.trim().equals("")) {
-            output = "El campo telefono no puede estar vacío";
-        }
-        if (!ValidatorUtil.validateTel(telefono.trim(), "34")) {
-            output = "El formato de teléfono no es válido";
-        }
         if (provincia == null || provincia.getId() == -1) {
             output = "El campo provincia no puede estar vacío";
         }
@@ -295,18 +277,20 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         if (empresa.trim().equals("")) {
             output = "El campo empresa no puede estar vacío";
         }
-        if (firstName.trim().equals("")) {
-            output = "El campo first name no puede estar vacío";
-        }
-        if (lastName.trim().equals("")) {
-            output = "El campo last name no puede estar vacío";
-        }
-
         if (negocio.trim().equals("")) {
             output = "El campo negocio no puede estar vacío";
         }
         if (txtNegocioAnterior.getText().toString().trim().equals("")) {
             output = "El campo negocio anterior no puede estar vacío";
+        }
+        if (phoneHome.trim().equals("")) {
+            output = "El campo telefono fijo no puede estar vacío";
+        }
+        if (!ValidatorUtil.validateTel(phoneHome.trim(), "34")) {
+            output = "El formato de teléfono no es válido";
+        }
+        if (phoneMobile.trim().equals("")) {
+            output = "El campo telefono movil no puede estar vacío";
         }
         if (perfilFranquicia.trim().equals("")) {
             output = "El campo perfil franquicia no puede estar vacío";
@@ -360,7 +344,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         RequestParams params = new RequestParams();
 
-        //params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
         params.put(UserDataSource.ColumnUsuarios.EMAIL, correo);
         params.put(UserDataSource.ColumnUsuarios.PASSWORD, password);
         params.put(UserDataSource.ColumnUsuarios.STATUS, status);
@@ -534,7 +517,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             break;
                         case 1:
-                            //       recogeDatos(obj.getString("info"));
+                            // recogeDatos(obj.getString("info"));
                             recogeDatos2(obj);
                             break;
                         case 2:
@@ -579,7 +562,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
             txtNombre.setText(var.get(UserDataSource.ColumnUsuarios.NOMBRE).toString());
             txtApellidos.setText(var.get(UserDataSource.ColumnUsuarios.APELLIDOS).toString());
-            txtTelefono.setText(var.get(UserDataSource.ColumnUsuarios.TELEFONO).toString());
             spnProvincia.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA).toString()));
             spnMunicipio.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO).toString()));
             txtCapital.setText(var.get(UserDataSource.ColumnUsuarios.CAPITAL).toString());
@@ -597,34 +579,9 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             txtPhoneMobile.setText(var.get(UserDataSource.ColumnUsuarios.PHONE_MOBILE).toString());
             txtRecursosPropios.setText(var.get(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS).toString());
             txtSituacionProfesional.setText(var.get(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL).toString());
-/*
-
-            txtNombre.setText(var.get("nombre").toString());
-            txtApellidos.setText(var.get("apellidos").toString());
-            txtTelefono.setText(var.get("telefono").toString());
-            spnProvincia.setSelection(Integer.parseInt(var.get("c_prov").toString()));
-            spnMunicipio.setSelection(Integer.parseInt(var.get("c_mun").toString()));
-            txtCapital.setText(var.get("capital").toString());
-            txtCapitalObservaciones.setText(var.get("capital_observaciones").toString());
-            txtCerrada.setText(var.get("cerrada").toString());
-            txtCuandoEmpezar.setText(var.get("cuando_empezar").toString());
-            txtDisponeContacto.setText(var.get("disp_contacto").toString());
-            txtDisponeLocal.setText(var.get("dispone_local").toString());
-            txtEmpresa.setText(var.get("empresa").toString());
-            txtFirstName.setText(var.get("first_name").toString());
-            txtLastName.setText(var.get("last_name").toString());
-            txtNegocio.setText(var.get("negocio").toString());
-            txtNegocioAnterior.setText(var.get("negocio_antes").toString());
-            txtPerfilFranquicia.setText(var.get("perfil_franquicia").toString());
-            txtPerfilProfesional.setText(var.get("perfil_profesional").toString());
-            txtPhoneHome.setText(var.get("phone_home").toString());
-            txtPhoneMobile.setText(var.get("phone_mobile").toString());
-            txtRecursosPropios.setText(var.get("recursos_propios").toString());
-            txtSituacionProfesional.setText(var.get("situacion_profesional").toString());
-*/
         }
     }
-
+/*
     private void recogeDatos(String info) {
         String campo;
 
@@ -639,8 +596,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                 txtNombre.setText(campo);
             } else if (clave.equals("apellidos")) {
                 txtApellidos.setText(campo);
-            } else if (clave.equals("telefono")) {
-                txtTelefono.setText(campo);
             } else if (clave.equals("c_prov")) {
                 spnProvincia.setSelection(Integer.parseInt(campo));
             } else if (clave.equals("c_mun")) {
@@ -659,10 +614,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                 txtDisponeLocal.setText(campo);
             } else if (clave.equals("empresa")) {
                 txtEmpresa.setText(campo);
-            } else if (clave.equals("first_name")) {
-                txtFirstName.setText(campo);
-            } else if (clave.equals("last_name")) {
-                txtLastName.setText(campo);
             } else if (clave.equals("negocio")) {
                 txtNegocio.setText(campo);
             } else if (clave.equals("negocio_antes")) {
@@ -748,10 +699,10 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                 case "situacion_profesional":
                     txtSituacionProfesional.setText(campo);
                     break;
-            }*/
+            }
 
         }
     }
 
-
+*/
 }
