@@ -65,7 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "phone_mobile varchar(20) DEFAULT NULL," +
             "recursos_propios  varchar(100) DEFAULT NULL," +
             "situacion_profesional  varchar(100) DEFAULT NULL)";
-String jess="";
+
 
     public DbHelper(Context context) {
         super(context, NOMBREBD, null, BD_VERSION);
