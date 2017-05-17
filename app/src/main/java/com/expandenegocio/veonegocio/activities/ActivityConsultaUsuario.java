@@ -1,6 +1,7 @@
 package com.expandenegocio.veonegocio.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -56,8 +57,6 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private String capitalObservaciones;
     private Integer cerrada;
     private String cuandoEmpezar;
-    //    private String dateEntered;
-//    private String dateModified;
     private Integer deleted;
     private String disponeContacto;
     private Integer disponeLocal;
@@ -127,6 +126,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         txtCorreo.setText(nCorreo);
         txtPassword.setText(nPassword);
+        verUsuario();
         provincia = loadSpinnerProvincias();
 
     }
@@ -201,8 +201,14 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         if (val == null) {
 
             usuario = createUsuario();
-
+            UserDataSource dataSource = new UserDataSource(this);
+            dataSource.updateUsuario(usuario);
             procesarInformacion();
+            Intent intent = new Intent("ActivityOpciones");
+            intent.putExtra("correo", nCorreo);
+            intent.putExtra("password", nPassword);
+            startActivity(intent);
+
 
         } else {
             Toast.makeText(getApplicationContext(), val, Toast.LENGTH_LONG).show();
@@ -431,7 +437,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     }
 
 
-    public void verUsuario(View view) {
+    // public void verUsuario(View view) {
+    public void verUsuario() {
 
         String val = validate2();
 

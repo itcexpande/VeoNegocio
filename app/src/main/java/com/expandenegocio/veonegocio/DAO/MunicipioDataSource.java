@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.expandenegocio.veonegocio.models.Municipio;
-import com.expandenegocio.veonegocio.models.Provincia;
 
 import java.util.ArrayList;
 
@@ -27,11 +26,6 @@ public class MunicipioDataSource {
         public static final String TOTAL_MUJERES = "total_mujeres";
     }
 
- /*   //Campos de la tabla provincias
-    public static class ColumnProvincia {
-        public static final String ID = "c_prov";
-        public static final String NOMBRE = "d_prov";
-    }*/
 
     private DbHelper dbHelper;
     private SQLiteDatabase database;
@@ -41,6 +35,30 @@ public class MunicipioDataSource {
         //Creando una instancia hacia la base de datos
         dbHelper = new DbHelper(context);
         database = dbHelper.getWritableDatabase();
+    }
+
+    public void insertMunicipio(Municipio municipio) {
+
+        String insertSQL = "Insert into " + MUNICIPIO_TABLE_NAME +
+                "(" +
+                ColumnMunicipio.CODIGO_PROVINCIA + "," +
+                ColumnMunicipio.CODIGO_MUNICIPIO + "," +
+                ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
+                ColumnMunicipio.TOTAL_HABITANTES + "," +
+                ColumnMunicipio.TOTAL_HOMBRES + "," +
+                ColumnMunicipio.TOTAL_MUJERES + "," +
+                ") VALUES ( " +
+                municipio.getCodigoProvincia() + "," +
+                municipio.getCodigoMunicipio() + "," +
+                "'" + municipio.getNombreMunicipio() + "'," +
+                municipio.getTotalHabitantes() + "," +
+                municipio.getHombres() + "," +
+                municipio.getMujeres() + " )";
+        try {
+            database.execSQL(insertSQL);
+        } catch (Exception ex) {
+            Log.d("Error insertar municipio", ex.toString());
+        }
     }
 
     public ArrayList<Municipio> getMunicipios(int numero) {

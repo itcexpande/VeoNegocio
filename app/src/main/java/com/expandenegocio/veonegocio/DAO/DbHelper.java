@@ -17,6 +17,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
            .getAbsolutePath() + "/Pictures/Solicitudes.db";
 */
+    private static final String TABLA_PROVINCIAS = "provincias";
+    private static final String TABLA_MUNICIPIOS = "municipios";
+    private static final String TABLA_USUARIOS = "users";
 
 
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
@@ -90,7 +93,18 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Actualizar la base de datos
-        db.execSQL("DROP TABLE IF EXIST VeoNegocio");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROVINCIAS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_MUNICIPIOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_USUARIOS);
+
+/*
+
+        db.execSQL(BD_CREAR_PROVINCIAS);
+        db.execSQL(BD_CREAR_MUNICIPIOS);
+        db.execSQL(BD_CREAR_USERS);
+
+*/
+
         onCreate(db);
     }
 }

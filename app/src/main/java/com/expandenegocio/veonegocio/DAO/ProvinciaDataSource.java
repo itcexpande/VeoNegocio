@@ -34,6 +34,20 @@ public class ProvinciaDataSource {
         database = dbHelper.getWritableDatabase();
     }
 
+    public void insertProvincia(Provincia provincia) {
+
+        String insertSQL = "Insert into " + PROVINCIA_TABLE_NAME +
+                "(" +
+                ColumnProvincia.ID + "," +
+                ColumnProvincia.NOMBRE +
+                ") VALUES ( " + provincia.getId() + ",'" + provincia.getNombreProvincia() + "' )";
+        try {
+            database.execSQL(insertSQL);
+        } catch (Exception ex) {
+            Log.d("Error insertar provincia", ex.toString());
+        }
+    }
+
     public ArrayList<Provincia> getProvincias() {
 
         ArrayList<Provincia> output = new ArrayList<Provincia>();
@@ -98,8 +112,6 @@ public class ProvinciaDataSource {
 
         return output;
     }
-
-
 
 
     public String buscarProvinciaPorId(String id) {

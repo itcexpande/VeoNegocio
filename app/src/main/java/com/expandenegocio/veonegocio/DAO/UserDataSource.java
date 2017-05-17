@@ -26,7 +26,6 @@ public class UserDataSource {
         public static final String STATUS = "status";
         public static final String NOMBRE = "nombre";
         public static final String APELLIDOS = "apellidos";
-        public static final String TELEFONO = "telefono";
         public static final String CODIGO_PROVINCIA = "c_prov";
         public static final String CODIGO_MUNICIPIO = "c_mun";
         public static final String CAPITAL = "capital";
@@ -123,6 +122,42 @@ public class UserDataSource {
             database.execSQL(insertSQL);
         } catch (Exception ex) {
             Log.d("Error insertar Usuario", ex.toString());
+        }
+    }
+
+    public void updateUsuario(User user) {
+
+        String insertSQL = "Update " + USUARIO_TABLE_NAME +
+                " set " +
+                ColumnUsuarios.STATUS + "=" + "'" + user.getStatus() + "'" + "," +
+                ColumnUsuarios.NOMBRE + "=" + "'" + user.getNombre() + "'" + "," +
+                ColumnUsuarios.APELLIDOS + "=" + "'" + user.getApellidos() + "'" + "," +
+                ColumnUsuarios.CODIGO_PROVINCIA + "=" + user.getCodigoProv() + "," +
+                ColumnUsuarios.CODIGO_MUNICIPIO + "=" + user.getCodigoMun() + "," +
+                ColumnUsuarios.CAPITAL + "=" + "'" + user.getCapital() + "'" + "," +
+                ColumnUsuarios.CAPITAL_OBSERVACIONES + "=" + "'" + user.getCapitalObservaciones() + "'" + "," +
+                ColumnUsuarios.CERRADA + "=" + user.getCerrada() + "," +
+                ColumnUsuarios.CUANDO_EMPEZAR + "=" + "'" + user.getCuandoEmpezar() + "'" + "," +
+                ColumnUsuarios.DATE_MODIFIED + "=" + "'" + user.getDateModified() + "'" + "," +
+                ColumnUsuarios.DISP_CONTACTO + "=" + "'" + user.getDisponeContacto() + "'" + "," +
+                ColumnUsuarios.DISP_LOCAL + "=" + user.getDisponeLocal() + "," +
+                ColumnUsuarios.EMPRESA + "=" + "'" + user.getEmpresa() + "'" + "," +
+                ColumnUsuarios.NEGOCIO + "=" + "'" + user.getNegocio() + "'" + "," +
+                ColumnUsuarios.NEGOCIO_ANTES + "=" + user.getNegocioAnterior() + "," +
+                ColumnUsuarios.PERFIL_FRANQUICIA + "=" + "'" + user.getPerfilFranquicia() + "'" + "," +
+                ColumnUsuarios.PERFIL_PROFESIONAL + "=" + "'" + user.getPerfilProfesional() + "'" + "," +
+                ColumnUsuarios.PHONE_HOME + "=" + "'" + user.getPhoneHome() + "'" + "," +
+                ColumnUsuarios.PHONE_MOBILE + "=" + "'" + user.getPhoneMobile() + "'" + "," +
+                ColumnUsuarios.RECURSOS_PROPIOS + "=" + "'" + user.getRecursosPropios() + "'" + "," +
+                ColumnUsuarios.SITUACION_PROFESIONAL + "=" + "'" + user.getSituacionProfesional() + "'" +
+                " Where " +
+                ColumnUsuarios.EMAIL + "=" + "'" + user.getEmail() + "'" + " and " +
+                ColumnUsuarios.PASSWORD + "=" + "'" + user.getPassword() + "'";
+
+        try {
+            database.execSQL(insertSQL);
+        } catch (Exception ex) {
+            Log.d("Error update Usuario", ex.toString());
         }
     }
 
