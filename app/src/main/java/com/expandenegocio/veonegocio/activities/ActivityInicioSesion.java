@@ -54,6 +54,8 @@ public class ActivityInicioSesion extends AppCompatActivity {
         usuario = new User();
         UserDataSource dataSource = new UserDataSource(this);
         usuario = dataSource.devuelveUsuario();
+
+
         if (usuario != null) {
             correo = usuario.getEmail().toString();
             pass = usuario.getPassword().toString();
@@ -69,7 +71,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
             if (emailUsuario.getText().toString().equals(correoRemoto) && password.getText().toString().equals(passRemoto)) {
 
                 Intent intent = new Intent("ActivityOpciones");
-                intent.putExtra("correo",correo);
+                intent.putExtra("correo", correo);
                 intent.putExtra("password", pass);
                 startActivity(intent);
             }

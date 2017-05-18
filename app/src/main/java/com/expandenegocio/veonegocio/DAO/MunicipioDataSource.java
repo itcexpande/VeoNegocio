@@ -46,7 +46,7 @@ public class MunicipioDataSource {
                 ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
                 ColumnMunicipio.TOTAL_HABITANTES + "," +
                 ColumnMunicipio.TOTAL_HOMBRES + "," +
-                ColumnMunicipio.TOTAL_MUJERES + "," +
+                ColumnMunicipio.TOTAL_MUJERES +
                 ") VALUES ( " +
                 municipio.getCodigoProvincia() + "," +
                 municipio.getCodigoMunicipio() + "," +

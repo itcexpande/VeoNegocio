@@ -40,7 +40,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String NOMBREBD = "VeoNegocio.db";
 
-    private static final int BD_VERSION = 3;
+    private static final int BD_VERSION = 1;
 
     private static final String BD_CREAR_MUNICIPIOS = "CREATE TABLE municipios " +
             "( PK_UID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -88,7 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
         super(context, NOMBREBD, null, BD_VERSION);
-        SQLiteDatabase.openOrCreateDatabase(NOMBREBD, null);
+    //    SQLiteDatabase.openOrCreateDatabase(NOMBREBD, null);
     }
 
     @Override

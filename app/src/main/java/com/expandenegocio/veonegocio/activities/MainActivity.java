@@ -15,19 +15,41 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
+import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.R;
+import com.expandenegocio.veonegocio.models.Municipio;
+import com.expandenegocio.veonegocio.models.Provincia;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.TreeMap;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class MainActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     private SliderLayout mDemoSlider;
+    private int codigoProvincia;
+    private int codigoMunicipio;
+    private String denominacionProvincia;
+    private int totalHabitantes;
+    private int totalHombres;
+    private int totalMujeres;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        pasarFicheros();
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -144,5 +166,193 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         startActivity(intent);
     }
 
+    private void pasarFicheros() {
+        pasaProvincias();
+        pasaMunicipios();
+    }
+
+    private void pasaProvincias() {
+
+        Provincia provincia = new Provincia();
+        RequestParams params = new RequestParams();
+        params.put(ProvinciaDataSource.ColumnProvincia.ID, -1);
+        params.put(ProvinciaDataSource.ColumnProvincia.NOMBRE, "");
+        invokeWS(params);
+
+
+    }
+
+
+    public void invokeWS(RequestParams params) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://www.expandenegocio.com/app/devuelve_provincias.php", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+
+
+                try {
+
+                    JSONObject obj = new JSONObject(response);
+
+                    switch (obj.getInt("status")) {
+
+                        case 0:
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            break;
+                        case 1:
+                            recogeDatos2(obj);
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                    error) {
+                try {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+
+    private void recogeDatos2(JSONObject obj) throws JSONException {
+        JSONArray datos = obj.getJSONArray("info");
+        int longitud = datos.length();
+        for (int x = 0; x < longitud; x++) {
+            JSONObject var = datos.getJSONObject(x);
+
+            codigoProvincia = Integer.parseInt(var.get(ProvinciaDataSource.ColumnProvincia.ID).toString());
+            denominacionProvincia = var.get(ProvinciaDataSource.ColumnProvincia.NOMBRE).toString();
+            Provincia provincia = new Provincia();
+            provincia.setId(codigoProvincia);
+            provincia.setNombreProvincia(denominacionProvincia);
+
+            ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+            dataSource.insertProvincia(provincia);
+        }
+    }
+
+    private void pasaMunicipios() {
+
+        Municipio municipio = new Municipio();
+        RequestParams params = new RequestParams();
+        params.put(MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA, 0);
+        params.put(MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO, 0);
+        params.put(MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO, "");
+        params.put(MunicipioDataSource.ColumnMunicipio.TOTAL_HABITANTES, 0);
+        params.put(MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES, 0);
+        params.put(MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES, 0);
+
+        invokeWS2(params);
+
+
+    }
+
+
+    public void invokeWS2(RequestParams params) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post("http://www.expandenegocio.com/app/devuelve_municipios.php", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+
+
+                try {
+
+                    JSONObject obj = new JSONObject(response);
+
+                    switch (obj.getInt("status")) {
+
+                        case 0:
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                            break;
+                        case 1:
+                            recogeDatos3(obj);
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
+                    error) {
+                try {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+
+    private void recogeDatos3(JSONObject obj) throws JSONException {
+        JSONArray datos = obj.getJSONArray("info");
+        int longitud = datos.length();
+        int hh= 0;
+        for (int x = 0; x < longitud; x++) {
+            JSONObject var = datos.getJSONObject(x);
+
+            codigoProvincia = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA).toString());
+            codigoMunicipio = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO).toString());
+            denominacionProvincia = var.get(MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO).toString();
+            totalHabitantes = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_HABITANTES).toString());
+            totalHombres = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES).toString());
+            totalMujeres = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES).toString());
+
+            Municipio municipio = new Municipio();
+            municipio.setCodigoProvincia(codigoProvincia);
+            municipio.setCodigoMunicipio(codigoMunicipio);
+            municipio.setNombreMunicipio(denominacionProvincia);
+            municipio.setTotalHabitantes(totalHabitantes);
+            municipio.setHombres(totalHombres);
+            municipio.setMujeres(totalMujeres);
+
+            MunicipioDataSource dataSource = new MunicipioDataSource(this);
+            dataSource.insertMunicipio(municipio);
+            System.out.println(hh++);
+            hh++;
+        }
+        Toast.makeText(this," pasados "+hh,Toast.LENGTH_LONG).show();
+    }
 
 }

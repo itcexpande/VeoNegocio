@@ -14,11 +14,6 @@
         android:title="Búsqueda de Negocio"
         app:showAsAction="never"
         android:onClick="busquedaDeNegocio"/>
-    <item
-        android:id="@+id/pasarProvincias"
-        android:orderInCategory="100"
-        android:title="Pasar Provincias"
-        app:showAsAction="never"
-        android:onClick="pasarProvincias"/>
+
 
 </menu>
