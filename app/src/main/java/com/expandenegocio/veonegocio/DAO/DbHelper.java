@@ -1,11 +1,16 @@
 package com.expandenegocio.veonegocio.DAO;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
-import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by Penlopjo on 31/03/2016.
@@ -21,25 +26,36 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String TABLA_MUNICIPIOS = "municipios";
     private static final String TABLA_USUARIOS = "users";
 
+    //private static String DB_PATH = "/data/data/es.veonegocio.veonegocio/databases/";
+    private static String DB_NAME = Environment.getExternalStorageDirectory()
+            .getAbsolutePath() + "/Pictures/VeoNegocio.db";
+    //private SQLiteDatabase myDataBase;
+    // private final Context myContext;
 
+/*
     public static final String NOMBREBD = Environment.getExternalStorageDirectory()
             .getAbsolutePath() + "/Pictures/VeoNegocio.db";
+
+  */
+
+    public static final String NOMBREBD = "VeoNegocio.db";
 
     private static final int BD_VERSION = 3;
 
     private static final String BD_CREAR_MUNICIPIOS = "CREATE TABLE municipios " +
-            "(pk_uid integer primary key autoincrement , " +
-            "c_prov integer not null," +
-            "c_mun integer not null," +
-            "d_mun text ," +
+            "( PK_UID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "c_prov integer," +
+            "c_mun integer ," +
+            "d_mun text," +
             "total_habitantes integer ," +
             "total_hombres integer ," +
             "total_mujeres integer )";
 
     private static final String BD_CREAR_PROVINCIAS = "CREATE TABLE provincias " +
-            "(pk_uid integer primary key autoincrement , " +
-            "c_prov integer not null," +
+            "( PK_UID integer primary key autoincrement," +
+            "c_prov integer," +
             "d_prov text)";
+
 
     private static final String BD_CREAR_USERS = "CREATE TABLE municipios " +
             "ID varchar(36) PRIMARY KEY NOT NULL," +
@@ -54,8 +70,8 @@ public class DbHelper extends SQLiteOpenHelper {
             "capital_observaciones varchar(255) DEFAULT NULL," +
             "cerrada  tinyint(4) DEFAULT NULL," +
             "cuando_empezar  varchar(100) DEFAULT NULL," +
-            "date_entered  datetime DEFAULT NULL," +
-            "date_modified datetime DEFAULT NULL," +
+            "date_entered  text," +
+            "date_modified text," +
             "deleted  tinyint(4) DEFAULT NULL," +
             "disp_contacto  varchar(100) DEFAULT NULL," +
             "dispone_local  tinyint(4) DEFAULT NULL," +

@@ -31,5 +31,6 @@
     <string name="action_settings">settings</string>
     <string name="has_olvidado_los_datos_de_tu_cuenta"><u>¿Has olvidado los datos de tu cuenta?</u></string>
     <string name="registrarse_es_gratis">REGISTRARSE, es gratis</string>
+    <string name="title_activity_pasar_provincias">PasarProvincias</string>
 
 </resources>

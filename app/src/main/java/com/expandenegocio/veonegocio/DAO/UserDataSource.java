@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.expandenegocio.veonegocio.models.Municipio;
-import com.expandenegocio.veonegocio.models.Provincia;
 import com.expandenegocio.veonegocio.models.User;
 
 /**
