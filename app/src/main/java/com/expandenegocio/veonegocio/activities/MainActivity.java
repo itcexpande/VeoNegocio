@@ -15,7 +15,9 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.expandenegocio.veonegocio.DAO.DbHelper;
 import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
+
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Municipio;
@@ -28,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import cz.msebera.android.httpclient.Header;
@@ -41,12 +44,14 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     private int totalHabitantes;
     private int totalHombres;
     private int totalMujeres;
-
+    private ArrayList<Provincia> provincias = new ArrayList<>();
+    private DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper = new DbHelper(getApplicationContext());
 
 
         pasarFicheros();
@@ -145,6 +150,11 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void InicioSesion(View view) {
+        //ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+        //ArrayList<Provincia> nn = dataSource.getProvincias2();
+        dbHelper = new DbHelper(getApplicationContext());
+        int id = dbHelper.recuperarProvincia(47).getId();
+        String nombre = dbHelper.recuperarProvincia(47).getNombreProvincia();
 
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
@@ -167,8 +177,10 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     private void pasarFicheros() {
+        MunicipioDataSource dataSource = new MunicipioDataSource(this);
+
         pasaProvincias();
-        pasaMunicipios();
+        //    pasaMunicipios();
     }
 
     private void pasaProvincias() {
@@ -240,6 +252,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     private void recogeDatos2(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
+
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
 
@@ -248,9 +261,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             Provincia provincia = new Provincia();
             provincia.setId(codigoProvincia);
             provincia.setNombreProvincia(denominacionProvincia);
-
+            provincias.add(provincia);
+            dbHelper.insertarProvincia(provincia.getId(), provincia.getNombreProvincia());
+            /*
             ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
             dataSource.insertProvincia(provincia);
+            */
         }
     }
 
@@ -328,7 +344,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     private void recogeDatos3(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
-        int hh= 0;
+        ArrayList<Municipio> listaM = new ArrayList<>();
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
 
@@ -349,10 +365,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
             MunicipioDataSource dataSource = new MunicipioDataSource(this);
             dataSource.insertMunicipio(municipio);
-            System.out.println(hh++);
-            hh++;
+            listaM.add(municipio);
+
         }
-        Toast.makeText(this," pasados "+hh,Toast.LENGTH_LONG).show();
+        longitud = listaM.size();
+        int nn = 0;
+
     }
 
 }

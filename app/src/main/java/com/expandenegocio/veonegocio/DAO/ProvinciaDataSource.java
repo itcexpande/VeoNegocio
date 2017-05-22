@@ -2,6 +2,7 @@ package com.expandenegocio.veonegocio.DAO;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ public class ProvinciaDataSource {
 
     public static final String PROVINCIA_TABLE_NAME = "provincias";
 
+
     //Campos de la tabla provincias
     public static class ColumnProvincia {
         public static final String ID = "c_prov";
@@ -26,13 +28,15 @@ public class ProvinciaDataSource {
 
     private DbHelper dbHelper;
     private SQLiteDatabase database;
-
+    private Context contexto;
 
     public ProvinciaDataSource(Context context) {
         //Creando una instancia hacia la base de datos
-        dbHelper = new DbHelper(context);
-        database = dbHelper.getWritableDatabase();
+        //dbHelper = new DbHelper(context);
+        //database = dbHelper.getWritableDatabase();
+        this.contexto= context;
     }
+
 
     public void insertProvincia(Provincia provincia) {
 

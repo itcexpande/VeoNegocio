@@ -9,6 +9,15 @@ public class Provincia {
     private int id;
     private String nombreProvincia;
 
+    public Provincia(int id, String nombreProvincia) {
+        this.id = id;
+        this.nombreProvincia = nombreProvincia;
+    }
+
+    public Provincia() {
+
+    }
+
     public int getId() {
         return id;
     }
