@@ -12,13 +12,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.DAO.FranquiciaDataSource;
-import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
-import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.ClavesFranquicia;
 import com.expandenegocio.veonegocio.models.Franquicia;
-import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.Provincia;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -30,6 +27,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
@@ -44,6 +44,7 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
     private ListView lista;
     public static SimpleAdapter adaptador;
     public ArrayList<Franquicia> listaFranquicias = new ArrayList<>();
+    public HashMap<String, Object> mapaFranquicias = new HashMap<>();
 
     public static SimpleAdapter getAdaptador() {
         return adaptador;
@@ -59,17 +60,21 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
         lista = (ListView) findViewById(R.id.lvModeloNegocio);
         this.registerForContextMenu(lista);
 
+        Franquicia franquicia = createFranquicia();
+        procesarInformacion(franquicia);
+
         String[] from = ClavesFranquicia.claves();
         int[] to = {R.id.imageview_modelo_negocio, R.id.tv1_modelo_negocio, R.id.tv2_modelo_negocio};
 
-        adaptador = new SimpleAdapter(this, gestora, R.layout.item_modelo_negocio, from, to);
+        adaptador = new SimpleAdapter(this, (List<? extends Map<String, ?>>) listaFranquicias, R.layout.item_modelo_negocio, from, to);
         adaptador.setViewBinder(new DatosViewAdapter());
         lista.setAdapter(adaptador);
 
     }
 
 
-    private Provincia loadSpinnerProvincias() {
+    private Franquicia loadFranquicias() {
+/*
 
         ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
         final ArrayList<Provincia> listaProv = dataSource.getProvincias();
@@ -101,37 +106,9 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
         spnProvincia.setAdapter(spinner_adapter);
 
         return provinciaSeleccionada;
-
+*/
+        return new Franquicia();
     }
-
-    private Municipio loadSpinnerMunicipios(Integer numeroProvincia) {
-        MunicipioDataSource dataSource = new MunicipioDataSource(this);
-        final ArrayList<Municipio> listaMunicipios = dataSource.getMunicipios(numeroProvincia);
-
-        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaMunicipios);
-
-        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spnMunicipio = (Spinner) findViewById(R.id.sp_alta_municipio);
-
-        spnMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                                                   @Override
-                                                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                       Municipio municipoSeleccionado = listaMunicipios.get(position);
-                                                   }
-
-                                                   @Override
-                                                   public void onNothingSelected(AdapterView<?> parent) {
-                                                       Municipio municipioSeleccionado = null;
-                                                   }
-                                               }
-        );
-
-        spnMunicipio.setAdapter(spinner_adapter);
-        return municipioSeleccionado;
-    }
-
 
     private Franquicia createFranquicia() {
         Franquicia franquicia = new Franquicia();
@@ -141,12 +118,12 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
     }
 
 
-    private void procesarInformacion() {
+    private void procesarInformacion(Franquicia f) {
 
         RequestParams params = new RequestParams();
 
-        params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
-        params.put(UserDataSource.ColumnUsuarios.EMAIL, correo);
+        params.put(FranquiciaDataSource.ColumnFranquicias.ID, f.getId().toString());
+        params.put(FranquiciaDataSource.ColumnFranquicias.NAME, f.getName().toString());
 
         invokeWS(params);
 
@@ -218,17 +195,13 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             JSONObject var = datos.getJSONObject(x);
             Franquicia franquicia = new Franquicia();
             franquicia.setId(var.get(FranquiciaDataSource.ColumnFranquicias.ID).toString());
-
-
-            franquicia.setName(var.get(FranquiciaDataSource.ColumnFranquicias.ID).toString());
+            franquicia.setName(var.get(FranquiciaDataSource.ColumnFranquicias.NAME).toString());
             franquicia.setDate_entered((Date) var.get(String.valueOf(Date.parse(FranquiciaDataSource.ColumnFranquicias.DATE_ENTERED.toString()))));
             franquicia.setDate_entered((Date) var.get(String.valueOf(Date.parse(FranquiciaDataSource.ColumnFranquicias.DATE_MODIFIED.toString()))));
-
             franquicia.setModified_user_id(var.get(FranquiciaDataSource.ColumnFranquicias.MODIFIED_USER_ID).toString());
             franquicia.setCreated_by(var.get(FranquiciaDataSource.ColumnFranquicias.CREATED_BY).toString());
             franquicia.setDescription(var.get(FranquiciaDataSource.ColumnFranquicias.DESCRIPTION).toString());
             franquicia.setDeleted(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.DELETED).toString()));
-
             franquicia.setAssigned_user_id(var.get(FranquiciaDataSource.ColumnFranquicias.ASSIGNED_USER_ID).toString());
             franquicia.setFranquicia_type(var.get(FranquiciaDataSource.ColumnFranquicias.FRANQUICIA_TYPE).toString());
             franquicia.setIndustry(var.get(FranquiciaDataSource.ColumnFranquicias.INDUSTRY).toString());
@@ -257,16 +230,13 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             franquicia.setVideo(var.get(FranquiciaDataSource.ColumnFranquicias.VIDEO).toString());
             franquicia.setExclusion_de_sector(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.EXCLUSION_DE_SECTOR).toString()));
             franquicia.setExclusion_de_subsector(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.EXCLUSION_DE_SUBSECTOR).toString()));
-
             franquicia.setEstado_validacion(var.get(FranquiciaDataSource.ColumnFranquicias.ESTADO_VALIDACION).toString());
             franquicia.setGestionado_por(var.get(FranquiciaDataSource.ColumnFranquicias.GESTIONADO_POR).toString());
             franquicia.setTipo_de_franquiciado(var.get(FranquiciaDataSource.ColumnFranquicias.TIPO_DE_FRANQUICIADO).toString());
             franquicia.setNecesario_titulacion(var.get(FranquiciaDataSource.ColumnFranquicias.NECESARIO_TITULACION).toString());
             franquicia.setTitulacion(var.get(FranquiciaDataSource.ColumnFranquicias.TITULACION).toString());
             franquicia.setCondiciones_especiales(var.get(FranquiciaDataSource.ColumnFranquicias.CONDICIONES_ESPECIALES).toString());
-
             franquicia.setFin_condiciones_especiales((Date) var.get(String.valueOf(Date.parse(FranquiciaDataSource.ColumnFranquicias.FIN_CONDICIONES_ESPECIALES.toString()))));
-
             franquicia.setObservaciones(var.get(FranquiciaDataSource.ColumnFranquicias.OBSERVACIONES).toString());
             franquicia.setInversion_minima_necesaria(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.INVERSION_MINIMA_NECESARIA).toString()));
             franquicia.setCurrency_id(var.get(FranquiciaDataSource.ColumnFranquicias.CURRENCY_ID).toString());
@@ -285,25 +255,18 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             franquicia.setAcuerdo_financiacion(var.get(FranquiciaDataSource.ColumnFranquicias.ACUERDO_FINANCIACION).toString());
             franquicia.setSector(var.get(FranquiciaDataSource.ColumnFranquicias.SECTOR).toString());
             franquicia.setBreve_descripcion(var.get(FranquiciaDataSource.ColumnFranquicias.BREVE_DESCRIPCION).toString());
-
             franquicia.setFecha_creacion(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.FECHA_CREACION).toString()));
             franquicia.setFecha_expansion((Date) var.get(String.valueOf(Date.parse(FranquiciaDataSource.ColumnFranquicias.FECHA_EXPANSION.toString()))));
-
             franquicia.setCentros_nacionales_propios(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CENTROS_NACIONALES_PROPIOS).toString()));
             franquicia.setCentros_nacionales_franquicia(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CENTROS_NACIONALES_FRANQUICIA).toString()));
-
             franquicia.setPresencia_internacional(var.get(FranquiciaDataSource.ColumnFranquicias.PRESENCIA_INTERNACIONAL).toString());
             franquicia.setPaises(var.get(FranquiciaDataSource.ColumnFranquicias.PAISES).toString());
-
             franquicia.setRed_spain(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.RED_SPAIN).toString()));
             franquicia.setCentros_extranjeros_propios(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CENTROS_EXTRANJEROS_PROPIOS).toString()));
-
             franquicia.setCentros_extranjeros_franqui(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CENTROS_EXTRANJEROS_FRANQUI).toString()));
             franquicia.setRed_extrangera(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.RED_EXTRANGERA).toString()));
             franquicia.setPlantilla_central(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.PLANTILLA_CENTRAL).toString()));
-
             franquicia.setCifra_negocio_grupo(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.CIFRA_NEGOCIO_GRUPO).toString()));
-
             franquicia.setNifra(var.get(FranquiciaDataSource.ColumnFranquicias.NIFRA).toString());
             franquicia.setRegmarca(var.get(FranquiciaDataSource.ColumnFranquicias.REGMARCA).toString());
             franquicia.setAef(var.get(FranquiciaDataSource.ColumnFranquicias.AEF).toString());
@@ -317,12 +280,9 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             franquicia.setDireccion_provincia(var.get(FranquiciaDataSource.ColumnFranquicias.DIRECCION_PROVINCIA).toString());
             franquicia.setDireccion_pais(var.get(FranquiciaDataSource.ColumnFranquicias.DIRECCION_PAIS).toString());
             franquicia.setPersona_contacto(var.get(FranquiciaDataSource.ColumnFranquicias.PERSONA_CONTACTO).toString());
-
             franquicia.setFecha_acuerdo((Date) var.get(String.valueOf(Date.parse(FranquiciaDataSource.ColumnFranquicias.FECHA_ACUERDO.toString()))));
             franquicia.setFecha_activacion((Date) var.get(String.valueOf(Date.parse(FranquiciaDataSource.ColumnFranquicias.FECHA_ACTIVACION.toString()))));
-
             franquicia.setFicha_ampliada_anterior(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.FICHA_AMPLIADA_ANTERIOR).toString()));
-
             franquicia.setExpan_consultora_id_c(var.get(FranquiciaDataSource.ColumnFranquicias.EXPAN_CONSULTORA_ID_C).toString());
             franquicia.setEstado_fran(var.get(FranquiciaDataSource.ColumnFranquicias.ESTADO_FRAN).toString());
             franquicia.setObservaciones_inter(var.get(FranquiciaDataSource.ColumnFranquicias.OBSERVACIONES_INTER).toString());
@@ -331,91 +291,82 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             franquicia.setUser_id_c(var.get(FranquiciaDataSource.ColumnFranquicias.USER_ID_C).toString());
             franquicia.setDocumentacion_pendiente(var.get(FranquiciaDataSource.ColumnFranquicias.DOCUMENTACION_PENDIENTE).toString());
             franquicia.setObjeciones_foros_bbdd(var.get(FranquiciaDataSource.ColumnFranquicias.OBJECIONES_FOROS_BBDD).toString());
-
             franquicia.setDerecho_entrada_min(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.DERECHO_ENTRADA_MIN).toString()));
             franquicia.setDerecho_entrada_max(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.DERECHO_ENTRADA_MAX).toString()));
-
             franquicia.setRoyalty_expltacion(var.get(FranquiciaDataSource.ColumnFranquicias.ROYALTY_EXPLTACION).toString());
             franquicia.setRoyalty_publicitario(var.get(FranquiciaDataSource.ColumnFranquicias.ROYALTY_PUBLICITARIO).toString());
             franquicia.setOtros_royalties(var.get(FranquiciaDataSource.ColumnFranquicias.OTROS_ROYALTIES).toString());
-
             franquicia.setFacturacion_year_unidad_fran_1(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.FACTURACION_YEAR_UNIDAD_FRAN_1).toString()));
             franquicia.setFacturacion_year_unidad_fran_2(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.FACTURACION_YEAR_UNIDAD_FRAN_2).toString()));
             franquicia.setFacturacion_year_unidad_fran_3(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.FACTURACION_YEAR_UNIDAD_FRAN_3).toString()));
-
             franquicia.setAmortizacio_inversion(var.get(FranquiciaDataSource.ColumnFranquicias.AMORTIZACIO_INVERSION).toString());
-
             franquicia.setBeneficio_neto_unidad_fran_1(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.BENEFICIO_NETO_UNIDAD_FRAN_1).toString()));
             franquicia.setBeneficio_neto_unidad_fran_2(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.BENEFICIO_NETO_UNIDAD_FRAN_2).toString()));
             franquicia.setBeneficio_neto_unidad_fran_3(Double.parseDouble(var.get(FranquiciaDataSource.ColumnFranquicias.BENEFICIO_NETO_UNIDAD_FRAN_3).toString()));
-
             franquicia.setTipo_actividad(var.get(FranquiciaDataSource.ColumnFranquicias.TIPO_ACTIVIDAD).toString());
             franquicia.setMovil_general(var.get(FranquiciaDataSource.ColumnFranquicias.MOVIL_GENERAL).toString());
             franquicia.setCargo_contacto_general(var.get(FranquiciaDataSource.ColumnFranquicias.CARGO_CONTACTO_GENERAL).toString());
             franquicia.setContacto_administracion(var.get(FranquiciaDataSource.ColumnFranquicias.CONTACTO_ADMINISTRACION).toString());
             franquicia.setTelefono_administracion(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_ADMINISTRACION).toString());
             franquicia.setMovil_administracion(var.get(FranquiciaDataSource.ColumnFranquicias.MOVIL_ADMINISTRACION).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CONTACTO_INTERMEDIACION).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_INTERMEDIACION).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.MOVIL_INTERMEDIACION).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_ADMINISTRACION).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_INTERMEDIACION).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.EMAIL1).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_GENERAL).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CONTACTO_GENERAL_2).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_CONTACTO_2).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_ALTERNATIVO_2).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.MOVIL_GENERAL_2).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_CONTACTO_2).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.CARGO_CONTACTO_2).toString());
-
-
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-            franquicia.set(var.get(FranquiciaDataSource.ColumnFranquicias.).toString());
-
-
-
-
-
-
+            franquicia.setContacto_intermediacion(var.get(FranquiciaDataSource.ColumnFranquicias.CONTACTO_INTERMEDIACION).toString());
+            franquicia.setTelefono_intermediacion(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_INTERMEDIACION).toString());
+            franquicia.setMovil_intermediacion(var.get(FranquiciaDataSource.ColumnFranquicias.MOVIL_INTERMEDIACION).toString());
+            franquicia.setCorreo_administracion(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_ADMINISTRACION).toString());
+            franquicia.setCorreo_intermediacion(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_INTERMEDIACION).toString());
+            franquicia.setEmail1(var.get(FranquiciaDataSource.ColumnFranquicias.EMAIL1).toString());
+            franquicia.setCorreo_general(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_GENERAL).toString());
+            franquicia.setContacto_general_2(var.get(FranquiciaDataSource.ColumnFranquicias.CONTACTO_GENERAL_2).toString());
+            franquicia.setTelefono_contacto_2(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_CONTACTO_2).toString());
+            franquicia.setTelefono_alternativo_2(var.get(FranquiciaDataSource.ColumnFranquicias.TELEFONO_ALTERNATIVO_2).toString());
+            franquicia.setMovil_general_2(var.get(FranquiciaDataSource.ColumnFranquicias.MOVIL_GENERAL_2).toString());
+            franquicia.setCorreo_contacto_2(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_CONTACTO_2).toString());
+            franquicia.setCargo_contacto_2(var.get(FranquiciaDataSource.ColumnFranquicias.CARGO_CONTACTO_2).toString());
+            franquicia.setInicio_expansion(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.INICIO_EXPANSION).toString()));
+            franquicia.setObservaciones_administracion(var.get(FranquiciaDataSource.ColumnFranquicias.OBSERVACIONES_ADMINISTRACION).toString());
+            franquicia.setTipo_cuenta(var.get(FranquiciaDataSource.ColumnFranquicias.TIPO_CUENTA).toString());
+            franquicia.setCorreo_envio(var.get(FranquiciaDataSource.ColumnFranquicias.CORREO_ENVIO).toString());
+            franquicia.setChk_c1(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C1).toString()));
+            franquicia.setChk_c2(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C2).toString()));
+            franquicia.setChk_c3(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C3).toString()));
+            franquicia.setChk_c4(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C4).toString()));
+            franquicia.setChk_c11(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C11).toString()));
+            franquicia.setChk_c12(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C12).toString()));
+            franquicia.setChk_c13(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C13).toString()));
+            franquicia.setChk_c14(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C14).toString()));
+            franquicia.setChk_c15(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.CHK_C15).toString()));
+            franquicia.setDir_cons_id_c(var.get(FranquiciaDataSource.ColumnFranquicias.DIR_CONS_ID_C).toString());
+            franquicia.setLlamar_todos(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.LLAMAR_TODOS).toString()));
+            franquicia.setInforme_urgente(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.INFORME_URGENTE).toString()));
+            franquicia.setModNeg1(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG1).toString());
+            franquicia.setModNeg2(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG2).toString());
+            franquicia.setModNeg3(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG3).toString());
+            franquicia.setModNeg4(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG4).toString());
+            franquicia.setPrioridad(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.PRIORIDAD).toString()));
+            franquicia.setValNeg11(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG11).toString());
+            franquicia.setValNeg12(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG12).toString());
+            franquicia.setValNeg13(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG13).toString());
+            franquicia.setValNeg14(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG14).toString());
+            franquicia.setValNeg15(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG15).toString());
+            franquicia.setValNeg21(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG21).toString());
+            franquicia.setValNeg22(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG22).toString());
+            franquicia.setValNeg23(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG23).toString());
+            franquicia.setValNeg24(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG24).toString());
+            franquicia.setValNeg25(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG25).toString());
+            franquicia.setValNeg31(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG31).toString());
+            franquicia.setValNeg32(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG32).toString());
+            franquicia.setValNeg33(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG33).toString());
+            franquicia.setValNeg34(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG34).toString());
+            franquicia.setValNeg35(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG35).toString());
+            franquicia.setValNeg41(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG41).toString());
+            franquicia.setValNeg42(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG42).toString());
+            franquicia.setValNeg43(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG43).toString());
+            franquicia.setValNeg44(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG44).toString());
+            franquicia.setValNeg45(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG45).toString());
+            franquicia.setCampo_prueba(var.get(FranquiciaDataSource.ColumnFranquicias.CAMPO_PRUEBA).toString());
+            franquicia.setMaster(Integer.parseInt(var.get(FranquiciaDataSource.ColumnFranquicias.MASTER).toString()));
+            listaFranquicias.add(franquicia);
+            mapaFranquicias.put(franquicia.getId(), franquicia);
         }
     }
 
