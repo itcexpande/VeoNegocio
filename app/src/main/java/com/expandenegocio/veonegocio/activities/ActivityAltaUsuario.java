@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.expandenegocio.veonegocio.DAO.DbHelper;
 import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
@@ -132,6 +133,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
         final ArrayList<Provincia> listaProv = dataSource.getProvincias();
+
 
         ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaProv);
 

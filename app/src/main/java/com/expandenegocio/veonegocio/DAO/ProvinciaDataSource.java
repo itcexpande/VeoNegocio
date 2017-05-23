@@ -2,7 +2,6 @@ package com.expandenegocio.veonegocio.DAO;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -32,9 +31,9 @@ public class ProvinciaDataSource {
 
     public ProvinciaDataSource(Context context) {
         //Creando una instancia hacia la base de datos
-        //dbHelper = new DbHelper(context);
-        //database = dbHelper.getWritableDatabase();
-        this.contexto= context;
+       dbHelper = new DbHelper(context);
+       database = dbHelper.getWritableDatabase();
+       // this.contexto= context;
     }
 
 

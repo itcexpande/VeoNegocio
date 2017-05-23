@@ -39,22 +39,50 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     private SliderLayout mDemoSlider;
     private int codigoProvincia;
-    private int codigoMunicipio;
     private String denominacionProvincia;
+    private int codigoMunicipio;
     private int totalHabitantes;
     private int totalHombres;
     private int totalMujeres;
     private ArrayList<Provincia> provincias = new ArrayList<>();
+    private ArrayList<Municipio> municipios = new ArrayList<>();
     private DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+/*
+
         dbHelper = new DbHelper(getApplicationContext());
+        pasaProvincias();
+        int lg = provincias.size();
+        for (int x = 0; x < lg; x++) {
+            Provincia provincia = provincias.get(x);
+            codigoProvincia = provincia.getId();
+            denominacionProvincia = provincia.getNombreProvincia();
+            dbHelper.insertarProvincia(codigoProvincia, denominacionProvincia);
+        }
 
+        Provincia provincia = new Provincia();
+        //provincia = dbHelper.recuperarUnaProvincia(47);
+        pasaMunicipios();
+        lg = municipios.size();
+        for (int x = 0; x < lg; x++) {
+            Municipio municipio = municipios.get(x);
+            codigoProvincia = municipio.getCodigoProvincia();
+            codigoMunicipio = municipio.getCodigoMunicipio();
+            denominacionProvincia = municipio.getNombreMunicipio();
+            totalHombres = municipio.getTotalHabitantes();
+            totalHombres = municipio.getHombres();
+            totalMujeres = municipio.getMujeres();
 
-        pasarFicheros();
+            dbHelper.insertarMunicipo(codigoProvincia, codigoMunicipio,
+                    denominacionProvincia, totalHabitantes,
+                    totalHombres,
+                    totalMujeres);
+        }
+*/
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -89,6 +117,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
     }
+
 
 
     @Override
@@ -150,11 +179,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     }
 
     public void InicioSesion(View view) {
-        //ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
-        //ArrayList<Provincia> nn = dataSource.getProvincias2();
-        dbHelper = new DbHelper(getApplicationContext());
-        int id = dbHelper.recuperarProvincia(47).getId();
-        String nombre = dbHelper.recuperarProvincia(47).getNombreProvincia();
 
         if (!compruebaConexion(this)) {
             Toast.makeText(getBaseContext(), "Necesaria conexión a internet ", Toast.LENGTH_SHORT).show();
@@ -176,12 +200,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         startActivity(intent);
     }
 
-    private void pasarFicheros() {
-        MunicipioDataSource dataSource = new MunicipioDataSource(this);
-
-        pasaProvincias();
-        //    pasaMunicipios();
-    }
 
     private void pasaProvincias() {
 
@@ -258,15 +276,12 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
             codigoProvincia = Integer.parseInt(var.get(ProvinciaDataSource.ColumnProvincia.ID).toString());
             denominacionProvincia = var.get(ProvinciaDataSource.ColumnProvincia.NOMBRE).toString();
+
             Provincia provincia = new Provincia();
             provincia.setId(codigoProvincia);
             provincia.setNombreProvincia(denominacionProvincia);
             provincias.add(provincia);
-            dbHelper.insertarProvincia(provincia.getId(), provincia.getNombreProvincia());
-            /*
-            ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
-            dataSource.insertProvincia(provincia);
-            */
+
         }
     }
 
@@ -344,7 +359,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     private void recogeDatos3(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
-        ArrayList<Municipio> listaM = new ArrayList<>();
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
 
@@ -362,14 +376,9 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             municipio.setTotalHabitantes(totalHabitantes);
             municipio.setHombres(totalHombres);
             municipio.setMujeres(totalMujeres);
-
-            MunicipioDataSource dataSource = new MunicipioDataSource(this);
-            dataSource.insertMunicipio(municipio);
-            listaM.add(municipio);
+            municipios.add(municipio);
 
         }
-        longitud = listaM.size();
-        int nn = 0;
 
     }
 

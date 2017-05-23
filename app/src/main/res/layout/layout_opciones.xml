@@ -15,5 +15,14 @@
         android:onClick="ConsultaModificacionDeUsuarios"/>
 
 
+    <Button
+        android:id="@+id/botonBusquedaDeNegocio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="BUSQUEDA DE NEGOCIO"
+        android:background="@drawable/boton_2"
+        android:onClick="BusquedaDeNegocio"/>
+
 
 </LinearLayout>

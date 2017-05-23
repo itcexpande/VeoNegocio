@@ -88,6 +88,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activities.ActivityBusquedaNegocio"
+            android:label="Busqueda de Negocio"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="ActivityBusquedaNegocio" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

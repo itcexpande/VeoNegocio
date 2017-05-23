@@ -50,10 +50,18 @@ public class ActivityOpciones extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void busquedaDeNegocio(MenuItem item) {
+    public void BusquedaDeNegocio(View view) {
+
+        Intent intent = new Intent("ActivityBusquedaConsultaUsuario");
+        intent.putExtra("correo", nCorreo);
+        intent.putExtra("password", nPassword);
+        startActivity(intent);
+
     }
 
+    public void busquedaDeNegocio(MenuItem item) {
 
+    }
 
 
 }
