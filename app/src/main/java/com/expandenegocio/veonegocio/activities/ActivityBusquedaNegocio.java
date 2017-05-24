@@ -180,13 +180,17 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
                 Franquicia elegido = (Franquicia) pariente.getItemAtPosition(posicion);
+                Franquicia ff= (Franquicia) listaFranquicias.get(posicion);
 
                 CharSequence texto = "Seleccionado: " + elegido.getDescription();
+                String dat =  ff.getId();
                 Toast toast = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_LONG);
                 toast.show();
-
+                Bundle bundle = new Bundle();
+                bundle.putString("id",dat);
                 FragmentManager fragmentManager = getFragmentManager();
                 DialogoDetalleFranquicia dialogo = new DialogoDetalleFranquicia();
+                dialogo.setArguments(bundle);
                 dialogo.show(fragmentManager, "listadoDetalleFranquicia");
 
             }

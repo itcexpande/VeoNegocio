@@ -5,6 +5,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_detalle_franquicia_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Empresa:" />
+    <TextView
         android:id="@+id/tv_detalle_franquicia_empresa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,11 +38,5 @@
         android:layout_marginTop="5dp"
         android:text="Página WEB:" />
 
-    <TextView
-        android:id="@+id/tv_detalle_inversionminimanecesaria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Inversion mínima necesaria:" />
 
 </LinearLayout>
