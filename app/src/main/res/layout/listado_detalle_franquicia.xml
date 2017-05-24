@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_detalle_franquicia_empresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Empresa:" />
+
+    <TextView
+        android:id="@+id/tv_detalle_franquicia_tipodeactividad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Tipo de Actividad:" />
+
+    <TextView
+        android:id="@+id/tv_detalle_franquicia_telefonooficina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Telefono Oficina:" />
+
+    <TextView
+        android:id="@+id/tv_detalle_franquicia_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Página WEB:" />
+
+    <TextView
+        android:id="@+id/tv_detalle_inversionminimanecesaria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Inversion mínima necesaria:" />
+
+</LinearLayout>

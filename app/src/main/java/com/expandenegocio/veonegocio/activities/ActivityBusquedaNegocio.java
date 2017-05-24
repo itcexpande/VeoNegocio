@@ -1,11 +1,14 @@
 package com.expandenegocio.veonegocio.activities;
 
 
-import android.app.ListActivity;
-import android.database.MatrixCursor;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 import com.expandenegocio.veonegocio.DAO.FranquiciaDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Franquicia;
+import com.expandenegocio.veonegocio.models.Lista_adaptador;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -33,64 +37,25 @@ import cz.msebera.android.httpclient.Header;
  * Created by jesus on 20/03/2017.
  */
 
-public class ActivityBusquedaNegocio extends ListActivity {
+public class ActivityBusquedaNegocio extends AppCompatActivity {
 
     private ArrayList<Franquicia> listaFranquicias = new ArrayList<>();
+    private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.listado_modelo_negocio);
         Franquicia franquicia = createFranquicia();
         procesarInformacion(franquicia);
-/*
-        String[] columnasBD = new String[]{"_id", "imagen", "textoSuperior", "textoInferior"};
-        MatrixCursor cursor = new MatrixCursor(columnasBD);
-        int longitud = listaFranquicias.size();
-        franquicia = new Franquicia();
-        String logo;
-        String nombre;
-        String descripcion;
 
-        for (int x = 0; x < longitud; x++) {
-            franquicia = new Franquicia();
-            franquicia = listaFranquicias.get(x);
-            logo = franquicia.getLogotipo();
-            nombre = franquicia.getName();
-            descripcion = franquicia.getDescription();
-
-            cursor.addRow(new Object[]{Integer.toString(x), R.drawable.buho, nombre, descripcion});
-        }
-
-
-/*
-        cursor.addRow(new Object[]{"0", R.drawable.buho, "nombre01", "descripcion01"});
-        cursor.addRow(new Object[]{"1", R.drawable.buho, "nombre02", "descripcion02"});
-        cursor.addRow(new Object[]{"2", R.drawable.buho, "nombre03", "descripcion03"});
-        cursor.addRow(new Object[]{"3", R.drawable.buho, "nombre04", "descripcion04"});
-        cursor.addRow(new Object[]{"4", R.drawable.buho, "nombre05", "descripcion05"});
-        cursor.addRow(new Object[]{"5", R.drawable.buho, "nombre06", "descripcion06"});
-*/
-/*
-        String[] desdeEstasColumnas = {"imagen", "textoSuperior", "textoInferior"};
-        int[] aEstasViews = {R.id.imageview_modelo_negocio, R.id.tv1_modelo_negocio, R.id.tv2_modelo_negocio};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.item_modelo_negocio, cursor, desdeEstasColumnas, aEstasViews, 0);
-
-        ListView listado = getListView();
-        listado.setAdapter(adapter);
-*/
     }
-
 
     @Override
-    public void onListItemClick(ListView lista, View view, int posicion, long id) {
-        // Hacer algo cuando un elemento de la lista es seleccionado
-        TextView textoTitulo = (TextView) view.findViewById(R.id.textView_superior);
-
-        CharSequence texto = "Seleccionado: " + textoTitulo.getText();
-        Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_LONG).show();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_busqueda_negocio, menu);
+        return true;
     }
-
 
     private Franquicia createFranquicia() {
         Franquicia franquicia = new Franquicia();
@@ -108,8 +73,6 @@ public class ActivityBusquedaNegocio extends ListActivity {
         params.put(FranquiciaDataSource.ColumnFranquicias.NAME, f.getName().toString());
 
         invokeWS(params);
-
-
     }
 
 
@@ -133,11 +96,8 @@ public class ActivityBusquedaNegocio extends ListActivity {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             break;
                         case 1:
-                            recogeDatos2(obj);
+                            recogeDatos(obj);
                             procesar();
-                            //Toast.makeText(getApplicationContext(), "Registrado correctamente!", Toast.LENGTH_LONG).show();
-
-
                             break;
                         case 2:
                             Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
@@ -174,8 +134,8 @@ public class ActivityBusquedaNegocio extends ListActivity {
     }
 
     private void procesar() {
-        String[] columnasBD = new String[]{"_id", "imagen", "textoSuperior", "textoInferior"};
-        MatrixCursor cursor = new MatrixCursor(columnasBD);
+
+        ArrayList<Franquicia> datos2 = new ArrayList<Franquicia>();
         int longitud = listaFranquicias.size();
         Franquicia franquicia = new Franquicia();
         String logo;
@@ -189,16 +149,48 @@ public class ActivityBusquedaNegocio extends ListActivity {
             nombre = franquicia.getName();
             descripcion = franquicia.getDescription();
 
-            cursor.addRow(new Object[]{Integer.toString(x), R.drawable.buho, nombre, descripcion});
+            Franquicia f = new Franquicia();
+            f.setLogotipo(Integer.toString(R.drawable.icono));
+            f.setName(nombre);
+            f.setDescription(descripcion);
+            datos2.add(f);
         }
 
-        String[] desdeEstasColumnas = {"imagen", "textoSuperior", "textoInferior"};
-        int[] aEstasViews = {R.id.imageview_modelo_negocio, R.id.tv1_modelo_negocio, R.id.tv2_modelo_negocio};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.item_modelo_negocio, cursor, desdeEstasColumnas, aEstasViews, 0);
+        lista = (ListView) findViewById(R.id.ListView_listado);
+        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_modelo_negocio, datos2) {
+            @Override
+            public void onEntrada(Object entrada, View view) {
+                if (entrada != null) {
+                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
+                    if (texto_superior_entrada != null)
+                        texto_superior_entrada.setText(((Franquicia) entrada).getName());
 
-        ListView listado = getListView();
-        listado.setAdapter(adapter);
+                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
+                    if (texto_inferior_entrada != null)
+                        texto_inferior_entrada.setText(((Franquicia) entrada).getDescription());
 
+                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
+                    if (imagen_entrada != null)
+                        imagen_entrada.setImageResource(Integer.parseInt(((Franquicia) entrada).getLogotipo()));
+                }
+            }
+        });
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+                Franquicia elegido = (Franquicia) pariente.getItemAtPosition(posicion);
+
+                CharSequence texto = "Seleccionado: " + elegido.getDescription();
+                Toast toast = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_LONG);
+                toast.show();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                DialogoDetalleFranquicia dialogo = new DialogoDetalleFranquicia();
+                dialogo.show(fragmentManager, "listadoDetalleFranquicia");
+
+            }
+        });
     }
 
     private void recogeDatos(JSONObject obj) throws JSONException {
@@ -356,7 +348,7 @@ public class ActivityBusquedaNegocio extends ListActivity {
             franquicia.setModNeg2(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG2).toString());
             franquicia.setModNeg3(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG3).toString());
             franquicia.setModNeg4(var.get(FranquiciaDataSource.ColumnFranquicias.MODNEG4).toString());
-            //       franquicia.setPrioridad(DevuelveIntegerCero(var.get(FranquiciaDataSource.ColumnFranquicias.PRIORIDAD).toString()));
+            // franquicia.setPrioridad(DevuelveIntegerCero(var.get(FranquiciaDataSource.ColumnFranquicias.PRIORIDAD).toString()));
             franquicia.setValNeg11(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG11).toString());
             franquicia.setValNeg12(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG12).toString());
             franquicia.setValNeg13(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG13).toString());
@@ -379,21 +371,6 @@ public class ActivityBusquedaNegocio extends ListActivity {
             franquicia.setValNeg45(var.get(FranquiciaDataSource.ColumnFranquicias.VALNEG45).toString());
             franquicia.setCampo_prueba(var.get(FranquiciaDataSource.ColumnFranquicias.CAMPO_PRUEBA).toString());
             franquicia.setMaster(DevuelveIntegerCero(var.get(FranquiciaDataSource.ColumnFranquicias.MASTER).toString()));
-
-            listaFranquicias.add(franquicia);
-        }
-    }
-
-    private void recogeDatos2(JSONObject obj) throws JSONException {
-        JSONArray datos = obj.getJSONArray("info");
-        int longitud = datos.length();
-        for (int x = 0; x < longitud; x++) {
-            JSONObject var = datos.getJSONObject(x);
-            Franquicia franquicia = new Franquicia();
-
-            franquicia.setId(var.get(FranquiciaDataSource.ColumnFranquicias.ID).toString());
-            franquicia.setName(var.get(FranquiciaDataSource.ColumnFranquicias.NAME).toString());
-            franquicia.setDescription(var.get(FranquiciaDataSource.ColumnFranquicias.DESCRIPTION).toString());
 
             listaFranquicias.add(franquicia);
         }
@@ -438,4 +415,6 @@ public class ActivityBusquedaNegocio extends ListActivity {
     }
 
 
+    public void SeleccionarOpciones(MenuItem item) {
+    }
 }
