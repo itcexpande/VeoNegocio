@@ -52,7 +52,7 @@ public class ActivityOpciones extends AppCompatActivity {
 
     public void BusquedaDeNegocio(View view) {
 
-        Intent intent = new Intent("ActivityBusquedaConsultaUsuario");
+        Intent intent = new Intent("ActivityBusquedaNegocio");
         intent.putExtra("correo", nCorreo);
         intent.putExtra("password", nPassword);
         startActivity(intent);

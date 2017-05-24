@@ -2,6 +2,7 @@ package com.expandenegocio.veonegocio.models;
 
 import android.support.annotation.NonNull;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -9,7 +10,7 @@ import java.util.HashMap;
  * Created by jesus on 28/04/2017.
  */
 
-public class Franquicia {
+public class Franquicia  {
 
     private String id;
     private String name;
@@ -76,17 +77,14 @@ public class Franquicia {
     private Date fecha_expansion;
     private Integer centros_nacionales_propios;
     private Integer centros_nacionales_franquicia;
-
     private String presencia_internacional;
     private String paises;
     private Integer red_spain;
-
     private Integer centros_extranjeros_propios;
     private Integer centros_extranjeros_franqui;
     private Integer red_extrangera;
     private Integer plantilla_central;
     private Double cifra_negocio_grupo;
-
     private String nifra;
     private String regmarca;
     private String aef;
@@ -102,7 +100,6 @@ public class Franquicia {
     private String persona_contacto;
     private Date fecha_acuerdo;
     private Date fecha_activacion;
-
     private Integer ficha_ampliada_anterior;
     private String expan_consultora_id_c;
     private String estado_fran;
@@ -112,24 +109,18 @@ public class Franquicia {
     private String user_id_c;
     private String documentacion_pendiente;
     private String objeciones_foros_bbdd;
-
     private Double derecho_entrada_min;
     private Double derecho_entrada_max;
-
     private String royalty_expltacion;
     private String royalty_publicitario;
     private String otros_royalties;
-
     private Double facturacion_year_unidad_fran_1;
     private Double facturacion_year_unidad_fran_2;
     private Double facturacion_year_unidad_fran_3;
-
     private String amortizacio_inversion;
-
     private Double beneficio_neto_unidad_fran_1;
     private Double beneficio_neto_unidad_fran_2;
     private Double beneficio_neto_unidad_fran_3;
-
     private String tipo_actividad;
     private String movil_general;
     private String cargo_contacto_general;
@@ -150,11 +141,9 @@ public class Franquicia {
     private String correo_contacto_2;
     private String cargo_contacto_2;
     private Integer inicio_expansion;
-
     private String observaciones_administracion;
     private String tipo_cuenta;
     private String correo_envio;
-
     private Integer chk_c1;
     private Integer chk_c2;
     private Integer chk_c3;
@@ -164,11 +153,9 @@ public class Franquicia {
     private Integer chk_c13;
     private Integer chk_c14;
     private Integer chk_c15;
-
     private String dir_cons_id_c;
     private Integer llamar_todos;
     private Integer informe_urgente;
-
     private String modNeg1;
     private String modNeg2;
     private String modNeg3;
@@ -1564,10 +1551,5 @@ public class Franquicia {
 
     public void setMaster(Integer master) {
         this.master = master;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
