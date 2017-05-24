@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Empresa:" />
+        android:text="Nombre:" />
     <TextView
         android:id="@+id/tv_detalle_franquicia_empresa"
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:text="Tipo de Actividad:" />
 
     <TextView
-        android:id="@+id/tv_detalle_franquicia_telefonooficina"
+        android:id="@+id/tv_detalle_franquicia_telefonoficina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

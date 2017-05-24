@@ -4,27 +4,20 @@ package com.expandenegocio.veonegocio.activities;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.DAO.FranquiciaDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Franquicia;
-import com.expandenegocio.veonegocio.models.Lista_adaptador;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -35,9 +28,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
+
+import static android.R.attr.fragment;
 
 
 public class DialogoDetalleFranquicia extends DialogFragment {
@@ -46,64 +40,49 @@ public class DialogoDetalleFranquicia extends DialogFragment {
     private ArrayList<Franquicia> listaFranquicias = new ArrayList<>();
     private TextView tv1, tv2, tv3, tv4, tv5;
 
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
-        String data = getArguments().getString("id");
+        String dataId = getArguments().getString("id").toString();
+        String dataName = getArguments().getString("name").toString();
+        String dataEmpresa = getArguments().getString("empresa").toString();
+        String dataTipoAc = getArguments().getString("tipoAc").toString();
+        String dataTfno = getArguments().getString("tfno").toString();
+        String dataWeb = getArguments().getString("web").toString();
 
-        Franquicia franquicia = new Franquicia();
-        franquicia.setId(data);
-        procesarInformacion(franquicia);
 
         LayoutInflater li = (LayoutInflater) getActivity().getSystemService(
                 infService);
 
         final View layoutInflado = li.inflate(R.layout.listado_detalle_franquicia, null);
+
         AlertDialog.Builder ventana = new AlertDialog.Builder(getActivity());
         ventana.setTitle("Detalle Franquicia");
 
         ventana.setView(layoutInflado);
-        TextView tv1 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_empresa);
-        TextView tv2 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_telefonooficina);
+        TextView tv2 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_empresa);
+        TextView tv4 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_telefonoficina);
         TextView tv3 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_tipodeactividad);
-        TextView tv4 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_web);
-        TextView tv5 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_nombre);
+        TextView tv5 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_web);
+        TextView tv1 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_nombre);
+
+        tv1.setText("Nombre: " + dataName);
+        tv2.setText("Empresa: " + dataEmpresa);
+        tv3.setText("Actividad: " + dataTipoAc);
+        tv4.setText("Telefono: " + dataTfno);
+        tv5.setText("WEB: " + dataWeb);
 
 
         //    ArrayList<CharSequence> datos = new ArrayList<>();
-/*
+
         ventana.setPositiveButton("Aceptar",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int boton) {
-
-                        EditText nombre = (EditText) layoutInflado.findViewById(R.id.nuevo_medallista);
-                        String nuevoNombre = nombre.getText().toString();
-                        EditText annoOlimpico = (EditText) layoutInflado.findViewById(R.id.nuevo_anno_olimpiadas);
-                        String nuevoannoOlimpiadas = annoOlimpico.getText().toString();
-                        Spinner spinner = (Spinner) layoutInflado.findViewById(R.id.nuevo_spinner_medalla);
-                        String nuevoMedalla = (String) spinner.getSelectedItem();
-                        Spinner spinner2 = (Spinner) layoutInflado.findViewById(R.id.nuevo_spinner_deporte);
-                        String nuevoDeporte = (String) spinner2.getSelectedItem();
-
-                        Deportista nuevo = new Deportista(
-                                nuevoNombre,
-                                Integer.parseInt(nuevoannoOlimpiadas),
-                                Medalla.devuelveMedallaPorNombre(getActivity(), nuevoMedalla),
-                                Deporte.devuelveDeportePorNombre(getActivity(), nuevoDeporte));
-
-                        //comprobamos si es correcto
-                        if (gestora.existeDeportista(nuevo)) {
-                            gestora.escribeAviso(getActivity(), "Deportista ya Exsite", nuevo);
-                        } else {
-                            gestora.add(nuevo);
-                            gestora.escribeAviso(getActivity(), "Deportista Alta", nuevo);
-                        }
-                        MainActivity.adaptador.notifyDataSetChanged();
-
                     }
                 });
 
-  */
+
         return ventana.create();
     }
 
@@ -116,7 +95,6 @@ public class DialogoDetalleFranquicia extends DialogFragment {
 
 
     public void invokeWS(RequestParams params) {
-
         AsyncHttpClient client = new AsyncHttpClient();
         client.post("http://www.expandenegocio.com/app/retorna_una_franquicia.php", params, new AsyncHttpResponseHandler() {
             @Override
@@ -135,7 +113,7 @@ public class DialogoDetalleFranquicia extends DialogFragment {
                             break;
                         case 1:
                             recogeDatos(obj);
-                            procesar();
+                            //   procesar();
                             break;
                         case 2:
                             Toast.makeText(getActivity(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
@@ -168,16 +146,42 @@ public class DialogoDetalleFranquicia extends DialogFragment {
 
             }
         });
-
     }
 
     private void procesar() {
+
+
+        String infService = Context.LAYOUT_INFLATER_SERVICE;
+
+        LayoutInflater li = (LayoutInflater) getActivity().getSystemService(
+                infService);
+        final View layoutInflado = li.inflate(R.layout.listado_detalle_franquicia, null);
+
+        TextView tv2 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_empresa);
+        TextView tv4 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_telefonoficina);
+        TextView tv3 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_tipodeactividad);
+        TextView tv5 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_web);
+        TextView tv1 = (TextView) layoutInflado.findViewById(R.id.tv_detalle_franquicia_nombre);
+        AlertDialog.Builder ventana = new AlertDialog.Builder(getActivity());
+        ventana.setTitle("Detalle Franquicia");
+
+        ventana.setView(layoutInflado);
+
+
         Franquicia franquicia = listaFranquicias.get(0);
-        tv1.setText("Empresa: " + devuelveTextoSiEsNull(franquicia.getEmpresa().toString()));
-        tv2.setText("Actividad: " + devuelveTextoSiEsNull(franquicia.getTipo_actividad().toString()));
-        tv2.setText("Telefono: " + devuelveTextoSiEsNull(franquicia.getPhone_office().toString()));
-        tv2.setText("WEB: " + devuelveTextoSiEsNull(franquicia.getWebsite().toString()));
-        tv5.setText("NOMBRE :  " + devuelveTextoSiEsNull(franquicia.getName().toString()));
+
+
+        String nombreEmpresa = devuelveTextoSiEsNull(franquicia.getEmpresa().toString());
+        String tipoActividad = devuelveTextoSiEsNull(franquicia.getTipo_actividad().toString());
+        String telefono = devuelveTextoSiEsNull(franquicia.getPhone_office().toString());
+        String nombre = devuelveTextoSiEsNull(franquicia.getName().toString());
+        String web = devuelveTextoSiEsNull(franquicia.getWebsite().toString());
+
+        tv1.setText("Empresa: " + nombre);
+        tv2.setText("Empresa: " + nombreEmpresa);
+        tv3.setText("Actividad: " + tipoActividad);
+        tv4.setText("Telefono: " + telefono);
+        tv5.setText("WEB: " + web);
 
 
     }
