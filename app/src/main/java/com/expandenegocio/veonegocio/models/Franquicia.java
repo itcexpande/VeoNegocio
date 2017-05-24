@@ -1,7 +1,10 @@
 package com.expandenegocio.veonegocio.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,7 +13,7 @@ import java.util.HashMap;
  * Created by jesus on 28/04/2017.
  */
 
-public class Franquicia  {
+public class Franquicia implements Serializable {
 
     private String id;
     private String name;
@@ -1552,4 +1555,6 @@ public class Franquicia  {
     public void setMaster(Integer master) {
         this.master = master;
     }
+
+
 }

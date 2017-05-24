@@ -1,8 +1,13 @@
 package com.expandenegocio.veonegocio.activities;
 
 
+import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -187,12 +193,17 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_LONG);
                 toast.show();
                 Bundle bundle = new Bundle();
+/*
+
                 bundle.putString("id", ff.getId().toString());
                 bundle.putString("name", ff.getName().toString());
                 bundle.putString("empresa", ff.getEmpresa().toString());
                 bundle.putString("tipoAc", ff.getTipo_actividad().toString());
                 bundle.putString("tfno", ff.getPhone_office().toString());
                 bundle.putString("web", ff.getWebsite().toString());
+
+*/
+                bundle.putSerializable("franquicia", ff);
 
                 FragmentManager fragmentManager = getFragmentManager();
                 DialogoDetalleFranquicia dialogo = new DialogoDetalleFranquicia();
