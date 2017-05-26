@@ -44,45 +44,18 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     private int totalHabitantes;
     private int totalHombres;
     private int totalMujeres;
-    private ArrayList<Provincia> provincias = new ArrayList<>();
-    private ArrayList<Municipio> municipios = new ArrayList<>();
     private DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
 
         dbHelper = new DbHelper(getApplicationContext());
+        // borra basedatos
+        //  getApplicationContext().deleteDatabase("VeoNegocio.db");
+
         pasaProvincias();
-        int lg = provincias.size();
-        for (int x = 0; x < lg; x++) {
-            Provincia provincia = provincias.get(x);
-            codigoProvincia = provincia.getId();
-            denominacionProvincia = provincia.getNombreProvincia();
-            dbHelper.insertarProvincia(codigoProvincia, denominacionProvincia);
-        }
-
-        Provincia provincia = new Provincia();
-        //provincia = dbHelper.recuperarUnaProvincia(47);
-        pasaMunicipios();
-        lg = municipios.size();
-        for (int x = 0; x < lg; x++) {
-            Municipio municipio = municipios.get(x);
-            codigoProvincia = municipio.getCodigoProvincia();
-            codigoMunicipio = municipio.getCodigoMunicipio();
-            denominacionProvincia = municipio.getNombreMunicipio();
-            totalHombres = municipio.getTotalHabitantes();
-            totalHombres = municipio.getHombres();
-            totalMujeres = municipio.getMujeres();
-
-            dbHelper.insertarMunicipo(codigoProvincia, codigoMunicipio,
-                    denominacionProvincia, totalHabitantes,
-                    totalHombres,
-                    totalMujeres);
-        }
-*/
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -117,7 +90,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
     }
-
 
 
     @Override
@@ -202,38 +174,28 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
 
     private void pasaProvincias() {
-
-        Provincia provincia = new Provincia();
         RequestParams params = new RequestParams();
         params.put(ProvinciaDataSource.ColumnProvincia.ID, -1);
         params.put(ProvinciaDataSource.ColumnProvincia.NOMBRE, "");
         invokeWS(params);
-
-
     }
 
 
     public void invokeWS(RequestParams params) {
-
         AsyncHttpClient client = new AsyncHttpClient();
         client.post("http://www.expandenegocio.com/app/devuelve_provincias.php", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
                 String response = new String(responseBody);
-
-
                 try {
-
                     JSONObject obj = new JSONObject(response);
-
                     switch (obj.getInt("status")) {
-
                         case 0:
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                             break;
                         case 1:
                             recogeDatos2(obj);
+                            pasaMunicipios();
                             break;
                         case 2:
                             Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
@@ -247,7 +209,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
                 }
 
             }
-
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable
@@ -266,28 +227,21 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     }
 
-
     private void recogeDatos2(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
 
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
-
             codigoProvincia = Integer.parseInt(var.get(ProvinciaDataSource.ColumnProvincia.ID).toString());
             denominacionProvincia = var.get(ProvinciaDataSource.ColumnProvincia.NOMBRE).toString();
 
-            Provincia provincia = new Provincia();
-            provincia.setId(codigoProvincia);
-            provincia.setNombreProvincia(denominacionProvincia);
-            provincias.add(provincia);
-
+            dbHelper.insertarProvincia(codigoProvincia, denominacionProvincia);
         }
     }
 
-    private void pasaMunicipios() {
 
-        Municipio municipio = new Municipio();
+    private void pasaMunicipios() {
         RequestParams params = new RequestParams();
         params.put(MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA, 0);
         params.put(MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO, 0);
@@ -297,8 +251,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         params.put(MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES, 0);
 
         invokeWS2(params);
-
-
     }
 
 
@@ -308,10 +260,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         client.post("http://www.expandenegocio.com/app/devuelve_municipios.php", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
                 String response = new String(responseBody);
-
-
                 try {
 
                     JSONObject obj = new JSONObject(response);
@@ -355,7 +304,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
     }
 
-
     private void recogeDatos3(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
@@ -368,15 +316,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             totalHabitantes = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_HABITANTES).toString());
             totalHombres = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES).toString());
             totalMujeres = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES).toString());
-
-            Municipio municipio = new Municipio();
-            municipio.setCodigoProvincia(codigoProvincia);
-            municipio.setCodigoMunicipio(codigoMunicipio);
-            municipio.setNombreMunicipio(denominacionProvincia);
-            municipio.setTotalHabitantes(totalHabitantes);
-            municipio.setHombres(totalHombres);
-            municipio.setMujeres(totalMujeres);
-            municipios.add(municipio);
+            dbHelper.insertarMunicipo(codigoProvincia, codigoMunicipio, denominacionProvincia, totalHabitantes, totalHombres, totalMujeres);
 
         }
 

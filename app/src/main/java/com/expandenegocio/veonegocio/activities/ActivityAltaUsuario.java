@@ -134,7 +134,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
         final ArrayList<Provincia> listaProv = dataSource.getProvincias();
 
-
         ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaProv);
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
