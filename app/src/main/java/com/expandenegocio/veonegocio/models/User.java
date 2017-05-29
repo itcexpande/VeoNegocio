@@ -16,26 +16,20 @@ public class User {
     private String status;
     private String nombre;
     private String apellidos;
+    private String telefono;
     private Integer codigoProv;
-    private Integer codigoMun;
-    private String capital;
-    private String capitalObservaciones;
-    private Integer cerrada;
+    private String sectorActividad;
+    private String planInversion;
     private String cuandoEmpezar;
-    private String dateEntered;
-    private String dateModified;
-    private Integer deleted;
-    private String disponeContacto;
-    private Integer disponeLocal;
-    private String empresa;
-    private String negocio;
-    private Integer negocioAnterior;
-    private String perfilFranquicia;
     private String perfilProfesional;
-    private String phoneHome;
-    private String phoneMobile;
-    private String recursosPropios;
-    private String situacionProfesional;
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     public String getId() {
         return id;
@@ -85,7 +79,6 @@ public class User {
         this.apellidos = apellidos;
     }
 
-
     public Integer getCodigoProv() {
         return codigoProv;
     }
@@ -94,36 +87,20 @@ public class User {
         this.codigoProv = codigoProv;
     }
 
-    public Integer getCodigoMun() {
-        return codigoMun;
+    public String getSectorActividad() {
+        return sectorActividad;
     }
 
-    public void setCodigoMun(Integer codigoMun) {
-        this.codigoMun = codigoMun;
+    public void setSectorActividad(String sectorActividad) {
+        this.sectorActividad = sectorActividad;
     }
 
-    public String getCapital() {
-        return capital;
+    public String getPlanInversion() {
+        return planInversion;
     }
 
-    public void setCapital(String capital) {
-        this.capital = capital;
-    }
-
-    public String getCapitalObservaciones() {
-        return capitalObservaciones;
-    }
-
-    public void setCapitalObservaciones(String capitalObservaciones) {
-        this.capitalObservaciones = capitalObservaciones;
-    }
-
-    public Integer getCerrada() {
-        return cerrada;
-    }
-
-    public void setCerrada(Integer cerrada) {
-        this.cerrada = cerrada;
+    public void setPlanInversion(String planInversion) {
+        this.planInversion = planInversion;
     }
 
     public String getCuandoEmpezar() {
@@ -134,116 +111,12 @@ public class User {
         this.cuandoEmpezar = cuandoEmpezar;
     }
 
-    public String getDateEntered() {
-        return dateEntered;
-    }
-
-    public void setDateEntered(String dateEntered) {
-        this.dateEntered = dateEntered;
-    }
-
-    public String getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(String dateModified) {
-        this.dateModified = dateModified;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
-
-    public String getDisponeContacto() {
-        return disponeContacto;
-    }
-
-    public void setDisponeContacto(String disponeContacto) {
-        this.disponeContacto = disponeContacto;
-    }
-
-    public Integer getDisponeLocal() {
-        return disponeLocal;
-    }
-
-    public void setDisponeLocal(Integer disponeLocal) {
-        this.disponeLocal = disponeLocal;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
-    public String getNegocio() {
-        return negocio;
-    }
-
-    public void setNegocio(String negocio) {
-        this.negocio = negocio;
-    }
-
-    public Integer getNegocioAnterior() {
-        return negocioAnterior;
-    }
-
-    public void setNegocioAnterior(Integer negocioAnterior) {
-        this.negocioAnterior = negocioAnterior;
-    }
-
-    public String getPerfilFranquicia() {
-        return perfilFranquicia;
-    }
-
-    public void setPerfilFranquicia(String perfilFranquicia) {
-        this.perfilFranquicia = perfilFranquicia;
-    }
-
     public String getPerfilProfesional() {
         return perfilProfesional;
     }
 
     public void setPerfilProfesional(String perfilProfesional) {
         this.perfilProfesional = perfilProfesional;
-    }
-
-    public String getPhoneHome() {
-        return phoneHome;
-    }
-
-    public void setPhoneHome(String phoneHome) {
-        this.phoneHome = phoneHome;
-    }
-
-    public String getPhoneMobile() {
-        return phoneMobile;
-    }
-
-    public void setPhoneMobile(String phoneMobile) {
-        this.phoneMobile = phoneMobile;
-    }
-
-    public String getRecursosPropios() {
-        return recursosPropios;
-    }
-
-    public void setRecursosPropios(String recursosPropios) {
-        this.recursosPropios = recursosPropios;
-    }
-
-    public String getSituacionProfesional() {
-        return situacionProfesional;
-    }
-
-    public void setSituacionProfesional(String situacionProfesional) {
-        this.situacionProfesional = situacionProfesional;
     }
 
     @Override

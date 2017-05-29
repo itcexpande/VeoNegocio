@@ -47,6 +47,8 @@ import cz.msebera.android.httpclient.Header;
 public class ActivityBusquedaNegocio extends AppCompatActivity {
 
     private ArrayList<Franquicia> listaFranquicias = new ArrayList<>();
+    private ArrayList<Franquicia> listaParaListView = new ArrayList<>();
+
     private ListView lista;
     private ProgressDialog progressDialog = null;
 
@@ -55,12 +57,15 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listado_modelo_negocio);
+
         Franquicia franquicia = new Franquicia();
+        franquicia.setId(UUID.randomUUID().toString());
+        franquicia.setName("");
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setContentView(R.layout.custom_progressdialog);
-        //se ppdrá cerrar simplemente pulsando back
+        //se podrá cerrar simplemente pulsando back
         progressDialog.setCancelable(true);
 
         procesarInformacion(franquicia);
@@ -73,15 +78,6 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
         return true;
     }
 
-    /*
-        private Franquicia createFranquicia() {
-            Franquicia franquicia = new Franquicia();
-            franquicia.setId(UUID.randomUUID().toString());
-            franquicia.setName("");
-            return franquicia;
-        }
-
-    */
     private void procesarInformacion(Franquicia f) {
 
         RequestParams params = new RequestParams();
@@ -153,7 +149,7 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
     }
 
     private void procesar() {
-
+/*
         ArrayList<Franquicia> datos2 = new ArrayList<Franquicia>();
         int longitud = listaFranquicias.size();
         Franquicia franquicia = new Franquicia();
@@ -174,9 +170,9 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             f.setDescription(descripcion);
             datos2.add(f);
         }
-
+*/
         lista = (ListView) findViewById(R.id.ListView_listado);
-        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_modelo_negocio, datos2) {
+        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_modelo_negocio, listaParaListView) {
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
@@ -221,9 +217,15 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
     private void recogeDatos(JSONObject obj) throws JSONException {
         JSONArray datos = obj.getJSONArray("info");
         int longitud = datos.length();
+
+   /*     String logo;
+        String nombre;
+        String descripcion;
+*/
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
             Franquicia franquicia = new Franquicia();
+            Franquicia f = new Franquicia();
 
             franquicia.setId(var.get(FranquiciaDataSource.ColumnFranquicias.ID).toString());
             franquicia.setName(var.get(FranquiciaDataSource.ColumnFranquicias.NAME).toString());
@@ -398,6 +400,15 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
             franquicia.setMaster(DevuelveIntegerCero(var.get(FranquiciaDataSource.ColumnFranquicias.MASTER).toString()));
 
             listaFranquicias.add(franquicia);
+/*
+            logo = franquicia.getLogotipo();
+            nombre = franquicia.getName();
+            descripcion = franquicia.getDescription();
+*/
+            f.setLogotipo(Integer.toString(R.drawable.icono));
+            f.setName(franquicia.getName().toString());
+            f.setDescription(franquicia.getDescription().toString());
+            listaParaListView.add(f);
         }
     }
 

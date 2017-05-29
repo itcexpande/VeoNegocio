@@ -56,27 +56,12 @@ public class DbHelper extends SQLiteOpenHelper {
             UserDataSource.ColumnUsuarios.STATUS + "  text NOT NULL," +
             UserDataSource.ColumnUsuarios.NOMBRE + " text NOT NULL," +
             UserDataSource.ColumnUsuarios.APELLIDOS + " text NOT NULL," +
-            UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA + " int(11) DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO + " int(11) DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.CAPITAL + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.CAPITAL_OBSERVACIONES + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.CERRADA + " tinyint(4) DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.DATE_ENTERED + " text," +
-            UserDataSource.ColumnUsuarios.DATE_MODIFIED + " text," +
-            UserDataSource.ColumnUsuarios.DELETED + " tinyint(4) DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.DISP_CONTACTO + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.DISP_LOCAL + " tinyint(4) DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.EMPRESA + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.NEGOCIO + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.NEGOCIO_ANTES + " tinyint(4) DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL + " text DEFAUKLT NULL," +
-            UserDataSource.ColumnUsuarios.PHONE_HOME + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.PHONE_MOBILE + " text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS + "  text DEFAULT NULL," +
-            UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL + " text DEFAULT NULL)";
-
+            UserDataSource.ColumnUsuarios.TELEFONO + " text NOT NULL," +
+            UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA + " int(11) NOT NULL," +
+            UserDataSource.ColumnUsuarios.SECTOR_ACTIVIDAD + " text not NULL," +
+            UserDataSource.ColumnUsuarios.PLAN_INVERSION + " text not NULL," +
+            UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR + " text not NULL," +
+            UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL + " text not NULL" + ")";
 
     public DbHelper(Context context) {
         super(context, NOMBREBD, null, BD_VERSION);
@@ -267,6 +252,5 @@ public class DbHelper extends SQLiteOpenHelper {
     private String ReplaceQuote(String t) {
         return t.replace("'", "''");
     }
-
 
 }
