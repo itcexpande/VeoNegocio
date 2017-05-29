@@ -5,9 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 import android.util.Log;
-
 
 import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.Provincia;
@@ -98,12 +96,12 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Eliminamos la tabla y la volvemos a crear otra vez
-        /*
-        db.execSQL("DROP TABLE IF EXISTS provincias");
-        db.execSQL("DROP TABLE IF EXISTS municipios");
-        db.execSQL("DROP TABLE IF EXISTS users");
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROVINCIAS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_MUNICIPIOS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_USUARIOS);
         onCreate(db);
-*/
+
 
     }
 
@@ -124,36 +122,20 @@ public class DbHelper extends SQLiteOpenHelper {
             valores.put(ProvinciaDataSource.ColumnProvincia.ID, id);
             valores.put(ProvinciaDataSource.ColumnProvincia.NOMBRE, nom);
             db.insert(TABLA_PROVINCIAS, null, valores);
-            db.close();
+            //  db.close();
         }
     }
 
-    public ArrayList<Provincia> getProvincias2() {
+    public ArrayList<Provincia> getProvincias() {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<Provincia> output = new ArrayList<Provincia>();
         try {
-            String query = "SELECT " + "c_prov" + "," +
-                    "d_prov" + " " +
-                    " FROM " + "provincias" +
-                    " WHERE " + "c_prov" + " > 0" +
-                    " ORDER BY " + "d_prov";
 
-            query = "SELECT " + ProvinciaDataSource.ColumnProvincia.ID + "," +
+            String query = "SELECT " + ProvinciaDataSource.ColumnProvincia.ID + "," +
                     ProvinciaDataSource.ColumnProvincia.NOMBRE +
                     " FROM " + TABLA_PROVINCIAS +
-                    " WHERE " + ProvinciaDataSource.ColumnProvincia.ID + " > 0" +
                     " ORDER BY " +
-                    "Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'Á','A')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'É','E')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'Í','I')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'Ó','O')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'Ú','U')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'á','a')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'e','e')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'í','i')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'ó','o')" +
-                    " and Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'ú','u')";
-
+                    "Replace(" + ProvinciaDataSource.ColumnProvincia.NOMBRE + ",'Á','A')";
 
             Cursor cursor = db.rawQuery(query, null);
 
@@ -175,87 +157,33 @@ public class DbHelper extends SQLiteOpenHelper {
         return output;
     }
 
-    /*
-        public Provincia recuperarUnaProvincia(int id) {
-            SQLiteDatabase db = getReadableDatabase();
-            String[] valores_recuperar = {ProvinciaDataSource.ColumnProvincia.ID,
-                    ProvinciaDataSource.ColumnProvincia.NOMBRE};
-            Cursor c = db.query(TABLA_PROVINCIAS, valores_recuperar, "c_prov=" + id,
-                    null, null, null, null, null);
-            if (c != null) {
-                c.moveToFirst();
-            }
-            Provincia provincia = new Provincia(c.getInt(0), c.getString(1));
-            db.close();
-            c.close();
-            return provincia;
-        }
+    public void closeProvincia() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.close();
 
-
-        public ArrayList<Provincia> recuperarTodasLasProvincias() {
-            SQLiteDatabase db = getReadableDatabase();
-            ArrayList<Provincia> output = new ArrayList<Provincia>();
-            try {
-                String query = "SELECT " + ProvinciaDataSource.ColumnProvincia.ID + "," +
-                        ProvinciaDataSource.ColumnProvincia.NOMBRE + " " +
-                        " FROM " + TABLA_PROVINCIAS +
-                        " WHERE " + ProvinciaDataSource.ColumnProvincia.ID + " > 0" +
-                        " ORDER BY " + ProvinciaDataSource.ColumnProvincia.NOMBRE;
-
-                Cursor cursor = db.rawQuery(query, null);
-
-                if (cursor.moveToFirst()) {
-                    do {
-                        Provincia provincia = new Provincia();
-                        provincia.setId(Integer.parseInt(cursor.getString(0)));
-                        provincia.setNombreProvincia(cursor.getString(1));
-
-                        // Add book to books
-                        output.add(provincia);
-                    } while (cursor.moveToNext());
-                }
-
-            } catch (Exception ex) {
-                Log.d("Error getProvincias", ex.toString());
-            }
-
-            return output;
-        }
-
-        public ArrayList<Provincia> recuperarTodasLasProvincias2() {
-            SQLiteDatabase db = getReadableDatabase();
-            ArrayList<Provincia> output = new ArrayList<Provincia>();
-            String[] valores_recuperar = {"c_prov", "d_prov"};
-            Cursor c = db.query("provincias", valores_recuperar,
-                    null, null, null, null, null, null);
-            c.moveToFirst();
-            do {
-                Provincia provincia = new Provincia(c.getInt(0), c.getString(1));
-                output.add(provincia);
-            } while (c.moveToNext());
-            db.close();
-            c.close();
-            return output;
-        }
-    */
+    }
 
     public void insertarMunicipo(int idp, int idm, String nom, int tha, int tho, int tmu) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             ContentValues valores = new ContentValues();
-            valores.put("c_prov", idp);
-            valores.put("c_mun", idm);
-            valores.put("d_mun", nom);
-            valores.put("total_habitantes", tha);
-            valores.put("total_hombres", tho);
-            valores.put("total_mujeres", tmu);
-            db.insert("municipios", null, valores);
-            db.close();
+            valores.put(MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA, idp);
+            valores.put(MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO, idm);
+            valores.put(MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO, nom);
+            valores.put(MunicipioDataSource.ColumnMunicipio.TOTAL_HABITANTES, tha);
+            valores.put(MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES, tho);
+            valores.put(MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES, tmu);
+            db.insert(TABLA_MUNICIPIOS, null, valores);
+            //db.close();
         }
     }
 
+    public void closeMunicipo() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.close();
+    }
 
-    public ArrayList<Municipio> devuelveMunicipios(int numero) {
+    public ArrayList<Municipio> devuelveMunicipiosPorCodigoProvincia(int codigoProvincia) {
         SQLiteDatabase db = getReadableDatabase();
 
         ArrayList<Municipio> output = new ArrayList<Municipio>();
@@ -271,7 +199,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES + "," +
                     MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES +
                     " FROM " + TABLA_MUNICIPIOS +
-                    " WHERE " + MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA + "=" + numero +
+                    " WHERE " + MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA + "=" + codigoProvincia +
                     " ORDER BY " + MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO;
 
             Cursor cursor = db.rawQuery(query, null);
@@ -296,54 +224,49 @@ public class DbHelper extends SQLiteOpenHelper {
         return output;
     }
 
-    public ArrayList<Municipio> devuelveMunicipiosPorCodigOProvinciaYPrimeraLetra(int id, String letraSeleccionda) {
-        SQLiteDatabase db = getReadableDatabase();
-        ArrayList<Municipio> output = new ArrayList<Municipio>();
-        try {
-            String query = "SELECT " +
-                    "c_prov" + "," +
-                    "c_mun" + "," +
-                    "d_mun" + "," +
-                    "total_habitantes" + "," +
-                    "total_hombres" + "," +
-                    "total_mujeres" +
-                    " FROM  " + "municipios" +
-                    " WHERE " + "c_prov" + "=" + id +
-                    " ORDER BY " + "d_mun";
+    private String SQL = "";
+    private ArrayList<String> listSQL;
 
-            query = "SELECT " +
-                    "c_prov" + "," +
-                    "c_mun" + "," +
-                    "d_mun" + "," +
-                    "total_habitantes" + "," +
-                    "total_hombres" + "," +
-                    "total_mujeres" +
-                    " FROM  " + "municipios" +
-                    " WHERE " + "c_prov" + "=" + id +
-                    " AND d_mun like '" + letraSeleccionda + "%'" +
-                    " ORDER BY " + "d_mun";
+    public void addMunicipioPoolUpdate(Municipio m) {
+        if (listSQL == null)
+            listSQL = new ArrayList<String>();
+        SQL = " INSERT OR REPLACE INTO " + TABLA_MUNICIPIOS + " ( " +
+                MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA + "," +
+                MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + "," +
+                MunicipioDataSource.ColumnMunicipio.NOMBRE_MUNICIPIO + "," +
+                MunicipioDataSource.ColumnMunicipio.TOTAL_HABITANTES + "," +
+                MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES + "," +
+                MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES +
+                " )  VALUES (" + m.getCodigoProvincia() + "," +
+                m.getCodigoMunicipio() + "," +
+                "'" + ReplaceQuote(m.getNombreMunicipio()) + "'," +
+                m.getTotalHabitantes() + "," +
+                m.getHombres() + "," +
+                m.getMujeres() + ");";
 
-            Cursor cursor = db.rawQuery(query, null);
+        listSQL.add(SQL);
+    }
 
-            if (cursor.moveToFirst()) {
-                do {
-                    Municipio municipio = new Municipio();
-                    municipio.setCodigoProvincia(cursor.getInt(0));
-                    municipio.setCodigoMunicipio(cursor.getInt(1));
-                    municipio.setNombreMunicipio(cursor.getString(2));
-                    municipio.setTotalHabitantes(cursor.getInt(3));
-                    municipio.setHombres(cursor.getInt(4));
-                    municipio.setMujeres(cursor.getInt(5));
-                    output.add(municipio);
-                } while (cursor.moveToNext());
+    public void commitPoolUpdate() {
+        if (listSQL != null && listSQL.size() > 0) {
+            SQLiteDatabase db = getWritableDatabase();
+            if (db != null) {
+                db.beginTransaction();
+                for (int i = 0; i < listSQL.size(); i++) {
+                    db.execSQL(listSQL.get(i));
+                }
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
             }
-
-        } catch (Exception ex) {
-            Log.d("Error getMunicipios", ex.toString());
+            listSQL.clear();
         }
 
-        return output;
-
     }
+
+    private String ReplaceQuote(String t) {
+        return t.replace("'", "''");
+    }
+
 
 }

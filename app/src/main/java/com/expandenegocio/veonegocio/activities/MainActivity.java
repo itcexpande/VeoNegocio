@@ -1,5 +1,6 @@
 package com.expandenegocio.veonegocio.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -17,11 +18,9 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.expandenegocio.veonegocio.DAO.DbHelper;
 import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
-
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.Municipio;
-import com.expandenegocio.veonegocio.models.Provincia;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -30,7 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import cz.msebera.android.httpclient.Header;
@@ -45,15 +43,17 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
     private int totalHombres;
     private int totalMujeres;
     private DbHelper dbHelper;
+    private DbHelper MDB;
+    private ProgressDialog progressDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbHelper = new DbHelper(getApplicationContext());
+        MDB = new DbHelper(getApplicationContext());
         // borra basedatos
-        //  getApplicationContext().deleteDatabase("VeoNegocio.db");
+          getApplicationContext().deleteDatabase("VeoNegocio.db");
 
         pasaProvincias();
 
@@ -163,7 +163,6 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
         }
 
-
     }
 
 
@@ -236,8 +235,9 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             codigoProvincia = Integer.parseInt(var.get(ProvinciaDataSource.ColumnProvincia.ID).toString());
             denominacionProvincia = var.get(ProvinciaDataSource.ColumnProvincia.NOMBRE).toString();
 
-            dbHelper.insertarProvincia(codigoProvincia, denominacionProvincia);
+            MDB.insertarProvincia(codigoProvincia, denominacionProvincia);
         }
+        MDB.closeProvincia();
     }
 
 
@@ -316,9 +316,20 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             totalHabitantes = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_HABITANTES).toString());
             totalHombres = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_HOMBRES).toString());
             totalMujeres = Integer.parseInt(var.get(MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES).toString());
-            dbHelper.insertarMunicipo(codigoProvincia, codigoMunicipio, denominacionProvincia, totalHabitantes, totalHombres, totalMujeres);
+
+            Municipio municipio = new Municipio();
+            municipio.setCodigoProvincia(codigoProvincia);
+            municipio.setCodigoMunicipio(codigoMunicipio);
+            municipio.setNombreMunicipio(denominacionProvincia);
+            municipio.setTotalHabitantes(totalHabitantes);
+            municipio.setHombres(totalHombres);
+            municipio.setMujeres(totalMujeres);
+            MDB.addMunicipioPoolUpdate(municipio);
+
 
         }
+        MDB.commitPoolUpdate();
+        MDB.closeMunicipo();
 
     }
 
