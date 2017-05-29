@@ -9,4 +9,8 @@
     <drawable name="highlight_pressed">#98dff3</drawable>
     <drawable name="highlight_focused">#b9e6f3</drawable>
 
+    <color name="progress_bg">#727072</color>
+    <color name="progress_text">#ededed</color>
+
+
 </resources>

@@ -3,6 +3,7 @@ package com.expandenegocio.veonegocio.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -47,12 +48,21 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
 
     private ArrayList<Franquicia> listaFranquicias = new ArrayList<>();
     private ListView lista;
+    private ProgressDialog progressDialog = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listado_modelo_negocio);
-        Franquicia franquicia = createFranquicia();
+        Franquicia franquicia = new Franquicia();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.custom_progressdialog);
+        //se ppdrá cerrar simplemente pulsando back
+        progressDialog.setCancelable(true);
+
         procesarInformacion(franquicia);
 
     }
@@ -63,14 +73,15 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
         return true;
     }
 
-    private Franquicia createFranquicia() {
-        Franquicia franquicia = new Franquicia();
-        franquicia.setId(UUID.randomUUID().toString());
-        franquicia.setName("");
-        return franquicia;
-    }
+    /*
+        private Franquicia createFranquicia() {
+            Franquicia franquicia = new Franquicia();
+            franquicia.setId(UUID.randomUUID().toString());
+            franquicia.setName("");
+            return franquicia;
+        }
 
-
+    */
     private void procesarInformacion(Franquicia f) {
 
         RequestParams params = new RequestParams();
@@ -104,6 +115,8 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
                         case 1:
                             recogeDatos(obj);
                             procesar();
+                            progressDialog.cancel();
+
                             break;
                         case 2:
                             Toast.makeText(getApplicationContext(), "Ya hay un usuario registrado con ese correo", Toast.LENGTH_LONG).show();
@@ -193,16 +206,7 @@ public class ActivityBusquedaNegocio extends AppCompatActivity {
                 Toast toast = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_LONG);
                 toast.show();
                 Bundle bundle = new Bundle();
-/*
 
-                bundle.putString("id", ff.getId().toString());
-                bundle.putString("name", ff.getName().toString());
-                bundle.putString("empresa", ff.getEmpresa().toString());
-                bundle.putString("tipoAc", ff.getTipo_actividad().toString());
-                bundle.putString("tfno", ff.getPhone_office().toString());
-                bundle.putString("web", ff.getWebsite().toString());
-
-*/
                 bundle.putSerializable("franquicia", ff);
 
                 FragmentManager fragmentManager = getFragmentManager();

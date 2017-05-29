@@ -7,8 +7,6 @@ import java.util.Date;
  */
 
 public enum ClavesFranquicia {
-
-
     ID,
     NAME,
     DATE_ENTERED,

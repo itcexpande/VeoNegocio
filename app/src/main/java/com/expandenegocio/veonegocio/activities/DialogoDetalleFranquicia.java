@@ -49,14 +49,6 @@ public class DialogoDetalleFranquicia extends DialogFragment {
         Franquicia fd = new Franquicia();
         fd = (Franquicia) getArguments().getSerializable("franquicia");
 
-   /*
-        String dataId = getArguments().getString("id").toString();
-        String dataName = getArguments().getString("name").toString();
-        String dataEmpresa = getArguments().getString("empresa").toString();
-        String dataTipoAc = getArguments().getString("tipoAc").toString();
-        String dataTfno = getArguments().getString("tfno").toString();
-        String dataWeb = getArguments().getString("web").toString();
-*/
 
         String dataId = fd.getId().toString();
         String dataName = fd.getName().toString();
