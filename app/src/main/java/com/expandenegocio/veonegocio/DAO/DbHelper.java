@@ -7,8 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.expandenegocio.veonegocio.models.CuandoEmpezar;
 import com.expandenegocio.veonegocio.models.Municipio;
+import com.expandenegocio.veonegocio.models.PlanInversor;
 import com.expandenegocio.veonegocio.models.Provincia;
+import com.expandenegocio.veonegocio.models.Sector;
 
 import java.util.ArrayList;
 
@@ -29,17 +32,21 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String TABLA_PROVINCIAS = "provincias";
     private static final String TABLA_MUNICIPIOS = "municipios";
     private static final String TABLA_USUARIOS = "users";
+    private static final String TABLA_SECTOR_ACTIVIDAD = "expan_m_sectores";
+    private static final String TABLA_PLAN_INVERSOR = "expan_m_capital";
+    private static final String TABLA_CUANDO_EMPEZAR = "expan_m_cuando_empezar";
+    private static final String TABLA_PERFIL_PROFESIONAL = "expan_m_perfil_fran";
 
 
     private static final int BD_VERSION = 1;
     private static String NOMBREBD = "VeoNegocio.db";
 
-    private static final String BD_CREAR_PROVINCIAS = "CREATE TABLE provincias " +
+    private static final String BD_CREAR_PROVINCIAS = "CREATE TABLE " + TABLA_PROVINCIAS +
             "( PK_UID integer primary key autoincrement," +
             ProvinciaDataSource.ColumnProvincia.ID + " integer," +
             ProvinciaDataSource.ColumnProvincia.NOMBRE + " text)";
 
-    private static final String BD_CREAR_MUNICIPIOS = "CREATE TABLE municipios" +
+    private static final String BD_CREAR_MUNICIPIOS = "CREATE TABLE " + TABLA_MUNICIPIOS +
             "( PK_UID INTEGER PRIMARY KEY AUTOINCREMENT," +
             MunicipioDataSource.ColumnMunicipio.CODIGO_PROVINCIA + " INTEGER," +
             MunicipioDataSource.ColumnMunicipio.CODIGO_MUNICIPIO + " INTEGER," +
@@ -49,7 +56,7 @@ public class DbHelper extends SQLiteOpenHelper {
             MunicipioDataSource.ColumnMunicipio.TOTAL_MUJERES + " INTEGER )";
 
 
-    private static final String BD_CREAR_USERS = "CREATE TABLE users (" +
+    private static final String BD_CREAR_USERS = "CREATE TABLE " + TABLA_USUARIOS + "(" +
             UserDataSource.ColumnUsuarios.ID + " text PRIMARY KEY NOT NULL," +
             UserDataSource.ColumnUsuarios.EMAIL + " text NOT NULL," +
             UserDataSource.ColumnUsuarios.PASSWORD + " text NOT NULL," +
@@ -63,6 +70,32 @@ public class DbHelper extends SQLiteOpenHelper {
             UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR + " text not NULL," +
             UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL + " text not NULL" + ")";
 
+    private static final String BD_CREAR_SECTOR_ACTIVIDAD = "CREATE TABLE " + TABLA_SECTOR_ACTIVIDAD +
+            "( c_id integer primary key not null default 0," +
+            "c_grupo_act text default null," +
+            "m_orden_act integer default null," +
+            "c_sector text DEFAULT NULL," +
+            "m_orden_sector integer DEFAULT NULL," +
+            "d_subsector text DEFAULT NULL" +
+            " )";
+
+
+    private static final String BD_CREAR_PLAN_INVERSOR = "CREATE TABLE " + TABLA_PLAN_INVERSOR +
+            "( id integer default null ," +
+            " nombre text" +
+            " )";
+
+    private static final String BD_CREAR_CUANDO_EMPEZAR = "CREATE TABLE " + TABLA_CUANDO_EMPEZAR +
+            "( id integer default null," +
+            " nombre text" +
+            " )";
+
+
+    private static final String BD_CREAR_PERFIL_PROFESIONAL = "CREATE TABLE " + TABLA_PERFIL_PROFESIONAL +
+            "( id integer not null primary key ," +
+            " nombre text" +
+            " )";
+
     public DbHelper(Context context) {
         super(context, NOMBREBD, null, BD_VERSION);
 //        SQLiteDatabase.openOrCreateDatabase(NOMBREBD, null);
@@ -75,6 +108,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(BD_CREAR_PROVINCIAS);
         db.execSQL(BD_CREAR_MUNICIPIOS);
         db.execSQL(BD_CREAR_USERS);
+        db.execSQL(BD_CREAR_SECTOR_ACTIVIDAD);
+        db.execSQL(BD_CREAR_PLAN_INVERSOR);
+        db.execSQL(BD_CREAR_CUANDO_EMPEZAR);
+        db.execSQL(BD_CREAR_PERFIL_PROFESIONAL);
+
     }
 
     // Método invocado por Android si hay un cambio de versión de la BD
@@ -85,6 +123,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROVINCIAS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_MUNICIPIOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_USUARIOS);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SECTOR_ACTIVIDAD);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PLAN_INVERSOR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_CUANDO_EMPEZAR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PERFIL_PROFESIONAL);
         onCreate(db);
 
 
@@ -96,6 +139,11 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_PROVINCIAS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_MUNICIPIOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLA_USUARIOS);
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_SECTOR_ACTIVIDAD);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PLAN_INVERSOR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_CUANDO_EMPEZAR);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLA_PERFIL_PROFESIONAL);
 
         onCreate(db);
     }
@@ -142,7 +190,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return output;
     }
 
-    public void closeProvincia() {
+    public void closeDataBase() {
         SQLiteDatabase db = getWritableDatabase();
         db.close();
 
@@ -163,10 +211,6 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void closeMunicipo() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.close();
-    }
 
     public ArrayList<Municipio> devuelveMunicipiosPorCodigoProvincia(int codigoProvincia) {
         SQLiteDatabase db = getReadableDatabase();
@@ -252,5 +296,195 @@ public class DbHelper extends SQLiteOpenHelper {
     private String ReplaceQuote(String t) {
         return t.replace("'", "''");
     }
+
+    public void borrarProvincias() {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "DELETE  FROM " + TABLA_PROVINCIAS + " WHERE 1=1";
+        db.execSQL(query);
+    }
+
+    public void borrarMunicipios() {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "DELETE  FROM " + TABLA_MUNICIPIOS + " WHERE 1=1";
+        db.execSQL(query);
+    }
+
+    public void borrarSectoresActividad() {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "DELETE  FROM " + TABLA_SECTOR_ACTIVIDAD + " WHERE 1=1";
+        db.execSQL(query);
+    }
+
+    public void borrarPlanInversor() {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "DELETE  FROM " + TABLA_PLAN_INVERSOR + " WHERE 1=1";
+        db.execSQL(query);
+    }
+
+    public void borrarCuandoEmpezar() {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "DELETE  FROM " + TABLA_CUANDO_EMPEZAR + " WHERE 1=1";
+        db.execSQL(query);
+    }
+
+    public void borrarPerfilProfesional() {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "DELETE  FROM " + TABLA_PERFIL_PROFESIONAL + " WHERE 1=1";
+        db.execSQL(query);
+    }
+
+
+    public void insertarSectorActividad(Sector s) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            ContentValues valores = new ContentValues();
+            valores.put(SectorActividadDataSource.ColumnSector.C_ID, s.getcId());
+            valores.put(SectorActividadDataSource.ColumnSector.C_GRUPO_ACT, s.getcGrupoAct());
+            valores.put(SectorActividadDataSource.ColumnSector.M_ORDEN_ACT, s.getmOrdenAct());
+            valores.put(SectorActividadDataSource.ColumnSector.C_SECTOR, s.getcSector());
+            valores.put(SectorActividadDataSource.ColumnSector.M_ORDEN_SECTOR, s.getmOrdenSector());
+            valores.put(SectorActividadDataSource.ColumnSector.D_SUBSECTOR, s.getdSubSector());
+
+            db.insert(TABLA_SECTOR_ACTIVIDAD, null, valores);
+            //  db.close();
+            String query = "select *  FROM " + TABLA_SECTOR_ACTIVIDAD;
+            db.execSQL(query);
+        }
+    }
+
+    public ArrayList<Sector> getSectoresActividad() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Sector> output = new ArrayList<Sector>();
+        try {
+
+            String query = "SELECT " + SectorActividadDataSource.ColumnSector.C_ID + "," +
+                    SectorActividadDataSource.ColumnSector.C_GRUPO_ACT + " " +
+                    SectorActividadDataSource.ColumnSector.M_ORDEN_ACT + " " +
+                    SectorActividadDataSource.ColumnSector.C_SECTOR + " " +
+                    SectorActividadDataSource.ColumnSector.M_ORDEN_SECTOR + " " +
+                    SectorActividadDataSource.ColumnSector.D_SUBSECTOR +
+                    " FROM " + TABLA_SECTOR_ACTIVIDAD +
+                    " ORDER BY " + SectorActividadDataSource.ColumnSector.C_ID;
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Sector sector = new Sector();
+                    sector.setcId(Integer.parseInt(cursor.getString(0)));
+                    sector.setcGrupoAct(cursor.getString(1));
+                    sector.setmOrdenAct(Integer.parseInt(cursor.getString(2)));
+                    sector.setcSector(cursor.getString(3));
+                    sector.setmOrdenSector(Integer.parseInt(cursor.getString(4)));
+                    sector.setdSubSector(cursor.getString(5));
+
+                    // Add book to books
+                    output.add(sector);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception ex) {
+            Log.d("Error getSectores Actividad", ex.toString());
+        }
+
+        return output;
+    }
+
+
+    public void insertarPlanInversor(int id, String nom) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            ContentValues valores = new ContentValues();
+            valores.put(PlanInversorDataSource.ColumnPlanInversor.ID, id);
+            valores.put(PlanInversorDataSource.ColumnPlanInversor.LITERAL, nom);
+            db.insert(TABLA_PLAN_INVERSOR, null, valores);
+            //  db.close();
+        }
+    }
+
+    public ArrayList<PlanInversor> getPlanInversor() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        ArrayList<PlanInversor> output = new ArrayList<PlanInversor>();
+
+        try {
+
+            String query = "SELECT " + PlanInversorDataSource.ColumnPlanInversor.ID + "," +
+                    PlanInversorDataSource.ColumnPlanInversor.LITERAL + " " +
+                    " FROM " + TABLA_PLAN_INVERSOR +
+                    " ORDER BY " + PlanInversorDataSource.ColumnPlanInversor.ID;
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    PlanInversor plan = new PlanInversor();
+                    plan.setId(Integer.parseInt(cursor.getString(0)));
+                    plan.setNombre(cursor.getString(1));
+
+                    // Add book to books
+                    output.add(plan);
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error getPlanInversor", ex.toString());
+        }
+
+        return output;
+    }
+
+
+    public void insertarPerfilProfesional(int id, String nom) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            ContentValues valores = new ContentValues();
+            valores.put(PerfilProfesionalDataSource.ColumnPerfilProfesional.ID, id);
+            valores.put(PerfilProfesionalDataSource.ColumnPerfilProfesional.LITERAL, nom);
+            db.insert(TABLA_PERFIL_PROFESIONAL, null, valores);
+            //  db.close();
+        }
+    }
+
+
+
+    public void insertarCuandoEmpezar(int id, String nom) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            ContentValues valores = new ContentValues();
+            valores.put(CuandoEmpezarDataSource.ColumnCuandoEmpezar.ID, id);
+            valores.put(CuandoEmpezarDataSource.ColumnCuandoEmpezar.NOMBRE, nom);
+            db.insert(TABLA_CUANDO_EMPEZAR, null, valores);
+            //  db.close();
+        }
+    }
+
+    public ArrayList<CuandoEmpezar> getCuandoEmpezar() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<CuandoEmpezar> output = new ArrayList<CuandoEmpezar>();
+        try {
+            String query = "SELECT " + CuandoEmpezarDataSource.ColumnCuandoEmpezar.ID + "," +
+                    CuandoEmpezarDataSource.ColumnCuandoEmpezar.NOMBRE + " " +
+                    " FROM " + TABLA_CUANDO_EMPEZAR +
+                    " ORDER BY " + CuandoEmpezarDataSource.ColumnCuandoEmpezar.ID;
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    CuandoEmpezar cuandoEmpezar = new CuandoEmpezar();
+                    cuandoEmpezar.setId(Integer.parseInt(cursor.getString(0)));
+                    cuandoEmpezar.setNombre(cursor.getString(1));
+                    // Add book to books
+                    output.add(cuandoEmpezar);
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error getCuandoEmpezar", ex.toString());
+        }
+
+        return output;
+    }
+
 
 }

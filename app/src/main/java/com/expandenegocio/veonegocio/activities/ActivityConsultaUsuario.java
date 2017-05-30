@@ -320,27 +320,8 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
         usuario.setCodigoProv(provincia.getId());
-        usuario.setCodigoMun(municipio.getCodigoMunicipio());
-        usuario.setCapital(capital);
-        usuario.setCapitalObservaciones(capitalObservaciones);
-        usuario.setCerrada(cerrada);
-        usuario.setCuandoEmpezar(cuandoEmpezar);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String currentDateandTime = sdf.format(new Date());
-        usuario.setDateEntered(currentDateandTime);
-        usuario.setDateModified(currentDateandTime);
-        usuario.setDeleted(deleted);
-        usuario.setDisponeContacto(disponeContacto);
-        usuario.setDisponeLocal(disponeLocal);
-        usuario.setEmpresa(empresa);
-        usuario.setNegocio(negocio);
-        usuario.setNegocioAnterior(negocioAnterior);
-        usuario.setPerfilFranquicia(perfilFranquicia);
+       // usuario.setCodigoMun(municipio.getCodigoMunicipio());
         usuario.setPerfilProfesional(perfilProfesional);
-        usuario.setPhoneHome(phoneHome);
-        usuario.setPhoneMobile(phoneMobile);
-        usuario.setRecursosPropios(recursosPropios);
-        usuario.setSituacionProfesional(situacionProfesional);
 
         return usuario;
 
@@ -349,7 +330,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private void procesarInformacion() {
 
         RequestParams params = new RequestParams();
-
+/*
         params.put(UserDataSource.ColumnUsuarios.EMAIL, correo);
         params.put(UserDataSource.ColumnUsuarios.PASSWORD, password);
         params.put(UserDataSource.ColumnUsuarios.STATUS, status);
@@ -372,7 +353,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.PHONE_MOBILE, usuario.getPhoneMobile());
         params.put(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS, usuario.getRecursosPropios());
         params.put(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL, usuario.getSituacionProfesional());
-
+*/
 
         invokeWS(params);
 
@@ -566,7 +547,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
         int longitud = datos.length();
         for (int x = 0; x < longitud; x++) {
             JSONObject var = datos.getJSONObject(x);
-
+/*
             txtNombre.setText(var.get(UserDataSource.ColumnUsuarios.NOMBRE).toString());
             txtApellidos.setText(var.get(UserDataSource.ColumnUsuarios.APELLIDOS).toString());
             spnProvincia.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA).toString()));
@@ -586,6 +567,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             txtPhoneMobile.setText(var.get(UserDataSource.ColumnUsuarios.PHONE_MOBILE).toString());
             txtRecursosPropios.setText(var.get(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS).toString());
             txtSituacionProfesional.setText(var.get(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL).toString());
+            */
         }
     }
 /*

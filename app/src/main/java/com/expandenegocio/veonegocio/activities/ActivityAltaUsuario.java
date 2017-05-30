@@ -1,8 +1,8 @@
 package com.expandenegocio.veonegocio.activities;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,13 +12,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.expandenegocio.veonegocio.DAO.CuandoEmpezarDataSource;
 import com.expandenegocio.veonegocio.DAO.DbHelper;
-import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
+import com.expandenegocio.veonegocio.DAO.PerfilProfesionalDataSource;
+import com.expandenegocio.veonegocio.DAO.PlanInversorDataSource;
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
+import com.expandenegocio.veonegocio.DAO.SectorActividadDataSource;
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
-import com.expandenegocio.veonegocio.models.Municipio;
+import com.expandenegocio.veonegocio.models.CuandoEmpezar;
+import com.expandenegocio.veonegocio.models.PerfilProfesional;
+import com.expandenegocio.veonegocio.models.PlanInversor;
 import com.expandenegocio.veonegocio.models.Provincia;
+import com.expandenegocio.veonegocio.models.Sector;
 import com.expandenegocio.veonegocio.models.User;
 import com.expandenegocio.veonegocio.utilities.ValidatorUtil;
 import com.loopj.android.http.AsyncHttpClient;
@@ -27,10 +33,7 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
@@ -41,11 +44,18 @@ import cz.msebera.android.httpclient.Header;
 
 public class ActivityAltaUsuario extends AppCompatActivity {
     private Provincia provincia;
-    private Municipio municipio;
+    private Sector sector;
+    private PlanInversor planInversor;
+    private CuandoEmpezar cuandoEmpezar;
+    private PerfilProfesional perfilProfesional;
+
     private User usuario;
 
     private Provincia provinciaSeleccionada;
-    private Municipio municipioSeleccionado;
+    private Sector sectorSeleccionado;
+    private PlanInversor planInversorSeleccionado;
+    private CuandoEmpezar cuandoEmpezarSeleccionado;
+    private PerfilProfesional perfilProfesionalSeleccionado;
 
     private String correo;
     private String password;
@@ -53,10 +63,10 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private String nombre;
     private String apellidos;
     private String telefono;
-    private String sectorActividad;
-    private String planInversion;
-    private String cuandoEmpezar;
-    private String perfilProfesional;
+    // private String sector;
+    // private String planInversion;
+    // private String cuandoEmpezar;
+    // private String perfilProfesional;
 
     private Spinner spnProvincia;
     private EditText txtCorreo;
@@ -64,12 +74,13 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private EditText txtNombre;
     private EditText txtApellidos;
     private EditText txtTelefono;
-    private Spinner txtSectorActividad;
-    private Spinner txtPlanInversion;
-    private Spinner txtCuandoEmpezar;
-    private Spinner txtPerfilProfesional;
+    private Spinner spnSectorActividad;
+    private Spinner spnPlanInversion;
+    private Spinner spnCuandoEmpezar;
+    private Spinner spnPerfilProfesional;
     private String nCorreo;
     private String nPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +93,12 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         txtPassword = (EditText) findViewById(R.id.et_alta_password);
         txtNombre = (EditText) findViewById(R.id.et_alta_nombre);
         txtApellidos = (EditText) findViewById(R.id.et_alta_apellidos);
-        spnProvincia = (Spinner) findViewById(R.id.sp_alta_provincia);
         txtTelefono = (EditText) findViewById(R.id.et_alta_telefono);
-        txtSectorActividad = (Spinner) findViewById(R.id.sp_alta_sector_actividad);
-        txtPlanInversion = (Spinner) findViewById(R.id.sp_alta_plan_inversion);
-        txtCuandoEmpezar = (Spinner) findViewById(R.id.et_alta_cuando_empezar);
-        txtPerfilProfesional = (Spinner) findViewById(R.id.et_alta_perfil_profesional);
+        spnProvincia = (Spinner) findViewById(R.id.sp_alta_provincia);
+        spnSectorActividad = (Spinner) findViewById(R.id.sp_alta_sector_actividad);
+        spnPlanInversion = (Spinner) findViewById(R.id.sp_alta_plan_inversion);
+        spnCuandoEmpezar = (Spinner) findViewById(R.id.sp_alta_cuando_empezar);
+        spnPerfilProfesional = (Spinner) findViewById(R.id.sp_alta_perfil_profesional);
         txtCorreo.setText(nCorreo);
         txtPassword.setText(nPassword);
         provincia = loadSpinnerProvincias();
@@ -112,7 +123,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                        Provincia provinciaSeleccionada = listaProv.get(position);
                                                        if (provinciaSeleccionada != null) {
-                                                           municipio = loadSpinnerMunicipios(provinciaSeleccionada.getId());
+                                                           sector = loadSpinnerSectorActividad();
                                                        }
                                                    }
 
@@ -129,32 +140,118 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
     }
 
-    private Municipio loadSpinnerMunicipios(Integer numeroProvincia) {
-        MunicipioDataSource dataSource = new MunicipioDataSource(this);
-        final ArrayList<Municipio> listaMunicipios = dataSource.getMunicipios(numeroProvincia);
+    private Sector loadSpinnerSectorActividad() {
+        SectorActividadDataSource dataSource = new SectorActividadDataSource(this);
+        final ArrayList<Sector> listaSector = dataSource.getSectores();
 
-        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaMunicipios);
+        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaSector);
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnMunicipio = (Spinner) findViewById(R.id.sp_alta_municipio);
+        spnSectorActividad = (Spinner) findViewById(R.id.sp_alta_sector_actividad);
 
-        spnMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spnSectorActividad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                                                   @Override
-                                                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                       Municipio municipoSeleccionado = listaMunicipios.get(position);
-                                                   }
+                                                         @Override
+                                                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                             ((TextView) parent.getChildAt(0)).setTextSize(12);
+                                                             ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
+                                                             planInversor = loadSpinnerPlanInversor();
+                                                         }
 
-                                                   @Override
-                                                   public void onNothingSelected(AdapterView<?> parent) {
-                                                       Municipio municipioSeleccionado = null;
-                                                   }
-                                               }
+                                                         @Override
+                                                         public void onNothingSelected(AdapterView<?> parent) {
+                                                             Sector sectorSeleccionado = null;
+                                                         }
+                                                     }
         );
 
-        spnMunicipio.setAdapter(spinner_adapter);
-        return municipioSeleccionado;
+        spnSectorActividad.setAdapter(spinner_adapter);
+        return sectorSeleccionado;
+    }
+
+    private PlanInversor loadSpinnerPlanInversor() {
+        PlanInversorDataSource dataSource = new PlanInversorDataSource(this);
+        final ArrayList<PlanInversor> listaPlanInversor = dataSource.getPlanInversor();
+
+        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaPlanInversor);
+
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spnPlanInversion = (Spinner) findViewById(R.id.sp_alta_plan_inversion);
+
+        spnPlanInversion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                                       @Override
+                                                       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                           cuandoEmpezar = loadSpinnerCuandoEmpezar();
+                                                       }
+
+                                                       @Override
+                                                       public void onNothingSelected(AdapterView<?> parent) {
+                                                           PlanInversor planInversorSeleccionado = null;
+                                                       }
+                                                   }
+        );
+
+        spnPlanInversion.setAdapter(spinner_adapter);
+        return planInversorSeleccionado;
+    }
+
+    private CuandoEmpezar loadSpinnerCuandoEmpezar() {
+        CuandoEmpezarDataSource dataSource = new CuandoEmpezarDataSource(this);
+        final ArrayList<CuandoEmpezar> listaCuandoEmpezar = dataSource.getCuandoEmpezar();
+
+        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaCuandoEmpezar);
+
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spnCuandoEmpezar = (Spinner) findViewById(R.id.sp_alta_cuando_empezar);
+
+        spnCuandoEmpezar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                                       @Override
+                                                       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                           perfilProfesional= loadSpinnerPerfilProfesional();
+                                                       }
+
+                                                       @Override
+                                                       public void onNothingSelected(AdapterView<?> parent) {
+                                                           CuandoEmpezar cuandoEmpezarSeleccionado = null;
+                                                       }
+                                                   }
+        );
+
+        spnCuandoEmpezar.setAdapter(spinner_adapter);
+        return cuandoEmpezarSeleccionado;
+    }
+    private PerfilProfesional loadSpinnerPerfilProfesional() {
+        PerfilProfesionalDataSource dataSource = new PerfilProfesionalDataSource(this);
+        final ArrayList<PerfilProfesional> listaPerfilProfesional = dataSource.getPerfilProfesional();
+
+        ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaPerfilProfesional);
+
+        spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spnPerfilProfesional = (Spinner) findViewById(R.id.sp_alta_perfil_profesional);
+
+        spnPerfilProfesional.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                                       @Override
+                                                       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                           perfilProfesionalSeleccionado=  listaPerfilProfesional.get(position);
+                                                         //  perfilProfesional= loadSpinnerPerfilProfesional();
+                                                       }
+
+                                                       @Override
+                                                       public void onNothingSelected(AdapterView<?> parent) {
+                                                           PerfilProfesional perfilProfesionalSeleccionado = null;
+                                                       }
+                                                   }
+        );
+
+        spnPerfilProfesional.setAdapter(spinner_adapter);
+        return perfilProfesionalSeleccionado;
     }
 
     public void altaUsuario(View view) {
@@ -181,53 +278,15 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private String validate() {
 
         String output = null;
-/*
-        correo = "j@gmail.com";
-        password = "a";
-        nombre = "Jesus";
-        apellidos = "Villa Alonso";
-        capital = "CAPITAL";
-        capitalObservaciones = "capital observaaciones";
-        cerrada = 1;
-        cuandoEmpezar = "cuando empezar";
-        deleted = 3;
-        disponeContacto = "dispone de contacto";
-        disponeLocal = 6;
-        empresa = "empresa";
-        negocio = "negocio";
-        negocioAnterior = 7;
-        perfilFranquicia = "perfil franquicia";
-        perfilProfesional = "perfil profesional";
-        phoneHome = "983359746";
-        phoneMobile = "617759716";
-        recursosPropios = "recursos propios";
-        situacionProfesional = "situacion profesionaal";
-        */
 
         correo = txtCorreo.getText().toString();
         password = txtPassword.getText().toString();
         nombre = txtNombre.getText().toString();
         apellidos = txtApellidos.getText().toString();
+        telefono = txtTelefono.getText().toString();
 
         provincia = (Provincia) spnProvincia.getSelectedItem();
-        municipio = (Municipio) spnMunicipio.getSelectedItem();
-
-        capital = txtCapital.getText().toString();
-        capitalObservaciones = txtCapitalObservaciones.getText().toString();
-        cerrada = Integer.parseInt(txtCerrada.getText().toString());
-        cuandoEmpezar = txtCuandoEmpezar.getText().toString();
-        deleted = 0;
-        disponeContacto = txtDisponeContacto.getText().toString();
-        disponeLocal = Integer.parseInt(txtDisponeLocal.getText().toString());
-        empresa = txtEmpresa.getText().toString();
-        negocio = txtNegocio.getText().toString();
-        negocioAnterior = Integer.parseInt(txtNegocioAnterior.getText().toString());
-        perfilFranquicia = txtPerfilFranquicia.getText().toString();
-        perfilProfesional = txtPerfilProfesional.getText().toString();
-        phoneHome = txtPhoneHome.getText().toString();
-        phoneMobile = txtPhoneMobile.getText().toString();
-        recursosPropios = txtRecursosPropios.getText().toString();
-        situacionProfesional = txtSituacionProfesional.getText().toString();
+        //   sector = (Municipio) spnMunicipio.getSelectedItem();
 
 
         if (correo.trim().equals("")) {
@@ -248,48 +307,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         if (provincia == null || provincia.getId() == -1) {
             output = "El campo provincia no puede estar vacío";
         }
-        if (municipio == null || municipio.getNombreMunicipio() == null) {
-            output = "El campo municipio no puede estar vacío";
-        }
-        if (capital.trim().equals("")) {
-            output = "El campo capital no puede estar vacío";
-        }
-        if (capitalObservaciones.trim().equals("")) {
-            output = "El campo capital observaciones no puede estar vacío";
-        }
-        if (txtCerrada.getText().toString().trim().equals("")) {
-            output = "El campo cerrada no puede estar vacío";
-        }
-        if (disponeContacto.trim().equals("")) {
-            output = "El campo dispone contacto no puede estar vacío";
-        }
-        if (txtDisponeLocal.getText().toString().trim().equals("")) {
-            output = "El campo dispone local no puede estar vacío";
-        }
-        if (empresa.trim().equals("")) {
-            output = "El campo empresa no puede estar vacío";
-        }
-        if (negocio.trim().equals("")) {
-            output = "El campo negocio no puede estar vacío";
-        }
-        if (txtNegocioAnterior.getText().toString().trim().equals("")) {
-            output = "El campo negocio anterior no puede estar vacío";
-        }
-        if (phoneHome.trim().equals("")) {
-            output = "El campo telefono fijo no puede estar vacío";
-        }
-        if (!ValidatorUtil.validateTel(phoneHome.trim(), "34")) {
-            output = "El formato de teléfono fijo no es válido";
-        }
-        if (phoneMobile.trim().equals("")) {
-            output = "El campo telefono movil no puede estar vacío";
-        }
-        if (perfilFranquicia.trim().equals("")) {
-            output = "El campo perfil franquicia no puede estar vacío";
-        }
-        if (perfilProfesional.trim().equals("")) {
-            output = "El campo perfil profesional no puede estar vacío";
-        }
 
 
         return output;
@@ -306,34 +323,14 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
         usuario.setCodigoProv(provincia.getId());
-        usuario.setCodigoMun(municipio.getCodigoMunicipio());
-        usuario.setCapital(capital);
-        usuario.setCapitalObservaciones(capitalObservaciones);
-        usuario.setCerrada(cerrada);
-        usuario.setCuandoEmpezar(cuandoEmpezar);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String currentDateandTime = sdf.format(new Date());
-        usuario.setDateEntered(currentDateandTime);
-        usuario.setDateModified(currentDateandTime);
-        usuario.setDeleted(deleted);
-        usuario.setDisponeContacto(disponeContacto);
-        usuario.setDisponeLocal(disponeLocal);
-        usuario.setEmpresa(empresa);
-        usuario.setNegocio(negocio);
-        usuario.setNegocioAnterior(negocioAnterior);
-        usuario.setPerfilFranquicia(perfilFranquicia);
-        usuario.setPerfilProfesional(perfilProfesional);
-        usuario.setPhoneHome(phoneHome);
-        usuario.setPhoneMobile(phoneMobile);
-        usuario.setRecursosPropios(recursosPropios);
-        usuario.setSituacionProfesional(situacionProfesional);
+        // usuario.setCuandoEmpezar(cuandoEmpezar);
         return usuario;
 
     }
 
 
     private void procesarInformacion() {
-
+/*
         RequestParams params = new RequestParams();
 
         params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
@@ -366,7 +363,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         invokeWS(params);
 
-
+*/
     }
 
 
