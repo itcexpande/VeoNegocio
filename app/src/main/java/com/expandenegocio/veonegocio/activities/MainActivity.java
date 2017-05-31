@@ -58,7 +58,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
 
         MDB = new DbHelper(getApplicationContext());
         // borra basedatos
-          getApplicationContext().deleteDatabase("VeoNegocio.db");
+          //getApplicationContext().deleteDatabase("VeoNegocio.db");
         // borra datos
         MDB.borrarProvincias();
         MDB.borrarMunicipios();
