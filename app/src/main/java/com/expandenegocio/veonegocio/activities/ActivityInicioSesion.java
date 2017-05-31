@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.expandenegocio.veonegocio.DAO.DbHelper;
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.User;
@@ -54,6 +55,7 @@ public class ActivityInicioSesion extends AppCompatActivity {
         usuario = new User();
         UserDataSource dataSource = new UserDataSource(this);
         usuario = dataSource.devuelveUsuario();
+
 
 
         if (usuario != null) {

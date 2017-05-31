@@ -12,6 +12,7 @@ import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.PlanInversor;
 import com.expandenegocio.veonegocio.models.Provincia;
 import com.expandenegocio.veonegocio.models.Sector;
+import com.expandenegocio.veonegocio.models.User;
 
 import java.util.ArrayList;
 
@@ -524,6 +525,32 @@ public class DbHelper extends SQLiteOpenHelper {
             Log.d("Error getCuandoEmpezar", ex.toString());
         }
 
+        return output;
+    }
+
+    public User devuelveUsuario() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        User output = null;
+        try {
+
+            String query = "SELECT " + UserDataSource.ColumnUsuarios.EMAIL +
+                    "," + UserDataSource.ColumnUsuarios.PASSWORD +
+                    " FROM " + TABLA_USUARIOS;
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    output = new User();
+                    output.setEmail(cursor.getString(0));
+                    output.setPassword(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error recoge Usuario", ex.toString());
+        }
         return output;
     }
 

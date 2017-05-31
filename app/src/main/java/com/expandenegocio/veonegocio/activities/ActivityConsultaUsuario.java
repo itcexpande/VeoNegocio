@@ -185,7 +185,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                        provinciaSeleccionada = listaProv.get(position);
                                                        if (provinciaSeleccionada != null) {
-                                                           sector = loadSpinnerSectorActividad();
+                                                           //sector = loadSpinnerSectorActividad();
                                                        }
                                                    }
 
@@ -620,7 +620,11 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             txtApellidos.setText(var.get(UserDataSource.ColumnUsuarios.APELLIDOS).toString());
             txtTelefono.setText(var.getString(UserDataSource.ColumnUsuarios.TELEFONO).toString());
             spnProvincia.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA).toString()));
-            //spnSectorActividad.setsetSelection(var.get(UserDataSource.ColumnUsuarios.SECTOR_ACTIVIDAD).toString());
+            spnSectorActividad.setSelection(0);
+            spnPlanInversion.setSelection(0);
+            spnCuandoEmpezar.setSelection(0);
+            spnPerfilProfesional.setSelection(0);
+
 
 
         }
