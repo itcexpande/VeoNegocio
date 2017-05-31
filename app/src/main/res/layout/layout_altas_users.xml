@@ -202,7 +202,7 @@
 
                 <Spinner
                     android:id="@+id/sp_alta_sector_actividad"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/sp_alta_provincia"

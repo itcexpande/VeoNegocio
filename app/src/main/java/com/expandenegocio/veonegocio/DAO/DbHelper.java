@@ -333,22 +333,64 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    String SQLs = "";
+    private ArrayList<String> listSQLs;
+
+    public void addSectoresPoolUpdate(Sector m) {
+        if (listSQLs == null)
+            listSQLs = new ArrayList<String>();
+        SQLs = " INSERT OR REPLACE INTO " + TABLA_SECTOR_ACTIVIDAD + " ( " +
+                SectorActividadDataSource.ColumnSector.C_ID + "," +
+                SectorActividadDataSource.ColumnSector.C_GRUPO_ACT + "," +
+                SectorActividadDataSource.ColumnSector.M_ORDEN_ACT + "," +
+                SectorActividadDataSource.ColumnSector.C_SECTOR + "," +
+                SectorActividadDataSource.ColumnSector.M_ORDEN_SECTOR + "," +
+                SectorActividadDataSource.ColumnSector.D_SUBSECTOR +
+                " )  VALUES (" +
+                m.getcId() + "," +
+                "'" + m.getcGrupoAct() + "'" + "," +
+                m.getmOrdenAct() + "," +
+                "'" + m.getcSector() + "'" + "," +
+                m.getmOrdenSector() + "," +
+                "'" + m.getdSubSector() + "'" +
+                ");";
+
+        listSQLs.add(SQLs);
+    }
+
+    public void commitPoolUpdateSector() {
+        if (listSQLs != null && listSQLs.size() > 0) {
+            SQLiteDatabase db = getWritableDatabase();
+            if (db != null) {
+                db.beginTransaction();
+                for (int i = 0; i < listSQLs.size(); i++) {
+                    db.execSQL(listSQLs.get(i));
+                }
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+            listSQLs.clear();
+        }
+
+    }
+
 
     public void insertarSectorActividad(Sector s) {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             ContentValues valores = new ContentValues();
             valores.put(SectorActividadDataSource.ColumnSector.C_ID, s.getcId());
-            valores.put(SectorActividadDataSource.ColumnSector.C_GRUPO_ACT, s.getcGrupoAct());
+            valores.put(SectorActividadDataSource.ColumnSector.C_GRUPO_ACT, s.getcGrupoAct().toString());
             valores.put(SectorActividadDataSource.ColumnSector.M_ORDEN_ACT, s.getmOrdenAct());
-            valores.put(SectorActividadDataSource.ColumnSector.C_SECTOR, s.getcSector());
+            valores.put(SectorActividadDataSource.ColumnSector.C_SECTOR, s.getcSector().toString());
             valores.put(SectorActividadDataSource.ColumnSector.M_ORDEN_SECTOR, s.getmOrdenSector());
-            valores.put(SectorActividadDataSource.ColumnSector.D_SUBSECTOR, s.getdSubSector());
+            valores.put(SectorActividadDataSource.ColumnSector.D_SUBSECTOR, s.getdSubSector().toString());
 
             db.insert(TABLA_SECTOR_ACTIVIDAD, null, valores);
             //  db.close();
-            String query = "select *  FROM " + TABLA_SECTOR_ACTIVIDAD;
-            db.execSQL(query);
+            //  String query = "select *  FROM " + TABLA_SECTOR_ACTIVIDAD;
+            //  db.execSQL(query);
         }
     }
 
@@ -444,7 +486,6 @@ public class DbHelper extends SQLiteOpenHelper {
             //  db.close();
         }
     }
-
 
 
     public void insertarCuandoEmpezar(int id, String nom) {

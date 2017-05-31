@@ -49,10 +49,10 @@ public class SectorActividadDataSource {
         try {
 
             String query = "SELECT " + ColumnSector.C_ID + "," +
-                    ColumnSector.C_GRUPO_ACT + " " +
-                    ColumnSector.M_ORDEN_ACT + " " +
-                    ColumnSector.C_SECTOR + " " +
-                    ColumnSector.M_ORDEN_SECTOR + " " +
+                    ColumnSector.C_GRUPO_ACT + "," +
+                    ColumnSector.M_ORDEN_ACT + "," +
+                    ColumnSector.C_SECTOR + "," +
+                    ColumnSector.M_ORDEN_SECTOR + "," +
                     ColumnSector.D_SUBSECTOR +
                     " FROM " + SECTOR_ACTIVIDAD_TABLE_NAME +
                     " ORDER BY " + ColumnSector.C_ID;

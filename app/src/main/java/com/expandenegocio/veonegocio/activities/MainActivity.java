@@ -60,13 +60,13 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
         // borra basedatos
         //  getApplicationContext().deleteDatabase("VeoNegocio.db");
 // borra datos
-     //   MDB.borrarProvincias();
-        // MDB.borrarMunicipios();
+        MDB.borrarProvincias();
+        MDB.borrarMunicipios();
 
-       // MDB.borrarSectoresActividad();
-      //  MDB.borrarPlanInversor();
-     //   MDB.borrarCuandoEmpezar();
-    //    MDB.borrarPerfilProfesional();
+        MDB.borrarSectoresActividad();
+        MDB.borrarPlanInversor();
+        MDB.borrarCuandoEmpezar();
+        MDB.borrarPerfilProfesional();
 
 
         pasaProvincias();
@@ -429,9 +429,11 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             sector.setcSector(c_sector);
             sector.setmOrdenSector(m_orden_sector);
             sector.setdSubSector(d_subsector);
-            MDB.insertarSectorActividad(sector);
-        }
+//            MDB.insertarSectorActividad(sector);
+            MDB.addSectoresPoolUpdate(sector);
 
+        }
+        MDB.commitPoolUpdateSector();
 
     }
 
@@ -652,7 +654,7 @@ public class MainActivity extends ActionBarActivity implements BaseSliderView.On
             codigoProvincia = Integer.parseInt(var.get(PerfilProfesionalDataSource.ColumnPerfilProfesional.ID).toString());
             denominacionProvincia = var.get(PerfilProfesionalDataSource.ColumnPerfilProfesional.LITERAL).toString();
 
-            MDB.insertarCuandoEmpezar(codigoProvincia, denominacionProvincia);
+            MDB.insertarPerfilProfesional(codigoProvincia, denominacionProvincia);
         }
         MDB.close();
     }

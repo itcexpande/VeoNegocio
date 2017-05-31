@@ -59,14 +59,10 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
     private String correo;
     private String password;
-    private String status;
     private String nombre;
     private String apellidos;
     private String telefono;
-    // private String sector;
-    // private String planInversion;
-    // private String cuandoEmpezar;
-    // private String perfilProfesional;
+
 
     private Spinner spnProvincia;
     private EditText txtCorreo;
@@ -121,7 +117,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
                                                    @Override
                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                       Provincia provinciaSeleccionada = listaProv.get(position);
+                                                       provinciaSeleccionada = listaProv.get(position);
                                                        if (provinciaSeleccionada != null) {
                                                            sector = loadSpinnerSectorActividad();
                                                        }
@@ -129,7 +125,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
                                                    @Override
                                                    public void onNothingSelected(AdapterView<?> parent) {
-                                                       Provincia provinciaSeleccionada = null;
+                                                       provinciaSeleccionada = null;
                                                    }
                                                }
         );
@@ -156,12 +152,16 @@ public class ActivityAltaUsuario extends AppCompatActivity {
                                                          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                              ((TextView) parent.getChildAt(0)).setTextSize(12);
                                                              ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
-                                                             planInversor = loadSpinnerPlanInversor();
+
+                                                             sectorSeleccionado = listaSector.get(position);
+                                                             if (sectorSeleccionado != null) {
+                                                                 planInversor = loadSpinnerPlanInversor();
+                                                             }
                                                          }
 
                                                          @Override
                                                          public void onNothingSelected(AdapterView<?> parent) {
-                                                             Sector sectorSeleccionado = null;
+                                                             sectorSeleccionado = null;
                                                          }
                                                      }
         );
@@ -184,12 +184,15 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
                                                        @Override
                                                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                           cuandoEmpezar = loadSpinnerCuandoEmpezar();
+                                                           planInversorSeleccionado = listaPlanInversor.get(position);
+                                                           if (planInversorSeleccionado != null) {
+                                                               cuandoEmpezar = loadSpinnerCuandoEmpezar();
+                                                           }
                                                        }
 
                                                        @Override
                                                        public void onNothingSelected(AdapterView<?> parent) {
-                                                           PlanInversor planInversorSeleccionado = null;
+                                                           planInversorSeleccionado = null;
                                                        }
                                                    }
         );
@@ -212,12 +215,15 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
                                                        @Override
                                                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                           perfilProfesional= loadSpinnerPerfilProfesional();
+                                                           cuandoEmpezarSeleccionado = listaCuandoEmpezar.get(position);
+                                                           if (cuandoEmpezarSeleccionado != null) {
+                                                               perfilProfesional = loadSpinnerPerfilProfesional();
+                                                           }
                                                        }
 
                                                        @Override
                                                        public void onNothingSelected(AdapterView<?> parent) {
-                                                           CuandoEmpezar cuandoEmpezarSeleccionado = null;
+                                                           cuandoEmpezarSeleccionado = null;
                                                        }
                                                    }
         );
@@ -225,6 +231,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         spnCuandoEmpezar.setAdapter(spinner_adapter);
         return cuandoEmpezarSeleccionado;
     }
+
     private PerfilProfesional loadSpinnerPerfilProfesional() {
         PerfilProfesionalDataSource dataSource = new PerfilProfesionalDataSource(this);
         final ArrayList<PerfilProfesional> listaPerfilProfesional = dataSource.getPerfilProfesional();
@@ -237,17 +244,16 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         spnPerfilProfesional.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                                                       @Override
-                                                       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                           perfilProfesionalSeleccionado=  listaPerfilProfesional.get(position);
-                                                         //  perfilProfesional= loadSpinnerPerfilProfesional();
-                                                       }
+                                                           @Override
+                                                           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                               perfilProfesionalSeleccionado = listaPerfilProfesional.get(position);
+                                                           }
 
-                                                       @Override
-                                                       public void onNothingSelected(AdapterView<?> parent) {
-                                                           PerfilProfesional perfilProfesionalSeleccionado = null;
+                                                           @Override
+                                                           public void onNothingSelected(AdapterView<?> parent) {
+                                                               perfilProfesionalSeleccionado = null;
+                                                           }
                                                        }
-                                                   }
         );
 
         spnPerfilProfesional.setAdapter(spinner_adapter);
@@ -286,8 +292,10 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         telefono = txtTelefono.getText().toString();
 
         provincia = (Provincia) spnProvincia.getSelectedItem();
-        //   sector = (Municipio) spnMunicipio.getSelectedItem();
-
+        sector = (Sector) spnSectorActividad.getSelectedItem();
+        planInversor = (PlanInversor) spnPlanInversion.getSelectedItem();
+        cuandoEmpezar = (CuandoEmpezar) spnCuandoEmpezar.getSelectedItem();
+        perfilProfesional = (PerfilProfesional) spnPerfilProfesional.getSelectedItem();
 
         if (correo.trim().equals("")) {
             output = "El campo correo no puede estar vacío";
@@ -308,7 +316,6 @@ public class ActivityAltaUsuario extends AppCompatActivity {
             output = "El campo provincia no puede estar vacío";
         }
 
-
         return output;
     }
 
@@ -323,14 +330,18 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
         usuario.setCodigoProv(provincia.getId());
-        // usuario.setCuandoEmpezar(cuandoEmpezar);
+        usuario.setSectorActividad(sector.getcGrupoAct().toString());
+        usuario.setPlanInversion(planInversor.getNombre().toString());
+        usuario.setCuandoEmpezar(cuandoEmpezar.getNombre().toString());
+        usuario.setPerfilProfesional(perfilProfesional.getNombre().toString());
+
         return usuario;
 
     }
 
 
     private void procesarInformacion() {
-/*
+
         RequestParams params = new RequestParams();
 
         params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
@@ -363,7 +374,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         invokeWS(params);
 
-*/
+
     }
 
 

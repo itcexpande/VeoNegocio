@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class PlanInversorDataSource {
 
-    public static final String PLAN_INVERSOR_TABLE_NAME = "expan_m_perfil_fran";
+    public static final String PLAN_INVERSOR_TABLE_NAME = "expan_m_capital";
 
 
     //Campos de la tabla provincias
