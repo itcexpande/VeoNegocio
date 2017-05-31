@@ -1,426 +1,249 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <ScrollView
-        android:id="@+id/scrollView_consultas_user"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp">
+        android:layout_weight="0.65"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <ScrollView
+            android:id="@+id/scrollView_altas_user"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/tv_consulta_correo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="15dp"
-                android:text="Correo electrónico:" />
-
-            <EditText
-                android:id="@+id/et_consulta_correo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignRight="@id/tv_consulta_correo"
-                android:hint="correo electrónico"
-                android:inputType="textEmailAddress" />
-
-
-            <TextView
-                android:id="@+id/tv_consulta_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_correo"
-                android:layout_marginTop="25dp"
-                android:text="Contraseña:" />
-
-            <EditText
-                android:id="@+id/et_consulta_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_correo"
-                android:hint="contraseña"
-                android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/tv_consulta_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_password"
-                android:layout_marginTop="25dp"
-                android:text="Nombre:" />
-
-            <EditText
-                android:id="@+id/et_consulta_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_password"
-                android:hint="nombre"
-                android:inputType="textCapWords"
-                android:maxLength="100" />
-
-            <TextView
-                android:id="@+id/tv_consulta_apellidos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_nombre"
-                android:layout_marginTop="25dp"
-                android:text="Apellidos:" />
-
-            <EditText
-                android:id="@+id/et_consulta_apellidos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_nombre"
-                android:hint="apellidos"
-                android:inputType="textCapWords"
-                android:maxLength="100" />
-
-            <LinearLayout
-                android:id="@+id/ll0"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/et_consulta_apellidos"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tv_consulta_telefono_home"
+                    android:id="@+id/tv_consulta_correo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tfno. fijo:" />
-
-                <EditText
-                    android:id="@+id/et_consulta_telefono_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text|phone"
-                    android:maxLength="20"
-                    android:hint="teléfono fijo"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="15dp"
+                    android:text="Correo electrónico:" />
 
                 <TextView
-                    android:id="@+id/tv_consulta_telefono_mobile"
+                    android:id="@+id/tv_consulta_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tfno. móvil:"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_correo"
+                    android:layout_marginTop="25dp"
+                    android:text="Contraseña:" />
 
-                <EditText
-                    android:id="@+id/et_consulta_telefono_mobile"
+
+                <TextView
+                    android:id="@+id/tv_consulta_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="teléfono móvil"
-                    android:inputType="text|phone"
-                    android:maxLength="20" />
-            </LinearLayout>
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_password"
+                    android:layout_marginTop="25dp"
+                    android:text="Nombre:" />
 
 
-            <LinearLayout
-                android:id="@+id/ll1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/ll0"
-                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_consulta_apellidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_nombre"
+                    android:layout_marginTop="25dp"
+                    android:text="Apellidos:" />
+
+                <TextView
+                    android:id="@+id/tv_consulta_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_apellidos"
+                    android:layout_marginTop="25dp"
+                    android:text="Teléfono:" />
+
 
                 <TextView
                     android:id="@+id/tv_consulta_provincia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_telefono"
+                    android:layout_marginTop="25dp"
                     android:text="Provincia:" />
+
+
+                <TextView
+                    android:id="@+id/tv_consulta_sector_actividad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_provincia"
+                    android:layout_marginTop="20dp"
+                    android:text="Sector Actividad:" />
+
+
+                <TextView
+                    android:id="@+id/tv_consulta_plan_inversion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_sector_actividad"
+                    android:layout_marginTop="20dp"
+                    android:text="Plan Inversion:" />
+
+
+                <TextView
+                    android:id="@+id/tv_consulta_cuando_empezar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_plan_inversion"
+                    android:layout_marginTop="15dp"
+                    android:text="Cuando Empezar:" />
+
+                <TextView
+                    android:id="@+id/tv_consulta_perfil_profesional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_consulta_cuando_empezar"
+                    android:layout_marginTop="15dp"
+                    android:text="Perfil Profesional:" />
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.35"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView2_altas_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_consulta_correo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:hint="correo electrónico"
+                    android:inputType="textEmailAddress" />
+
+
+                <EditText
+                    android:id="@+id/et_consulta_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/et_consulta_correo"
+                    android:hint="contraseña"
+                    android:inputType="textPassword" />
+
+
+                <EditText
+                    android:id="@+id/et_consulta_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/et_consulta_password"
+                    android:hint="nombre"
+                    android:inputType="textCapWords"
+                    android:maxLength="100" />
+
+
+                <EditText
+                    android:id="@+id/et_consulta_apellidos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/et_consulta_nombre"
+                    android:hint="apellidos"
+                    android:inputType="textCapWords"
+                    android:maxLength="100" />
+
+
+                <EditText
+                    android:id="@+id/et_consulta_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/et_consulta_apellidos"
+                    android:hint="teléfono"
+                    android:inputType="text|phone"
+                    android:maxLength="20" />
+
 
                 <Spinner
                     android:id="@+id/sp_consulta_provincia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"></Spinner>
-
-                <TextView
-                    android:id="@+id/tv_consulta_municipio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Municipio:" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/et_consulta_telefono"
+                    android:layout_marginTop="10dp"></Spinner>
 
                 <Spinner
-                    android:id="@+id/sp_consulta_municipio"
+                    android:id="@+id/sp_consulta_sector_actividad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/sp_consulta_provincia"
+                    android:layout_marginTop="10dp"></Spinner>
+
+                <Spinner
+                    android:id="@+id/sp_consulta_plan_inversion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"></Spinner>
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/sp_consulta_sector_actividad"
+                    android:layout_marginTop="10dp"></Spinner>
 
-            </LinearLayout>
+                <Spinner
+                    android:id="@+id/sp_consulta_cuando_empezar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/sp_consulta_plan_inversion"
+                    android:layout_marginTop="10dp"></Spinner>
 
-            <TextView
-                android:id="@+id/tv_consulta_capital"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/ll1"
-                android:layout_marginTop="20dp"
-                android:text="Capital:" />
+                <Spinner
+                    android:id="@+id/sp_consulta_perfil_profesional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/sp_consulta_cuando_empezar"
+                    android:layout_marginTop="10dp"></Spinner>
 
-            <EditText
-                android:id="@+id/et_consulta_capital"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/ll1"
-                android:hint="capital"
-                android:inputType="text"
-                android:maxLength="100" />
+            </RelativeLayout>
 
+        </ScrollView>
 
-            <TextView
-                android:id="@+id/tv_consulta_capital_observaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/et_consulta_capital"
-                android:layout_marginTop="15dp"
-                android:text="Capital Observaciones:" />
+        <Button
+            android:id="@+id/boton_consulta_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_consulta_situacion_profesional"
+            android:layout_marginTop="20dp"
+            android:onClick="consultaUsuario2"
+            android:text="MODIFICAR USUARIO" />
 
-            <EditText
-                android:id="@+id/et_consulta_capital_observaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/tv_consulta_capital"
-                android:hint="capital observaciones"
-                android:inputType="text"
-                android:maxLength="255" />
+    </LinearLayout>
 
-
-            <TextView
-                android:id="@+id/tv_consulta_cerrada"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/et_consulta_capital_observaciones"
-                android:layout_marginTop="15dp"
-                android:text="Cerrada:" />
-
-            <EditText
-                android:id="@+id/et_consulta_cerrada"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/tv_consulta_capital_observaciones"
-                android:hint="cerrada"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tv_consulta_cuando_empezar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_cerrada"
-                android:layout_marginTop="20dp"
-                android:text="Cuando empezar:" />
-
-            <EditText
-                android:id="@+id/et_consulta_cuando_empezar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_cerrada"
-                android:hint="cuando empezar"
-                android:inputType="text"
-                android:maxLength="100" />
-
-            <TextView
-                android:id="@+id/tv_consulta_dispone_contacto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_cuando_empezar"
-                android:layout_marginTop="20dp"
-                android:text="Dispone contacto:" />
-
-            <EditText
-                android:id="@+id/et_consulta_dispone_contacto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_cuando_empezar"
-                android:hint="dispone contacto"
-                android:inputType="text"
-                android:maxLength="100" />
-
-            <TextView
-                android:id="@+id/tv_consulta_dispone_local"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_dispone_contacto"
-                android:layout_marginTop="25dp"
-                android:text="Dispone local:" />
-
-            <EditText
-                android:id="@+id/et_consulta_dispone_local"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_dispone_contacto"
-                android:hint="dispone local"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tv_consulta_empresa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_dispone_local"
-                android:layout_marginTop="25dp"
-                android:text="Empresa:" />
-
-            <EditText
-                android:id="@+id/et_consulta_empresa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_dispone_local"
-                android:hint="empresa"
-                android:inputType="text"
-                android:maxLength="255" />
-
-
-            <TextView
-                android:id="@+id/tv_consulta_negocio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_empresa"
-                android:layout_marginTop="25dp"
-                android:text="Negocio:" />
-
-            <EditText
-                android:id="@+id/et_consulta_negocio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_empresa"
-                android:hint="negocio"
-                android:inputType="text"
-                android:maxLength="255" />
-
-            <TextView
-                android:id="@+id/tv_consulta_negocio_anterior"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_negocio"
-                android:layout_marginTop="25dp"
-                android:text="Negocio anterior:" />
-
-            <EditText
-                android:id="@+id/et_consulta_negocio_anterior"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_negocio"
-                android:hint="negocio anterior"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/tv_consulta_perfil_franquicia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_negocio_anterior"
-                android:layout_marginTop="25dp"
-                android:text="Perfil franquicia:" />
-
-            <EditText
-                android:id="@+id/et_consulta_perfil_franquicia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_negocio_anterior"
-                android:hint="perfil franquicia"
-                android:inputType="text"
-                android:maxLength="100" />
-
-            <TextView
-                android:id="@+id/tv_consulta_perfil_profesional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_perfil_franquicia"
-                android:layout_marginTop="25dp"
-                android:text="Perfil profesional:" />
-
-            <EditText
-                android:id="@+id/et_consulta_perfil_profesional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_perfil_franquicia"
-                android:hint="perfil profesional"
-                android:inputType="text" />
-
-            <TextView
-                android:id="@+id/tv_consulta_recursos_propios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_perfil_profesional"
-                android:layout_marginTop="25dp"
-                android:text="Recursos propios:" />
-
-            <EditText
-                android:id="@+id/et_consulta_recursos_propios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_perfil_profesional"
-                android:hint="recursos propios"
-                android:inputType="text"
-                android:maxLength="100" />
-
-            <TextView
-                android:id="@+id/tv_consulta_situacion_profesional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tv_consulta_recursos_propios"
-                android:layout_marginTop="30dp"
-                android:text="Situacion profesional:" />
-
-            <EditText
-                android:id="@+id/et_consulta_situacion_profesional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/et_consulta_recursos_propios"
-                android:hint="situacion profesional"
-                android:inputType="text"
-                android:maxLength="100" />
-
-            <Button
-                android:id="@+id/boton_consulta_user"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_below="@+id/et_consulta_situacion_profesional"
-                android:onClick="consultaUsuario2"
-                android:text="ACEPTAR" />
-
-
-        </RelativeLayout>
-    </ScrollView>
-
-</RelativeLayout>
+</LinearLayout>

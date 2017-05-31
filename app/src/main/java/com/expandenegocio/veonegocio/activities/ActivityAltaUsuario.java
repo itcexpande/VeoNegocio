@@ -329,6 +329,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         usuario.setStatus("");
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
+        usuario.setTelefono(telefono);
         usuario.setCodigoProv(provincia.getId());
         usuario.setSectorActividad(sector.getcGrupoAct().toString());
         usuario.setPlanInversion(planInversor.getNombre().toString());
@@ -347,29 +348,15 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         params.put(UserDataSource.ColumnUsuarios.ID, usuario.getId().toString());
         params.put(UserDataSource.ColumnUsuarios.EMAIL, correo);
         params.put(UserDataSource.ColumnUsuarios.PASSWORD, password);
-        params.put(UserDataSource.ColumnUsuarios.STATUS, status);
+        params.put(UserDataSource.ColumnUsuarios.STATUS, "");
         params.put(UserDataSource.ColumnUsuarios.NOMBRE, nombre);
         params.put(UserDataSource.ColumnUsuarios.APELLIDOS, apellidos);
+        params.put(UserDataSource.ColumnUsuarios.TELEFONO, telefono);
         params.put(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA, usuario.getCodigoProv());
-        params.put(UserDataSource.ColumnUsuarios.CODIGO_MUNICIPIO, usuario.getCodigoMun());
-        params.put(UserDataSource.ColumnUsuarios.CAPITAL, usuario.getCapital());
-        params.put(UserDataSource.ColumnUsuarios.CAPITAL_OBSERVACIONES, usuario.getCapitalObservaciones());
-        params.put(UserDataSource.ColumnUsuarios.CERRADA, usuario.getCerrada());
+        params.put(UserDataSource.ColumnUsuarios.SECTOR_ACTIVIDAD, usuario.getSectorActividad());
+        params.put(UserDataSource.ColumnUsuarios.PLAN_INVERSION, usuario.getPlanInversion());
         params.put(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR, usuario.getCuandoEmpezar());
-        params.put(UserDataSource.ColumnUsuarios.DATE_ENTERED, usuario.getDateEntered());
-        params.put(UserDataSource.ColumnUsuarios.DATE_MODIFIED, usuario.getDateModified());
-        params.put(UserDataSource.ColumnUsuarios.DELETED, usuario.getDeleted());
-        params.put(UserDataSource.ColumnUsuarios.DISP_CONTACTO, usuario.getDisponeContacto());
-        params.put(UserDataSource.ColumnUsuarios.DISP_LOCAL, usuario.getDisponeLocal());
-        params.put(UserDataSource.ColumnUsuarios.EMPRESA, usuario.getEmpresa());
-        params.put(UserDataSource.ColumnUsuarios.NEGOCIO, usuario.getNegocio());
-        params.put(UserDataSource.ColumnUsuarios.NEGOCIO_ANTES, usuario.getNegocioAnterior());
-        params.put(UserDataSource.ColumnUsuarios.PERFIL_FRANQUICIA, usuario.getPerfilFranquicia());
         params.put(UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL, usuario.getPerfilProfesional());
-        params.put(UserDataSource.ColumnUsuarios.PHONE_HOME, usuario.getPhoneHome());
-        params.put(UserDataSource.ColumnUsuarios.PHONE_MOBILE, usuario.getPhoneMobile());
-        params.put(UserDataSource.ColumnUsuarios.RECURSOS_PROPIOS, usuario.getRecursosPropios());
-        params.put(UserDataSource.ColumnUsuarios.SITUACION_PROFESIONAL, usuario.getSituacionProfesional());
 
 
         invokeWS(params);
