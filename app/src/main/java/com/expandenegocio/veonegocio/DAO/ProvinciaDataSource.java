@@ -84,6 +84,40 @@ public class ProvinciaDataSource {
         return output;
     }
 
+    public ArrayList<Provincia> getProvincias2() {
+
+        ArrayList<Provincia> output = new ArrayList<Provincia>();
+
+        try {
+
+            String query = "SELECT " + ColumnProvincia.ID + "," +
+                    ColumnProvincia.NOMBRE +
+                    " FROM " + PROVINCIA_TABLE_NAME +
+                    " where " + ColumnProvincia.ID + ">0" +
+                    " ORDER BY " +
+                    "Replace(" + ColumnProvincia.NOMBRE + ",'Á','A')";
+
+
+            Cursor cursor = database.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Provincia provincia = new Provincia();
+                    provincia.setId(Integer.parseInt(cursor.getString(0)));
+                    provincia.setNombreProvincia(cursor.getString(1));
+
+                    // Add book to books
+                    output.add(provincia);
+                } while (cursor.moveToNext());
+            }
+
+        } catch (Exception ex) {
+            Log.d("Error getProvincias", ex.toString());
+        }
+
+        return output;
+    }
+
     public String buscarProvinciaPorId(String id) {
 
         String output = "";

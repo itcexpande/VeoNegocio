@@ -1,6 +1,7 @@
 package com.expandenegocio.veonegocio.activities;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -269,9 +270,16 @@ public class ActivityAltaUsuario extends AppCompatActivity {
             usuario = createUsuario();
             UserDataSource dataSource = new UserDataSource(this);
             if (dataSource.buscaUsuarioPorEmailYPassword(correo, password) == null) {
-                dataSource.insertUsuario(usuario);
+                //dataSource.insertUsuario(usuario);
+                DbHelper dbHelper = new DbHelper(getApplicationContext());
+                dbHelper.insertarUsuario(usuario);
             }
             procesarInformacion();
+
+            Intent intent = new Intent("ActivityOpciones");
+            intent.putExtra("correo", correo);
+            intent.putExtra("password", nPassword);
+            startActivity(intent);
 
 
         } else {

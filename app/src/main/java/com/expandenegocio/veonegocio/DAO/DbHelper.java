@@ -488,6 +488,27 @@ public class DbHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void insertarUsuario(User u) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            ContentValues valores = new ContentValues();
+            valores.put(UserDataSource.ColumnUsuarios.ID, u.getId());
+            valores.put(UserDataSource.ColumnUsuarios.EMAIL, u.getEmail());
+            valores.put(UserDataSource.ColumnUsuarios.PASSWORD, u.getPassword());
+            valores.put(UserDataSource.ColumnUsuarios.STATUS, u.getStatus());
+            valores.put(UserDataSource.ColumnUsuarios.NOMBRE, u.getNombre());
+            valores.put(UserDataSource.ColumnUsuarios.APELLIDOS, u.getApellidos());
+            valores.put(UserDataSource.ColumnUsuarios.TELEFONO, u.getTelefono());
+            valores.put(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA, u.getCodigoProv());
+            valores.put(UserDataSource.ColumnUsuarios.SECTOR_ACTIVIDAD, u.getSectorActividad());
+            valores.put(UserDataSource.ColumnUsuarios.PLAN_INVERSION, u.getPlanInversion());
+            valores.put(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR, u.getCuandoEmpezar());
+            valores.put(UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL, u.getPerfilProfesional());
+
+            db.insert(TABLA_USUARIOS, null, valores);
+            //  db.close();
+        }
+    }
 
     public void insertarCuandoEmpezar(int id, String nom) {
         SQLiteDatabase db = getWritableDatabase();

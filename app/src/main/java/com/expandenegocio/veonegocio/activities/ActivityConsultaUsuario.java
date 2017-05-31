@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.expandenegocio.veonegocio.DAO.CuandoEmpezarDataSource;
-import com.expandenegocio.veonegocio.DAO.MunicipioDataSource;
 import com.expandenegocio.veonegocio.DAO.PerfilProfesionalDataSource;
 import com.expandenegocio.veonegocio.DAO.PlanInversorDataSource;
 import com.expandenegocio.veonegocio.DAO.ProvinciaDataSource;
@@ -22,7 +21,6 @@ import com.expandenegocio.veonegocio.DAO.SectorActividadDataSource;
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.CuandoEmpezar;
-import com.expandenegocio.veonegocio.models.Municipio;
 import com.expandenegocio.veonegocio.models.PerfilProfesional;
 import com.expandenegocio.veonegocio.models.PlanInversor;
 import com.expandenegocio.veonegocio.models.Provincia;
@@ -37,9 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import cz.msebera.android.httpclient.Header;
@@ -84,61 +80,12 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private String nPassword;
     private String status;
 
-    /*
-        private Provincia provincia;
-        private Municipio municipio;
-        private User usuario;
 
-        private Provincia provinciaSeleccionada;
-        private Municipio municipioSeleccionado;
+    private String secActividad;
+    private String pInversor;
+    private String cEmpezar;
+    private String pProfesional;
 
-        private String correo;
-        private String password;
-        private String nombre;
-        private String status;
-        private String apellidos;
-        private Spinner spnProvincia;
-        private Spinner spnMunicipio;
-        private String capital;
-        private String capitalObservaciones;
-        private Integer cerrada;
-        private String cuandoEmpezar;
-        private Integer deleted;
-        private String disponeContacto;
-        private Integer disponeLocal;
-        private String empresa;
-        private String negocio;
-        private Integer negocioAnterior;
-        private String perfilFranquicia;
-        private String perfilProfesional;
-        private String phoneHome;
-        private String phoneMobile;
-        private String recursosPropios;
-        private String situacionProfesional;
-
-        private EditText txtCorreo;
-        private EditText txtPassword;
-        private EditText txtNombre;
-        private EditText txtApellidos;
-        private EditText txtCapital;
-        private EditText txtCapitalObservaciones;
-        private EditText txtCerrada;
-        private EditText txtCuandoEmpezar;
-        private EditText txtDisponeContacto;
-        private EditText txtDisponeLocal;
-        private EditText txtEmpresa;
-        private EditText txtNegocio;
-        private EditText txtNegocioAnterior;
-        private EditText txtPerfilFranquicia;
-        private EditText txtPerfilProfesional;
-        private EditText txtPhoneHome;
-        private EditText txtPhoneMobile;
-        private EditText txtRecursosPropios;
-        private EditText txtSituacionProfesional;
-
-        private String nCorreo;
-        private String nPassword;
-    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +109,12 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         txtCorreo.setText(nCorreo);
         txtPassword.setText(nPassword);
+        ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
+        final ArrayList<Provincia> listaProv = dataSource.getProvincias();
+
+        SectorActividadDataSource dataSource2 = new SectorActividadDataSource(this);
+        final ArrayList<Sector> listaSector = dataSource2.getSectores();
+
         verUsuario();
         provincia = loadSpinnerProvincias();
 
@@ -171,7 +124,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
     private Provincia loadSpinnerProvincias() {
 
         ProvinciaDataSource dataSource = new ProvinciaDataSource(this);
-        final ArrayList<Provincia> listaProv = dataSource.getProvincias();
+        final ArrayList<Provincia> listaProv = dataSource.getProvincias2();
 
         ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listaProv);
 
@@ -185,7 +138,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                        provinciaSeleccionada = listaProv.get(position);
                                                        if (provinciaSeleccionada != null) {
-                                                           //sector = loadSpinnerSectorActividad();
+                                                           sector = loadSpinnerSectorActividad();
                                                        }
                                                    }
 
@@ -210,15 +163,16 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnSectorActividad = (Spinner) findViewById(R.id.sp_alta_sector_actividad);
+        spnSectorActividad = (Spinner) findViewById(R.id.sp_consulta_sector_actividad);
 
         spnSectorActividad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                                                          @Override
                                                          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                             ((TextView) parent.getChildAt(0)).setTextSize(12);
-                                                             ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
-
+                                                             if (((TextView) parent.getChildAt(0)) != null) {
+                                                                 ((TextView) parent.getChildAt(0)).setTextSize(12);
+                                                                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
+                                                             }
                                                              sectorSeleccionado = listaSector.get(position);
                                                              if (sectorSeleccionado != null) {
                                                                  planInversor = loadSpinnerPlanInversor();
@@ -244,7 +198,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnPlanInversion = (Spinner) findViewById(R.id.sp_alta_plan_inversion);
+        spnPlanInversion = (Spinner) findViewById(R.id.sp_consulta_plan_inversion);
 
         spnPlanInversion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -275,7 +229,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnCuandoEmpezar = (Spinner) findViewById(R.id.sp_alta_cuando_empezar);
+        spnCuandoEmpezar = (Spinner) findViewById(R.id.sp_consulta_cuando_empezar);
 
         spnCuandoEmpezar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -306,7 +260,7 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
 
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spnPerfilProfesional = (Spinner) findViewById(R.id.sp_alta_perfil_profesional);
+        spnPerfilProfesional = (Spinner) findViewById(R.id.sp_consulta_perfil_profesional);
 
         spnPerfilProfesional.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -620,11 +574,60 @@ public class ActivityConsultaUsuario extends AppCompatActivity {
             txtApellidos.setText(var.get(UserDataSource.ColumnUsuarios.APELLIDOS).toString());
             txtTelefono.setText(var.getString(UserDataSource.ColumnUsuarios.TELEFONO).toString());
             spnProvincia.setSelection(Integer.parseInt(var.get(UserDataSource.ColumnUsuarios.CODIGO_PROVINCIA).toString()));
-            spnSectorActividad.setSelection(0);
-            spnPlanInversion.setSelection(0);
-            spnCuandoEmpezar.setSelection(0);
-            spnPerfilProfesional.setSelection(0);
 
+
+            String secActividad = var.get(UserDataSource.ColumnUsuarios.SECTOR_ACTIVIDAD).toString();
+            String pInversor = var.get(UserDataSource.ColumnUsuarios.PLAN_INVERSION).toString();
+            String cEmpezar = var.get(UserDataSource.ColumnUsuarios.CUANDO_EMPEZAR).toString();
+            String pProfesional = var.get(UserDataSource.ColumnUsuarios.PERFIL_PROFESIONAL).toString();
+
+            ArrayList<Sector> sectors = new ArrayList<>();
+            SectorActividadDataSource source = new SectorActividadDataSource(this);
+            sectors = source.getSectores();
+            int posicion = 0;
+            for (int xx = 0; xx < sectors.size(); xx++) {
+                if (sectors.get(xx).getcGrupoAct().toString().equals(secActividad)) {
+                    posicion = xx;
+                    break;
+                }
+            }
+            spnSectorActividad.setSelection(posicion);
+
+            ArrayList<PlanInversor> inversors = new ArrayList<>();
+            PlanInversorDataSource source1 = new PlanInversorDataSource(this);
+            inversors = source1.getPlanInversor();
+            posicion = 0;
+            for (int xx = 0; xx < inversors.size(); xx++) {
+                if (inversors.get(xx).getNombre().toString().equals(pInversor)) {
+                    posicion = xx;
+                    break;
+                }
+            }
+            spnPlanInversion.setSelection(posicion);
+
+            ArrayList<CuandoEmpezar> empezars = new ArrayList<>();
+            CuandoEmpezarDataSource source2 = new CuandoEmpezarDataSource(this);
+            empezars = source2.getCuandoEmpezar();
+            posicion = 0;
+            for (int xx = 0; xx < empezars.size(); xx++) {
+                if (empezars.get(xx).getNombre().toString().equals(cEmpezar)) {
+                    posicion = xx;
+                    break;
+                }
+            }
+            spnCuandoEmpezar.setSelection(posicion);
+
+            ArrayList<PerfilProfesional> profesionals = new ArrayList<>();
+            PerfilProfesionalDataSource source3 = new PerfilProfesionalDataSource(this);
+            profesionals = source3.getPerfilProfesional();
+            posicion = 0;
+            for (int xx = 0; xx < profesionals.size(); xx++) {
+                if (profesionals.get(xx).getNombre().toString().equals(pProfesional)) {
+                    posicion = xx;
+                    break;
+                }
+            }
+            spnPerfilProfesional.setSelection(posicion);
 
 
         }
