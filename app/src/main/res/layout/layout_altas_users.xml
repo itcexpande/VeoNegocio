@@ -11,116 +11,108 @@
         android:layout_weight="0.65"
         android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/scrollView_altas_user"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="5dp">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_alta_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:text="Correo electrónico:" />
 
-                <TextView
-                    android:id="@+id/tv_alta_correo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="15dp"
-                    android:text="Correo electrónico:" />
-
-                <TextView
-                    android:id="@+id/tv_alta_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_correo"
-                    android:layout_marginTop="25dp"
-                    android:text="Contraseña:" />
+            <TextView
+                android:id="@+id/tv_alta_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_correo"
+                android:layout_marginTop="25dp"
+                android:text="Contraseña:" />
 
 
-                <TextView
-                    android:id="@+id/tv_alta_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_password"
-                    android:layout_marginTop="25dp"
-                    android:text="Nombre:" />
+            <TextView
+                android:id="@+id/tv_alta_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_password"
+                android:layout_marginTop="25dp"
+                android:text="Nombre:" />
 
 
-                <TextView
-                    android:id="@+id/tv_alta_apellidos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_nombre"
-                    android:layout_marginTop="25dp"
-                    android:text="Apellidos:" />
+            <TextView
+                android:id="@+id/tv_alta_apellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_nombre"
+                android:layout_marginTop="25dp"
+                android:text="Apellidos:" />
 
-                <TextView
-                    android:id="@+id/tv_alta_telefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_apellidos"
-                    android:layout_marginTop="25dp"
-                    android:text="Teléfono:" />
-
-
-                <TextView
-                    android:id="@+id/tv_alta_provincia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_telefono"
-                    android:layout_marginTop="25dp"
-                    android:text="Provincia:" />
+            <TextView
+                android:id="@+id/tv_alta_telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_apellidos"
+                android:layout_marginTop="25dp"
+                android:text="Teléfono:" />
 
 
-                <TextView
-                    android:id="@+id/tv_alta_sector_actividad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_provincia"
-                    android:layout_marginTop="20dp"
-                    android:text="Sector Actividad:" />
+            <TextView
+                android:id="@+id/tv_alta_provincia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_telefono"
+                android:layout_marginTop="15dp"
+                android:text="Provincia:" />
 
 
-                <TextView
-                    android:id="@+id/tv_alta_plan_inversion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_sector_actividad"
-                    android:layout_marginTop="20dp"
-                    android:text="Plan Inversion:" />
+            <TextView
+                android:id="@+id/tv_alta_plan_inversion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_provincia"
+                android:layout_marginTop="20dp"
+                android:text="Plan Inversion:" />
+
+            <TextView
+                android:id="@+id/tv_alta_cuando_empezar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_plan_inversion"
+                android:layout_marginTop="15dp"
+                android:text="Cuando Empezar:" />
+
+            <TextView
+                android:id="@+id/tv_alta_perfil_profesional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_cuando_empezar"
+                android:layout_marginTop="15dp"
+                android:text="Perfil Profesional:" />
+
+            <TextView
+                android:id="@+id/tv_alta_sector_actividad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_alta_cuando_empezar"
+                android:layout_marginTop="40dp"
+                android:text="Sector Actividad:" />
 
 
-                <TextView
-                    android:id="@+id/tv_alta_cuando_empezar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_plan_inversion"
-                    android:layout_marginTop="15dp"
-                    android:text="Cuando Empezar:" />
-
-                <TextView
-                    android:id="@+id/tv_alta_perfil_profesional"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/tv_alta_cuando_empezar"
-                    android:layout_marginTop="15dp"
-                    android:text="Perfil Profesional:" />
-
-            </RelativeLayout>
+        </RelativeLayout>
 
 
-        </ScrollView>
     </LinearLayout>
 
     <LinearLayout
@@ -129,121 +121,113 @@
         android:layout_weight="0.35"
         android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/scrollView2_altas_user"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="5dp">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/et_alta_correo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:hint="correo electrónico"
-                    android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/et_alta_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:hint="correo electrónico"
+                android:inputType="textEmailAddress" />
 
 
-                <EditText
-                    android:id="@+id/et_alta_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/et_alta_correo"
-                    android:hint="contraseña"
-                    android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/et_alta_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/et_alta_correo"
+                android:hint="contraseña"
+                android:inputType="textPassword" />
 
 
-                <EditText
-                    android:id="@+id/et_alta_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/et_alta_password"
-                    android:hint="nombre"
-                    android:inputType="textCapWords"
-                    android:maxLength="100" />
+            <EditText
+                android:id="@+id/et_alta_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/et_alta_password"
+                android:hint="nombre"
+                android:inputType="textCapWords"
+                android:maxLength="100" />
 
 
-                <EditText
-                    android:id="@+id/et_alta_apellidos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/et_alta_nombre"
-                    android:hint="apellidos"
-                    android:inputType="textCapWords"
-                    android:maxLength="100" />
+            <EditText
+                android:id="@+id/et_alta_apellidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/et_alta_nombre"
+                android:hint="apellidos"
+                android:inputType="textCapWords"
+                android:maxLength="100" />
 
 
-                <EditText
-                    android:id="@+id/et_alta_telefono"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/et_alta_apellidos"
-                    android:hint="teléfono"
-                    android:inputType="text|phone"
-                    android:maxLength="20" />
+            <EditText
+                android:id="@+id/et_alta_telefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/et_alta_apellidos"
+                android:hint="teléfono"
+                android:inputType="text|phone"
+                android:maxLength="20" />
 
 
-                <Spinner
-                    android:id="@+id/sp_alta_provincia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/et_alta_telefono"
-                    android:layout_marginTop="10dp"></Spinner>
+            <Spinner
+                android:id="@+id/sp_alta_provincia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_alta_telefono"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"></Spinner>
 
-                <Spinner
-                    android:id="@+id/sp_alta_sector_actividad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/sp_alta_provincia"
-                    android:layout_marginTop="10dp"></Spinner>
 
-                <Spinner
-                    android:id="@+id/sp_alta_plan_inversion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/sp_alta_sector_actividad"
-                    android:layout_marginTop="10dp"></Spinner>
+            <Spinner
+                android:id="@+id/sp_alta_plan_inversion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/sp_alta_provincia"
+                android:layout_marginTop="20dp"></Spinner>
 
-                <Spinner
-                    android:id="@+id/sp_alta_cuando_empezar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/sp_alta_plan_inversion"
-                    android:layout_marginTop="10dp"></Spinner>
+            <Spinner
+                android:id="@+id/sp_alta_cuando_empezar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/sp_alta_plan_inversion"
+                android:layout_marginTop="15dp"></Spinner>
 
-                <Spinner
-                    android:id="@+id/sp_alta_perfil_profesional"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/sp_alta_cuando_empezar"
-                    android:layout_marginTop="10dp"></Spinner>
+            <Spinner
+                android:id="@+id/sp_alta_perfil_profesional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/sp_alta_cuando_empezar"
+                android:layout_marginTop="10dp"></Spinner>
 
-            </RelativeLayout>
+            <ListView
+                android:id="@+id/lv_alta_sector_actividad"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_below="@+id/sp_alta_perfil_profesional"></ListView>
 
-        </ScrollView>
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/boton_alta_user"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/et_alta_situacion_profesional"
             android:layout_marginTop="20dp"
             android:onClick="altaUsuario"
-            android:text="ACEPTAR ALTA USUARIO" />
+            android:text="ALTA USUARIO" />
 
     </LinearLayout>
 

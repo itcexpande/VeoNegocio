@@ -1,14 +1,22 @@
 package com.expandenegocio.veonegocio.activities;
 
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +30,8 @@ import com.expandenegocio.veonegocio.DAO.SectorActividadDataSource;
 import com.expandenegocio.veonegocio.DAO.UserDataSource;
 import com.expandenegocio.veonegocio.R;
 import com.expandenegocio.veonegocio.models.CuandoEmpezar;
+import com.expandenegocio.veonegocio.models.Franquicia;
+import com.expandenegocio.veonegocio.models.Lista_adaptador;
 import com.expandenegocio.veonegocio.models.PerfilProfesional;
 import com.expandenegocio.veonegocio.models.PlanInversor;
 import com.expandenegocio.veonegocio.models.Provincia;
@@ -43,7 +53,8 @@ import cz.msebera.android.httpclient.Header;
  * Created by jesus on 20/03/2017.
  */
 
-public class ActivityAltaUsuario extends AppCompatActivity {
+//public class ActivityAltaUsuario extends AppCompatActivity {
+public class ActivityAltaUsuario extends Activity {
     private Provincia provincia;
     private Sector sector;
     private PlanInversor planInversor;
@@ -71,12 +82,16 @@ public class ActivityAltaUsuario extends AppCompatActivity {
     private EditText txtNombre;
     private EditText txtApellidos;
     private EditText txtTelefono;
-    private Spinner spnSectorActividad;
+    private ListView spnSectorActividad;
     private Spinner spnPlanInversion;
     private Spinner spnCuandoEmpezar;
     private Spinner spnPerfilProfesional;
     private String nCorreo;
     private String nPassword;
+
+    private SparseBooleanArray seleccionados;
+    private CharSequence[] datosSectores;
+    private Resources res;
 
 
     @Override
@@ -92,12 +107,60 @@ public class ActivityAltaUsuario extends AppCompatActivity {
         txtApellidos = (EditText) findViewById(R.id.et_alta_apellidos);
         txtTelefono = (EditText) findViewById(R.id.et_alta_telefono);
         spnProvincia = (Spinner) findViewById(R.id.sp_alta_provincia);
-        spnSectorActividad = (Spinner) findViewById(R.id.sp_alta_sector_actividad);
+        spnSectorActividad = (ListView) findViewById(R.id.lv_alta_sector_actividad);
         spnPlanInversion = (Spinner) findViewById(R.id.sp_alta_plan_inversion);
         spnCuandoEmpezar = (Spinner) findViewById(R.id.sp_alta_cuando_empezar);
         spnPerfilProfesional = (Spinner) findViewById(R.id.sp_alta_perfil_profesional);
         txtCorreo.setText(nCorreo);
         txtPassword.setText(nPassword);
+        ListView lista = (ListView) this.findViewById(R.id.lv_alta_sector_actividad);
+
+        SectorActividadDataSource dataSource = new SectorActividadDataSource(this);
+        final ArrayList<Sector> listaSector = dataSource.getSectores();
+        //lista = (ListView) findViewById(R.id.ListView_listado);
+        lista.setAdapter(new Lista_adaptador(this, R.layout.item_listview_alta_user, listaSector) {
+            @Override
+            public void onEntrada(Object entrada, View view) {
+                if (entrada != null) {
+                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.tvsector_item_alta_user);
+                    if (texto_superior_entrada != null)
+                        texto_superior_entrada.setText(((Sector) entrada).getcGrupoAct());
+
+                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.tvsubsector_item_alta_user);
+                    if (texto_inferior_entrada != null)
+                        texto_inferior_entrada.setText(((Sector) entrada).getdSubSector());
+
+                    CheckBox ck_entrada = (CheckBox) view.findViewById(R.id.ck_item_alta_user);
+
+                }
+            }
+        });
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+                Sector elegido = (Sector) pariente.getItemAtPosition(posicion);
+                Sector ff = (Sector) listaSector.get(posicion);
+
+                CharSequence texto = "Seleccionado: " + elegido.getcGrupoAct();
+                String dat = ff.getdSubSector();
+                Toast toast = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_LONG);
+                toast.show();
+                /*
+                Bundle bundle = new Bundle();
+
+                bundle.putSerializable("franquicia", ff);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                DialogoDetalleFranquicia dialogo = new DialogoDetalleFranquicia();
+                dialogo.setArguments(bundle);
+                dialogo.show(fragmentManager, "listadoDetalleFranquicia");
+                */
+
+                // FALTA RELLENAR ARRAYLIST DE SECTORES Y SUBSECTORES SELECCIONADOS
+
+            }
+        });
         provincia = loadSpinnerProvincias();
 
     }
@@ -120,7 +183,9 @@ public class ActivityAltaUsuario extends AppCompatActivity {
                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                        provinciaSeleccionada = listaProv.get(position);
                                                        if (provinciaSeleccionada != null) {
-                                                           sector = loadSpinnerSectorActividad();
+                                                           //sector = loadSpinnerSectorActividad();
+                                                           planInversor = loadSpinnerPlanInversor();
+
                                                        }
                                                    }
 
@@ -137,7 +202,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
     }
 
-    private Sector loadSpinnerSectorActividad() {
+    /*private Sector loadSpinnerSectorActividad() {
         SectorActividadDataSource dataSource = new SectorActividadDataSource(this);
         final ArrayList<Sector> listaSector = dataSource.getSectores();
 
@@ -169,7 +234,7 @@ public class ActivityAltaUsuario extends AppCompatActivity {
 
         spnSectorActividad.setAdapter(spinner_adapter);
         return sectorSeleccionado;
-    }
+    }*/
 
     private PlanInversor loadSpinnerPlanInversor() {
         PlanInversorDataSource dataSource = new PlanInversorDataSource(this);
